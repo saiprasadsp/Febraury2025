@@ -1,0 +1,157 @@
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0; 
+    margin: 0; 
+    padding: 0; 
+    height: 100%; 
+    overflow: hidden; 
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%; 
+    background-color: #1F6281; 
+    justify-content: space-between; /* Ensure both halves take equal space */
+}
+
+.left-half {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px; /* Add some padding */
+    color: #fff;
+}
+
+.right-half {
+    flex: 1.2; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    background-color: #ffffff;
+    /* This ensures the right half scales along with the left */
+}
+
+.logo {
+    max-width: 300px; /* Adjust as needed */
+    margin-bottom: 20px;
+    margin-top: 60px; /* Add this line to push it down */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+form {
+    width: 100%;
+}
+
+input {
+    width: calc(80% - 22px); /* Adjust width to 80%, change as needed */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #1F6281; /* Thicker black border */
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+input:focus {
+    border-color: #0185F8;
+    outline: none; 
+}
+
+.logincss{
+    display: flex;
+    justify-content: space-around; /* Keeps the same horizontal spacing as before */
+    align-items: center; 
+}
+
+button {
+    width: 150%; /* Make button responsive */
+    padding: 10px;
+    background-color: #1F6281;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #0185F8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.copyright {
+    margin-top: 120px;
+    font-size: 12px;
+    color: #000000;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack columns on small screens */
+    }
+
+    .left-half, .right-half {
+        flex: 1 1 100%; /* Both sections will take full width */
+    }
+
+    .logo {
+        max-width: 250px; /* Adjust logo size on small screens */
+        margin-top: 40px; /* Reduce top margin */
+    }
+
+    input {
+        width: calc(90% - 22px); /* Increase input width on small screens */
+    }
+
+    button {
+        width: 100%; /* Full width button on small screens */
+    }
+
+    .forgot-password {
+        text-align: center; /* Center forgot password text */
+    }
+
+    .copyright {
+        margin-top: 60px; /* Reduce top margin on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        max-width: 200px; /* Further reduce logo size for very small screens */
+        margin-top: 30px; /* Adjust top margin */
+    }
+
+    input {
+        width: calc(95% - 22px); /* Increase input width even more */
+    }
+
+    .forgot-password {
+        font-size: 12px; /* Smaller font for very small screens */
+    }
+
+    .copyright {
+        margin-top: 40px; /* Further reduce margin */
+    }
+}
