@@ -16,7 +16,7 @@ function Login() {
 
   useEffect(()=>{
     if (userInfo) {
-      navigate('/layout')
+      navigate('/dashboard')
     }
   },[])
   const handleLogin=async(e)=>{
@@ -28,7 +28,7 @@ function Login() {
       console.log(res);
       
       dispatch(setLogin({...res}))
-      navigate('/layout')
+      navigate('/dashboard')
     } catch (err) {
       toast.error(err?.data?.message||err.error);
       
