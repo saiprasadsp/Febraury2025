@@ -1,14 +1,21 @@
 import { Provider, useSelector } from "react-redux";
 import  store  from "./redux/store";
 import { Route, BrowserRouter , Routes, Navigate } from "react-router-dom";
-import Layout from "./pages/Layout";
+import Dashboard from "./pages/Dashboard";
 import Adminpage from "./pages/Adminpage";
 import Userpage from "./pages/Userpage";
+import Distributor from "./pages/Distributor";
+import Retail from "./pages/RetailList";
+import Transactions from "./pages/Transactions";
+import Margin from "./pages/Margin";
+import KYCApproval from "./pages/KYCApproval";
+import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import Content from "./pages/Content";
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -20,7 +27,14 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />}/>
           <Route path="/login" element={<Login/>}/>
 
-          <Route path="/layout" element={<ProtectedRoute allowedRoles={['user', 1]}><Layout /></ProtectedRoute>}>
+          <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['user', 1]}><Dashboard /></ProtectedRoute>}>
+            <Route index={true} element={<ProtectedRoute allowedRoles={["user",1]}><Content/></ProtectedRoute>}/>
+            <Route path="distributor" element={<ProtectedRoute allowedRoles={["user",1]}><Distributor/></ProtectedRoute>}/>
+            <Route path="retail" element={<ProtectedRoute allowedRoles={["user",1]}><Retail/></ProtectedRoute>}/>
+            <Route path="transactions" element={<ProtectedRoute allowedRoles={["user",1]}><Transactions/></ProtectedRoute>}/>
+            <Route path="margin" element={<ProtectedRoute allowedRoles={["user",1]}><Margin/></ProtectedRoute>}/>
+            <Route path="approval" element={<ProtectedRoute allowedRoles={["user",1]}><KYCApproval/></ProtectedRoute>}/>
+            <Route path="settings" element={<ProtectedRoute allowedRoles={["user",1]}><Settings/></ProtectedRoute>}/>
             <Route path="profile" element={<ProtectedRoute allowedRoles={["user",1]}><Profile/></ProtectedRoute>}/>
             <Route path="register" element={<ProtectedRoute allowedRoles={["user",1]}><Register/></ProtectedRoute>}/>
 
