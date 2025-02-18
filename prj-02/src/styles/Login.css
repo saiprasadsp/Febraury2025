@@ -1,0 +1,74 @@
+.left-section {
+    background-color: #1F6287;
+    height: 100vh;
+  }
+  
+  .right-section {
+    background-color: white;
+    height: 100vh;
+    border-radius: 10px;
+  }
+
+  
+/* Right section */
+.col-md-4 {
+    height: 100vh;
+    padding: 40px;
+}
+
+/* Form inputs */
+input {
+    width: 90%;
+    font-size: 12px;
+    border-radius: 10px;
+    border: 2px solid #1F6281; 
+    padding: 8px 10px 8px 30px; /* Increased top and bottom padding slightly */
+
+}
+input:focus {
+    border-color: #023e72;
+    outline: none; 
+}
+
+/* Button */
+.btn-primary {
+    background-color: #1F6281 !important;
+    border-color: #1F6281 !important;
+    border-radius: 10px;
+    margin-left: -50%
+}
+
+
+.btn-primary:hover {
+    background-color: #1F6281;
+}
+
+/* Forgot password link */
+.text-primary {
+    color: #1F6281;
+    text-decoration: none;
+}
+
+.text-primary:hover {
+    text-decoration: underline;
+}
+
+/* Logo styling */
+img {
+    width: 150px;
+    height: auto;
+    margin-left: -15%
+}
+.mb-8 {
+    margin-bottom: 5px;
+    font-size: 10px;
+    margin-left: -10%
+}
+.right-section p {
+    color: #000000;
+    font-size: 13px;
+}
+/* Copyright text */
+.text-muted {
+    font-size: 12px;
+}
