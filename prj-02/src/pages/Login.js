@@ -6,75 +6,87 @@ import { setLogin } from "../redux/authSlice";
 import {  useLoginMutation} from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import logo from "../assets/logo/TheQucikPayMe.png"
+import "@fortawesome/fontawesome-free/css/all.min.css";
 function Login() {
-  const [userID,setUserID ] = useState("")
-  const [password,setPassword ] = useState("")
+  const [userID, setUserID] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // State for error message
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const {userInfo} = useSelector((state)=>state.auth)
-  const [login,{isLoading}]=useLoginMutation()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+  const [login, { isLoading }] = useLoginMutation();
 
-  useEffect(()=>{
+  useEffect(() => {
     if (userInfo) {
-      navigate('/dashboard')
+      navigate("/dashboard");
     }
-  },[])
-  const handleLogin=async(e)=>{
-    e.preventDefault()
-    console.log(userID,password);
-    
+  }, []);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(""); // Clear previous errors
+
     try {
-      const res = await login({userid:userID,password:password}).unwrap()
+      const res = await login({ userid: userID, password: password }).unwrap();
       console.log(res);
-      
-      dispatch(setLogin({...res}))
-      navigate('/dashboard')
+
+      dispatch(setLogin({ ...res }));
+      navigate("/dashboard");
     } catch (err) {
-      toast.error(err?.data?.message||err.error);
-      
+      setError("Please Enter Valid Credentials"); // Set error message
     }
-  
-  }
+  };
+
   return (
     <div className="vh-100 d-flex">
-  <div className="col-md-8 left-section">
-  </div>
-  <div className="col-md-4 right-section">
-    <div className="d-flex flex-column align-items-center">
-      <img
-        src={logo} // Replace with your logo path
-        alt="Blender Logo"
-      />
-      <p className="text-center mb-8">Enter your login credentials to proceed</p>
-      <form className="w-100" onSubmit={handleLogin}>
-        <div className="mb-3">
-        <i className="fas fa-user"></i>
-          <input type="text" placeholder="User ID" value={userID} onChange={(e) => setUserID(e.target.value)} required/>
+      <div className="col-md-7 left-section"></div>
+      <div className="col-md-5 right-section d-flex justify-content-center align-items-center">
+        <div className="login-box">
+          <div className="d-flex flex-column align-items-center">
+            <img src={logo} alt="Blender Logo" className="logo-img" />
+            <p className="text-center mb-3">Enter your login credentials to proceed</p>
+
+            {error && <p className="error-text">{error}</p>} {/* Show error message */}
+
+            <form className="w-100" onSubmit={handleLogin}>
+              <div className="mb-3 input-icon">
+                <i className="fas fa-user"></i>
+                <input
+                  type="text"
+                  placeholder="User ID"
+                  value={userID}
+                  onChange={(e) => setUserID(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="mb-4 input-icon">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="d-flex justify-content-between mb-4">
+                <span>
+                  <a href="#" className="text-primary">
+                    Forgot Password?
+                  </a>
+                </span>
+                <button type="submit" className="btn btn-primary">Login</button>
+              </div>
+            </form>
+
+            <p className="mt-4 text-center text-muted">&copy; All rights received @2024 NagSoft India Pvt Ltd</p>
+          </div>
         </div>
-        <div className="mb-4">
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-        </div>
-        <div className="d-flex justify-content-between mb-4">
-          <span><a href="#" className="text-primary">Forgot Password?</a></span>
-          <span className="justify-content-end"><button type="submit" className="btn btn-primary">
-          Login
-        </button>
-        </span>            
-        </div>
-      </form>
-      <p className="mt-4 text-center text-muted">
-        &copy; All rights received @2024 NagSoft India Pvt Ltd
-      </p>
+      </div>
     </div>
-  </div>
-</div>
-
-
-
-
-
   );
 }
 
 export default Login;
+
