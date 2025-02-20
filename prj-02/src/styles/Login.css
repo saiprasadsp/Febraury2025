@@ -1,12 +1,71 @@
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 10px; /* Adjust icon position */
+    color: #1F6281;
+    font-size: 14px;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* Add left padding for the icon */
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #1F6281; 
+}
+
+
+.login-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    transform: translateY(-15px); /* Moves it 15px up */
+}
+
+/* Keep the right-section centered properly */
+.right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Input Field Icons */
+.input-icon {
+    position: relative;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 10px 40px; /* Space for the icon */
+    border: 2px solid #1F6281;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1F6281;
+    font-size: 16px;
+}
+
 .left-section {
     background-color: #1F6287;
     height: 100vh;
-  }
-  
-  .right-section {
-    background-color: white;
-    height: 100vh;
-    border-radius: 10px;
   }
 
   
@@ -53,12 +112,20 @@ input:focus {
     text-decoration: underline;
 }
 
-/* Logo styling */
-img {
-    width: 150px;
+.logo-img {
+    width: 160px; 
     height: auto;
-    margin-left: -15%
+    margin-bottom: 15px;
 }
+.error-text {
+    color: red !important;  /* Force red color */
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+
+
+
 .mb-8 {
     margin-bottom: 5px;
     font-size: 10px;
@@ -71,4 +138,29 @@ img {
 /* Copyright text */
 .text-muted {
     font-size: 12px;
+}
+/* Make sure it stays centered on smaller screens */
+@media (max-width: 768px) {
+    .right-section {
+        width: 100%;  /* Full width on small screens */
+        justify-content: center;
+    }
+    
+    .login-box {
+        width: 95%; /* Slightly wider on small screens */
+        max-width: 350px; /* Keep it balanced */
+    }
+    .logo-img {
+        width: 140px;
+    }
+    .col-md-5 {
+        flex: 0 0 100%; /* Full width on smaller screens */
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .logo-img {
+        width: 170px;
+    }
 }
