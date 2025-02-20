@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import {ToastContainer} from 'react-toastify'
+import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { Navbar ,Nav, NavDropdown, Container} from "react-bootstrap";
-import { Outlet,Link, useNavigate } from 'react-router-dom'
+import { Outlet,Link, useNavigate, useLocation } from 'react-router-dom'
 import { Layout,Menu,Button,theme } from "antd";
 import { AiOutlineMenuFold, AiOutlineMenuUnfold,AiOutlineUser,AiOutlineVideoCamera,AiOutlineUpload, AiOutlineSetting } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,22 +18,20 @@ export default function Dashboard() {
   const[logout]=useLogoutMutation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation()
   const logoutHandler =async()=>{
     try {
       await logout().unwrap()
       dispatch(setLogout())
       navigate('/')
     } catch (err) {
-      // toast.error(err?.data?.message||err.error);
+      toast.error(err?.data?.message||err.error);
       console.log(err);
       
       
     }
    }
    const hanldeMenuClick=(e)=>{
-    console.log(e);
-    
-    
     navigate(e.path)
    }
    const getIcon = (iconName) => {
@@ -48,42 +46,49 @@ export default function Dashboard() {
       default: return null; // Or a default icon
     }
   };
+  const menuItems =navLinks.map((item)=>({
+    key:item.path,
+    label:item.label,
+    icon:getIcon(item.key),
+    onClick:()=>hanldeMenuClick(item)
 
+  }))
   return (
     <div style={{height:'100vh'}}>
+      <ToastContainer/>
     <Layout style={{height:'100vh'}}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div>
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
-        >
-          {navLinks.map((item)=>(
-            <Menu.Item key={item.key} icon={getIcon(item.key)} onClick={()=>hanldeMenuClick(item)}>{item.label}</Menu.Item>
-          ))}
-        </Menu>
+          selectedKeys={[location.pathname==="/dashboard"?"/dashboard":location.pathname]}
+
+           items={menuItems} />
+        
         </div>
 
       </Sider>
       <Layout>
-        <Header style={{padding:0,background:colorBgContainer,display:'flex',alignItems: 'center' }}>
+        <Header style={{padding:0,background:colorBgContainer,display:'flex',alignItems: 'center' }} className='shadow-sm p-3 mb-5 bg-white rounded'>
         <Button type='text' icon={collapsed?<AiOutlineMenuUnfold/>:<AiOutlineMenuFold/>} onClick={()=>setCollapsed(!collapsed)}/>
-        <Navbar variant='pills' className='d-flex'>
-          <Navbar.Brand>QuickPay</Navbar.Brand>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav' >
-            <Nav className='ms-auto' >
-              {userInfo&&(<>
-              <NavDropdown   title={userInfo.id} >
-                <NavDropdown.Item> <Link to='profile'>Profile</Link></NavDropdown.Item>
-                <NavDropdown.Item><Link onClick={logoutHandler}>Logout<FaSignOutAlt /></Link></NavDropdown.Item>
-              </NavDropdown>
-              </>)}
+        <div className='container-fluid  d-flex justify-content-between'>
+          <div>QuickPay</div>
+          <div className="btn-group">
+            {userInfo&&(<>
+              <button type="button" className="btn btn-secondary">{userInfo.id}</button>
+              <button type="button" className="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                <span className="visually-hidden">Toggle Dropdown</span>
+              </button>
+              <ul className="dropdown-menu">
+                <li><Link to='profile' className='dropdown-item'>Profile</Link></li>
+                <li><Link onClick={logoutHandler} className='dropdown-item'>Logout <FaSignOutAlt /></Link></li>
+              </ul>
 
-            </Nav>
-          </Navbar.Collapse>
-      </Navbar>
+              </>)}
+            </div>
+
+        </div>
         </Header>
         <Content style={{background: colorBgContainer,
             borderRadius: borderRadiusLG}}>
@@ -94,12 +99,7 @@ export default function Dashboard() {
         </Footer>
       </Layout>
     </Layout>
-      {/* <Header/> */}
-      {/* <ToastContainer/> */}
-      {/* <Container> */}
 
-      {/* </Container> */}
-      {/* <Footer/> */}
     </div>
   )
 }

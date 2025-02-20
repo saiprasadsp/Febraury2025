@@ -1,44 +1,44 @@
 [
-            {
-              "key": 1,
-              "icon": "AiOutlineUser",
-              "label": "Dashboard",
-              "path":"/dashboard"
-            },
-            {
-              "key": 2,
-              "icon": "AiOutlineVideoCamera",
-              "label": "Distributor list",
-              "path":"distributor"
-            },
-            {
-              "key": 3,
-              "icon": "AiOutlineUpload ",
-              "label": "Retail list",
-              "path":"retail"
-            },
-            {
-              "key": 4,
-              "icon": "AiOutlineUpload ",
-              "label": "Today Transactions",
-              "path":"transactions"
-            },
-            {
-              "key": 5,
-              "icon": "AiOutlineUpload ",
-              "label": "Margin",
-              "path":"margin"
-            },
-            {
-              "key": 6,
-              "icon": "AiOutlineUpload ",
-              "label": "KYC Approval",
-              "path":"approval"
-            },
-            {
-              "key": 7,
-              "icon": "AiOutlineSetting ",
-              "label": "Settings",
-              "path":"settings"
-            }
-          ]
+  {
+    "key": 1,
+    "icon": "AiOutlineUser",
+    "label": "Dashboard",
+    "path": "/dashboard"
+  },
+  {
+    "key": 2,
+    "icon": "AiOutlineVideoCamera",
+    "label": "Distributor list",
+    "path": "/dashboard/distributor"
+  },
+  {
+    "key": 3,
+    "icon": "AiOutlineUpload",
+    "label": "Retail list",
+    "path": "/dashboard/retail"
+  },
+  {
+    "key": 4,
+    "icon": "AiOutlineUpload",
+    "label": "Today Transactions",
+    "path": "/dashboard/transactions"
+  },
+  {
+    "key": 5,
+    "icon": "AiOutlineUpload",
+    "label": "Margin",
+    "path": "/dashboard/margin"
+  },
+  {
+    "key": 6,
+    "icon": "AiOutlineUpload",
+    "label": "KYC Approval",
+    "path": "/dashboard/approval"
+  },
+  {
+    "key": 7,
+    "icon": "AiOutlineSetting",
+    "label": "Settings",
+    "path": "/dashboard/settings"
+  }
+]
