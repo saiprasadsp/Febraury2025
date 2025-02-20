@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'antd';
 import { useGetDistributorMutation } from '../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,21 +7,7 @@ import { toast } from 'react-toastify';
 const columns = [
   {
     title: 'DB ID',
-    dataIndex: 'DB ID',
-    filters: [
-      {
-        text: 'Joe',
-        value: 'Joe',
-      },
-      {
-        text: 'Category 1',
-        value: 'Category 1',
-      },
-      {
-        text: 'Category 2',
-        value: 'Category 2',
-      },
-    ],
+    dataIndex: 'ID',
     filterMode: 'tree',
     filterSearch: true,
     onFilter: (value, record) => record.name.startsWith(value),
@@ -29,34 +15,25 @@ const columns = [
   },
   {
     title: 'Distributor Name',
-    dataIndex: 'Distributor Name',
+    dataIndex: 'name',
     sorter: (a, b) => a.age - b.age,
   },
   {
     title: 'Mobile Number',
-    dataIndex: 'Mobile Number',
-    filters: [
-      {
-        text: 'London',
-        value: 'London',
-      },
-      {
-        text: 'New York',
-        value: 'New York',
-      },
-    ],
+    dataIndex: 'mobile',
+    
     onFilter: (value, record) => record.address.startsWith(value),
     filterSearch: true,
     width: '20%',
   },
   {
     title: 'DOJ',
-    dataIndex: 'DOJ',
+    dataIndex: 'doj',
     sorter: (a, b) => a.age - b.age,
   },
   {
     title: 'KYC Status',
-    dataIndex: 'KYC Status',
+    dataIndex: 'kyc',
     sorter: (a, b) => a.age - b.age,
   },
   {
@@ -68,6 +45,7 @@ const columns = [
 
 
 export default function KYCApproval() {
+  const [data,setData] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {userInfo} = useSelector((state)=>state.auth)
@@ -77,12 +55,21 @@ export default function KYCApproval() {
     const fetchDistributor = async()=>{
          try {
            const res = await getDistributor().unwrap();
+           const formattedData = res.map((item)=>({
+            key:item.ID,
+            ID:item.distributor_id,
+            name:item.first_name,
+            mobile:item.user_mobile,
+            doj:item.doj,
+            kyc:item.kyc_status,
+
+           }))
+           setData(formattedData)
            console.log(res,'step4');
            dispatch()
            navigate('/dashboard')
          } catch (err) {
            toast.error(err?.data?.message||err.error);
-           console.log(err);
          }
        
        }
@@ -93,7 +80,7 @@ export default function KYCApproval() {
   
   };
   return (
-    <div>  <Table columns={columns} onChange={onChange} />
+    <div>  <Table columns={columns} onChange={onChange} dataSource={data}/>
 </div>
   )
 }
