@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Adminpage from "./pages/Adminpage";
 import Userpage from "./pages/Userpage";
 import Distributor from "./pages/Distributor";
+import AddDistributor from "./pages/AddDistributor";
 import Retail from "./pages/RetailList";
 import Transactions from "./pages/Transactions";
 import Margin from "./pages/Margin";
@@ -28,15 +29,18 @@ function App() {
           <Route path="/login" element={<Login/>}/>
 
           <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['user', 1]}><Dashboard /></ProtectedRoute>}>
-            <Route index={true} element={<ProtectedRoute allowedRoles={["user",1]}><Content/></ProtectedRoute>}/>
-            <Route path="distributor" element={<ProtectedRoute allowedRoles={["user",1]}><Distributor/></ProtectedRoute>}/>
-            <Route path="retail" element={<ProtectedRoute allowedRoles={["user",1]}><Retail/></ProtectedRoute>}/>
-            <Route path="transactions" element={<ProtectedRoute allowedRoles={["user",1]}><Transactions/></ProtectedRoute>}/>
-            <Route path="margin" element={<ProtectedRoute allowedRoles={["user",1]}><Margin/></ProtectedRoute>}/>
-            <Route path="approval" element={<ProtectedRoute allowedRoles={["user",1]}><KYCApproval/></ProtectedRoute>}/>
-            <Route path="settings" element={<ProtectedRoute allowedRoles={["user",1]}><Settings/></ProtectedRoute>}/>
-            <Route path="profile" element={<ProtectedRoute allowedRoles={["user",1]}><Profile/></ProtectedRoute>}/>
-            <Route path="register" element={<ProtectedRoute allowedRoles={["user",1]}><Register/></ProtectedRoute>}/>
+  <Route index={true} element={<ProtectedRoute allowedRoles={["user",1]}><Content/></ProtectedRoute>}/>
+  <Route path="distributor" element={<ProtectedRoute allowedRoles={["user",1]}><Distributor/></ProtectedRoute>}/>
+  <Route path="distributor/adddistributor" element={<ProtectedRoute allowedRoles={["user",1]}><AddDistributor/></ProtectedRoute>}/>  
+  <Route path="retail" element={<ProtectedRoute allowedRoles={["user",1]}><Retail/></ProtectedRoute>}/>
+  <Route path="transactions" element={<ProtectedRoute allowedRoles={["user",1]}><Transactions/></ProtectedRoute>}/>
+  <Route path="margin" element={<ProtectedRoute allowedRoles={["user",1]}><Margin/></ProtectedRoute>}/>
+  <Route path="approval" element={<ProtectedRoute allowedRoles={["user",1]}><KYCApproval/></ProtectedRoute>}/>
+  <Route path="settings" element={<ProtectedRoute allowedRoles={["user",1]}><Settings/></ProtectedRoute>}/>
+  <Route path="profile" element={<ProtectedRoute allowedRoles={["user",1]}><Profile/></ProtectedRoute>}/>
+  <Route path="register" element={<ProtectedRoute allowedRoles={["user",1]}><Register/></ProtectedRoute>}/>
+
+          
 
           </Route>
           <Route path="/admin" element={<ProtectedRoute  allowedRoles={["admin"]}><Adminpage/></ProtectedRoute>} />

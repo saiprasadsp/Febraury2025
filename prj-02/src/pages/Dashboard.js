@@ -177,7 +177,8 @@ export default function Dashboard() {
             items={menuItems}
           />
         </Sider>
-
+        <footer className={`dashboard-footer ${collapsed ? "collapsed" : ""}`}>
+        </footer>
         <Layout>
           <Content className="dashboard-content">
             <Outlet />
