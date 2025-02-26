@@ -80,7 +80,7 @@ function Login() {
               </div>
             </form>
 
-            <p className="mt-4 text-center text-muted">&copy; All rights received @2024 NagSoft India Pvt Ltd</p>
+            <p className="mt-4 text-center text-muted">&copy; All rights received @2025 NeoFin Tech India Pvt Ltd</p>
           </div>
         </div>
       </div>
