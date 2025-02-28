@@ -41,12 +41,26 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             })
         }),
         getDistributor:builder.mutation({
-            query:(data)=>({
+            query:()=>({
                 url:`${DISTRIBUTOR_LIST}/profile`,
                 method:'GET',
+            })
+        }),
+        createDistributor:builder.mutation({
+            query:(data)=>({
+                url:`${DISTRIBUTOR_LIST}/register`,
+                method:'POST',
+                body:data
+            })
+        }),
+        getDistributorDetails:builder.mutation({
+            query:(data)=>({
+                url:`${DISTRIBUTOR_LIST}/profile/id`,
+                method:'POST',
+                body:data
             })
         })
     })
 })
 
-export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation} = usersApiSlice
+export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation} = usersApiSlice

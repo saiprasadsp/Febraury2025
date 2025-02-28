@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-    userInfo:localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
+    userInfo:localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null,
+    isAuthenticated:localStorage.getItem('userInfo')?true:false
 }
 
 const authSlice =createSlice({
@@ -22,9 +23,9 @@ const authSlice =createSlice({
             state.isAuthenticated=false;
             localStorage.removeItem("userInfo");
 
-            // if (!state.isAuthenticated) {
-            //     console.log("User logged out"); // ✅ Fixed (Explicit `if` statement)
-            // }
+            if (!state.isAuthenticated) {
+                console.log("User logged out"); // ✅ Fixed (Explicit `if` statement)
+            }
 
         },
     }
