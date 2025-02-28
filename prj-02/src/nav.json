@@ -1,37 +1,56 @@
 [
   {
     "key": 1,
-    "icon": "AiOutlineUser",
+    "icon": "AiOutlineDashboard",
     "label": "Dashboard",
     "path": "/dashboard"
   },
   {
     "key": 2,
-    "icon": "AiOutlineVideoCamera",
-    "label": "Distributor list",
-    "path": "/dashboard/distributor"
-  },
+    "icon": "AiOutlineTeam",
+    "label": "Distributor",
+    "children": [
+      {
+        "key": 10,
+        "icon": "AiOutlineTeam",
+        "label": "Distributor List",
+        "path": "/dashboard/distributor/approval"
+      },
+      {
+        "key": 8,
+        "icon": "FaUserPlus",
+        "label": "Add Distributor",
+        "path": "/dashboard/distributor/adddistributor"
+      },
+      {
+        "key": 9,
+        "icon": "FaUserCheck",
+        "label": "Distributor KYC",
+        "path": "/dashboard/distributor/kyc"
+      }
+    ]
+  },  
   {
     "key": 3,
-    "icon": "AiOutlineUpload",
-    "label": "Retail list",
+    "icon": "AiOutlineShop",
+    "label": "Retail List",
     "path": "/dashboard/retail"
   },
   {
     "key": 4,
-    "icon": "AiOutlineUpload",
+    "icon": "AiOutlineTransaction",
     "label": "Today Transactions",
     "path": "/dashboard/transactions"
   },
   {
     "key": 5,
-    "icon": "AiOutlineUpload",
+    "icon": "AiOutlineDollarCircle",
     "label": "Margin",
     "path": "/dashboard/margin"
   },
   {
     "key": 6,
-    "icon": "AiOutlineUpload",
+    "icon": "AiOutlineCheckCircle",
     "label": "KYC Approval",
     "path": "/dashboard/approval"
   },

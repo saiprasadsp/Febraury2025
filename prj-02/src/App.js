@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Adminpage from "./pages/Adminpage";
 import Userpage from "./pages/Userpage";
 import Distributor from "./pages/Distributor";
+import AddDistributor from "./pages/AddDistributor";
 import Retail from "./pages/RetailList";
 import Transactions from "./pages/Transactions";
 import Margin from "./pages/Margin";
@@ -44,6 +45,7 @@ function App() {
             <Route path="settings" element={<ProtectedRoute allowedRoles={["user",1]}><Settings/></ProtectedRoute>}/>
             <Route path="profile" element={<ProtectedRoute allowedRoles={["user",1]}><Profile/></ProtectedRoute>}/>
             <Route path="register" element={<ProtectedRoute allowedRoles={["user",1]}><Register/></ProtectedRoute>}/>
+
 
           </Route>
           <Route path="/admin" element={<ProtectedRoute  allowedRoles={["admin"]}><Adminpage/></ProtectedRoute>} />
