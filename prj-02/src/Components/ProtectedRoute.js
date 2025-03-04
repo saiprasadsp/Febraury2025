@@ -1,17 +1,21 @@
-import { Navigate } from "react-router";
-import { Outlet } from "react-router-dom";
+import { Outlet,Navigate,useLocation } from "react-router-dom";
 import {useSelector  } from "react-redux";
 
 const ProtectedRoute=({children,allowedRoles})=>{
 const {userInfo} = useSelector((state)=>state.auth);
+const location = useLocation()
 console.log('step 3',userInfo);
 
-if (!userInfo || !userInfo.role|| !allowedRoles.includes(userInfo.role)) {
+if (!userInfo ) {
     return <Navigate to='/' replace/>
 }
 
+if (!allowedRoles.includes(userInfo.role)) {
+    return <Navigate to='/dashboard'  replace state={{from:location}}/>
+}
 
-return children
+
+return children?children:<Outlet/>
 }
 
 export default ProtectedRoute
