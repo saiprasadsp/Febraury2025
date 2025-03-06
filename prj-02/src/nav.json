@@ -1,63 +1,57 @@
 [
   {
     "key": 1,
-    "icon": "AiOutlineDashboard",
+    "icon": "AiOutlineUser",
     "label": "Dashboard",
-    "path": "/dashboard"
+    "path": "/dashboard",
+    "roles":["superadmin","distributor","retailer"]
   },
   {
     "key": 2,
-    "icon": "AiOutlineTeam",
-    "label": "Distributor",
-    "children": [
-      {
-        "key": 10,
-        "icon": "AiOutlineTeam",
-        "label": "Distributor List",
-        "path": "/dashboard/distributor/approval"
-      },
-      {
-        "key": 8,
-        "icon": "FaUserPlus",
-        "label": "Add Distributor",
-        "path": "/dashboard/distributor/adddistributor"
-      },
-      {
-        "key": 9,
-        "icon": "FaUserCheck",
-        "label": "Distributor KYC",
-        "path": "/dashboard/distributor/kyc"
-      }
-    ]
-  },  
+    "icon": "AiOutlineVideoCamera",
+    "label": "Distributor list",
+    "path": "/dashboard/distributor",
+    "roles":["superadmin","distributor"]
+
+  },
   {
     "key": 3,
-    "icon": "AiOutlineShop",
-    "label": "Retail List",
-    "path": "/dashboard/retail"
+    "icon": "AiOutlineUpload",
+    "label": "Retail list",
+    "path": "/dashboard/retail",
+    "roles":["superadmin","distributor"]
+
   },
   {
     "key": 4,
-    "icon": "AiOutlineTransaction",
+    "icon": "AiOutlineUpload",
     "label": "Today Transactions",
-    "path": "/dashboard/transactions"
+    "path": "/dashboard/transactions",
+    "roles":["superadmin"]
+
   },
   {
     "key": 5,
-    "icon": "AiOutlineDollarCircle",
+    "icon": "AiOutlineUpload",
     "label": "Margin",
-    "path": "/dashboard/margin"
+    "path": "/dashboard/margin",
+    "roles":["superadmin"]
+
   },
   {
     "key": 6,
-    "icon": "AiOutlineCheckCircle",
+    "icon": "AiOutlineUpload",
     "label": "KYC Approval",
-    "path": "/dashboard/approval"
+    "path": "/dashboard/approval",
+    "roles":["superadmin"]
+
   },
   {
     "key": 7,
     "icon": "AiOutlineSetting",
     "label": "Settings",
-    "path": "/dashboard/settings"
+    "path": "/dashboard/settings",
+    "roles":["superadmin"]
+
   }
 ]

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import FormContainer from '../Components/FormContainer'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
@@ -18,7 +17,6 @@ const getBase64 = (file) =>
   
 export default function AddDistributor() {
     const [formData,setFormData] = useState({
-        id:2,
         roleId:2,
         firstName:'',
         lastName:'',
@@ -108,9 +106,9 @@ export default function AddDistributor() {
     const handleInputChange=(e)=>{
     setFormData({...formData,[e.target.name]:e.target.value})
     }
-    const handleFileChange=(field)=>({fileList})=>{
-        setFileList((prev)=>({...prev,[field]:fileList}))
-    }
+    // const handleFileChange=(field)=>({fileList})=>{
+    //     setFileList((prev)=>({...prev,[field]:fileList}))
+    // }
   return (
     <Container fluid >
             <h1>Add Distributor</h1>
@@ -293,4 +291,4 @@ export default function AddDistributor() {
 
     </Container>
   )
-
+}
