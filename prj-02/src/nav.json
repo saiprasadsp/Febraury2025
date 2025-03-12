@@ -9,9 +9,29 @@
   {
     "key": 2,
     "icon": "AiOutlineVideoCamera",
-    "label": "Distributor list",
+    "label": "Distributors",
     "path": "/dashboard/distributor",
-    "roles":["superadmin","distributor"]
+    "roles":["superadmin","distributor"],
+    "children": [
+      {
+        "key": 10,
+        "icon": "AiOutlineTeam",
+        "label": "Distributor List",
+        "path": "/dashboard/distributor"
+      },
+      {
+        "key": 8,
+        "icon": "FaUserPlus",
+        "label": "Add Distributor",
+        "path": "/dashboard/distributor/adddistributor"
+      },
+      {
+        "key": 9,
+        "icon": "FaUserCheck",
+        "label": "Distributor KYC",
+        "path": "/dashboard/distributor/kyc"
+      }
+    ]
 
   },
   {

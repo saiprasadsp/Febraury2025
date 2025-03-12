@@ -1,278 +1,281 @@
 
 .quickpay-logo {
-    width: 100px; 
-    height: 50px;
+  width: 100px; 
+  height: 50px;
 }
 /* Style the button group */
 .btn-group {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Main user ID button */
-  .btn-secondary {
-    width: 100px; /* Adjust width */
-    padding: 6px 10px; /* Adjust padding */
-    font-size: 14px;
-    background-color: #1F6281 !important;
-    border-color: #1F6281 !important;
-  }
-  
-  /* Dropdown toggle button */
-  .dropdown-toggle-split {
-    width: 30px; /* Adjust width */
-    padding: 6px 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  display: flex;
+  align-items: center;
+}
+
+/* Main user ID button */
+.btn-secondary {
+  width: 100px; /* Adjust width */
+  padding: 6px 10px; /* Adjust padding */
+  font-size: 14px;
+  background-color: #1F6281 !important;
+  border-color: #1F6281 !important;
+}
+
+/* Dropdown toggle button */
+.dropdown-toggle-split {
+  width: 30px; /* Adjust width */
+  padding: 6px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Dropdown menu - Attach directly below the toggle button & adjust position */
 .dropdown-menu {
-    min-width: 130px !important; /* Reduce width */
-    width: auto;
-    text-align: left;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    margin-top: 0px !important; /* Ensure no extra gap */
-    transform: none !important;
-    position: absolute !important;
-    top: calc(100% - 7px) !important; /* Move up slightly (adjust this value) */
-    left: 0 !important; /* Keep aligned with the button */
-    right: auto !important;
-    padding: 0; /* Remove extra padding */
-  }
-  
-  
-  /* Ensure the parent .btn-group has relative positioning */
-  .btn-group {
-    position: relative;
-  }
-  
-  /* Dropdown items - Reduce spacing */
-  .dropdown-item {
-    font-size: 14px;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    padding: 4px 8px !important; /* Adjusted padding */
-    line-height: 1.5 !important; /* Reduce line height */
-  }
-  
-  /* Hover effect */
-  .dropdown-item:hover {
-    background-color: #1F6281 !important; /* Change to red */
-    color: white !important; /* Ensure text is visible */
-  }
-  
-  /* Ensure proper spacing for icons */
-  .dropdown-item svg {
-    font-size: 16px;
-  }
-  
-      
-  footer {
-    background-color: white !important;
-    color: black;
-    font-size: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 200px; /* Default width when sidebar is expanded */
-    right: 0;
-    height: 35px !important;
-    padding: 0 !important;
-    line-height: 20px !important;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 10px 10px 0 0; /* Rounded top corners */
-    box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.15);
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transition */
+  min-width: 130px !important; /* Reduce width */
+  width: auto;
+  text-align: left;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 0px !important; /* Ensure no extra gap */
+  transform: none !important;
+  position: absolute !important;
+  top: calc(100% - 7px) !important; /* Move up slightly (adjust this value) */
+  left: 0 !important; /* Keep aligned with the button */
+  right: auto !important;
+  padding: 0; /* Remove extra padding */
+}
+
+
+/* Ensure the parent .btn-group has relative positioning */
+.btn-group {
+  position: relative;
+}
+
+/* Dropdown items - Reduce spacing */
+.dropdown-item {
+  font-size: 14px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px !important; /* Adjusted padding */
+  line-height: 1.5 !important; /* Reduce line height */
+}
+
+/* Hover effect */
+.dropdown-item:hover {
+  background-color: #1F6281 !important; /* Change to red */
+  color: white !important; /* Ensure text is visible */
+}
+
+/* Ensure proper spacing for icons */
+.dropdown-item svg {
+  font-size: 16px;
+}
+
+    
+footer {
+  background-color: white !important;
+  color: black;
+  font-size: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 200px; /* Default width when sidebar is expanded */
+  right: 0;
+  height: 40px !important;
+  padding: 0 !important;
+  line-height: 20px !important;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1000;
+  border-radius: 10px 10px 0 0; /* Rounded top corners */
+  box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.15);
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transition */
 }
 
 /* ✅ Adjust Footer When Sidebar Collapses */
 .dashboard-footer.collapsed {
-    left: 80px; /* Footer shifts left when sidebar is collapsed */
+  left: 80px; /* Footer shifts left when sidebar is collapsed */
 }
 
 .dashboard-footer {
-    background-color: white !important;
-    color: black;
-    font-size: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 200px; /* Default when sidebar is expanded */
-    right: 0;
-    height: 35px !important;
-    padding: 0 !important;
-    line-height: 20px !important;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.15);
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+  background-color: white !important;
+  color: black;
+  font-size: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 200px; /* Default when sidebar is expanded */
+  right: 0;
+  height: 30px !important;
+  padding: 0 !important;
+  line-height: 20px !important;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.15);
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 /* ✅ Adjust Footer When Sidebar Collapses */
 .dashboard-footer.collapsed {
-    left: 80px;
+  left: 80px;
 }
 
 /* ✅ Mobile-Specific Fix */
 @media (max-width: 768px) {
-    .dashboard-footer {
-        left: 0 !important;
-        width: 100%;
-    }
-    .dashboard-footer.mobile {
-        width: 100%;
-    }
+  .dashboard-footer {
+      left: 0 !important;
+      width: 100%;
+  }
+  .dashboard-footer.mobile {
+      width: 100%;
+  }
 }
 /* ✅ Hide the sidebar arrow */
 .ant-layout-sider-trigger {
-    display: none !important;
+  display: none !important;
 }
 
-  
+
 
 /* Thick top border */
 footer::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px; /* 🔹 Slightly thinner border */
-    background-color: #1F6281;
-    position: absolute;
-    top: 0;
-    left: 0;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px; /* 🔹 Slightly thinner border */
+  background-color: #1F6281;
+  position: absolute;
+  top: 0;
+  left: 0;
+
 }
 
 /* Move text slightly to the left */
 footer::after {
-    content: "All rights received @2025 NeoFin Tech India Pvt Ltd";
-    position: relative;
-    left: -50px; /* Adjust value to move text left */
-    font-size: 10px !important; /* 🔹 Reduce text size to fit */
-    white-space: nowrap; /* Prevent text wrapping */
+  content: "All rights received @2025 NeoFin Tech India Pvt Ltd";
+  position: relative;
+  left: -50px; /* Adjust value to move text left */
+  font-size: 10px !important; /* 🔹 Reduce text size to fit */
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
 /* Change active menu item background color */
 .ant-menu-dark .ant-menu-item-selected {
-    background-color: #1F6281 !important; /* Change to red */
+  background-color: #1F6281 !important; /* Change to red */
 }
 
 /* Change hover color */
 .ant-menu-dark .ant-menu-item:hover {
-    background-color: #1F6281 !important; /* Slightly lighter red on hover */
+  background-color: #1F6281 !important; /* Slightly lighter red on hover */
 }
 
 /* Optional: Change text color when selected */
 .ant-menu-dark .ant-menu-item-selected a {
-    color: white !important;
+  color: white !important;
 }
 .dashboard-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .dashboard-header {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    height: 60px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: var(--antd-color-bg-container);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* ✅ Soft shadow */
-    border-bottom: 2px solid #1F6281; /* ✅ Thick red line */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--antd-color-bg-container);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* ✅ Soft shadow */
+  border-bottom: 2px solid #1F6281; /* ✅ Thick red line */
 }
 
 
-  
-  .dashboard-navbar {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 16px;
-  }
-  .dashboard-layout {
-    margin-top: 60px;
-    flex: 1;
-  }
-  
-  .dashboard-sider {
-    height: calc(100vh - 60px); /* Full height minus navbar */
-    overflow: auto;
-    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* ✅ Adds a shadow on the right side */
-    z-index: 1001;
+
+.dashboard-navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 16px;
+}
+.dashboard-layout {
+  margin-top: 60px;
+  flex: 1;
+}
+
+.dashboard-sider {
+  height: calc(100vh - 60px); /* Full height minus navbar */
+  overflow: auto;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* ✅ Adds a shadow on the right side */
+  z-index: 1001;
 }
 
 /* Mobile Sidebar - Shadow for Better Visibility */
 .mobile-sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100vh;
-    background: #001529;
-    transition: left 0.3s ease-in-out;
-    z-index: 1100;
-    overflow-y: auto; /* Ensure full content is visible */
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  background: #001529;
+  transition: left 0.3s ease-in-out;
+  z-index: 1100;
+  overflow-y: auto; /* Ensure full content is visible */
 }
 
 .mobile-sidebar.show {
-    left: 0;
+  left: 0;
 }
 
-  
-  .mobile-sidebar.show {
-    left: 0;
-  }
-  
-  /* Sidebar Overlay */
-  .sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1099;
-    transition: opacity 0.3s ease-in-out;
-  }
-  
-  .dashboard-content {
-    background: rgb(255, 255, 255); /* ✅ Changes right side to red */
-    border-radius: var(--antd-border-radius-lg);
-    padding: 16px;
-    min-height: calc(100vh - 60px);
+
+.mobile-sidebar.show {
+  left: 0;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1099;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dashboard-content {
+  background: rgb(255, 255, 255); /* ✅ Changes right side to red */
+  border-radius: var(--antd-border-radius-lg);
+  padding: 16px;
+  min-height: calc(100vh - 60px);
+  overflow-y: scroll;
 }
 
 .dashboard-box {
-  flex: 1;
-  min-width: 200px; /* Decreased width */
-  max-width: 250px; /* Set a max width */
-  height: 120px; /* Increased height */
-  padding: 25px;
-  border-radius: 12px;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for better look */
-  text-align: center;
-  font-weight: bold;
-  border: 3px solid #1F6281; /* Orange border */
-  font-size: 12px; /* Increased font size */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px; /* Space between icon and text */
+flex: 1;
+min-width: 200px; /* Decreased width */
+max-width: 250px; /* Set a max width */
+height: 120px; /* Increased height */
+padding: 25px;
+border-radius: 12px;
+background: white;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for better look */
+text-align: center;
+font-weight: bold;
+border: 3px solid #1F6281; /* Orange border */
+font-size: 12px; /* Increased font size */
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px; /* Space between icon and text */
 }
 
 /* Different colors for each box */
@@ -287,14 +290,13 @@ footer::after {
 
 /* Styling for icons */
 .dashboard-box svg {
-  font-size: 26px;
+font-size: 26px;
 }
 
-  
 
 
 
 
 
 
-  
+
