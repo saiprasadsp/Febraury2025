@@ -1,0 +1,82 @@
+/* Container */
+.add-distributor-container {
+    width: 80%;
+    margin: auto;
+    padding-bottom: 60px !important;
+    
+  }
+  
+  /* Heading */
+  .add-distributor-container h3 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  /* Steps Styling */
+  .ant-steps-item-process .ant-steps-item-icon {
+    background-color: #1F6281 !important; 
+    border-color: #1F6281 !important; 
+  }
+  
+  .ant-steps-item-finish .ant-steps-item-icon {
+    background-color: #1F6281 !important; 
+    border-color:  #1F6281 !important; 
+  }
+  .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+    color: white !important;
+}
+
+  
+  .ant-steps-item-title {
+    color:  #1F6281 !important; 
+  }
+  
+  /* Form Styling */
+  .add-distributor-form {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  /* Input Fields */
+  .add-distributor-form .ant-form-item {
+    margin-bottom: 16px;
+  }
+  
+  /* Upload Button */
+  .upload-button {
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .upload-button div {
+    margin-top: 8px;
+    color: #666;
+  }
+  
+  /* Navigation Buttons */
+  .button-container {
+    margin-top: 24px;
+    text-align: center;
+    padding-bottom: 200px; /* ✅ Increased bottom padding to make space */
+  }
+  .next-button, .done-button {
+    background-color: #1F6281 !important;
+    border-color: #1F6281 !important;
+    color: white !important;
+    margin-right: 10px;
+    padding: 10px 16px; /* ✅ Increased padding */
+    font-size: 14px; /* ✅ Adjust font size */
+    margin-bottom: 20px !important;
+  }
+  
+  .previous-button {
+    background-color: #d15f01 !important;
+    border-color: #d15f01 !important;
+    color: white !important;
+  }
+  
+  
