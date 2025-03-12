@@ -27,6 +27,7 @@ const { Header, Sider, Content } = Layout;
 
 export default function Dashboard() {
   const [collapsed, setCollapsed] = useState(false);
+  const [filteredNav,setFilteredNav]=useState([])
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -40,6 +41,11 @@ export default function Dashboard() {
   const location = useLocation();
 
   useEffect(() => {
+    if(userInfo?.role){
+      const filteredLinks = navLinks.filter((item)=>item.roles.includes(userInfo?.role))
+    setFilteredNav(filteredLinks)
+
+    }
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       if (window.innerWidth > 768) setShowSidebar(false);
@@ -47,7 +53,7 @@ export default function Dashboard() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [userInfo]);
 
   const logoutHandler = async () => {
     try {
@@ -93,7 +99,7 @@ export default function Dashboard() {
   };  
 
   // Convert JSON data into sidebar menu items
-  const menuItems = navLinks.map((item) => {
+  const menuItems = filteredNav.map((item) => {
     if (item.children) {
       return {
         key: item.path,

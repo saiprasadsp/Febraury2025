@@ -10,7 +10,6 @@
     "key": 2,
     "icon": "AiOutlineVideoCamera",
     "label": "Distributors",
-    "path": "/dashboard/distributor",
     "roles":["superadmin","distributor"],
     "children": [
       {
