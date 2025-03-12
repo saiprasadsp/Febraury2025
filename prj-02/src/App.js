@@ -35,10 +35,10 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['distributor', "superadmin"]}><Dashboard /></ProtectedRoute>}>
             <Route index={true} element={<ProtectedRoute allowedRoles={["distributor","superadmin"]}><Content/></ProtectedRoute>}/>
            
-            <Route path="retail" element={<ProtectedRoute allowedRoles={["distributor","superadmin"]}><Retail/></ProtectedRoute>}/>
-            <Route path="transactions" element={<ProtectedRoute allowedRoles={["distributor","superadmin"]}><Transactions/></ProtectedRoute>}/>
-            <Route path="margin" element={<ProtectedRoute allowedRoles={["distributor","superadmin"]}><Margin/></ProtectedRoute>}/>
-            <Route path="approval" element={<ProtectedRoute allowedRoles={["distributor","superadmin"]}><KYCApproval/></ProtectedRoute>}/>
+            <Route path="retail" element={<ProtectedRoute allowedRoles={["superadmin"]}><Retail/></ProtectedRoute>}/>
+            <Route path="transactions" element={<ProtectedRoute allowedRoles={["superadmin"]}><Transactions/></ProtectedRoute>}/>
+            <Route path="margin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Margin/></ProtectedRoute>}/>
+            <Route path="approval" element={<ProtectedRoute allowedRoles={["superadmin"]}><KYCApproval/></ProtectedRoute>}/>
             <Route path="distributor" element={<ProtectedRoute allowedRoles={["distributor","superadmin"]}><Distributor/></ProtectedRoute>}>
             <Route index={true} element={<GetDistributor/>}/>
             <Route path="getDistributor/:id" element={<DistributorDetails/>}/>
