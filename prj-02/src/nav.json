@@ -27,8 +27,8 @@
       {
         "key": 9,
         "icon": "FaUserCheck",
-        "label": "Distributor KYC",
-        "path": "/dashboard/distributor/kyc"
+        "label": "Distributor Margin",
+        "path": "/dashboard/distributor/distributormargin"
       }
     ]
 

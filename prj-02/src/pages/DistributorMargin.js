@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useGetDistributorDetailsMutation } from '../slices/usersApiSlice'
-import { useParams } from 'react-router-dom'
+import React, { useState } from "react";
 import { Button, Steps, message, Upload, Image, Form, Input, Select, DatePicker, Row, Col } from "antd";
+import { AiOutlinePlus } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import "../styles/AddDistributor.css";
+
+const { Option } = Select;
 
 const steps = [
     { title: "Aadhaar Details" },
@@ -17,51 +20,45 @@ const getBase64 = (file) =>
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
     });
-export default function DistributorDetails() {
- const [current, setCurrent] = useState(0);
-    const {id} = useParams()
-    const [data,setData] = useState([])
-    // const [data,setdata] 
-    const [getDistributorDetails,{isLoading}]=useGetDistributorDetailsMutation()
 
-    useEffect(()=>{
-        async function getDistributorDetail(){
-            const res = await getDistributorDetails({ditributorId:id}).unwrap()
-            console.log(res);
-            
-            setData(res)
-            
-        }
+const AddDistributor = () => {
+    const [current, setCurrent] = useState(0);
+    const [form] = Form.useForm();
+    const [aadharUrl, setAadharUrl] = useState([]);
+    const navigate = useNavigate();
 
-        getDistributorDetail()
-    },[])
+    const next = () => setCurrent(current + 1);
+    const prev = () => setCurrent(current - 1);
+
     const handlePreview = async (file) => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
     };
 
-    const next = () => setCurrent(current + 1);
-    const prev = () => setCurrent(current - 1);
+    const uploadButton = (
+        <button style={{ border: 0, background: "none" }} type="button">
+            <AiOutlinePlus />
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </button>
+    );
 
-    
+    const onFinish = (values) => {
+        console.log("Form submitted:", values);
+        message.success("Distributor added successfully!");
+        navigate("/dashboard/distributor");
+    };
     return (
         <div style={{ width: "80%", margin: "auto" }}>
             <h3>Add Distributor</h3>
             <Steps current={current} items={steps} />
-            {data.map((item)=>(<>
-                <Form layout="vertical" initialValues={{ aadharName: item.name_as_per_aadhaar, 
-                    aadharNumber: item.aadhar_number,
-                    dob: item.dob,
-
-                    }}>
-                
+            <Form form={form} layout="vertical" onFinish={onFinish}>
                 {current === 0 && (
                     <>
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item label="Name as per Aadhaar" name="aadharName" rules={[{ required: true, message: "Please enter Aadhaar name" }]}>
-                                    <Input value='Murali'  name="aadharName"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -75,13 +72,12 @@ export default function DistributorDetails() {
                                 >
                                     <Input
                                         maxLength={14}  // 12 digits + 2 spaces
-                                        value={data.aadharNumber}  name="aadharNumber"
-                                        // onChange={(e) => {
-                                        //     let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                                        //     value = value.slice(0, 12); // Limit to 12 digits
-                                        //     value = value.replace(/(\d{4})/g, "$1 ").trim(); // Add space after every 4 digits
-                                        //     setdata({...data,aadharNumber:value}) // Set formatted value in form
-                                        // }}
+                                        onChange={(e) => {
+                                            let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                                            value = value.slice(0, 12); // Limit to 12 digits
+                                            value = value.replace(/(\d{4})/g, "$1 ").trim(); // Add space after every 4 digits
+                                            form.setFieldsValue({ aadharNumber: value }); // Set formatted value in form
+                                        }}
                                     />
                                 </Form.Item>
                             </Col>
@@ -91,17 +87,16 @@ export default function DistributorDetails() {
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item label="Date of Birth" name="dob" rules={[{ required: true, message: "Please enter DOB" }]}>
-                                    {/* <DatePicker style={{ width: "100%" }} name="dob" /> */}
-                                    <Input />
+                                    <DatePicker style={{ width: "100%" }} />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
                                 <Form.Item label="Gender" name="gender" rules={[{ required: true, message: "Please select gender" }]}>
-                                    {/* <Select value={data.gender} onChange={(value)=>setdata({...data,gender:value})}>
+                                    <Select>
                                         <Option value="Male">Male</Option>
                                         <Option value="Female">Female</Option>
-                                        <Option value="other">Other</Option>
-                                    </Select> */}
+                                        <Option value="Female">Other</Option>
+                                    </Select>
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -109,7 +104,7 @@ export default function DistributorDetails() {
                         <Row gutter={16}>
                             <Col span={16}>
                                 <Form.Item label="Address" name="address" rules={[{ required: true, message: "Please enter Address" }]}>
-                                    <Input value={data.address}  name="address"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -117,12 +112,12 @@ export default function DistributorDetails() {
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item label="State" name="state" rules={[{ required: true, message: "Please enter state" }]}>
-                                    <Input value={data.state}  name="state"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
                                 <Form.Item label="District" name="district" rules={[{ required: true, message: "Please enter district" }]}>
-                                    <Input value={data.district}  name="district"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -130,7 +125,7 @@ export default function DistributorDetails() {
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item label="Pincode" name="pincode" rules={[{ required: true, message: "Please enter pincode" }]}>
-                                    <Input maxLength={6} value={data.pincode}  name="pincode"/>
+                                    <Input maxLength={6} />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -144,12 +139,10 @@ export default function DistributorDetails() {
                                 >
                                     <Input
                                         maxLength={10}
-                                        value={data.value}
-                                        name="mobile"
-                                        // onChange={(e) => {
-                                        //     const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                                        //     setdata({ ...data,mobile: value }); // Set formatted value in form
-                                        // }}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                                            form.setFieldsValue({ mobileNumber: value }); // Set formatted value in form
+                                        }}
                                     />
                                 </Form.Item>
                             </Col>
@@ -159,18 +152,18 @@ export default function DistributorDetails() {
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item label="Email" name="email" rules={[{ required: true, type: "email", message: "Please enter a valid email" }]}>
-                                    <Input value={data.email}  name="email"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
                                 <Form.Item label="Upload Aadhaar" name="aadharUrl">
                                     <Upload
                                         listType="picture-card"
-                                        // fileList={aadharUrl}
+                                        fileList={aadharUrl}
                                         onPreview={handlePreview}
-                                        // onChange={({ fileList }) => setAadharUrl(fileList)}
+                                        onChange={({ fileList }) => setAadharUrl(fileList)}
                                     >
-                                        {/* {aadharUrl.length >= 1 ? null : uploadButton} */}
+                                        {aadharUrl.length >= 1 ? null : uploadButton}
                                     </Upload>
                                 </Form.Item>
                             </Col>
@@ -187,7 +180,7 @@ export default function DistributorDetails() {
                                     label="Name as per PAN"
                                     rules={[{ required: true, message: "Please enter name as per PAN" }]}
                                 >
-                                    <Input value={data.panName}  name="panName"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -199,20 +192,15 @@ export default function DistributorDetails() {
                                         { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]$/, message: "Enter a valid PAN (e.g., ABCDE1234F)" }
                                     ]}
                                 >
-                                    <Input maxLength={10} value={data.panNumber}  name="panNumber"/>
+                                    <Input maxLength={10} />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row gutter={16}>
                             <Col span={12}>
-                            <Upload
-                                        listType="picture-card"
-                                        // fileList={panUrl}
-                                        onPreview={handlePreview}
-                                        // onChange={({ fileList }) => setPanUrl(fileList)}
-                                    >
-                                        {/* {panUrl.length >= 1 ? null : uploadButton} */}
-                                    </Upload>
+                                <Upload listType="picture-card" onPreview={handlePreview}>
+                                    {uploadButton}
+                                </Upload>
                             </Col>
                         </Row>
 
@@ -228,7 +216,7 @@ export default function DistributorDetails() {
                                     label="Business Name"
                                     rules={[{ required: true, message: "Please enter Business Name" }]}
                                 >
-                                    <Input value={data.businessName}  name="businessName"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -237,7 +225,7 @@ export default function DistributorDetails() {
                                     label="Business Category"
                                     rules={[{ required: true, message: "Please select Business Category" }]}
                                 >
-                                    <Input value={data.businessCategory}  name="businessCategory"/>
+                                    <Input />
 
                                 </Form.Item>
                             </Col>
@@ -250,7 +238,7 @@ export default function DistributorDetails() {
                                     label="Business Address"
                                     rules={[{ required: true, message: "Please enter Business Address" }]}
                                 >
-                                    <Input value={data.businessAddress}  name="businessAddress"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -259,7 +247,7 @@ export default function DistributorDetails() {
                                     label="State"
                                     rules={[{ required: true, message: "Please enter State" }]}
                                 >
-                                    <Input value={data.businessState}  name="businessState"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -271,7 +259,7 @@ export default function DistributorDetails() {
                                     label="District"
                                     rules={[{ required: true, message: "Please enter District" }]}
                                 >
-                                    <Input value={data.businessDistrict}  name="businessDistrict"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -283,7 +271,7 @@ export default function DistributorDetails() {
                                         { pattern: /^[0-9]{6}$/, message: "Enter a valid 6-digit Pincode" }
                                     ]}
                                 >
-                                    <Input maxLength={6} value={data.businessPincode}  name="businessPincode"/>
+                                    <Input maxLength={6} />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -295,7 +283,7 @@ export default function DistributorDetails() {
                                     label="Labour License Number"
                                     rules={[{ required: true, message: "Please enter Labour License Number" }]}
                                 >
-                                    <Input value={data.businessLabourLicenseNumber}  name="businessLabourLicenseNumber"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -304,7 +292,7 @@ export default function DistributorDetails() {
                                     label="Proprietor Name"
                                     rules={[{ required: true, message: "Please enter Proprietor Name" }]}
                                 >
-                                    <Input value={data.businessProprietorName}  name="businessProprietorName"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -314,13 +302,8 @@ export default function DistributorDetails() {
                                     name="ShopPhoto"
                                     label="Shop Photo"
                                 >
-                                    <Upload
-                                        listType="picture-card"
-                                        // fileList={shopImageUrl}
-                                        onPreview={handlePreview}
-                                        // onChange={({ fileList }) => setShopImageUrl(fileList)}
-                                    >
-                                        {/* {shopImageUrl.length >= 1 ? null : uploadButton} */}
+                                    <Upload listType="picture-card" onPreview={handlePreview}>
+                                        {uploadButton}
                                     </Upload>
                                 </Form.Item>
                             </Col>
@@ -329,13 +312,8 @@ export default function DistributorDetails() {
                                     name="labourLicenseDocument"
                                     label="Labour License Document"
                                 >
-                                    <Upload
-                                        listType="picture-card"
-                                        // fileList={labourLicenseUrl}
-                                        onPreview={handlePreview}
-                                        // onChange={({ fileList }) => setLabourLicenseUrl(fileList)}
-                                    >
-                                        {/* {labourLicenseUrl.length >= 1 ? null : uploadButton} */}
+                                    <Upload listType="picture-card" onPreview={handlePreview}>
+                                        {uploadButton}
                                     </Upload>
                                 </Form.Item>
                             </Col>
@@ -353,7 +331,7 @@ export default function DistributorDetails() {
                                     label="Bank Name"
                                     rules={[{ required: true, message: "Please enter Bank Name" }]}
                                 >
-                                    <Input value={data.bankName}  name="bankName"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -362,7 +340,7 @@ export default function DistributorDetails() {
                                     label="Account Holder Name"
                                     rules={[{ required: true, message: "Please enter Account Holder Name" }]}
                                 >
-                                    <Input value={data.accountName}  name="accountName"/>
+                                    <Input />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -377,7 +355,7 @@ export default function DistributorDetails() {
                                         { pattern: /^[0-9]{9,18}$/, message: "Enter a valid Account Number (9-18 digits)" }
                                     ]}
                                 >
-                                    <Input maxLength={18} value={data.accountNumber}  name="accountNumber"/>
+                                    <Input maxLength={18} />
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -389,7 +367,7 @@ export default function DistributorDetails() {
                                         { pattern: /^[A-Z]{4}0[A-Z0-9]{6}$/, message: "Enter a valid IFSC Code" }
                                     ]}
                                 >
-                                    <Input maxLength={11} value={data.IFSC}  name="IFSC"/>
+                                    <Input maxLength={11} />
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -400,13 +378,8 @@ export default function DistributorDetails() {
                                     name="cancelledCheque"
                                     label="Cancelled Cheque / Passbook"
                                 >
-                                    <Upload
-                                        listType="picture-card"
-                                        // fileList={cancelledCheckUrl}
-                                        onPreview={handlePreview}
-                                        // onChange={({ fileList }) => setCancelledCheckUrl(fileList)}
-                                    >
-                                        {/* {cancelledCheckUrl.length >= 1 ? null : uploadButton} */}
+                                    <Upload listType="picture-card" onPreview={handlePreview}>
+                                        {uploadButton}
                                     </Upload>
                                 </Form.Item>
                             </Col>
@@ -433,8 +406,8 @@ export default function DistributorDetails() {
                     )}
                 </div>
             </Form>
-            </>))}
-           
         </div>
     );
-}
+};
+
+export default AddDistributor;
