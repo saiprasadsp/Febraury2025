@@ -5,6 +5,7 @@ import { useGetDistributorMutation } from '../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import "../styles/GetDistributor.css";
 
 export default function GetDistributor() {
     const [data,setData] = useState([])
@@ -39,21 +40,27 @@ export default function GetDistributor() {
       
       };
       const handleView = (id) => {
-        navigate(`/dashboard/approval/getDistributor/${id}`);
+        navigate(`/dashboard/distributor/getDistributor/${id}`);
       };
       const columns = [
         {
-          title: 'DB ID',
-          dataIndex: 'ID',
-          filterMode: 'tree',
-          filterSearch: true,
-          onFilter: (value, record) => record.name.startsWith(value),
-          width: '15%',
-        },
+          title: "DB ID",
+          dataIndex: "ID",
+          filters: data
+            ? data.map((item) => ({
+                text: item.ID.toString(),
+                value: item.ID.toString(),
+              }))
+            : [],
+          filterMode: "menu", // Removes "Select All"
+          filterSearch: (input, record) => record.value.includes(input), // Shows only matched results
+          onFilter: (value, record) => record.ID.toString().includes(value),
+          width: "15%",
+        }
+        ,        
         {
           title: 'Distributor Name',
           dataIndex: 'name',
-          sorter: (a, b) => a.age - b.age,
         },
         {
           title: 'Mobile Number',
@@ -66,19 +73,24 @@ export default function GetDistributor() {
         {
           title: 'DOJ',
           dataIndex: 'doj',
-          sorter: (a, b) => a.age - b.age,
+
         },
         {
           title: 'KYC Status',
           dataIndex: 'kyc',
-          sorter: (a, b) => a.age - b.age,
         },
         {
           title: 'Actions',
           dataIndex: 'view',
-          render:(_,record)=>
-            (<Button  onClick={() => handleView(record.ID)}>View</Button>)
-          
+          width: 100,
+          render: (_, record) => (
+            <Button 
+              className="view-button" 
+              onClick={() => handleView(record.ID)}
+            >
+              View
+            </Button>
+          ),
         },
       ];
   return (

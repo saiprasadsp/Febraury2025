@@ -20,6 +20,7 @@ import Content from "./pages/Content";
 import AddDistributor from "./pages/AddDistributor";
 import GetDistributor from "./pages/GetDistributor";
 import DistributorDetails from "./pages/DistributorDetails";
+import DistributorMargin from "./pages/DistributorMargin";
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -43,6 +44,7 @@ function App() {
             <Route index={true} element={<GetDistributor/>}/>
             <Route path="getDistributor/:id" element={<DistributorDetails/>}/>
             <Route path="addDistributor" element={<AddDistributor/>}/>
+            <Route path="distributorMargin" element={<DistributorMargin/>}/>
             </Route>
             <Route path="settings" element={<ProtectedRoute allowedRoles={["superadmin"]}><Settings/></ProtectedRoute>}/>
             <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor","superadmin"]}><Profile/></ProtectedRoute>}/>
