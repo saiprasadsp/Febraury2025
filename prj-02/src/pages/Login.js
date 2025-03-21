@@ -6,7 +6,7 @@ import { setLogin } from "../redux/authSlice";
 import {  useLoginMutation} from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import logo from "../assets/logo/TheQucikPayMe.png"
-// import "@fortawesome/fontawesome-free/css/all.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 function Login() {
   const [userID, setUserID] = useState("");
   const [password, setPassword] = useState("");
@@ -80,7 +80,7 @@ function Login() {
               </div>
             </form>
 
-            <p className="mt-4 text-center text-muted">&copy; All rights received @2025 NeoFin Tech India Pvt Ltd</p>
+            <p className="mt-4 text-center text-muted">&copy; All rights received @2025 NeoFin Nex India Pvt Ltd</p>
           </div>
         </div>
       </div>
