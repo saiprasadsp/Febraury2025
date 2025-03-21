@@ -156,7 +156,7 @@ footer::before {
 
 /* Move text slightly to the left */
 footer::after {
-  content: "All rights received @2025 NeoFin Tech India Pvt Ltd";
+  content: "All rights received @2025 NeoFin Nex India Pvt Ltd";
   position: relative;
   left: -50px; /* Adjust value to move text left */
   font-size: 10px !important; /* 🔹 Reduce text size to fit */
