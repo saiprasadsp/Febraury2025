@@ -2,7 +2,6 @@ import { apiSlice } from "./apiSlice";
 
 const USERS_URL = 'http://localhost:9000/api/users'
 const DISTRIBUTOR_LIST = 'http://localhost:9000/api/customers'
-console.log('step 2',USERS_URL);
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
@@ -59,8 +58,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method:'POST',
                 body:data
             })
+        }),
+        updateDistributorMargin:builder.mutation({
+            query:(data)=>({
+                url:`${DISTRIBUTOR_LIST}/update`,
+                method:'PUT',
+                body:data
+            })
         })
     })
 })
 
-export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation} = usersApiSlice
+export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation} = usersApiSlice

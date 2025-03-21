@@ -1,13 +1,14 @@
 import React, { useState, useEffect, createContext, useRef, useContext } from "react";
 import { Button, Table, Form, Input } from "antd";
-import { useGetDistributorMutation } from '../slices/usersApiSlice';
+import { useGetDistributorMutation,useUpdateDistributorMarginMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import "../styles/AddDistributor.css";
 
 const AddDistributor = () => {
     const [data, setData] = useState([]);
     const [getDistributor, { isLoading }] = useGetDistributorMutation();
-    const [updatedValues, setUpdatedValues] = useState({}); // Holds updates for margin values
+    const [updateDistributorMargin]=useUpdateDistributorMarginMutation()
+    const [updatedValues, setUpdatedValues] = useState(""); // Holds updates for margin values
 
     useEffect(() => {
         const fetchDistributor = async () => {
@@ -128,30 +129,45 @@ const AddDistributor = () => {
         return <td {...restProps}>{childNode}</td>;
     };
 
-    const handlesave = (row) => {
-        const newData = [...data];
-        const index = newData.findIndex((item) => row.key === item.key);
-        const item = newData[index];
-        newData.splice(index, 1, {
-            ...item,
-            ...row,
-        });
-        setData(newData);
-
-        // Save updated values locally for the margin field
-        setUpdatedValues((prev) => ({
-            ...prev,
-            [row.key]: { ...prev[row.key], margin: row.margin },
-        }));
+    const handlesave = async(row) => {
+        try {
+            const res = await updateDistributorMargin({id:row.ID,margin:row.margin}).unwrap()
+            toast.success(res.message)
+            const newData = [...data];
+            const index = newData.findIndex((item) => row.key === item.key);
+            const item = newData[index];
+            newData.splice(index, 1, {
+                ...item,
+                ...row,
+            });
+            setData(newData);
+    
+            // Save updated values locally for the margin field
+            setUpdatedValues((prev) => ({
+                ...prev,
+                [row.key]: { ...prev[row.key], margin: row.margin },
+            }));
+        } catch (err) {
+            toast.error(err?.data?.message || "Error in updating margin")
+        }
     };
 
-    const handleUpdateAll = () => {
-        const newData = data.map((item) => {
-            const updatedMargin = updatedValues[item.key]?.margin || item.margin;
-            return { ...item, margin: updatedMargin };
-        });
-        setData(newData);
-        setUpdatedValues({}); // Clear updated values after applying
+    const handleUpdateAll = async() => {
+        if (updatedValues===""||updatedValues===null||updatedValues===undefined) {
+            toast.error("Please enter a Margin value before updating.")
+            return
+        }
+        try {
+            await updateDistributorMargin({margin:updatedValues}).unwrap()
+            toast.success("All Margins updated successfully")
+            const newData = data.map((item) => {
+                return { ...item, margin: updatedValues };
+            });
+            setData(newData);
+            setUpdatedValues(null); // Clear updated values after applying
+        } catch (err) {
+            toast.error(err?.data?.message || "Failed to update margin")
+        }
     };
 
     const columns = defaultColumns.map((col) => {
@@ -186,6 +202,7 @@ const AddDistributor = () => {
                         className="form-control"
                         placeholder="Recipient's username"
                         aria-label="Recipient's username"
+                        onChange={(e)=>setUpdatedValues(e.target.value)}
                     />
                     <button className="btn btn-outline-secondary" type="button" onClick={handleUpdateAll}>
                         Update All
