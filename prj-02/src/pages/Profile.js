@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUpdateUserMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
-import { setLogin } from '../redux/authSlice';
+import { setLogin, setLogout } from '../redux/authSlice';
 
 export default function Profile() {
   const[userId,setUserId] = useState('')
@@ -17,10 +17,16 @@ export default function Profile() {
   const {userInfo} = useSelector((state)=>state.auth)
 
   useEffect(()=>{
-    setUserId(userInfo.id)
-    setEmail(userInfo.email)
 
-  },[userInfo.id,userInfo.email])
+    if (userInfo && userInfo.id && userInfo.email) {
+      console.log("step 1");
+      
+      setUserId((prevId)=>prevId !== userInfo.id ? userInfo.id:prevId)
+      setEmail((prevEmail)=>prevEmail !== userInfo.email ? userInfo.email:prevEmail)
+      
+    }
+
+  },[])
 
   const submitHandler=async (e)=>{
     e.preventDefault();
@@ -30,7 +36,7 @@ export default function Profile() {
       try {
         const res = await updateUser({email:email,password:password,userid:userId}).unwrap()
         console.log(res);
-        dispatch(setLogin(res))
+        dispatch(setLogout())
         toast.success('Porfile updated successfully')
 
       } catch (err) {

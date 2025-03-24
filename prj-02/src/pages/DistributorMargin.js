@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useRef, useContext } from "react";
-import { Button, Table, Form, Input } from "antd";
+import { Button, Table, Form, Input,Modal } from "antd";
 import { useGetDistributorMutation,useUpdateDistributorMarginMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import "../styles/AddDistributor.css";
@@ -130,26 +130,36 @@ const AddDistributor = () => {
     };
 
     const handlesave = async(row) => {
-        try {
-            const res = await updateDistributorMargin({id:row.ID,margin:row.margin}).unwrap()
-            toast.success(res.message)
-            const newData = [...data];
-            const index = newData.findIndex((item) => row.key === item.key);
-            const item = newData[index];
-            newData.splice(index, 1, {
-                ...item,
-                ...row,
-            });
-            setData(newData);
-    
-            // Save updated values locally for the margin field
-            setUpdatedValues((prev) => ({
-                ...prev,
-                [row.key]: { ...prev[row.key], margin: row.margin },
-            }));
-        } catch (err) {
-            toast.error(err?.data?.message || "Error in updating margin")
-        }
+        Modal.confirm({
+            title:"Confirm Save",
+            content:'Are you sure you want to continue?',
+            onOk:async()=>{
+                try {
+                    const res = await updateDistributorMargin({id:row.ID,margin:row.margin}).unwrap()
+                    toast.success(res.message)
+                    const newData = [...data];
+                    const index = newData.findIndex((item) => row.key === item.key);
+                    const item = newData[index];
+                    newData.splice(index, 1, {
+                        ...item,
+                        ...row,
+                    });
+                    setData(newData);
+            
+                    // Save updated values locally for the margin field
+                    setUpdatedValues((prev) => ({
+                        ...prev,
+                        [row.key]: { ...prev[row.key], margin: row.margin },
+                    }));
+                } catch (err) {
+                    toast.error(err?.data?.message || "Error in updating margin")
+                }
+            },
+            onCancel:()=>{
+                console.log("User cancelled save");
+                
+            }
+        })
     };
 
     const handleUpdateAll = async() => {
@@ -157,17 +167,29 @@ const AddDistributor = () => {
             toast.error("Please enter a Margin value before updating.")
             return
         }
-        try {
-            await updateDistributorMargin({margin:updatedValues}).unwrap()
-            toast.success("All Margins updated successfully")
-            const newData = data.map((item) => {
-                return { ...item, margin: updatedValues };
-            });
-            setData(newData);
-            setUpdatedValues(null); // Clear updated values after applying
-        } catch (err) {
-            toast.error(err?.data?.message || "Failed to update margin")
-        }
+
+        Modal.confirm({
+            title:'Confirm save',
+            content:'Are you sure you want to continue?',
+            onOk:async()=>{
+                try {
+                    await updateDistributorMargin({margin:updatedValues}).unwrap()
+                    toast.success("All Margins updated successfully")
+                    const newData = data.map((item) => {
+                        return { ...item, margin: updatedValues };
+                    });
+                    setData(newData);
+                    setUpdatedValues(null); // Clear updated values after applying
+                } catch (err) {
+                    toast.error(err?.data?.message || "Failed to update margin")
+                }
+
+            },
+            onCancel:async()=>{
+                console.log("User Cancelled update All");
+                
+            }
+        })
     };
 
     const columns = defaultColumns.map((col) => {

@@ -19,6 +19,7 @@ import { FaSignOutAlt, FaUserPlus, FaUserCheck } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { setLogout } from "../redux/authSlice";
+import  SessionConflictToast  from "../Components/SessionConflictToast";
 import navLinks from "../nav.json";
 import logo from "../assets/logo/TheQucikPayMe.png";
 import "../styles/Dashboard.css";
@@ -189,6 +190,7 @@ export default function Dashboard() {
         </footer>
         <Layout>
           <Content className="dashboard-content">
+          <SessionConflictToast/>
             <Outlet />
           </Content>
         </Layout>
