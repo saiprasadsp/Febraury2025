@@ -1,7 +1,7 @@
 import { apiSlice } from "./apiSlice";
 
 const USERS_URL = 'http://localhost:9000/api/users'
-const DISTRIBUTOR_LIST = 'http://localhost:9000/api/customers'
+const DISTRIBUTOR_LIST = 'http://localhost:9000/api/distributor'
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
