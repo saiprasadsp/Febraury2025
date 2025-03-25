@@ -1,0 +1,19 @@
+.approve-button {
+  background-color: #096022 !important;
+  border-color: #096022 !important;
+  color: white !important;
+  margin-right: 10px;
+  padding: 10px 16px; /* ✅ Increased padding */
+  font-size: 14px; /* ✅ Adjust font size */
+  margin-bottom: 20px !important;
+}
+
+.reject-button {
+  background-color: #930000 !important;
+  border-color: #930000 !important;
+  color: white !important;
+  margin-right: 10px;
+  padding: 10px 16px; /* ✅ Increased padding */
+  font-size: 14px; /* ✅ Adjust font size */
+  margin-bottom: 20px !important;
+}
