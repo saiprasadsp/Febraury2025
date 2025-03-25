@@ -1,26 +1,37 @@
+import { useEffect, useState } from "react";
 import { Upload, Modal } from "antd";
-import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 
-
-const PdfUploader = ({ label, fileList, setFileList }) => {
+const PdfUploader = ({ label, fileList, setFileList, initialFiles = [] }) => {
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewFile, setPreviewFile] = useState("");
+
+    // Load initial S3 files only once
+    useEffect(() => {
+        if (initialFiles.length > 0 && fileList.length === 0) {
+            const formattedFiles = initialFiles.map((url, index) => ({
+                uid: `s3-${index}`,
+                name: `File ${index + 1}.pdf`,
+                url, // S3 file URL
+                status: "done",
+            }));
+            setFileList(formattedFiles);
+        }
+    }, [initialFiles, setFileList]); // Removed `fileList` from dependencies to avoid infinite loop
 
     const handlePreview = async (file) => {
         let fileUrl = file.url || file.thumbUrl;
         if (!fileUrl && file.originFileObj) {
             fileUrl = URL.createObjectURL(file.originFileObj);
         }
-    
+
         if (window.innerWidth <= 768) {
-            // Open PDF in new tab for mobile users
             window.open(fileUrl, "_blank");
         } else {
             setPreviewFile(fileUrl);
             setPreviewVisible(true);
         }
-    };    
+    };
 
     const handleChange = ({ fileList }) => {
         const filteredList = fileList.filter(file => file.name.endsWith(".pdf"));

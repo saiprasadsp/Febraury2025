@@ -15,6 +15,7 @@ const steps = [
     { title: "Bank Details" },
 ];
 
+
 const AddDistributor = () => {
     const [current, setCurrent] = useState(0);
     const [form] = Form.useForm();
@@ -50,7 +51,7 @@ const AddDistributor = () => {
         IFSC: '',
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
-        ditributorMargin: '0.5',
+        ditributorMargin: process.env.DitributorMargin,
         userType: 'distributor',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`

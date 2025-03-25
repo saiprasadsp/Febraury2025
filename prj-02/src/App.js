@@ -19,7 +19,7 @@ import Register from "./pages/Register";
 import Content from "./pages/Content";
 import AddDistributor from "./pages/AddDistributor";
 import GetDistributor from "./pages/GetDistributor";
-import DistributorDetails from "./pages/ViewDistributorDetails";
+import DistributorDetails from "./pages/ApproveDistributor";
 import DistributorMargin from "./pages/DistributorMargin";
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
