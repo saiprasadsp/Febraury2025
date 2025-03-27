@@ -95,7 +95,8 @@ export default function DistributorDetails() {
                 <Form layout="vertical" initialValues={{
                     aadharName: item.name_as_per_aadhaar,
                     aadharNumber: item.aadhar_number,
-                    dob: item.dob,
+                    doj: new Date().toISOString(), // Adding Date of Joining (doj)
+
                     gender: item.gender,
                     address: item.address,
                     state: item.state,
@@ -104,6 +105,7 @@ export default function DistributorDetails() {
                     pincode: item.pincode,
                     email: item.user_email,
                     aadharUrl: item.aadhar_url,
+                    kycstatus: item.kyc_status,
 
 
                     panName: item.name_as_per_pan,
@@ -176,11 +178,11 @@ export default function DistributorDetails() {
                                 </Col>
                             </Row>
                             <Row gutter={16}>
-                                {/* <Col span={12}>
-                                <Form.Item label="Date of Birth" name="dob" rules={[{ required: true, message: "Please enter DOB" }]}>
-                                    <DatePicker style={{ width: "100%" }} onChange={(date) => setFormData({ ...formData, dob: new Date(date).toISOString() })} value={formData.dob} name="dob" />
-                                </Form.Item>
-                            </Col> */}
+                                <Col span={12}>
+                                    <Form.Item label="Date of Birth" name="dob" rules={[{ required: true, message: "Please enter DOB" }]}>
+                                        <DatePicker style={{ width: "100%" }} onChange={(date) => setFormData({ ...formData, dob: new Date(date).toISOString() })} value={formData.dob} name="dob" />
+                                    </Form.Item>
+                                </Col>
                                 <Col span={12}>
                                     <Form.Item label="Gender" name="gender" rules={[{ required: true, message: "Please select gender" }]}>
                                         <Select value={formData.gender} onChange={(value) => setFormData({ ...formData, gender: value })}>
@@ -241,18 +243,18 @@ export default function DistributorDetails() {
                                 </Col>
 
                             </Row>
-                           <Row gutter={16}>
-    <Col span={12}>
-        <Form.Item name="aadharUrl">
-            <PdfUploader
-                label="Aadhaar"
-                fileList={aadharFile}
-                setFileList={setAadharFile}
-                initialFiles={["https://your-s3-bucket-url/aadhar.pdf"]} // Replace with actual URL(s)
-            />
-        </Form.Item>
-    </Col>
-</Row>
+                            <Row gutter={16}>
+                                <Col span={12}>
+                                    <Form.Item name="aadharUrl">
+                                        <PdfUploader
+                                            label="Aadhaar"
+                                            fileList={aadharFile}
+                                            setFileList={setAadharFile}
+                                            initialFiles={["https://your-s3-bucket-url/aadhar.pdf"]} // Replace with actual URL(s)
+                                        />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
 
 
                         </>
@@ -463,35 +465,47 @@ export default function DistributorDetails() {
                     )}
 
                     <div style={{ marginTop: 24 }}>
-                        {current < steps.length - 1 && (
-                            <Button type="primary" className="next-button" onClick={next}>
-                                Next
-                            </Button>
-                        )}
-                        {current === steps.length - 1 && (
-                            <Button type="primary" className="done-button" htmlType="submit">
-                                Update
-                            </Button>
 
-                        )}
-                        {current === steps.length - 1 && (
-                            <Button type="primary" className="approve-button" htmlType="submit">
-                                Approve
-                            </Button>
+                        {/* Ensure item exists before rendering */}
+                        {item && (
+                            <>
+                                {current < steps.length - 1 && (
+                                    <Button type="primary" className="next-button" onClick={next}>
+                                        Next
+                                    </Button>
+                                )}
 
-                        )}
-                        {current === steps.length - 1 && (
-                            <Button type="primary" className="reject-button" htmlType="submit">
-                                Reject
-                            </Button>
+                                {["Pending", "Rejected"].includes(item.kyc_status) && current === steps.length - 1 && (
+                                    <>
+                                        <Button type="primary" className="done-button" htmlType="submit">
+                                            Update
+                                        </Button>
+                                        <Button type="primary" className="approve-button" htmlType="submit">
+                                            Approve
+                                        </Button>
+                                        <Button type="primary" className="reject-button" htmlType="submit">
+                                            Reject
+                                        </Button>
+                                    </>
+                                )}
 
-                        )}
-                        {current > 0 && (
-                            <Button className="previous-button" onClick={prev}>
-                                Previous
-                            </Button>
+                                {item.kyc_status === "Approved" && current === steps.length - 1 && (
+                                    <Button type="primary" className="done-button">
+                                        Close
+                                    </Button>
+                                )}
+
+                                {current > 0 && (
+                                    <Button className="previous-button" onClick={prev}>
+                                        Previous
+                                    </Button>
+                                )}
+                            </>
                         )}
                     </div>
+
+
+
                 </Form>
             </>))}
 

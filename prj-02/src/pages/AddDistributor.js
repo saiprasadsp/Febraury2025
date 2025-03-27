@@ -452,7 +452,7 @@ const AddDistributor = () => {
                     )}
                     {current === steps.length - 1 && (
                         <Button type="primary" className="done-button" htmlType="submit">
-                            Done
+                            Submit
                         </Button>
                     )}
                     {current > 0 && (
