@@ -50,7 +50,15 @@ const AddDistributor = () => {
         {
             title: 'DOJ',
             dataIndex: 'doj',
-        },
+            render: (date) => {
+              return new Date(date).toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+              });
+            },
+            width: "18%",
+          },      
         {
             title: 'Margin',
             dataIndex: 'margin',
