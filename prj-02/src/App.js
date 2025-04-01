@@ -21,6 +21,8 @@ import Content from "./pages/Content";
 import AddDistributor from "./pages/AddDistributor";
 import GetDistributor from "./pages/GetDistributor";
 import DistributorDetails from "./pages/ApproveDistributor";
+import RetailerDetails from "./pages/ApproveRetailer";
+
 import DistributorMargin from "./pages/DistributorMargin";
 import AddRetailer from "./pages/AddRetailer";
 import GetRetailers from "./pages/GetRetailer";
@@ -55,7 +57,7 @@ function App() {
 
         <Route path="retailer" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Retailer /></ProtectedRoute>}>
           {<Route index={true} element={<GetRetailers />} />}
-          <Route path="getRetailer/:id" element={<getRetailers />} />
+          <Route path="getRetailer/:id" element={<RetailerDetails />} />
           <Route path="addRetailer" element={<AddRetailer />} />
           {/* <Route path="distributorMargin" element={<DistributorMargin />} /> */}
         </Route>

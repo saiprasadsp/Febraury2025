@@ -88,7 +88,7 @@ const AddRetailer = () => {
         try {
             const res = await createDistributor(data).unwrap();
             toast.success(res?.message);
-            navigate('/dashboard/distributor');
+            navigate('/dashboard/retailer');
         } catch (err) {
             console.log(err);
             toast.error(err?.data?.message);
