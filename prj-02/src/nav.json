@@ -10,7 +10,7 @@
     "key": 2,
     "icon": "AiOutlineVideoCamera",
     "label": "Distributors",
-    "roles":["superadmin","distributor"],
+    "roles":["superadmin"],
     "children": [
       {
         "key": 10,
@@ -36,9 +36,29 @@
   {
     "key": 3,
     "icon": "AiOutlineUpload",
-    "label": "Retail list",
-    "path": "/dashboard/retail",
-    "roles":["superadmin","distributor"]
+    "label": "Retailers",
+    "roles":["superadmin","distributor"],
+
+    "children": [
+      {
+        "key": 10,
+        "icon": "AiOutlineTeam",
+        "label": "Retailers List",
+        "path": "/dashboard/retailer"
+      },
+      {
+        "key": 8,
+        "icon": "FaUserPlus",
+        "label": "Add Retailer",
+        "path": "/dashboard/retailer/addretailer"
+      },
+      {
+        "key": 9,
+        "icon": "FaUserCheck",
+        "label": "Retailer Margins",
+        "path": "/dashboard/retailer/distributormargin"
+      }
+    ]
 
   },
   {
@@ -70,7 +90,7 @@
     "icon": "AiOutlineSetting",
     "label": "Settings",
     "path": "/dashboard/settings",
-    "roles":["superadmin"]
+    "roles":["superadmin","distributor"]
 
   }
 ]
