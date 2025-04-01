@@ -5,14 +5,17 @@ import { PlusOutlined } from "@ant-design/icons";
 const PdfUploader = ({ label, fileList, setFileList, initialFiles = [] }) => {
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewFile, setPreviewFile] = useState("");
+    
 
     // Load initial S3 files only once
     useEffect(() => {
+        
         if (initialFiles.length > 0 && fileList.length === 0) {
+            
             const formattedFiles = initialFiles.map((url, index) => ({
                 uid: `s3-${index}`,
                 name: `File ${index + 1}.pdf`,
-                url, // S3 file URL
+                url:`'${url}'`, // S3 file URL
                 status: "done",
             }));
             setFileList(formattedFiles);
@@ -20,6 +23,7 @@ const PdfUploader = ({ label, fileList, setFileList, initialFiles = [] }) => {
     }, [initialFiles, setFileList]); // Removed `fileList` from dependencies to avoid infinite loop
 
     const handlePreview = async (file) => {
+        
         let fileUrl = file.url || file.thumbUrl;
         if (!fileUrl && file.originFileObj) {
             fileUrl = URL.createObjectURL(file.originFileObj);

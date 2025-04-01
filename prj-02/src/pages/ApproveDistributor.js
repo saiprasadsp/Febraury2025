@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, Steps, message, Upload, Image, Form, Input, Select, DatePicker, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { useGetDistributorDetailsMutation } from '../slices/usersApiSlice'
+import { useGetDistributorDetailsMutation,useUpdateDistributorMutation } from '../slices/usersApiSlice'
 import PdfUploader from "./PdfUploader"; // ✅ Import PdfUploader
 import "../styles/ApproveDistributor.css";
-
+import dayjs from "dayjs";
 
 const { Option } = Select;
 
@@ -19,72 +19,168 @@ const steps = [
 
 
 export default function DistributorDetails() {
+    const formUpdated = useRef(false)
     const [current, setCurrent] = useState(0);
     const { id } = useParams()
     const [data, setData] = useState([])
     const [form] = Form.useForm();
-    // const [data,setdata] 
+    const [aadharFile, setAadharFile] = useState([]);
+    const [panFile, setPanFile] = useState([]);
+    const [shopImageFile, setShopImageFile] = useState([]);
+    const [labourLicenseFile, setLabourLicenseFile] = useState([]);
+    const [cancelledCheckFile, setCancelledCheckFile] = useState([]);
+    const [formData, setFormData] = useState({
+        ID:"",
+        roleid: 2,
+        aadharName: '',
+        aadharNumber: '',
+        dob: '',
+        gender: '',
+        address: '',
+        state: '',
+        district: '',
+        pincode: '',
+        mobile: '',
+        email: '',
+        password: '',
+        panNumber: '',
+        panName: '',
+        businessName: '',
+        businessCategory: '',
+        businessAddress: '',
+        businessState: '',
+        businessDistrict: '',
+        businessPincode: '',
+        businessLabourLicenseNumber: '',
+        businessProprietorName: '',
+        bankName: '',
+        accountName: '',
+        accountNumber: '',
+        IFSC: '',
+        doj: `${new Date().toISOString()}`,
+        status: 'Pending',
+        ditributorMargin: process.env.DitributorMargin,
+        userType: 'distributor',
+        create: `${new Date().toISOString()}`,
+        update: `${new Date().toISOString()}`
+    });
     const [getDistributorDetails, { isLoading }] = useGetDistributorDetailsMutation()
-
+    const [updateDistributor] = useUpdateDistributorMutation()
+    const[dob,setDob] = useState("")
     useEffect(() => {
         async function getDistributorDetail() {
-            const res = await getDistributorDetails({ ditributorId: id }).unwrap();
-            console.log("Distributor Details:", res); // Debugging
-
-            setData(res);
-
-            // ✅ Set Aadhaar file uploader state if aadhar_url exists
-            if (res.aadhar_url) {
-                setAadharFile([{
-                    uid: '-1',
-                    name: 'Aadhaar.pdf',
-                    status: 'done',
-                    url: res.aadhar_url
-                }]);
+            try {
+                
+                const res = await getDistributorDetails({ ditributorId: id }).unwrap();
+                console.log("Distributor Details:", res); 
+    
+                setData(res);
+                if (res.length>0) {
+                    const item = res[0]
+                    setFormData((prevData)=>({
+                        ...prevData,
+                        ID:item.ID,
+                        aadharName: item.name_as_per_aadhaar,
+                        aadharNumber: item.aadhar_number,
+                        dob: new Date(item.dob).toISOString(),    
+                        gender: item.gender,
+                        address: item.address,
+                        state: item.state,
+                        district: item.district,
+                        pincode: item.pincode,
+                        mobile: item.user_mobile,
+                        email: item.user_email,
+                        aadharUrl: item.aadhar_url,
+                        kycstatus: item.kyc_status,    
+                        panName: item.name_as_per_pan,
+                        panNumber: item.pan_number,
+                        panUrl:item.pan_url,
+                        businessName: item.bank_name,
+                        businessCategory: item.business_category,
+                        businessAddress: item.business_address,
+                        businessState: item.business_state,
+                        businessDistrict: item.business_district,
+                        businessPincode: item.business_pincode,
+                        businessLabourLicenseNumber: item.business_labour_license_Number,
+                        businessProprietorName: item.business_proprietor_Name,
+                        ShopPhoto: item.shop_photo_url,
+                        labourLicenseDocument: item.business_ll_url,    
+                        bankName: item.bank_name,
+                        accountName: item.account_holder_name,
+                        accountNumber: item.account_number,
+                        IFSC: item.ifsc_code,
+                        cancelledCheque: item.cancelled_check_url,        
+                    }))
+                    
+                    if (!formUpdated.current) {
+                        
+                        form.setFieldsValue({
+                            ...formData,dob:item.dob?dayjs(item.dob):null
+                        })
+                        formUpdated.current=true
+                    }
+                    console.log("step 10",formData);
+                    
+                }
+            } catch (error) {
+                console.log(error);
+                
             }
         }
 
         getDistributorDetail();
     }, []);
 
-    // ✅ PDF Upload States
-    const [aadharFile, setAadharFile] = useState([]);
-    const [panFile, setPanFile] = useState([]);
-    const [shopImageFile, setShopImageFile] = useState([]);
-    const [labourLicenseFile, setLabourLicenseFile] = useState([]);
-    const [cancelledCheckFile, setCancelledCheckFile] = useState([]);
-    const [formData, setFormData] = useState({}); // ✅ Define formData state
+    useEffect(()=>{
+        form.setFieldsValue(formData)
+    },[formData])
 
 
     const next = () => setCurrent(current + 1);
     const prev = () => setCurrent(current - 1);
 
-    const onFinish = async () => {
-        const data = new FormData();
-
-        Object.entries(formData).forEach(([key, value]) => {
-            data.append(key, value);
-        });
-
-        // ✅ Append PDF Files to FormData
-        if (aadharFile.length) data.append('aadharUrl', aadharFile[0].originFileObj);
-        if (panFile.length) data.append('panUrl', panFile[0].originFileObj);
-        if (shopImageFile.length) data.append('shopImageUrl', shopImageFile[0].originFileObj);
-        if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
-        if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);
-
-        console.log(data);
-
+    const onFinish = async () => {  
 
     };
     const handleInputChange = (e) => {
+        
         const { name, value } = e.target;
+        console.log("step 3",name,value);
         setFormData((prevData) => ({
             ...prevData,
             [name]: value.toUpperCase(),
         }));
     };
+    const handleUpdate=async()=>{
+        try {
+            console.log(formData);
+            
+            const data = new FormData();
+            Object.entries(formData).forEach(([key, value]) => {
+                data.append(key, value);
+            });
 
+            if (aadharFile.length) data.append('aadharUrl', aadharFile[0].originFileObj);
+            if (panFile.length) data.append('panUrl', panFile[0].originFileObj);
+            if (shopImageFile.length) data.append('shopImageUrl', shopImageFile[0].originFileObj);
+            if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
+            if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);
+
+            console.log(data);
+            
+
+            const res = await updateDistributor(formData).unwrap()
+            console.log(res);
+            
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+        
+        
+    }
 
 
     return (
@@ -92,42 +188,7 @@ export default function DistributorDetails() {
             <h4>View Distributor</h4>
             <Steps current={current} items={steps} />
             {data.map((item) => (<>
-                <Form layout="vertical" initialValues={{
-                    aadharName: item.name_as_per_aadhaar,
-                    aadharNumber: item.aadhar_number,
-                    doj: new Date().toISOString(), // Adding Date of Joining (doj)
-
-                    gender: item.gender,
-                    address: item.address,
-                    state: item.state,
-                    district: item.district,
-                    mobileNumber: item.user_mobile,
-                    pincode: item.pincode,
-                    email: item.user_email,
-                    aadharUrl: item.aadhar_url,
-                    kycstatus: item.kyc_status,
-
-
-                    panName: item.name_as_per_pan,
-                    panNumber: item.pan_number,
-                    businessName: item.bank_name,
-                    businessCategory: item.business_category,
-                    businessAddress: item.business_address,
-                    businessState: item.business_state,
-                    businessDistrict: item.business_district,
-                    businessPincode: item.business_pincode,
-                    labourLicenseNumber: item.business_labour_license_Number,
-                    proprietorName: item.business_proprietor_Name,
-                    ShopPhoto: item.shop_photo_url,
-                    labourLicenseDocument: item.business_ll_url,
-
-                    bankName: item.bank_name,
-                    bankAccountHolder: item.account_holder_name,
-                    accountNumber: item.account_number,
-                    ifscCode: item.ifsc_code,
-                    cancelledCheque: item.cancelled_check_url,
-
-                }}>
+                <Form form={form} layout="vertical">
 
                     {current === 0 && (
                         <>
@@ -180,7 +241,7 @@ export default function DistributorDetails() {
                             <Row gutter={16}>
                                 <Col span={12}>
                                     <Form.Item label="Date of Birth" name="dob" rules={[{ required: true, message: "Please enter DOB" }]}>
-                                        <DatePicker style={{ width: "100%" }} onChange={(date) => setFormData({ ...formData, dob: new Date(date).toISOString() })} value={formData.dob} name="dob" />
+                                        {/* <DatePicker initialValues={dayjs(formData.dob)} style={{ width: "100%" }} onChange={(date) => setFormData({ ...formData, dob: new Date(date).toISOString() })} value={formData.dob} name="dob" /> */}
                                     </Form.Item>
                                 </Col>
                                 <Col span={12}>
@@ -224,7 +285,7 @@ export default function DistributorDetails() {
                                 <Col span={12}>
                                     <Form.Item
                                         label="Mobile Number"
-                                        name="mobileNumber"
+                                        name="mobile"
                                         rules={[
                                             { required: true, message: "Please enter mobile number" },
                                             { pattern: /^\d{10}$/, message: "Mobile number must be exactly 10 digits" }
@@ -245,12 +306,21 @@ export default function DistributorDetails() {
                             </Row>
                             <Row gutter={16}>
                                 <Col span={12}>
+                                    <Form.Item label="Email" name="email" rules={[{ required: true, type: "email", message: "Please enter a valid email" }]}>
+                                        <Input
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            name="email"
+                                        />
+                                    </Form.Item>
+                                </Col>
+                                <Col span={12}>
                                     <Form.Item name="aadharUrl">
                                         <PdfUploader
                                             label="Aadhaar"
                                             fileList={aadharFile}
                                             setFileList={setAadharFile}
-                                            initialFiles={["https://your-s3-bucket-url/aadhar.pdf"]} // Replace with actual URL(s)
+                                            initialFiles={[aadharFile]} // Replace with actual URL(s)
                                         />
                                     </Form.Item>
                                 </Col>
@@ -282,7 +352,7 @@ export default function DistributorDetails() {
                                         ]}
                                         normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
                                     >
-                                        <Input maxLength={10} />
+                                        <Input maxLength={10} name='panNumber' value={formData.panNumber} onChange={handleInputChange}/>
                                     </Form.Item>
 
                                 </Col>
@@ -290,7 +360,7 @@ export default function DistributorDetails() {
                             <Row gutter={16}>
                                 <Col span={12}>
                                     <Form.Item >
-                                        <PdfUploader label="PAN Card" fileList={panFile} setFileList={setPanFile} />
+                                        <PdfUploader label="PAN Card" fileList={panFile} setFileList={setPanFile} initialFiles={[panFile]}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -369,7 +439,7 @@ export default function DistributorDetails() {
                             <Row gutter={16}>
                                 <Col span={12}>
                                     <Form.Item
-                                        name="labourLicenseNumber"
+                                        name="businessLabourLicenseNumber"
                                         label="Labour License Number"
                                     >
                                         <Input value={formData.businessLabourLicenseNumber} onChange={handleInputChange} name="businessLabourLicenseNumber" />
@@ -377,7 +447,7 @@ export default function DistributorDetails() {
                                 </Col>
                                 <Col span={12}>
                                     <Form.Item
-                                        name="proprietorName"
+                                        name="businessProprietorName"
                                         label="Proprietor Name"
                                         rules={[{ required: true, message: "Please enter Proprietor Name" }]}
                                     >
@@ -387,13 +457,13 @@ export default function DistributorDetails() {
                             </Row>
                             <Row gutter={16}>
                                 <Col span={12}>
-                                    <Form.Item >
-                                        <PdfUploader label="Shop Image" fileList={shopImageFile} setFileList={setShopImageFile} />
+                                    <Form.Item name="shopImageUrl">
+                                        <PdfUploader label="Shop Image" fileList={shopImageFile} setFileList={setShopImageFile} initialFiles={[shopImageFile]}/>
                                     </Form.Item>
                                 </Col>
                                 <Col span={12}>
-                                    <Form.Item>
-                                        <PdfUploader label="Labour License" fileList={labourLicenseFile} setFileList={setLabourLicenseFile} />
+                                    <Form.Item name="labourLicenseUrl">
+                                        <PdfUploader label="Labour License" fileList={labourLicenseFile} setFileList={setLabourLicenseFile} initialFiles={[labourLicenseFile]}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -415,7 +485,7 @@ export default function DistributorDetails() {
                                 </Col>
                                 <Col span={12}>
                                     <Form.Item
-                                        name="bankAccountHolder"
+                                        name="accountName"
                                         label="Account Holder Name"
                                         rules={[{ required: true, message: "Please enter Account Holder Name" }]}
                                     >
@@ -439,7 +509,7 @@ export default function DistributorDetails() {
                                 </Col>
                                 <Col span={12}>
                                     <Form.Item
-                                        name="ifscCode"
+                                        name="IFSC"
                                         label="IFSC Code"
                                         rules={[
                                             { required: true, message: "Please enter IFSC Code" },
@@ -447,7 +517,7 @@ export default function DistributorDetails() {
                                         ]}
                                         normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
                                     >
-                                        <Input maxLength={11} />
+                                        <Input maxLength={11} value={formData.IFSC}  onChange={handleInputChange} name='IFSC'/>
                                     </Form.Item>
 
                                 </Col>
@@ -456,8 +526,8 @@ export default function DistributorDetails() {
 
                             <Row gutter={16}>
                                 <Col span={12}>
-                                    <Form.Item >
-                                        <PdfUploader label="Cancelled Check" fileList={cancelledCheckFile} setFileList={setCancelledCheckFile} />
+                                    <Form.Item name="cancelledCheckUrl">
+                                        <PdfUploader label="Cancelled Check" fileList={cancelledCheckFile} setFileList={setCancelledCheckFile} initialFiles={[cancelledCheckFile]}/>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -466,7 +536,6 @@ export default function DistributorDetails() {
 
                     <div style={{ marginTop: 24 }}>
 
-                        {/* Ensure item exists before rendering */}
                         {item && (
                             <>
                                 {current < steps.length - 1 && (
@@ -477,7 +546,7 @@ export default function DistributorDetails() {
 
                                 {["Pending", "Rejected"].includes(item.kyc_status) && current === steps.length - 1 && (
                                     <>
-                                        <Button type="primary" className="done-button" htmlType="submit">
+                                        <Button type="primary" className="done-button" htmlType="submit" onClick={handleUpdate}>
                                             Update
                                         </Button>
                                         <Button type="primary" className="approve-button" htmlType="submit">
