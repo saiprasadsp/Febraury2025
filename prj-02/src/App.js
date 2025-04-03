@@ -24,7 +24,7 @@ import DistributorDetails from "./pages/ApproveDistributor";
 import DistributorMargin from "./pages/DistributorMargin";
 import AddRetailer from "./pages/AddRetailer";
 import GetRetailers from "./pages/GetRetailer";
-
+import RetailerDetails from './pages/RetailerDetails'
 
 
 const RequireAuth = ({ children }) => {
@@ -46,6 +46,7 @@ function App() {
         <Route path="transactions" element={<ProtectedRoute allowedRoles={["superadmin"]}><Transactions /></ProtectedRoute>} />
         <Route path="margin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Margin /></ProtectedRoute>} />
         <Route path="approval" element={<ProtectedRoute allowedRoles={["superadmin"]}><KYCApproval /></ProtectedRoute>} />
+
         <Route path="distributor" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Distributor /></ProtectedRoute>}>
           <Route index={true} element={<GetDistributor />} />
           <Route path="getDistributor/:id" element={<DistributorDetails />} />
@@ -54,8 +55,8 @@ function App() {
         </Route>
 
         <Route path="retailer" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Retailer /></ProtectedRoute>}>
-          {<Route index={true} element={<GetRetailers />} />}
-          <Route path="getRetailer/:id" element={<getRetailers />} />
+          <Route index={true} element={<GetRetailers />} />
+          <Route path="getRetailer/:id" element={<RetailerDetails />} />
           <Route path="addRetailer" element={<AddRetailer />} />
           {/* <Route path="distributorMargin" element={<DistributorMargin />} /> */}
         </Route>

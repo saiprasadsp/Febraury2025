@@ -18,10 +18,9 @@ export default function GetRetailer() {
         const fetchRetailer = async()=>{
              try {
                const res = await getRetailer().unwrap();
-               console.log(res);
                const formattedData = res.map((item)=>({
                 key:item.ID,
-                ID:item.distributor_id,
+                ID:item.retailer_id,
                 name:item.name_as_per_aadhaar,
                 mobile:item.user_mobile,
                 doj:item.doj,
@@ -45,7 +44,7 @@ export default function GetRetailer() {
       };
       const columns = [
         {
-          title: "DB ID",
+          title: "Retailer ID",
           dataIndex: "ID",
           // filters: data
           //   ? data.map((item) => ({
@@ -107,7 +106,7 @@ export default function GetRetailer() {
   return (
     <div>
       <div>
-        <button type="button" className="btn btn-warning"><Link to='addDistributor'>Add Retailer</Link></button>
+        <button type="button" className="btn btn-warning"><Link to='addRetailer'>Add Retailer</Link></button>
       </div>
         <Table columns={columns} onChange={onChange} dataSource={data}/>
        

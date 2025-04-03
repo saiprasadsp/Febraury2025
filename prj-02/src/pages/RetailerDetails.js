@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button, Steps, message, Upload, Image, Form, Input, Select, DatePicker, Row, Col } from "antd";
 import { useParams,useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { useGetDistributorDetailsMutation,useUpdateDistributorMutation,useApproveDistributorMutation } from '../slices/usersApiSlice'
+import { useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation } from '../slices/usersApiSlice'
 import PdfUploader from "./PdfUploader"; // ✅ Import PdfUploader
 import "../styles/ApproveDistributor.css";
 import dayjs from "dayjs";
@@ -62,25 +62,27 @@ export default function DistributorDetails() {
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
         ditributorMargin: process.env.DitributorMargin,
-        userType: 'distributor',
+        userType: 'retailer',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`
     });
-    const [getDistributorDetails, { isLoading }] = useGetDistributorDetailsMutation()
-    const [updateDistributor] = useUpdateDistributorMutation()
-    const[approveDistributor]=useApproveDistributorMutation()
+    const [getRetailerDetails, { isLoading }] = useGetRetailerDetailsMutation()
+    const [updateRetailer] = useUpdateRetailerMutation()
+    const[approveRetailer]=useApproveRetailerMutation()
     const[dob,setDob] = useState("")
     useEffect(() => {
         async function getDistributorDetail() {
             try {
                 
-                const res = await getDistributorDetails({ ditributorId: id }).unwrap();
+                
+                const res = await getRetailerDetails({ retailerId: id }).unwrap();
     
                 setData(res);
                 if (res.length>0) {
                     const item = res[0]
                     setFormData((prevData)=>({
                         ...prevData,
+                        distributorId: userInfo.id,
                         ID:item.ID,
                         aadharName: item.name_as_per_aadhaar,
                         aadharNumber: item.aadhar_number,
@@ -130,7 +132,9 @@ export default function DistributorDetails() {
     }, []);
 
     useEffect(()=>{
-        form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})        
+
+        form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})
+        
     },[formData])
 
 
@@ -159,10 +163,9 @@ export default function DistributorDetails() {
             if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
             if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);           
 
-            const res = await updateDistributor(formData).unwrap()
+            const res = await updateRetailer(formData).unwrap()
             toast.success(res?.message)
-            navigate('/dashboard/distributor')
-            
+            navigate('/dashboard/retailer')          
             
         } catch (err) {
             console.log(err);
@@ -178,16 +181,16 @@ export default function DistributorDetails() {
         try {
             
             const data={
-                distributor:id,
+                retailer:id,
                 status:status,
                 create:`${new Date().toISOString()}`,
                 update:`${new Date().toISOString()}`
             }
             
-            const res = await approveDistributor(data).unwrap()
+            const res = await approveRetailer(data).unwrap()
             toast.success(res?.message)
 
-            navigate('/dashboard/distributor');
+            navigate('/dashboard/retailer');
         } catch (err) {
             console.log(err);
             toast.error(err?.data?.message)
@@ -341,7 +344,7 @@ export default function DistributorDetails() {
                                             setFileList={setAadharFile}
                                             initialFiles={formData.aadharUrl ? [formData.aadharUrl] : []} // Replace with actual URL(s)
                                         />
-                                       
+                                    
                                     </Form.Item>
                                 </Col>
                             </Row>
