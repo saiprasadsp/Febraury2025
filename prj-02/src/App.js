@@ -21,6 +21,8 @@ import Content from "./pages/Content";
 import AddDistributor from "./pages/AddDistributor";
 import GetDistributor from "./pages/GetDistributor";
 import DistributorDetails from "./pages/ApproveDistributor";
+import RetailerDetails from "./pages/ApproveRetailer";
+
 import DistributorMargin from "./pages/DistributorMargin";
 import AddRetailer from "./pages/AddRetailer";
 import GetRetailers from "./pages/GetRetailer";

@@ -101,6 +101,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 body:data
             })
         }),
+
         updateRetailer:builder.mutation({
             query:(data)=>({
                 url:`${RETAILER_LIST}/profile`,
@@ -126,3 +127,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 })
 
 export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
+

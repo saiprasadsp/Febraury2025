@@ -8,7 +8,7 @@ import "../styles/GetDistributor.css";
 import { Tooltip } from 'antd';
 
 export default function GetRetailer() {
-    const [data,setData] = useState([])
+  const [data, setData] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {userInfo} = useSelector((state)=>state.auth)
@@ -102,14 +102,38 @@ export default function GetRetailer() {
               <Button className="view-button"  onClick={() => handleView(record.ID)}>View</Button>
           ),
       },
-      ];
+    },
+    {
+      title: "KYC Status",
+      dataIndex: "kyc",
+      filters: data
+        ? [...new Set(data.map((item) => item.kyc))] 
+            .filter((status) => status) 
+            .map((status) => ({
+              text: status.toString(),
+              value: status.toString(),
+            }))
+        : [],
+      filterMode: "menu",
+      filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()), 
+      onFilter: (value, record) => record.kyc?.toString() === value, 
+    },
+    {
+      title: 'Actions',
+      dataIndex: 'view',
+      width: 100,
+      render: (_, record) => (
+        <Button className="view-button" onClick={() => handleView(record.retailerid)}>View</Button> // ✅ Use retailerid instead of ID
+      ),
+    },    
+  ];
   return (
     <div>
       <div>
         <button type="button" className="btn btn-warning"><Link to='addRetailer'>Add Retailer</Link></button>
       </div>
-        <Table columns={columns} onChange={onChange} dataSource={data}/>
-       
-        </div>
+      <Table columns={columns} onChange={onChange} dataSource={data} />
+
+    </div>
   )
 }
