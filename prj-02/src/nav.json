@@ -56,7 +56,7 @@
         "key": 9,
         "icon": "FaUserCheck",
         "label": "Retailer Margins",
-        "path": "/dashboard/retailer/distributormargin"
+        "path": "/dashboard/retailer/retailerMargin"
       }
     ]
 

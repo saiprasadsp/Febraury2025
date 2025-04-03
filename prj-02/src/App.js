@@ -25,7 +25,7 @@ import DistributorMargin from "./pages/DistributorMargin";
 import AddRetailer from "./pages/AddRetailer";
 import GetRetailers from "./pages/GetRetailer";
 import RetailerDetails from './pages/RetailerDetails'
-
+import RetailerMargin from './pages/RetailerMargin'
 
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -58,7 +58,7 @@ function App() {
           <Route index={true} element={<GetRetailers />} />
           <Route path="getRetailer/:id" element={<RetailerDetails />} />
           <Route path="addRetailer" element={<AddRetailer />} />
-          {/* <Route path="distributorMargin" element={<DistributorMargin />} /> */}
+          <Route path="retailerMargin" element={<RetailerMargin />} />
         </Route>
     
 
