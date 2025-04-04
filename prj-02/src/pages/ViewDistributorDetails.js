@@ -28,8 +28,6 @@ export default function DistributorDetails() {
     useEffect(() => {
         async function getDistributorDetail() {
             const res = await getDistributorDetails({ ditributorId: id }).unwrap()
-            console.log(res);
-
             setData(res)
 
         }

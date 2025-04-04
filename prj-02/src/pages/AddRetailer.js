@@ -19,12 +19,12 @@ const steps = [
 const AddRetailer = () => {
     const [current, setCurrent] = useState(0);
     const [form] = Form.useForm();
-    const [createDistributor, { isLoading }] = useCreateRetailerMutation();
+    const [createRetailer, { isLoading }] = useCreateRetailerMutation();
     const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state.auth);
 
     const [formData, setFormData] = useState({
-        newDistributorId: userInfo.id,
+        distributorId: userInfo.id,
         roleid: 3,
         aadharName: '',
         aadharNumber: '',
@@ -53,7 +53,7 @@ const AddRetailer = () => {
         IFSC: '',
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
-        ditributorMargin: process.env.DitributorMargin,
+        retailerPercentage: process.env.RetailerPercentage,
         userType: 'retailer',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`
@@ -83,10 +83,9 @@ const AddRetailer = () => {
         if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
         if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);
 
-        console.log(data);
 
         try {
-            const res = await createDistributor(data).unwrap();
+            const res = await createRetailer(data).unwrap();
             toast.success(res?.message);
             navigate('/dashboard/retailer');
         } catch (err) {
@@ -264,7 +263,7 @@ const AddRetailer = () => {
                                     ]}
                                     normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
                                 >
-                                    <Input maxLength={10} />
+                                    <Input maxLength={10} onChange={handleInputChange} value={formData.panNumber} name='panNumber'/>
                                 </Form.Item>
 
                             </Col>
@@ -429,7 +428,7 @@ const AddRetailer = () => {
                                     ]}
                                     normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
                                 >
-                                    <Input maxLength={11} />
+                                    <Input maxLength={11} onChange={handleInputChange} value={form.IFSC} name="IFSC"/>
                                 </Form.Item>
 
                             </Col>

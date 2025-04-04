@@ -1,26 +1,38 @@
 import { useEffect, useState } from "react";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
 
-const PdfUploader = ({ label, fileList, setFileList, initialFiles = [] }) => {
+
+const extractFileName=(url)=>{
+try {
+    const fileName = url.substring(url.lastIndexOf('/')+1)
+    const extractedFileName = fileName.split('_').pop()
+    return extractedFileName
+} catch (err) {
+    console.log("Error in extracting file name:",err?.data?.message);    
+    toast.error(err?.data?.message)
+    return null
+}
+}
+
+const PdfUploader = ({ label, fileList, setFileList, initialFiles=[] }) => {
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewFile, setPreviewFile] = useState("");
-    
 
     // Load initial S3 files only once
     useEffect(() => {
         
-        if (initialFiles.length > 0 && fileList.length === 0) {
-            
+        if (initialFiles.length>0 && fileList.length===0) {            
             const formattedFiles = initialFiles.map((url, index) => ({
                 uid: `s3-${index}`,
-                name: `File ${index + 1}.pdf`,
-                url:`'${url}'`, // S3 file URL
+                name: extractFileName(url),
+                url:url, // S3 file URL
                 status: "done",
             }));
             setFileList(formattedFiles);
         }
-    }, [initialFiles, setFileList]); // Removed `fileList` from dependencies to avoid infinite loop
+    }, [initialFiles]); // Removed `fileList` from dependencies to avoid infinite loop
 
     const handlePreview = async (file) => {
         

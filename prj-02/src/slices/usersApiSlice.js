@@ -74,10 +74,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 body:data
             })
         }),
-        getRetailer:builder.mutation({
-            query:()=>({
-                url:`${RETAILER_LIST}/profile`,
-                method:'GET',
+        approveDistributor:builder.mutation({
+            query:(data)=>({
+                url:`${DISTRIBUTOR_LIST}/approve`,
+                method:'POST',
+                body:data
             })
         }),
         createRetailer:builder.mutation({
@@ -86,15 +87,44 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method:'POST',
                 body:data
             })
-        }),  
+        }),       
+        getRetailer:builder.mutation({
+            query:()=>({
+                url:`${RETAILER_LIST}/profile`,
+                method:'GET',
+            })
+        }),
+        getRetailerDetails:builder.mutation({
+            query:(data)=>({
+                url:`${RETAILER_LIST}/profile/id`,
+                method:'POST',
+                body:data
+            })
+        }),
+
         updateRetailer:builder.mutation({
             query:(data)=>({
                 url:`${RETAILER_LIST}/profile`,
                 method:'PUT',
                 body:data
             })
-        }),     
+        }),
+        approveRetailer:builder.mutation({
+            query:(data)=>({
+                url:`${RETAILER_LIST}/approve`,
+                method:'POST',
+                body:data
+            })
+        }),
+        updateRetailerPercentage:builder.mutation({
+            query:(data)=>({
+                url:`${RETAILER_LIST}/approve`,
+                method:'PUT',
+                body:data,
+            })
+        })
     })
 })
 
-export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useUpdateRetailerMutation} = usersApiSlice
+export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
+

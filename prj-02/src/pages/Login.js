@@ -29,7 +29,6 @@ function Login() {
 
     try {
       const res = await login({ userid: userID, password: password }).unwrap();
-      console.log(res);
 
       dispatch(setLogin({ ...res }));
       navigate("/dashboard");

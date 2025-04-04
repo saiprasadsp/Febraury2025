@@ -262,7 +262,7 @@ const AddDistributor = () => {
                                     ]}
                                     normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
                                 >
-                                    <Input maxLength={10} />
+                                    <Input maxLength={10} onChange={handleInputChange} value={formData.panNumber} name="panNumber"/>
                                 </Form.Item>
 
                             </Col>
@@ -427,7 +427,7 @@ const AddDistributor = () => {
                                     ]}
                                     normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
                                 >
-                                    <Input maxLength={11} />
+                                    <Input maxLength={11} onChange={handleInputChange} value={formData.IFSC} name="IFSC"/>
                                 </Form.Item>
 
                             </Col>

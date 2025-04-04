@@ -19,7 +19,6 @@ export default function Profile() {
   useEffect(()=>{
 
     if (userInfo && userInfo.id && userInfo.email) {
-      console.log("step 1");
       
       setUserId((prevId)=>prevId !== userInfo.id ? userInfo.id:prevId)
       setEmail((prevEmail)=>prevEmail !== userInfo.email ? userInfo.email:prevEmail)
@@ -35,7 +34,6 @@ export default function Profile() {
     } else {
       try {
         const res = await updateUser({email:email,password:password,userid:userId}).unwrap()
-        console.log(res);
         dispatch(setLogout())
         toast.success('Porfile updated successfully')
 

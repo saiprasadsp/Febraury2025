@@ -26,8 +26,8 @@ import RetailerDetails from "./pages/ApproveRetailer";
 import DistributorMargin from "./pages/DistributorMargin";
 import AddRetailer from "./pages/AddRetailer";
 import GetRetailers from "./pages/GetRetailer";
-
-
+import RetailerDetails from './pages/RetailerDetails'
+import RetailerMargin from './pages/RetailerMargin'
 
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -48,6 +48,7 @@ function App() {
         <Route path="transactions" element={<ProtectedRoute allowedRoles={["superadmin"]}><Transactions /></ProtectedRoute>} />
         <Route path="margin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Margin /></ProtectedRoute>} />
         <Route path="approval" element={<ProtectedRoute allowedRoles={["superadmin"]}><KYCApproval /></ProtectedRoute>} />
+
         <Route path="distributor" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Distributor /></ProtectedRoute>}>
           <Route index={true} element={<GetDistributor />} />
           <Route path="getDistributor/:id" element={<DistributorDetails />} />
@@ -56,10 +57,10 @@ function App() {
         </Route>
 
         <Route path="retailer" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Retailer /></ProtectedRoute>}>
-          {<Route index={true} element={<GetRetailers />} />}
+          <Route index={true} element={<GetRetailers />} />
           <Route path="getRetailer/:id" element={<RetailerDetails />} />
           <Route path="addRetailer" element={<AddRetailer />} />
-          {/* <Route path="distributorMargin" element={<DistributorMargin />} /> */}
+          <Route path="retailerMargin" element={<RetailerMargin />} />
         </Route>
     
 
