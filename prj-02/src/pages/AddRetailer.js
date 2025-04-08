@@ -53,7 +53,7 @@ const AddRetailer = () => {
         IFSC: '',
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
-        retailerPercentage: process.env.RetailerPercentage,
+        retailerPercentage: process.env.REACT_APP_Retailer_Percentage,
         userType: 'retailer',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`

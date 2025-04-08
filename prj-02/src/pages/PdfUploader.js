@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
@@ -19,11 +19,11 @@ try {
 const PdfUploader = ({ label, fileList, setFileList, initialFiles=[] }) => {
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewFile, setPreviewFile] = useState("");
-
+    const hasInitialLoaded = useRef(false)
     // Load initial S3 files only once
     useEffect(() => {
         
-        if (initialFiles.length>0 && fileList.length===0) {            
+        if (initialFiles.length>0 && !hasInitialLoaded.current && fileList.length===0) {            
             const formattedFiles = initialFiles.map((url, index) => ({
                 uid: `s3-${index}`,
                 name: extractFileName(url),
@@ -31,8 +31,9 @@ const PdfUploader = ({ label, fileList, setFileList, initialFiles=[] }) => {
                 status: "done",
             }));
             setFileList(formattedFiles);
+            hasInitialLoaded.current=true
         }
-    }, [initialFiles]); // Removed `fileList` from dependencies to avoid infinite loop
+    }, [initialFiles,fileList,setFileList]); // Removed `fileList` from dependencies to avoid infinite loop
 
     const handlePreview = async (file) => {
         
@@ -53,6 +54,11 @@ const PdfUploader = ({ label, fileList, setFileList, initialFiles=[] }) => {
         const filteredList = fileList.filter(file => file.name.endsWith(".pdf"));
         setFileList(filteredList);
     };
+    const handleRemove=(file)=>{
+        setFileList([])
+        hasInitialLoaded.current=true
+    }
+    
 
     return (
         <>
@@ -63,9 +69,7 @@ const PdfUploader = ({ label, fileList, setFileList, initialFiles=[] }) => {
                 beforeUpload={() => false}
                 onPreview={handlePreview}
                 onChange={handleChange}
-                onRemove={(file) => {
-                    setFileList(fileList.filter(item => item.uid !== file.uid));
-                }}
+                onRemove={handleRemove}
             >
                 {fileList.length >= 1 ? null : (
                     <div>

@@ -102,7 +102,6 @@ export default function GetRetailer() {
               <Button className="view-button"  onClick={() => handleView(record.ID)}>View</Button>
           ),
       },
-    },
     {
       title: "KYC Status",
       dataIndex: "kyc",

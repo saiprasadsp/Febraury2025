@@ -58,7 +58,7 @@ export default function RetailerDetails() {
         IFSC: '',
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
-        ditributorMargin: process.env.DitributorMargin,
+        retailerPercentage: process.env.REACT_APP_Retailer_Percentage,
         userType: 'retailer',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`
