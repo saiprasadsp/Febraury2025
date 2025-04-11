@@ -40,10 +40,32 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
+  const filterNavLinks = (links, role) => {
+    return links
+      .filter(link => link.roles?.includes(role)) // filter parent items by role
+      .map(link => {
+        if (link.children) {
+          // handle special case: superadmin should not access "Add Retailer"
+          const filteredChildren = link.children.filter(child => {
+            if (role === "superadmin" && child.path === "/dashboard/retailer/addretailer") {
+              return false;
+            }
+            return true;
+          });
+  
+          return {
+            ...link,
+            children: filteredChildren
+          };
+        }
+        return link;
+      })
+      .filter(link => !link.children || link.children.length > 0); // remove empty parent menus
+  };
+  
   useEffect(() => {
     if(userInfo?.role){
-      const filteredLinks = navLinks.filter((item)=>item.roles.includes(userInfo?.role))
+      const filteredLinks = filterNavLinks(navLinks, userInfo?.role);
     setFilteredNav(filteredLinks)
 
     }

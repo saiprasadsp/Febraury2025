@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button, Steps, message, Upload, Image, Form, Input, Select, DatePicker, Row, Col } from "antd";
 import { useParams,useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { useGetDistributorDetailsMutation,useUpdateDistributorMutation,useApproveDistributorMutation } from '../slices/usersApiSlice'
-import PdfUploader from "./PdfUploader"; // ✅ Import PdfUploader
-import "../styles/ApproveDistributor.css";
+import { useGetDistributorDetailsMutation,useUpdateDistributorMutation,useApproveDistributorMutation } from '../../slices/usersApiSlice'
+import PdfUploader from "../../Components/PdfUploader"; // ✅ Import PdfUploader
+import "../../styles/ApproveDistributor.css";
 import dayjs from "dayjs";
 import { useSelector } from 'react-redux';
 
@@ -61,7 +61,7 @@ export default function DistributorDetails() {
         IFSC: '',
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
-        ditributorMargin: process.env.DitributorMargin,
+        ditributorMargin: process.env.REACT_APP_Distributor_Margin,
         userType: 'distributor',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`
@@ -71,6 +71,8 @@ export default function DistributorDetails() {
     const[approveDistributor]=useApproveDistributorMutation()
     const[dob,setDob] = useState("")
     useEffect(() => {
+        console.log('Env',process.env.REACT_APP_Distributor_Margin);
+        
         async function getDistributorDetail() {
             try {
                 
@@ -338,7 +340,12 @@ export default function DistributorDetails() {
                                         <PdfUploader
                                             label="Aadhaar"
                                             fileList={aadharFile}
-                                            setFileList={setAadharFile}
+                                            setFileList={(updatedList)=>{
+                                                setAadharFile(updatedList)
+                                                if (updatedList.length===0) {
+                                                    setFormData((prev)=>({...prev,aadharUrl:''}))
+                                                }
+                                            }}
                                             initialFiles={formData.aadharUrl ? [formData.aadharUrl] : []} // Replace with actual URL(s)
                                         />
                                        

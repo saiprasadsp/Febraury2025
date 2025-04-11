@@ -18,16 +18,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Content from "./pages/Content";
-import AddDistributor from "./pages/AddDistributor";
-import GetDistributor from "./pages/GetDistributor";
-import DistributorDetails from "./pages/ApproveDistributor";
-import RetailerDetails from "./pages/ApproveRetailer";
+import GetDistributor from "./pages/Distributor/GetDistributor";
+import DistributorDetails from "./pages/Distributor/DistributorDetails";
+import AddDistributor from "./pages/Distributor/AddDistributor";
+import DistributorMargin from "./pages/Distributor/DistributorMargin";
 
-import DistributorMargin from "./pages/DistributorMargin";
-import AddRetailer from "./pages/AddRetailer";
-import GetRetailers from "./pages/GetRetailer";
-import RetailerDetails from './pages/RetailerDetails'
-import RetailerMargin from './pages/RetailerMargin'
+import GetRetailers from "./pages/Retailer/GetRetailer";
+import RetailerDetails from './pages/Retailer/RetailerDetails'
+import AddRetailer from "./pages/Retailer/AddRetailer";
+import RetailerMargin from './pages/Retailer/RetailerMargin'
 
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -59,7 +58,7 @@ function App() {
         <Route path="retailer" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Retailer /></ProtectedRoute>}>
           <Route index={true} element={<GetRetailers />} />
           <Route path="getRetailer/:id" element={<RetailerDetails />} />
-          <Route path="addRetailer" element={<AddRetailer />} />
+          <Route path="addRetailer" element={<ProtectedRoute allowedRoles={["distributor"]}><AddRetailer /></ProtectedRoute>}/>
           <Route path="retailerMargin" element={<RetailerMargin />} />
         </Route>
     

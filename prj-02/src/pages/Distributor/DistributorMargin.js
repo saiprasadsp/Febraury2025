@@ -1,8 +1,8 @@
 import React, { useState, useEffect, createContext, useRef, useContext } from "react";
 import { Button, Table, Form, Input,Modal } from "antd";
-import { useGetDistributorMutation,useUpdateDistributorMarginMutation } from '../slices/usersApiSlice';
+import { useGetDistributorMutation,useUpdateDistributorMarginMutation } from '../../slices/usersApiSlice';
 import { toast } from 'react-toastify';
-import "../styles/AddDistributor.css";
+import "../../styles/AddDistributor.css";
 
 const AddDistributor = () => {
     const [data, setData] = useState([]);
