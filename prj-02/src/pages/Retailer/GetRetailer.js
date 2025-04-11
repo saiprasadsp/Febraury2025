@@ -1,10 +1,10 @@
 import { Table, Button } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { useGetRetailerMutation } from '../slices/usersApiSlice';
+import { useGetRetailerMutation } from '../../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import "../styles/GetDistributor.css";
+import "../../styles/GetDistributor.css";
 import { Tooltip } from 'antd';
 
 export default function GetRetailer() {
@@ -12,12 +12,16 @@ export default function GetRetailer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {userInfo} = useSelector((state)=>state.auth)
+  
   const [getRetailer,{isLoading}]=useGetRetailerMutation()
     useEffect(()=>{
     
         const fetchRetailer = async()=>{
              try {
-               const res = await getRetailer().unwrap();
+              let param = userInfo.role !=="superadmin"?userInfo.id:''
+              console.log(param);
+
+               const res = await getRetailer({distributor:param}).unwrap();
                const formattedData = res.map((item)=>({
                 key:item.ID,
                 ID:item.retailer_id,
@@ -102,34 +106,34 @@ export default function GetRetailer() {
               <Button className="view-button"  onClick={() => handleView(record.ID)}>View</Button>
           ),
       },
-    {
-      title: "KYC Status",
-      dataIndex: "kyc",
-      filters: data
-        ? [...new Set(data.map((item) => item.kyc))] 
-            .filter((status) => status) 
-            .map((status) => ({
-              text: status.toString(),
-              value: status.toString(),
-            }))
-        : [],
-      filterMode: "menu",
-      filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()), 
-      onFilter: (value, record) => record.kyc?.toString() === value, 
-    },
-    {
-      title: 'Actions',
-      dataIndex: 'view',
-      width: 100,
-      render: (_, record) => (
-        <Button className="view-button" onClick={() => handleView(record.retailerid)}>View</Button> // ✅ Use retailerid instead of ID
-      ),
-    },    
+    // {
+    //   title: "KYC Status",
+    //   dataIndex: "kyc",
+    //   filters: data
+    //     ? [...new Set(data.map((item) => item.kyc))] 
+    //         .filter((status) => status) 
+    //         .map((status) => ({
+    //           text: status.toString(),
+    //           value: status.toString(),
+    //         }))
+    //     : [],
+    //   filterMode: "menu",
+    //   filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()), 
+    //   onFilter: (value, record) => record.kyc?.toString() === value, 
+    // },
+    // {
+    //   title: 'Actions',
+    //   dataIndex: 'view',
+    //   width: 100,
+    //   render: (_, record) => (
+    //     <Button className="view-button" onClick={() => handleView(record.retailerid)}>View</Button> // ✅ Use retailerid instead of ID
+    //   ),
+    // },    
   ];
   return (
     <div>
-      <div>
-        <button type="button" className="btn btn-warning"><Link to='addRetailer'>Add Retailer</Link></button>
+      <div>{userInfo.role==="superadmin"?<></>:<button type="button" className="btn btn-warning"><Link to='addRetailer'>Add Retailer</Link></button>}
+        
       </div>
       <Table columns={columns} onChange={onChange} dataSource={data} />
 

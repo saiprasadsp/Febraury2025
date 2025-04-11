@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button, Steps, message, Upload, Image, Form, Input, Select, DatePicker, Row, Col } from "antd";
 import { useParams,useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation } from '../slices/usersApiSlice'
-import PdfUploader from "./PdfUploader"; // ✅ Import PdfUploader
-import "../styles/ApproveDistributor.css";
+import { useGetDistributorDetailsMutation,useUpdateDistributorMutation,useApproveDistributorMutation } from '../../slices/usersApiSlice'
+import PdfUploader from "../../Components/PdfUploader"; // ✅ Import PdfUploader
+import "../../styles/ApproveDistributor.css";
 import dayjs from "dayjs";
 import { useSelector } from 'react-redux';
 
@@ -61,28 +61,28 @@ export default function DistributorDetails() {
         IFSC: '',
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
-        retailerPercentage: process.env.REACT_APP_Retailer_Percentage,
-        userType: 'retailer',
+        ditributorMargin: process.env.REACT_APP_Distributor_Margin,
+        userType: 'distributor',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`
     });
-    const [getRetailerDetails, { isLoading }] = useGetRetailerDetailsMutation()
-    const [updateRetailer] = useUpdateRetailerMutation()
-    const[approveRetailer]=useApproveRetailerMutation()
+    const [getDistributorDetails, { isLoading }] = useGetDistributorDetailsMutation()
+    const [updateDistributor] = useUpdateDistributorMutation()
+    const[approveDistributor]=useApproveDistributorMutation()
     const[dob,setDob] = useState("")
     useEffect(() => {
+        console.log('Env',process.env.REACT_APP_Distributor_Margin);
+        
         async function getDistributorDetail() {
             try {
                 
-                
-                const res = await getRetailerDetails({ retailerId: id }).unwrap();
+                const res = await getDistributorDetails({ ditributorId: id }).unwrap();
     
                 setData(res);
                 if (res.length>0) {
                     const item = res[0]
                     setFormData((prevData)=>({
                         ...prevData,
-                        distributorId: userInfo.id,
                         ID:item.ID,
                         aadharName: item.name_as_per_aadhaar,
                         aadharNumber: item.aadhar_number,
@@ -132,9 +132,7 @@ export default function DistributorDetails() {
     }, []);
 
     useEffect(()=>{
-
-        form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})
-        
+        form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})        
     },[formData])
 
 
@@ -163,9 +161,10 @@ export default function DistributorDetails() {
             if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
             if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);           
 
-            const res = await updateRetailer(formData).unwrap()
+            const res = await updateDistributor(formData).unwrap()
             toast.success(res?.message)
-            navigate('/dashboard/retailer')          
+            navigate('/dashboard/distributor')
+            
             
         } catch (err) {
             console.log(err);
@@ -181,16 +180,16 @@ export default function DistributorDetails() {
         try {
             
             const data={
-                retailer:id,
+                distributor:id,
                 status:status,
                 create:`${new Date().toISOString()}`,
                 update:`${new Date().toISOString()}`
             }
             
-            const res = await approveRetailer(data).unwrap()
+            const res = await approveDistributor(data).unwrap()
             toast.success(res?.message)
 
-            navigate('/dashboard/retailer');
+            navigate('/dashboard/distributor');
         } catch (err) {
             console.log(err);
             toast.error(err?.data?.message)
@@ -341,10 +340,15 @@ export default function DistributorDetails() {
                                         <PdfUploader
                                             label="Aadhaar"
                                             fileList={aadharFile}
-                                            setFileList={setAadharFile}
+                                            setFileList={(updatedList)=>{
+                                                setAadharFile(updatedList)
+                                                if (updatedList.length===0) {
+                                                    setFormData((prev)=>({...prev,aadharUrl:''}))
+                                                }
+                                            }}
                                             initialFiles={formData.aadharUrl ? [formData.aadharUrl] : []} // Replace with actual URL(s)
                                         />
-                                    
+                                       
                                     </Form.Item>
                                 </Col>
                             </Row>

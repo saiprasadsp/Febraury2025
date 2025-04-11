@@ -3,9 +3,15 @@ import { apiSlice } from "./apiSlice";
 const USERS_URL = 'http://localhost:9000/api/users'
 const DISTRIBUTOR_LIST = 'http://localhost:9000/api/distributor'
 const RETAILER_LIST = 'http://localhost:9000/api/retailer'
-
+const DASHBOARD = 'http://localhost:9000/api/dashboard'
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
+        dashboard:builder.mutation({
+            query:()=>({
+                    url:`${DASHBOARD}/`,
+                    method:"GET",
+            })
+        }),
         login:builder.mutation({
             query:(data)=>({
                     url:`${USERS_URL}/auth`,
@@ -89,9 +95,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             })
         }),       
         getRetailer:builder.mutation({
-            query:()=>({
+            query:(data)=>({
                 url:`${RETAILER_LIST}/profile`,
-                method:'GET',
+                method:'POST',
+                body:data
             })
         }),
         getRetailerDetails:builder.mutation({
@@ -126,5 +133,5 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const{useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
 

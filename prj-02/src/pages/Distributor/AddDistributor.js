@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, Steps, message, Form, Input, Select, DatePicker, Row, Col, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
-import "../styles/AddDistributor.css";
+import "../../styles/AddDistributor.css";
 import { toast } from "react-toastify";
-import { useCreateDistributorMutation } from "../slices/usersApiSlice";
-import PdfUploader from "./PdfUploader"; // ✅ Import PdfUploader
-import Spinner from "../Components/Spinner";
+import { useCreateDistributorMutation } from "../../slices/usersApiSlice";
+import PdfUploader from "../../Components/PdfUploader"; // ✅ Import PdfUploader
+import Spinner from "../../Components/Spinner";
 
 const { Option } = Select;
 
@@ -52,7 +52,7 @@ const AddDistributor = () => {
         IFSC: '',
         doj: `${new Date().toISOString()}`,
         status: 'Pending',
-        ditributorMargin: process.env.DitributorMargin,
+        ditributorMargin: process.env.REACT_APP_Distributor_Margin,
         userType: 'distributor',
         create: `${new Date().toISOString()}`,
         update: `${new Date().toISOString()}`

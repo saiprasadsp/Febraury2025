@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, Steps, message, Form, Input, Select, DatePicker, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
-import "../styles/AddDistributor.css";
+import "../../styles/AddDistributor.css";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useCreateRetailerMutation } from "../slices/usersApiSlice";
-import PdfUploader from "./PdfUploader"; 
+import { useCreateRetailerMutation } from "../../slices/usersApiSlice";
+import PdfUploader from "../../Components/PdfUploader"; 
 const { Option } = Select;
 
 const steps = [

@@ -1,10 +1,10 @@
 import { Table, Button } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { useGetDistributorMutation } from '../slices/usersApiSlice';
+import { useGetDistributorMutation } from '../../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import "../styles/GetDistributor.css";
+import '../../styles/GetDistributor.css'
 import { Tooltip } from 'antd';
 
 export default function GetDistributor() {

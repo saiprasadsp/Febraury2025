@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
-import { useGetRetailerMutation,useUpdateRetailerPercentageMutation } from '../slices/usersApiSlice';
+import { useGetRetailerMutation,useUpdateRetailerPercentageMutation } from '../../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { Button, Form, Input, Modal, Table } from 'antd';
 
