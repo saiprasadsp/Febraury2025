@@ -24,7 +24,8 @@ export default function GetRetailer() {
                const res = await getRetailer({distributor:param}).unwrap();
                const formattedData = res.map((item)=>({
                 key:item.ID,
-                ID:item.retailer_id,
+                ID:item.distributor_id,
+                retailerid: item.retailer_id,
                 name:item.name_as_per_aadhaar,
                 mobile:item.user_mobile,
                 doj:item.doj,
@@ -48,39 +49,59 @@ export default function GetRetailer() {
       };
       const columns = [
         {
-          title: "Retailer ID",
+          title: "Distributor ID",
           dataIndex: "ID",
-          // filters: data
-          //   ? data.map((item) => ({
-          //       text: item.ID.toString(),
-          //       value: item.ID.toString(),
-          //     }))
-          //   : [],
-          // filterMode: "menu", // Removes "Select All"
-          // filterSearch: (input, record) => record.value.includes(input), // Shows only matched results
-          // onFilter: (value, record) => record.ID.toString().includes(value),
-          // width: "15%",
-        }
-        ,        
+          filters: data
+            ? data.map((item) => ({
+              text: String(item.ID),
+              value: String(item.ID),
+            }))
+            : [],
+          filterMode: "menu",
+          filterSearch: (input, record) => String(record.value).includes(input),
+          onFilter: (value, record) => String(record.ID).includes(value),
+          width: "15%",
+        },
         {
-          title: 'Distributor Name',
+          title: "Retailer ID",
+          dataIndex: "retailerid",
+          filters: data
+            ? data.map((item) => ({
+              text: String(item.retailerid),  
+              value: String(item.retailerid),
+            }))
+            : [],
+          filterMode: "menu",
+          filterSearch: (input, record) => String(record.retailerid).includes(input), 
+          onFilter: (value, record) => String(record.retailerid).includes(value), 
+          width: "15%",
+        },
+        {
+          title: 'Retailer Name',
           dataIndex: 'name',
           width: 250,
           render: (text) => (
-              <Tooltip title={text}>
-                  <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "150px", display: "inline-block" }}>
-                      {text}
-                  </span>
-              </Tooltip>
+            <Tooltip title={text}>
+              <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "200px", display: "inline-block" }}>
+                {text}
+              </span>
+            </Tooltip>
           ),
-      },
+        },
         {
-          title: 'Mobile Number',
-          dataIndex: 'mobile',
-          
-          onFilter: (value, record) => record.address.startsWith(value),
-          filterSearch: true,
-          width: '20%',
+          title: "Mobile Number",
+          dataIndex: "mobile",  
+          filters: data
+            ? data
+                .filter((item) => item.mobile) 
+                .map((item) => ({
+                  text: item.mobile?.toString() || "",  
+                  value: item.mobile?.toString() || ""  
+                }))
+            : [],
+          filterMode: "menu",
+          filterSearch: (input, record) => record.value?.toString().includes(input),  
+          onFilter: (value, record) => record.mobile?.toString().includes(value),  
         },
         {
           title: 'DOJ',
@@ -92,43 +113,32 @@ export default function GetRetailer() {
               year: 'numeric',
             });
           },
-        },        
+        },
         {
-          title: 'KYC Status',
-          dataIndex: 'kyc',
-          
+          title: "KYC Status",
+          dataIndex: "kyc",
+          filters: data
+            ? [...new Set(data.map((item) => item.kyc))]
+              .filter((status) => status)
+              .map((status) => ({
+                text: status.toString(),
+                value: status.toString(),
+              }))
+            : [],
+          filterMode: "menu",
+          filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()),
+          onFilter: (value, record) => record.kyc?.toString() === value,
         },
         {
           title: 'Actions',
           dataIndex: 'view',
           width: 100,
           render: (_, record) => (
-              <Button className="view-button"  onClick={() => handleView(record.ID)}>View</Button>
+            <Button className="view-button" onClick={() => handleView(record.retailerid)}>View</Button>
           ),
-      },
-    // {
-    //   title: "KYC Status",
-    //   dataIndex: "kyc",
-    //   filters: data
-    //     ? [...new Set(data.map((item) => item.kyc))] 
-    //         .filter((status) => status) 
-    //         .map((status) => ({
-    //           text: status.toString(),
-    //           value: status.toString(),
-    //         }))
-    //     : [],
-    //   filterMode: "menu",
-    //   filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()), 
-    //   onFilter: (value, record) => record.kyc?.toString() === value, 
-    // },
-    // {
-    //   title: 'Actions',
-    //   dataIndex: 'view',
-    //   width: 100,
-    //   render: (_, record) => (
-    //     <Button className="view-button" onClick={() => handleView(record.retailerid)}>View</Button> // ✅ Use retailerid instead of ID
-    //   ),
-    // },    
+        },
+    
+   
   ];
   return (
     <div>
