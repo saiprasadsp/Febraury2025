@@ -19,7 +19,7 @@ export default function RetailerMargin() {
                         name: item.name_as_per_aadhaar,
                         mobile: item.user_mobile,
                         doj: item.doj,
-                        margin: item.distributor_margin,
+                        margin: item.retailer_percentage,
                     }));
                     setData(formattedData);
                 } catch (err) {
@@ -49,7 +49,15 @@ export default function RetailerMargin() {
             {
                 title: 'DOJ',
                 dataIndex: 'doj',
-            },
+                render: (date) => {
+                  return new Date(date).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  });
+                },
+                width: "18%",
+              }, 
             {
                 title: 'Margin',
                 dataIndex: 'margin',

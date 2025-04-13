@@ -40,7 +40,7 @@ const navigate = useNavigate()
     { name: "PAYIN IN", icon: <FaRupeeSign /> },
     { name: "PAYOUT", icon: <FaMoneyCheckAlt /> },
     { name: "CC Bill Payments", icon: <FaCreditCard /> },
-    // (userInfo.role !=="retailer" ?{ name: "Distributor List", icon: <FaUserTie />,count:`${list.total_distributor}` ,value:'distributor'}:[]),
+    (userInfo.role !=="retailer" ?{ name: "Distributor List", icon: <FaUserTie />,count:`${list.total_distributor}` ,value:'distributor'}:[]),
     { name: "Retail List", icon: <FaUsers />,count:`${list.total_retailer}`,value:'retailer' },
     { name: "Today Transactions", icon: <FaExchangeAlt /> },
     { name: "KYC Pending", icon: <FaClock />,count:`${list.total_pending}` },
