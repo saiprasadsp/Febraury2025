@@ -92,5 +92,61 @@
     "path": "/dashboard/settings",
     "roles":["superadmin","distributor"]
 
+  },
+  {
+    "key": 8,
+    "icon": "AiOutlineSetting",
+    "label": "Add Balance",
+    "path": "/dashboard/addbalance",
+    "roles":["retailer"]
+
+  },
+  {
+    "key": 9,
+    "icon": "AiOutlineSetting",
+    "label": "Bank Transfer",
+    "path": "/dashboard/banktransfer",
+    "roles":["retailer"]
+
+  },
+  {
+    "key": 10,
+    "icon": "AiOutlineSetting",
+    "label": "CC Bill Payments",
+    "path": "/dashboard/payments",
+    "roles":["retailer"]
+
+  },
+  {
+    "key": 11,
+    "icon": "AiOutlineSetting",
+    "label": "Reports",
+    "roles":["retailer"],
+    "children":[{
+      "key":10,
+      "icon":"AiOutlineSetting",
+      "label":"Add Balance",
+      "path":"/dashboard/reports"
+    },
+    {
+      "key":11,
+      "icon":"AiOutlineSetting",
+      "label":"Bank Transfer",
+      "path":"/dashboard/reports/banktransfer"
+    },
+    {
+      "key":12,
+      "icon":"AiOutlineSetting",
+      "label":"CC Bill Payments",
+      "path":"/dashboard/reports/payments"
+    },
+    {
+      "key":12,
+      "icon":"AiOutlineSetting",
+      "label":"PassBook",
+      "path":"/dashboard/reports/passbook"
+    }
+  ]
+
   }
 ]
