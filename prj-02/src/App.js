@@ -27,7 +27,11 @@ import GetRetailers from "./pages/Retailer/GetRetailer";
 import RetailerDetails from './pages/Retailer/RetailerDetails'
 import AddRetailer from "./pages/Retailer/AddRetailer";
 import RetailerMargin from './pages/Retailer/RetailerMargin'
-
+import AddBalance from "./pages/AddBalance";
+import BankTransfer from "./pages/BankTransfer";
+import Payments from "./pages/Payments";
+import Reports from "./pages/Reports";
+import PassBook from "./pages/PassBook";
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -40,7 +44,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
 
-      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['distributor', "superadmin"]}><Dashboard /></ProtectedRoute>}>
+      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['distributor', "superadmin","retailer"]}><Dashboard /></ProtectedRoute>}>
         <Route index={true} element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Content /></ProtectedRoute>} />
 
         <Route path="retail" element={<ProtectedRoute allowedRoles={["superadmin"]}><Retail /></ProtectedRoute>} />
@@ -61,6 +65,13 @@ function App() {
           <Route path="addRetailer" element={<ProtectedRoute allowedRoles={["distributor"]}><AddRetailer /></ProtectedRoute>}/>
           <Route path="retailerMargin" element={<RetailerMargin />} />
         </Route>
+        <Route path="reports" element={<ProtectedRoute allowedRoles={['retailer']}><Reports/></ProtectedRoute>}>
+        <Route index={true} element={<AddBalance/>}/>
+        <Route path="banktransfer" element={<BankTransfer/>}/>
+        <Route path="payments" element={<Payments/>}/>
+        <Route path="passbook" element={<PassBook/>}/>
+
+        </Route>
     
 
 
@@ -68,6 +79,9 @@ function App() {
         <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Settings /></ProtectedRoute>} />
         <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Profile /></ProtectedRoute>} />
         <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Register /></ProtectedRoute>} />
+        <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer"]}><AddBalance/></ProtectedRoute>} />
+        <Route path="banktransfer" element={<ProtectedRoute allowedRoles={["retailer"]}><BankTransfer/></ProtectedRoute>} />
+        <Route path="payments" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
 
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />

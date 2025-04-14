@@ -4,12 +4,14 @@ const USERS_URL = 'http://localhost:9000/api/users'
 const DISTRIBUTOR_LIST = 'http://localhost:9000/api/distributor'
 const RETAILER_LIST = 'http://localhost:9000/api/retailer'
 const DASHBOARD = 'http://localhost:9000/api/dashboard'
+
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
         dashboard:builder.mutation({
-            query:()=>({
+            query:(data)=>({
                     url:`${DASHBOARD}/`,
-                    method:"GET",
+                    method:"POST",
+                    body:data
             })
         }),
         login:builder.mutation({
@@ -125,7 +127,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         updateRetailerPercentage:builder.mutation({
             query:(data)=>({
-                url:`${RETAILER_LIST}/approve`,
+                url:`${RETAILER_LIST}/update`,
                 method:'PUT',
                 body:data,
             })

@@ -23,6 +23,7 @@ import  SessionConflictToast  from "../Components/SessionConflictToast";
 import navLinks from "../nav.json";
 import logo from "../assets/logo/TheQucikPayMe.png";
 import "../styles/Dashboard.css";
+import RetailerDashboard from "./RetailerDashboard";
 
 const { Header, Sider, Content } = Layout;
 
@@ -213,7 +214,12 @@ export default function Dashboard() {
         <Layout>
           <Content className="dashboard-content">
           <SessionConflictToast/>
-            <Outlet />
+          {userInfo?.role === "retailer" && location.pathname === "/dashboard" ? (
+              <RetailerDashboard/>
+            ) : (
+              <Outlet />
+            )}
+            
           </Content>
         </Layout>
       </Layout>

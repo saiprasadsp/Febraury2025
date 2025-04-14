@@ -5,14 +5,14 @@ import { Button, Form, Input, Modal, Table } from 'antd';
 
 export default function RetailerMargin() {
     const [data, setData] = useState([]);
-        const [getDistributor, { isLoading }] = useGetRetailerMutation();
+        const [getRetailer, { isLoading }] = useGetRetailerMutation();
         const [updateRetailerPercentage]=useUpdateRetailerPercentageMutation()
         const [updatedValues, setUpdatedValues] = useState(""); // Holds updates for margin values
     
         useEffect(() => {
             const fetchDistributor = async () => {
                 try {
-                    const res = await getDistributor().unwrap();
+                    const res = await getRetailer().unwrap();
                     const formattedData = res.map((item) => ({
                         key: item.ID,
                         ID: item.retailer_id,
