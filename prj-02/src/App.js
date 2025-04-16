@@ -32,6 +32,8 @@ import BankTransfer from "./pages/BankTransfer";
 import Payments from "./pages/Payments";
 import Reports from "./pages/Reports";
 import PassBook from "./pages/PassBook";
+import AddNewBankAccount from './pages/AddNewBankAccount';
+
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -70,7 +72,7 @@ function App() {
         <Route path="banktransfer" element={<BankTransfer/>}/>
         <Route path="payments" element={<Payments/>}/>
         <Route path="passbook" element={<PassBook/>}/>
-
+        <Route path="addnewbankaccount" element={<AddNewBankAccount/>}/>
         </Route>
     
 
@@ -81,6 +83,7 @@ function App() {
         <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Register /></ProtectedRoute>} />
         <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer"]}><AddBalance/></ProtectedRoute>} />
         <Route path="banktransfer" element={<ProtectedRoute allowedRoles={["retailer"]}><BankTransfer/></ProtectedRoute>} />
+        <Route path="addnewbankaccount" element={<ProtectedRoute allowedRoles={["retailer"]}><AddNewBankAccount/></ProtectedRoute>} />
         <Route path="payments" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
 
       </Route>
