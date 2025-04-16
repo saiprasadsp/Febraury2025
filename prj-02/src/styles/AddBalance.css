@@ -1,0 +1,64 @@
+.plan-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.plan-button {
+  flex: 1;
+}
+
+.plan-button.highlight {
+  border: 2px solid #1F6281 !important; /* Highlight in red if no plan is selected */
+}
+
+.plan-button.selected {
+  background-color: #1F6281 !important; /* Set selected button background color to red */
+  color: white !important;  /* Change text color to white when selected */
+}
+.plan-button:hover {
+  border: 2px solid #1F6281 !important;
+  color: #1F6281 !important;
+}
+
+
+.plan-message {
+  margin-top: 8px;
+  color: black !important;
+  font-weight: 500;
+}
+
+.amount-input {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 5px !important;
+}
+
+.reference-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.add-balance-button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #1F6281 !important; /* AntD danger red */
+  border-color: #1F6281 !important;
+  color: white !important;
+}
+
+/* Card container with shadow */
+.inner-card {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+  transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
+}
+
+/* On hover, shadow becomes more intense */
+.inner-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More intense shadow on hover */
+}
