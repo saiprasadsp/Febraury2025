@@ -56,9 +56,9 @@ export default function DistributorDetails() {
             businessLabourLicenseNumber: '',
             businessProprietorName: '',
             bankName: '',
-            accountName: '',
             accountNumber: '',
             IFSC: '',
+            accountName: '',
             doj: `${new Date().toISOString()}`,
             status: 'Pending',
             ditributorMargin: process.env.REACT_APP_Retailer_Percentage,
@@ -133,31 +133,31 @@ export default function DistributorDetails() {
     
         useEffect(()=>{
             form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})    
-            if (formData.aadharUrl && aadharFile.length===0) {
-                const extractFileName=(url)=>{
-                    try {
-                        const fileName = url.substring(url.lastIndexOf('/')+1)
-                        const extractedFileName = fileName.split('_').pop()
-                        return extractedFileName
-                    } catch (err) {
-                        console.log("Error in extracting file name:",err?.data?.message);    
-                        toast.error(err?.data?.message)
-                        return null
-                    }
-                    }
-                    setAadharFile([
-                        {
-                            uid:'1',
-                            name:extractFileName(formData.aadharUrl),
-                            url:formData.aadharUrl,
-                            status:'done'
+            // if (formData.aadharUrl && aadharFile.length===0) {
+            //     const extractFileName=(url)=>{
+            //         try {
+            //             const fileName = url.substring(url.lastIndexOf('/')+1)
+            //             const extractedFileName = fileName.split('_').pop()
+            //             return extractedFileName
+            //         } catch (err) {
+            //             console.log("Error in extracting file name:",err?.data?.message);    
+            //             toast.error(err?.data?.message)
+            //             return null
+            //         }
+            //         }
+            //         setAadharFile([
+            //             {
+            //                 uid:'1',
+            //                 name:extractFileName(formData.aadharUrl),
+            //                 url:formData.aadharUrl,
+            //                 status:'done'
 
-                        }
-                    ])
-                    console.log("step 1",aadharFile);
+            //             }
+            //         ])
+            //         console.log("step 1",aadharFile);
                     
-            }    
-        },[formData,formData.aadharUrl])
+            // }    
+        },[formData])
     
     
         const next = () => setCurrent(current + 1);
@@ -361,7 +361,7 @@ export default function DistributorDetails() {
                                     </Col>
                                     <Col span={12}>
                                         <Form.Item name="aadharUrl">
-                                            {/* <PdfUploader
+                                            <PdfUploader
                                                 label="Aadhaar"
                                                 fileList={aadharFile}
                                                 setFileList={(updatedList)=>{
@@ -371,26 +371,8 @@ export default function DistributorDetails() {
                                                     }
                                                 }}
                                                 initialFiles={formData.aadharUrl ? [formData.aadharUrl] : []} 
-                                            /> */}
-
-                                            {/* <PdfUploader
-                                            label='Aadhar'
-                                            fileList={aadharFile}
-                                            setFileList={(updatedList)=>{
-                                                setAadharFile(updatedList)
-                                                if (updatedList.length===0) {
-                                                    setFormData((prev)=>({...prev,aadharUrl:''}))
-                                                }
-                                            }}
-                                            /> */}
-                                            <PdfUploader
-                                                onFileChange={setAadharFile}
-                                                fileList={aadharFile}
-                                                accept=".pdf"
-                                                label="Aadhaar Upload"
-                                                />
-
-                                           
+                                            />
+                                                                         
                                         </Form.Item>
                                     </Col>
                                 </Row>
