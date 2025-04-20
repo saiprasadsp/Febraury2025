@@ -79,4 +79,28 @@
     color: white !important;
   }
   
+  .input-group {
+    display: flex; /* Flexbox layout for input and button */
+    gap: 10px; /* Adds space between the input and button */
+    align-items: center; /* Aligns items vertically in the center */
+  }
   
+  .btn-update-all {
+    background-color: #1F6281; /* Red color */
+    color: white;
+    border-radius: 10px; /* Rounded corners */
+    padding: 6px 15px;
+    transition: transform 0.3s ease; /* Smooth movement effect */
+    border: none; /* Remove default border */
+  }
+  .btn-update-all:hover {
+    transform: translateY(-1px); /* Move button slightly up on hover */
+    background-color: #1F6281; /* Darker red on hover */
+    color: white;
+  } 
+  .btn-update-all:focus {
+    outline: none; /* Remove focus outline */
+  }
+
+  
+

@@ -222,31 +222,28 @@ export default function RetailerMargin() {
             },
         };
     
-  return (
-    <div>
-            <div className="d-flex flex-row mb-3">
-                <div className="input-group mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Recipient's username"
-                        aria-label="Recipient's username"
-                        onChange={(e)=>setUpdatedValues(e.target.value)}
-                    />
-                    <button className="btn btn-outline-secondary" type="button" onClick={handleUpdateAll}>
-                        Update All
-                    </button>
-                </div>
-                <div>&nbsp;</div>
-            </div>
-            <div>
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    rowClassName={() => 'editable-row'}
-                    components={components}
-                />
-            </div>
-        </div>
-  )
+   return (
+          <div>
+              <div className="input-group mb-3">
+                  <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Margin Value"
+                      aria-label="Recipient's username"
+                      onChange={(e) => setUpdatedValues(e.target.value)}
+                  />
+                  <button className="btn btn-update-all" type="button" onClick={handleUpdateAll}>
+                      Update All
+                  </button>
+              </div>
+              <div>
+                  <Table
+                      columns={columns}
+                      dataSource={data}
+                      rowClassName={() => 'editable-row'}
+                      components={components}
+                  />
+              </div>
+          </div>
+      );
 }

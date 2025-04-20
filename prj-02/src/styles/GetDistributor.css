@@ -40,7 +40,7 @@
   background-color: #1F6281 !important; 
   box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3); 
   transform: translateY(-2px);
-  color: white !important; /* Ensures text remains white */
+  color: white !important; 
 }
 
 .view-button a {
@@ -49,5 +49,12 @@
 }
 
 .view-button:hover a {
-  color: white !important; /* Ensures link inside button remains white */
+  color: white !important; 
+}
+.ant-table-thead > tr > th {
+  background-color: #1F6281 !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 8px 12px !important; 
+
 }

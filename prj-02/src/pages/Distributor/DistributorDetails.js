@@ -150,19 +150,19 @@ export default function DistributorDetails() {
         try {
 
             const data = new FormData();
-            
+
 
             Object.entries(formData).forEach(([key, value]) => {
                 data.append(key, value);
             });
-            console.log("Aadhar",aadharFile);
-            
-            if (aadharFile.length>0 && aadharFile[0].originFileObj) data.append('aadharUrl', aadharFile[0].originFileObj);
+            console.log("Aadhar", aadharFile);
+
+            if (aadharFile.length > 0 && aadharFile[0].originFileObj) data.append('aadharUrl', aadharFile[0].originFileObj);
             if (panFile.length) data.append('panUrl', panFile[0].originFileObj);
             if (shopImageFile.length) data.append('shopImageUrl', shopImageFile[0].originFileObj);
             if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
             if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);
-                console.log("step 2",data);
+            console.log("step 2", data);
 
             const res = await updateDistributor(data).unwrap()
             toast.success(res?.message)
@@ -605,9 +605,13 @@ export default function DistributorDetails() {
                                     <Button className="previous-button" onClick={prev}>
                                         Previous
                                     </Button>
-                                    <Button type="primary" className="done-button">
+                                    <Button
+                                        className="Close-button"
+                                        onClick={() => navigate('/dashboard/distributor')}
+                                    >
                                         Close
                                     </Button>
+
                                 </>
                             )}
 
