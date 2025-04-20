@@ -116,7 +116,7 @@ export default function Dashboard() {
       case 9:
         return <FaUserCheck />; // Distributor KYC
       case 10:
-        return <AiOutlineUnorderedList />; // Distributor List
+        return <AiOutlineUnorderedList />; 
       default:
         return null;
     }
