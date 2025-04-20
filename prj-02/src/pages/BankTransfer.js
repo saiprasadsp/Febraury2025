@@ -19,12 +19,12 @@ export default function BankTransfer() {
              try {
                const res = await getDistributor().unwrap();
                const formattedData = res.map((item)=>({
-                key:item.ID,
-                ID:item.distributor_id,
-                name:item.name_as_per_aadhaar,
-                mobile:item.user_mobile,
-                doj:item.doj,
-                kyc:item.kyc_status,
+                // key:item.ID,
+                // ID:item.distributor_id,
+                // name:item.name_as_per_aadhaar,
+                // mobile:item.user_mobile,
+                // doj:item.doj,
+                // kyc:item.kyc_status,
     
                }))
                setData(formattedData)
@@ -51,28 +51,10 @@ export default function BankTransfer() {
           title: 'Name',
           dataIndex: 'names',
           width: "20%",
-          render: (text) => (
-              <Tooltip title={text}>
-                  <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "250px", display: "inline-block" }}>
-                      {text}
-                  </span>
-              </Tooltip>
-          ),
       },
       {
         title: "Account Number",
-        dataIndex: "account number",  
-        filters: data
-          ? data
-              .filter((item) => item.mobile) 
-              .map((item) => ({
-                text: item.mobile?.toString() || "",  
-                value: item.mobile?.toString() || ""  
-              }))
-          : [],
-        filterMode: "menu",
-        filterSearch: (input, record) => record.value?.toString().includes(input),  
-        onFilter: (value, record) => record.mobile?.toString().includes(value),  
+        dataIndex: "account number",   
         width: "18%",
       },
         {
@@ -86,19 +68,16 @@ export default function BankTransfer() {
           width: "15%",
         },
         {
-          title: 'Actions',
-          dataIndex: 'Delete',
+          title: 'Action',
+          dataIndex: 'Delee',
           width: "15%",
-          render: (_, record) => (
-              <Button className="view-button"  onClick={() => handleView(record.ID)}>Delete</Button>
-          ),
       },
       ];
       return (
         <div>
           <div style={{ marginBottom: '16px' }}>
             <Link to="../addnewbankaccount">
-              <button type="button" className="btn btn-warning">Add New Bank Account</button>
+              <button type="button" className="btn btn-warning">Add Bank Account</button>
             </Link>
           </div>
           

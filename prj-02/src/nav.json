@@ -13,19 +13,19 @@
     "roles":["superadmin"],
     "children": [
       {
-        "key": 10,
+        "key": 2,
         "icon": "AiOutlineTeam",
         "label": "Distributor List",
         "path": "/dashboard/distributor"
       },
       {
-        "key": 8,
+        "key": 14,
         "icon": "FaUserPlus",
         "label": "Add Distributor",
         "path": "/dashboard/distributor/adddistributor"
       },
       {
-        "key": 9,
+        "key": 5,
         "icon": "FaUserCheck",
         "label": "Distributor Margin",
         "path": "/dashboard/distributor/distributormargin"
@@ -41,19 +41,19 @@
 
     "children": [
       {
-        "key": 10,
+        "key": 3,
         "icon": "AiOutlineTeam",
         "label": "Retailers List",
         "path": "/dashboard/retailer"
       },
       {
-        "key": 8,
+        "key": 14,
         "icon": "FaUserPlus",
         "label": "Add Retailer",
         "path": "/dashboard/retailer/addretailer"
       },
       {
-        "key": 9,
+        "key": 5,
         "icon": "FaUserCheck",
         "label": "Retailer Margins",
         "path": "/dashboard/retailer/retailerMargin"
@@ -95,30 +95,28 @@
   },
   {
     "key": 8,
-    "icon": "AiOutlineSetting",
+    "icon": "FaWallet",
     "label": "Add Balance",
     "path": "/dashboard/addbalance",
-    "roles":["retailer"]
-
-  },
-  {
-    "key": 9,
-    "icon": "AiOutlineSetting",
-    "label": "Bank Transfer",
-    "path": "/dashboard/banktransfer",
-    "roles":["retailer"]
-
-  },
-  {
-    "key": 10,
-    "icon": "AiOutlineSetting",
-    "label": "CC Bill Payments",
-    "path": "/dashboard/payments",
-    "roles":["retailer"]
-
-  },
+    "roles": ["retailer"]
+  },  
   {
     "key": 11,
+    "icon": "FaUniversity",
+    "label": "Bank Transfer",
+    "path": "/dashboard/banktransfer",
+    "roles": ["retailer"]
+  },
+  
+  {
+    "key": 10,
+    "icon": "FaCreditCard",
+    "label": "CC Bill Payments",
+    "path": "/dashboard/payments",
+    "roles": ["retailer"]
+  },  
+  {
+    "key": 13,
     "icon": "AiOutlineSetting",
     "label": "Reports",
     "roles":["retailer"],
@@ -135,17 +133,18 @@
       "path":"/dashboard/reports/banktransfer"
     },
     {
-      "key":12,
+      "key":10,
       "icon":"AiOutlineSetting",
       "label":"CC Bill Payments",
       "path":"/dashboard/reports/payments"
     },
     {
-      "key":12,
-      "icon":"AiOutlineSetting",
-      "label":"PassBook",
-      "path":"/dashboard/reports/passbook"
-    }
+  "key": 12,
+  "icon": "AiOutlineBook",
+  "label": "PassBook",
+  "path": "/dashboard/reports/passbook"
+}
+
   ]
 
   }
