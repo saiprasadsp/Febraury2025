@@ -591,44 +591,58 @@ export default function DistributorDetails() {
                             </>
                         )}
     
-                        <div style={{ marginTop: 24 }}>
-    
-                            {formData && (
-                                <>
-                                    {current < steps.length - 1 && (
-                                        <Button type="primary" className="next-button" onClick={next}>
-                                            Next
-                                        </Button>
-                                    )}
-    
-                                    {["Pending", "Reject"].includes(formData.status) && current === steps.length - 1 && (
-                                        <>
-                                            <Button type="primary" className="done-button" htmlType="submit" onClick={handleUpdate}>
-                                                Update
-                                            </Button>
-                                            <Button type="primary" value='Approved' className="approve-button" htmlType="submit" onClick={handleStatus}>
-                                                Approve
-                                            </Button>
-                                            <Button type="primary" value='Rejected' className="reject-button" htmlType="submit" onClick={handleStatus}>
-                                                Reject
-                                            </Button>
-                                        </>
-                                    )}
-    
-                                    {formData.kyc_status === "Approve" && current === steps.length - 1 && (
-                                        <Button type="primary" className="done-button">
-                                            Close
-                                        </Button>
-                                    )}
-    
-                                    {current > 0 && (
-                                        <Button className="previous-button" onClick={prev}>
-                                            Previous
-                                        </Button>
-                                    )}
-                                </>
-                            )}
-                        </div>
+                     <div style={{ marginTop: 24 }}>
+                     
+                                         {formData && (
+                                             <>
+                                                 {/* Show Next if not on the last step */}
+                                                 {current < steps.length - 1 && (
+                                                     <Button type="primary" className="next-button" onClick={next}>
+                                                         Next
+                                                     </Button>
+                                                 )}
+                     
+                                                 {/* If status is Pending or Reject and on last step */}
+                                                 {["Pending", "Reject"].includes(formData.kycstatus) && current === steps.length - 1 && (
+                                                     <>
+                                                         <Button type="primary" className="done-button" htmlType="submit" onClick={handleUpdate}>
+                                                             Update
+                                                         </Button>
+                                                         <Button type="primary" value="Approved" className="approve-button" htmlType="submit" onClick={handleStatus}>
+                                                             Approve
+                                                         </Button>
+                                                         <Button type="primary" value="Rejected" className="reject-button" htmlType="submit" onClick={handleStatus}>
+                                                             Reject
+                                                         </Button>
+                                                         <Button className="previous-button" onClick={prev}>
+                                                             Previous
+                                                         </Button>
+                                                     </>
+                                                 )}
+                     
+                                                 {/* If status is Approve and on last step */}
+                                                 {formData.kycstatus === "Approve" && current === steps.length - 1 && (
+                                                     <>
+                                                         <Button className="previous-button" onClick={prev}>
+                                                             Previous
+                                                         </Button>
+                                                         <Button type="primary" className="done-button">
+                                                             Close
+                                                         </Button>
+                                                     </>
+                                                 )}
+                     
+                                                 {/* Default Previous if not already shown and not on first step */}
+                                                 {current > 0 &&
+                                                     !(["Pending", "Reject", "Approve"].includes(formData.kycstatus) && current === steps.length - 1) && (
+                                                         <Button className="previous-button" onClick={prev}>
+                                                             Previous
+                                                         </Button>
+                                                     )}
+                                             </>
+                                         )}
+                     
+                                     </div>
     
     
     

@@ -267,7 +267,7 @@ height: 120px; /* Increased height */
 padding: 25px;
 border-radius: 12px;
 background: white;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for better look */
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55); /* Shadow for better look */
 text-align: center;
 font-weight: bold;
 border: 3px solid #1F6281; /* Orange border */
@@ -276,6 +276,11 @@ display: flex;
 align-items: center;
 justify-content: center;
 gap: 12px; /* Space between icon and text */
+cursor: pointer;
+}
+.dashboard-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 /* Different colors for each box */

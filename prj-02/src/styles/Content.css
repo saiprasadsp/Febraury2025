@@ -1,0 +1,8 @@
+.clickable-count span {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.clickable-count span:hover {
+  color: #49acee;
+}
