@@ -128,7 +128,7 @@ export default function GetDistributor() {
       <div>
         <button type="button" className="btn btn-warning"><Link to='addDistributor'>Add Distributor</Link></button>
       </div>
-        <Table columns={columns} onChange={onChange} dataSource={data}/>
+        <Table className="custom-distributor-table" columns={columns} onChange={onChange} dataSource={data}/>
        
         </div>
   )

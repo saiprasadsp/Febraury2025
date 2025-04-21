@@ -13,13 +13,16 @@ import {
   AiOutlineDollarCircle,
   AiOutlineCheckCircle,
   AiOutlineSetting,
-  AiOutlineUnorderedList, // Import this for Distributor List
+  AiOutlineUnorderedList, 
+  AiOutlineBook,
+  AiOutlineFileText 
 } from "react-icons/ai";
+import { FaCreditCard, FaUniversity, FaWallet, } from "react-icons/fa";
 import { FaSignOutAlt, FaUserPlus, FaUserCheck } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { setLogout } from "../redux/authSlice";
-import  SessionConflictToast  from "../Components/SessionConflictToast";
+import SessionConflictToast from "../Components/SessionConflictToast";
 import navLinks from "../nav.json";
 import logo from "../assets/logo/TheQucikPayMe.png";
 import "../styles/Dashboard.css";
@@ -29,7 +32,7 @@ const { Header, Sider, Content } = Layout;
 
 export default function Dashboard() {
   const [collapsed, setCollapsed] = useState(false);
-  const [filteredNav,setFilteredNav]=useState([])
+  const [filteredNav, setFilteredNav] = useState([])
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -53,7 +56,7 @@ export default function Dashboard() {
             }
             return true;
           });
-  
+
           return {
             ...link,
             children: filteredChildren
@@ -63,11 +66,11 @@ export default function Dashboard() {
       })
       .filter(link => !link.children || link.children.length > 0); // remove empty parent menus
   };
-  
+
   useEffect(() => {
-    if(userInfo?.role){
+    if (userInfo?.role) {
       const filteredLinks = filterNavLinks(navLinks, userInfo?.role);
-    setFilteredNav(filteredLinks)
+      setFilteredNav(filteredLinks)
 
     }
     const handleResize = () => {
@@ -112,15 +115,22 @@ export default function Dashboard() {
       case 7:
         return <AiOutlineSetting />;
       case 8:
-        return <FaUserPlus />; // Add Distributor
+        return <FaWallet />;
       case 9:
         return <FaUserCheck />; // Distributor KYC
       case 10:
-        return <AiOutlineUnorderedList />; // Distributor List
-      default:
-        return null;
+        return <FaCreditCard />;
+      case 11:
+        return <FaUniversity />;
+      case 12:
+        return <AiOutlineBook  />;
+        case 13:
+          return <AiOutlineFileText   />;
+          case 14:
+            return <FaUserPlus   />;
+          
     }
-  };  
+  };
 
   // Convert JSON data into sidebar menu items
   const menuItems = filteredNav.map((item) => {
@@ -213,13 +223,13 @@ export default function Dashboard() {
         </footer>
         <Layout>
           <Content className="dashboard-content">
-          <SessionConflictToast/>
-          {userInfo?.role === "retailer" && location.pathname === "/dashboard" ? (
-              <RetailerDashboard/>
+            <SessionConflictToast />
+            {userInfo?.role === "retailer" && location.pathname === "/dashboard" ? (
+              <RetailerDashboard />
             ) : (
               <Outlet />
             )}
-            
+
           </Content>
         </Layout>
       </Layout>

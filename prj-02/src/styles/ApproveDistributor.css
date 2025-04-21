@@ -17,3 +17,35 @@
   font-size: 14px; /* ✅ Adjust font size */
   margin-bottom: 20px !important;
 }
+.previous-button {
+  background-color: #1F6281; /* Red */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px; /* Space between buttons */
+  padding: 6px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.previous-button:hover {
+  background-color: #1F6281; /* Slightly darker red on hover */
+}
+
+.Close-button {
+  background-color: #1F6281 !important; /* Red */
+  color: white !important;
+  border: none !important;
+  border-radius: 5px !important;
+  padding: 6px 16px !important;
+  transition: background-color 0.3s ease;
+}
+
+.Close-button:hover {
+  background-color: #1F6281 !important; /* Darker red on hover */
+  color: white !important;
+}
+
+
+
+
+

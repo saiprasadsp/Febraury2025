@@ -1,13 +1,13 @@
 import React, { useState, useEffect, createContext, useRef, useContext } from "react";
-import { Button, Table, Form, Input,Modal } from "antd";
-import { useGetDistributorMutation,useUpdateDistributorMarginMutation } from '../../slices/usersApiSlice';
+import { Button, Table, Form, Input, Modal } from "antd";
+import { useGetDistributorMutation, useUpdateDistributorMarginMutation } from '../../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import "../../styles/AddDistributor.css";
 
 const AddDistributor = () => {
     const [data, setData] = useState([]);
     const [getDistributor, { isLoading }] = useGetDistributorMutation();
-    const [updateDistributorMargin]=useUpdateDistributorMarginMutation()
+    const [updateDistributorMargin] = useUpdateDistributorMarginMutation()
     const [updatedValues, setUpdatedValues] = useState(""); // Holds updates for margin values
 
     useEffect(() => {
@@ -51,14 +51,14 @@ const AddDistributor = () => {
             title: 'DOJ',
             dataIndex: 'doj',
             render: (date) => {
-              return new Date(date).toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric',
-              });
+                return new Date(date).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                });
             },
             width: "18%",
-          },      
+        },
         {
             title: 'Margin',
             dataIndex: 'margin',
@@ -137,13 +137,13 @@ const AddDistributor = () => {
         return <td {...restProps}>{childNode}</td>;
     };
 
-    const handlesave = async(row) => {
+    const handlesave = async (row) => {
         Modal.confirm({
-            title:"Confirm Save",
-            content:'Are you sure you want to continue?',
-            onOk:async()=>{
+            title: "Confirm Save",
+            content: 'Are you sure you want to continue?',
+            onOk: async () => {
                 try {
-                    const res = await updateDistributorMargin({id:row.ID,margin:row.margin}).unwrap()
+                    const res = await updateDistributorMargin({ id: row.ID, margin: row.margin }).unwrap()
                     toast.success(res.message)
                     const newData = [...data];
                     const index = newData.findIndex((item) => row.key === item.key);
@@ -153,7 +153,7 @@ const AddDistributor = () => {
                         ...row,
                     });
                     setData(newData);
-            
+
                     // Save updated values locally for the margin field
                     setUpdatedValues((prev) => ({
                         ...prev,
@@ -163,25 +163,25 @@ const AddDistributor = () => {
                     toast.error(err?.data?.message || "Error in updating margin")
                 }
             },
-            onCancel:()=>{
+            onCancel: () => {
                 console.log("User cancelled save");
-                
+
             }
         })
     };
 
-    const handleUpdateAll = async() => {
-        if (updatedValues===""||updatedValues===null||updatedValues===undefined) {
+    const handleUpdateAll = async () => {
+        if (updatedValues === "" || updatedValues === null || updatedValues === undefined) {
             toast.error("Please enter a Margin value before updating.")
             return
         }
 
         Modal.confirm({
-            title:'Confirm save',
-            content:'Are you sure you want to continue?',
-            onOk:async()=>{
+            title: 'Confirm save',
+            content: 'Are you sure you want to continue?',
+            onOk: async () => {
                 try {
-                    await updateDistributorMargin({margin:updatedValues}).unwrap()
+                    await updateDistributorMargin({ margin: updatedValues }).unwrap()
                     toast.success("All Margins updated successfully")
                     const newData = data.map((item) => {
                         return { ...item, margin: updatedValues };
@@ -193,9 +193,9 @@ const AddDistributor = () => {
                 }
 
             },
-            onCancel:async()=>{
+            onCancel: async () => {
                 console.log("User Cancelled update All");
-                
+
             }
         })
     };
@@ -225,20 +225,17 @@ const AddDistributor = () => {
 
     return (
         <div>
-            <div className="d-flex flex-row mb-3">
-                <div className="input-group mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Recipient's username"
-                        aria-label="Recipient's username"
-                        onChange={(e)=>setUpdatedValues(e.target.value)}
-                    />
-                    <button className="btn btn-outline-secondary" type="button" onClick={handleUpdateAll}>
-                        Update All
-                    </button>
-                </div>
-                <div>&nbsp;</div>
+            <div className="input-group mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Margin Value"
+                    aria-label="Recipient's username"
+                    onChange={(e) => setUpdatedValues(e.target.value)}
+                />
+                <button className="btn btn-update-all" type="button" onClick={handleUpdateAll}>
+                    Update All
+                </button>
             </div>
             <div>
                 <Table

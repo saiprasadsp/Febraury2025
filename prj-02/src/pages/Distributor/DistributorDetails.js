@@ -149,7 +149,7 @@ export default function DistributorDetails() {
         try {
 
             const data = new FormData();
-            
+
 
             Object.entries(formData).forEach(([key, value]) => {
                 data.append(key, value);
@@ -160,6 +160,8 @@ export default function DistributorDetails() {
             if (shopImageFile.length) data.append('shopImageUrl', shopImageFile[0].originFileObj);
             if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
             if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);
+            console.log("step 2", data);
+
 
             const res = await updateDistributor(data).unwrap()
             toast.success(res?.message)
@@ -602,9 +604,13 @@ export default function DistributorDetails() {
                                     <Button className="previous-button" onClick={prev}>
                                         Previous
                                     </Button>
-                                    <Button type="primary" className="done-button">
+                                    <Button
+                                        className="Close-button"
+                                        onClick={() => navigate('/dashboard/distributor')}
+                                    >
                                         Close
                                     </Button>
+
                                 </>
                             )}
 
