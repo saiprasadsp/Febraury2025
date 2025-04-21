@@ -70,7 +70,6 @@ export default function RetailerDetails() {
         async function getRetailerDetail() {
             try {
                 const res = await getRetailerDetails({ retailerId: id }).unwrap();
-                console.log("Retailer Details:", res);
                 setData(res);
                 if (res.length > 0) {
                     const item = res[0];
@@ -115,10 +114,10 @@ export default function RetailerDetails() {
                         });
                         formUpdated.current = true;
                     }
-                    console.log("step 10", formData);
                 }
-            } catch (error) {
-                console.log(error);
+            } catch (err) {
+                console.log(err);
+                toast.error(err?.data?.message)
             }
         }
         getRetailerDetail();
@@ -135,7 +134,6 @@ export default function RetailerDetails() {
     
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        console.log("step 3", name, value);
         setFormData((prevData) => ({
             ...prevData,
             [name]: value.toUpperCase(),

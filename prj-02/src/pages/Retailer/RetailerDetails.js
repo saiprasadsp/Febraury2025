@@ -71,7 +71,6 @@ export default function DistributorDetails() {
         const[approveRetailer]=useApproveRetailerMutation()
         const[dob,setDob] = useState("")
         useEffect(() => {
-            console.log('Env',process.env.REACT_APP_Retailer_Percentage);
             
             async function getDistributorDetail() {
                 try {
@@ -132,31 +131,7 @@ export default function DistributorDetails() {
         }, []);
     
         useEffect(()=>{
-            form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})    
-            // if (formData.aadharUrl && aadharFile.length===0) {
-            //     const extractFileName=(url)=>{
-            //         try {
-            //             const fileName = url.substring(url.lastIndexOf('/')+1)
-            //             const extractedFileName = fileName.split('_').pop()
-            //             return extractedFileName
-            //         } catch (err) {
-            //             console.log("Error in extracting file name:",err?.data?.message);    
-            //             toast.error(err?.data?.message)
-            //             return null
-            //         }
-            //         }
-            //         setAadharFile([
-            //             {
-            //                 uid:'1',
-            //                 name:extractFileName(formData.aadharUrl),
-            //                 url:formData.aadharUrl,
-            //                 status:'done'
-
-            //             }
-            //         ])
-            //         console.log("step 1",aadharFile);
-                    
-            // }    
+            form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})      
         },[formData])
     
     

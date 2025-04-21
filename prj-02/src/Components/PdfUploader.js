@@ -36,11 +36,9 @@ const PdfUploader = ({ label, fileList, setFileList, initialFiles=[] }) => {
     }, [initialFiles,fileList,setFileList]); // Removed `fileList` from dependencies to avoid infinite loop
 
     const handlePreview = async (file) => {
-        console.log(file);
         
         let fileUrl = file.url || file.thumbUrl;
         if (!fileUrl && file.originFileObj) {
-            console.log("step 10",file.originFileObj);
             
             fileUrl = URL.createObjectURL(file.originFileObj);
         }

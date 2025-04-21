@@ -71,7 +71,6 @@ export default function DistributorDetails() {
     const [approveDistributor] = useApproveDistributorMutation()
     const [dob, setDob] = useState("")
     useEffect(() => {
-        console.log('Env', process.env.REACT_APP_Distributor_Margin);
 
         async function getDistributorDetail() {
             try {
@@ -155,14 +154,12 @@ export default function DistributorDetails() {
             Object.entries(formData).forEach(([key, value]) => {
                 data.append(key, value);
             });
-            console.log("Aadhar",aadharFile);
             
             if (aadharFile.length>0 && aadharFile[0].originFileObj) data.append('aadharUrl', aadharFile[0].originFileObj);
             if (panFile.length) data.append('panUrl', panFile[0].originFileObj);
             if (shopImageFile.length) data.append('shopImageUrl', shopImageFile[0].originFileObj);
             if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
             if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);
-                console.log("step 2",data);
 
             const res = await updateDistributor(data).unwrap()
             toast.success(res?.message)
