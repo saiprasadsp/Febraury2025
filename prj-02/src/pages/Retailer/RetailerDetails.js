@@ -3,7 +3,7 @@ import { Button, Steps, message, Upload, Image, Form, Input, Select, DatePicker,
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { useGetRetailerDetailsMutation, useUpdateRetailerMutation, useApproveRetailerMutation } from '../../slices/usersApiSlice'
-import PdfUploader from "../../Components/PdfUploader"; // ✅ Import PdfUploader
+import PdfUploader from "../../Components/PdfUploader";
 import "../../styles/ApproveDistributor.css";
 import dayjs from "dayjs";
 import { useSelector } from 'react-redux';
@@ -20,108 +20,150 @@ const steps = [
 
 export default function DistributorDetails() {
     const formUpdated = useRef(false)
-    const [current, setCurrent] = useState(0);
-    const { id } = useParams()
-    const [data, setData] = useState([])
-    const [form] = Form.useForm();
-    const [aadharFile, setAadharFile] = useState([]);
-    const [panFile, setPanFile] = useState([]);
-    const [shopImageFile, setShopImageFile] = useState([]);
-    const [labourLicenseFile, setLabourLicenseFile] = useState([]);
-    const [cancelledCheckFile, setCancelledCheckFile] = useState([]);
-    const navigate = useNavigate()
-    const { userInfo } = useSelector((state) => state.auth);
-    const [formData, setFormData] = useState({
-        ID: "",
-        roleid: 2,
-        aadharName: '',
-        aadharNumber: '',
-        dob: '',
-        gender: '',
-        address: '',
-        state: '',
-        district: '',
-        pincode: '',
-        mobile: '',
-        email: '',
-        password: '',
-        panNumber: '',
-        panName: '',
-        businessName: '',
-        businessCategory: '',
-        businessAddress: '',
-        businessState: '',
-        businessDistrict: '',
-        businessPincode: '',
-        businessLabourLicenseNumber: '',
-        businessProprietorName: '',
-        bankName: '',
-        accountNumber: '',
-        IFSC: '',
-        accountName: '',
-        doj: `${new Date().toISOString()}`,
-        status: 'Pending',
-        ditributorMargin: process.env.REACT_APP_Retailer_Percentage,
-        userType: 'retailer',
-        create: `${new Date().toISOString()}`,
-        update: `${new Date().toISOString()}`
-    });
-    const [getRetailerDetails, { isLoading }] = useGetRetailerDetailsMutation()
-    const [updateRetailer] = useUpdateRetailerMutation()
-    const [approveRetailer] = useApproveRetailerMutation()
-    const [dob, setDob] = useState("")
-    useEffect(() => {
-        console.log('Env', process.env.REACT_APP_Retailer_Percentage);
-
-        async function getDistributorDetail() {
-            try {
-
-                const res = await getRetailerDetails({ retailerId: id }).unwrap();
-
-                setData(res);
-                if (res.length > 0) {
-                    const item = res[0]
-                    setFormData((prevData) => ({
-                        ...prevData,
-                        ID: item.ID,
-                        aadharName: item.name_as_per_aadhaar,
-                        aadharNumber: item.aadhar_number,
-                        dob: formatDate(item.dob),
-                        gender: item.gender,
-                        address: item.address,
-                        state: item.state,
-                        district: item.district,
-                        pincode: item.pincode,
-                        mobile: item.user_mobile,
-                        email: item.user_email,
-                        aadharUrl: item.aadhar_url,
-                        kycstatus: item.kyc_status,
-                        panName: item.name_as_per_pan,
-                        panNumber: item.pan_number,
-                        panUrl: item.pan_url,
-                        businessName: item.bank_name,
-                        businessCategory: item.business_category,
-                        businessAddress: item.business_address,
-                        businessState: item.business_state,
-                        businessDistrict: item.business_district,
-                        businessPincode: item.business_pincode,
-                        businessLabourLicenseNumber: item.business_labour_license_Number,
-                        businessProprietorName: item.business_proprietor_Name,
-                        shopImageUrl: item.shop_photo_url,
-                        labourLicenseUrl: item.business_ll_url,
-                        bankName: item.bank_name,
-                        accountName: item.account_holder_name,
-                        accountNumber: item.account_number,
-                        IFSC: item.ifsc_code,
-                        cancelledChequeUrl: item.cancelled_check_url,
-                    }))
-
-                    if (!formUpdated.current) {
-
-                        formUpdated.current = true
+        const [current, setCurrent] = useState(0);
+        const { id } = useParams()
+        const [data, setData] = useState([])
+        const [form] = Form.useForm();
+        const [aadharFile, setAadharFile] = useState([]);
+        const [panFile, setPanFile] = useState([]);
+        const [shopImageFile, setShopImageFile] = useState([]);
+        const [labourLicenseFile, setLabourLicenseFile] = useState([]);
+        const [cancelledCheckFile, setCancelledCheckFile] = useState([]);
+        const navigate  = useNavigate()
+        const { userInfo } = useSelector((state) => state.auth);
+        const [formData, setFormData] = useState({
+            ID:"",
+            roleid: 2,
+            aadharName: '',
+            aadharNumber: '',
+            dob: '',
+            gender: '',
+            address: '',
+            state: '',
+            district: '',
+            pincode: '',
+            mobile: '',
+            email: '',
+            password: '',
+            panNumber: '',
+            panName: '',
+            businessName: '',
+            businessCategory: '',
+            businessAddress: '',
+            businessState: '',
+            businessDistrict: '',
+            businessPincode: '',
+            businessLabourLicenseNumber: '',
+            businessProprietorName: '',
+            bankName: '',
+            accountNumber: '',
+            IFSC: '',
+            accountName: '',
+            doj: `${new Date().toISOString()}`,
+            status: 'Pending',
+            ditributorMargin: process.env.REACT_APP_Retailer_Percentage,
+            userType: 'retailer',
+            create: `${new Date().toISOString()}`,
+            update: `${new Date().toISOString()}`
+        });
+        const [getRetailerDetails, { isLoading }] = useGetRetailerDetailsMutation()
+        const [updateRetailer] = useUpdateRetailerMutation()
+        const[approveRetailer]=useApproveRetailerMutation()
+        const[dob,setDob] = useState("")
+        useEffect(() => {
+            
+            async function getDistributorDetail() {
+                try {
+                    
+                    const res = await getRetailerDetails({ retailerId: id }).unwrap();
+        
+                    setData(res);
+                    if (res.length>0) {
+                        const item = res[0]
+                        setFormData((prevData)=>({
+                            ...prevData,
+                            ID:item.ID,
+                            aadharName: item.name_as_per_aadhaar,
+                            aadharNumber: item.aadhar_number,
+                            dob: formatDate(item.dob),    
+                            gender: item.gender,
+                            address: item.address,
+                            state: item.state,
+                            district: item.district,
+                            pincode: item.pincode,
+                            mobile: item.user_mobile,
+                            email: item.user_email,
+                            aadharUrl: item.aadhar_url,
+                            kycstatus: item.kyc_status,    
+                            panName: item.name_as_per_pan,
+                            panNumber: item.pan_number,
+                            panUrl:item.pan_url,
+                            businessName: item.bank_name,
+                            businessCategory: item.business_category,
+                            businessAddress: item.business_address,
+                            businessState: item.business_state,
+                            businessDistrict: item.business_district,
+                            businessPincode: item.business_pincode,
+                            businessLabourLicenseNumber: item.business_labour_license_Number,
+                            businessProprietorName: item.business_proprietor_Name,
+                            shopImageUrl: item.shop_photo_url,
+                            labourLicenseUrl: item.business_ll_url,    
+                            bankName: item.bank_name,
+                            accountName: item.account_holder_name,
+                            accountNumber: item.account_number,
+                            IFSC: item.ifsc_code,
+                            cancelledChequeUrl: item.cancelled_check_url,        
+                        }))
+                        
+                        if (!formUpdated.current) {
+                            
+                            formUpdated.current=true
+                        }
+                        
                     }
 
                 }
+
+            }
+    
+            getDistributorDetail();
+        }, []);
+    
+        useEffect(()=>{
+            form.setFieldsValue({...formData,dob:formData.dob?dayjs(formData.dob):null})      
+        },[formData])
+    
+    
+        const next = () => setCurrent(current + 1);
+        const prev = () => setCurrent(current - 1);
+    
+        const handleInputChange = (e) => {        
+            const { name, value } = e.target;
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value.toUpperCase(),
+            }));
+        };
+        const handleUpdate=async()=>{
+            try {
+                
+                const data = new FormData();
+                
+                Object.entries(formData).forEach(([key, value]) => {
+                    data.append(key, value);
+                });
+    
+                if (aadharFile.length) data.append('aadharUrl', aadharFile[0].originFileObj);
+                if (panFile.length) data.append('panUrl', panFile[0].originFileObj);
+                if (shopImageFile.length) data.append('shopImageUrl', shopImageFile[0].originFileObj);
+                if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
+                if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);           
+    
+                const res = await updateRetailer(data).unwrap()
+                toast.success(res?.message)
+                navigate('/dashboard/retailer')
+                
+ 
             } catch (err) {
                 console.log(err);
                 toast.error(err?.data?.message)

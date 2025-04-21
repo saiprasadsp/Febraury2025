@@ -19,7 +19,6 @@ export default function GetRetailer() {
         const fetchRetailer = async()=>{
              try {
               let param = userInfo.role !=="superadmin"?userInfo.id:''
-              console.log(param);
 
                const res = await getRetailer({distributor:param}).unwrap();
                const formattedData = res.map((item)=>({

@@ -25,14 +25,12 @@ export default function Content() {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        let param = userInfo.role === 'distributor' ? userInfo.id : ''
-        console.log(param);
+        let param = userInfo.role ==='distributor'?userInfo.id:''
 
-        const res = await dashboard({ distributor: param }).unwrap()
-        console.log(res);
-
-        if (res && res.length > 0) {
-          setList(res[0])
+        const res= await dashboard({distributor:param}).unwrap()
+        
+        if (res && res.length>0) {
+        setList(res[0])
         }
 
       } catch (err) {

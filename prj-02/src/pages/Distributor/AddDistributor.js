@@ -82,7 +82,6 @@ const AddDistributor = () => {
         if (labourLicenseFile.length) data.append('labourLicenseUrl', labourLicenseFile[0].originFileObj);
         if (cancelledCheckFile.length) data.append('cancelledCheckUrl', cancelledCheckFile[0].originFileObj);
 
-        console.log(data);
 
         try {
             const res = await createDistributor(data).unwrap();
