@@ -1,52 +1,39 @@
-import { Outlet,Navigate,useLocation } from "react-router-dom";
-import {useSelector,useDispatch  } from "react-redux";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setLogin,setLogout } from "../redux/authSlice";
-import { useLoginMutation } from "../slices/usersApiSlice";
+import { setLogin, setLogout } from "../redux/authSlice";
+import { useGetUserQuery } from "../slices/usersApiSlice"; // Add a profile API slice
 
-const ProtectedRoute=({children,allowedRoles})=>{
-const {userInfo} = useSelector((state)=>state.auth);
-const dispatch = useDispatch()
-const location = useLocation()
-const [login]=useLoginMutation()
+const ProtectedRoute = ({ children, allowedRoles }) => {
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-const getCookie=(cookieName)=>{
-    const cookies = document.cookie.split("; ")
-    const cookie = cookies.find((row)=> row.startsWith(cookieName + "="))
-    return cookie? cookie.split("=")[1]:null
-}
+  const { data, error, isLoading } = useGetUserQuery(null, {
+    skip: !!userInfo,  // don't call if userInfo already exists
+  });
 
-useEffect(()=>{
-    const token = getCookie('jwt')
-    if (!token) {
-        dispatch(setLogout())
-        return
+  useEffect(() => {
+    if (data) {
+      dispatch(setLogin(data)); // set user info from profile API
+    } else if (error) {
+      dispatch(setLogout());
     }
+  }, [data, error, dispatch]);
 
-    if (!userInfo) {
-        const fetchUser = async()=>{
-            try {
-                const userData = await login().unwrap()
-                
-                dispatch(setLogin(userData))
-            } catch (err) {
-                dispatch(setLogout())
-            }
-        }
-        fetchUser()
-    }
-    
-},[userInfo,dispatch,login])
-if (!userInfo ) {
-    return <Navigate to='/' replace/>
-}
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-if (!allowedRoles.includes(userInfo.role)) {
-    return <Navigate to='/dashboard'  replace state={{from:location}}/>
-}
+  if (!userInfo) {
+    return <Navigate to="/" replace />;
+  }
 
+  if (!allowedRoles.includes(userInfo.role)) {
+    return <Navigate to="/dashboard" replace state={{ from: location }} />;
+  }
 
-return children?children:<Outlet/>
-}
+  return children ? children : <Outlet />;
+};
 
-export default ProtectedRoute
+export default ProtectedRoute;
