@@ -1,9 +1,10 @@
 import { apiSlice } from "./apiSlice";
 
-const USERS_URL = 'http://localhost:9000/api/users'
-const DISTRIBUTOR_LIST = 'http://localhost:9000/api/distributor'
-const RETAILER_LIST = 'http://localhost:9000/api/retailer'
-const DASHBOARD = 'http://localhost:9000/api/dashboard'
+
+const USERS_URL = `${process.env.REACT_APP_API}/users`
+const DISTRIBUTOR_LIST = `${process.env.REACT_APP_API}/distributor`
+const RETAILER_LIST = `${process.env.REACT_APP_API}/retailer`
+const DASHBOARD = `${process.env.REACT_APP_API}/dashboard`
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
@@ -35,7 +36,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 body:data
             })
         }),
-        getUser:builder.mutation({
+        getUser:builder.query({
             query:()=>({
                 url:`${USERS_URL}/profile`,
                 method:'GET'
@@ -135,5 +136,5 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserMutation,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
 
