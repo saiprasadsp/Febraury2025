@@ -27,13 +27,24 @@ function Login() {
     e.preventDefault();
     setError(""); // Clear previous errors
 
-    try {
-      const res = await login({ userid: userID, password: password }).unwrap();
-
-      dispatch(setLogin({ ...res }));
-      navigate("/dashboard");
-    } catch (err) {
-      setError("Please Enter Valid Credentials"); // Set error message
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async(position)=>{
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude
+        
+        try {
+          const res = await login({ userid: userID, password: password,geoLocation:{latitude,longitude} }).unwrap();
+    
+          dispatch(setLogin({ ...res }));
+          navigate("/dashboard");
+        } catch (err) {
+          setError("Please Enter Valid Credentials"); // Set error message
+        }
+      },(error)=>{console.error('Geolocation error:',error.message);
+      })
+    } else {
+      console.log('Geo location is not supported by this browser');
+      
     }
   };
 

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setLogin, setLogout } from "../redux/authSlice";
 import { useGetUserQuery } from "../slices/usersApiSlice"; // Add a profile API slice
+import TermsConditions from "./TermsConditions";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -27,6 +28,10 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 
   if (!userInfo) {
     return <Navigate to="/" replace />;
+  }
+
+  if (!userInfo.termsAccepted) {
+    return <TermsConditions/>
   }
 
   if (!allowedRoles.includes(userInfo.role)) {
