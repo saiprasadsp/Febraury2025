@@ -13,6 +13,7 @@ const authSlice =createSlice({
         setLogin:(state,action)=>{
             state.userInfo=action.payload;
             state.isAuthenticated=true;
+            state.hasAcceptedTerms = action.payload.termsAccepted;
             localStorage.setItem("userInfo", JSON.stringify(action.payload));
         
         

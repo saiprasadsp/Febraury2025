@@ -1,7 +1,7 @@
 import { fetchBaseQuery,createApi } from "@reduxjs/toolkit/query/react";
 import { setLogout } from "../redux/authSlice";
 import { setShowSessionConflict } from "../redux/authSlice";
-const baseQuery = fetchBaseQuery({baseUrl:`${process.env.REACT_APP_API}/users`,credentials:"include"})
+const baseQuery = fetchBaseQuery({baseUrl:`${process.env.REACT_APP_API}`,credentials:"include"})
 
 const baseQueryWithAuth = async(args,api,extraOptions)=>{
     let result = await baseQuery(args,api,extraOptions);
@@ -17,6 +17,6 @@ const baseQueryWithAuth = async(args,api,extraOptions)=>{
 
 export const apiSlice = createApi({
     baseQuery:baseQueryWithAuth,
-    tagTypes:['User'],
+    tagTypes:['Users'],
     endpoints:(builder)=>({}),
 })

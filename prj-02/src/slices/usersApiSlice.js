@@ -22,6 +22,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                     body:data
             })
         }),
+        accepTerms:builder.mutation({
+            query:()=>({
+                url:`${USERS_URL}/terms`,
+                method:'PUT',
+
+            })
+        }),
         logout:builder.mutation({
             query:()=>({
                 url:`${USERS_URL}/logout`,
@@ -136,5 +143,5 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
 
