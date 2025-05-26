@@ -1,7 +1,7 @@
-import { Table, Button } from 'antd'
+import { Table, Button, Modal } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { useGetDistributorMutation } from '../../slices/usersApiSlice';
+import { useActivateDistributorMutation, useGetDistributorMutation } from '../../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/GetDistributor.css'
@@ -13,6 +13,7 @@ export default function GetDistributor() {
   const navigate = useNavigate()
   const {userInfo} = useSelector((state)=>state.auth)
   const [getDistributor,{isLoading}]=useGetDistributorMutation()
+  const [activateDistributor]=useActivateDistributorMutation()
     useEffect(()=>{
     
         const fetchDistributor = async()=>{
@@ -25,6 +26,7 @@ export default function GetDistributor() {
                 mobile:item.user_mobile,
                 doj:item.doj,
                 kyc:item.kyc_status,
+                status:item.distributor_status===1 ? "Active" :'De-Active'
     
                }))
                setData(formattedData)
@@ -41,6 +43,48 @@ export default function GetDistributor() {
       const handleView = (id) => {
         navigate(`/dashboard/distributor/getDistributor/${id}`);
       };
+
+      const handleStatus=async(row)=>{
+        const updatedStatus = row.status === "Active" ? 0 : 1;
+        const statusLabel = updatedStatus === 1 ? "Active" : "Dective";
+        console.log('Step 1',updatedStatus);
+        console.log('Step 2',statusLabel);
+        
+
+        Modal.confirm({
+          title: "Confirm Status Change",
+          content: `Are you sure you want to ${statusLabel} this distributor?`,
+          okText: "Yes",
+          cancelText: "No",
+          onOk: async () => {
+            try {
+              const res = await activateDistributor({
+                id: row.ID,
+                status: updatedStatus,
+              }).unwrap();
+              toast.success(res.message || "Status updated successfully");
+
+              // update local state
+              // const newData = data.map((item) =>
+              //   item.ID === row.ID
+              //     ? {
+              //         ...item,
+              //         status: updatedStatus === 1 ? "De-Active" : "Active",
+              //       }
+              //     : item
+              // );
+              // await fetchDistributor()
+              setData(newData);
+            } catch (err) {
+              toast.error(err?.data?.message || "Failed to update status");
+            }
+          },
+          onCancel: () => {
+            console.log("User cancelled status change");
+          },
+        });
+
+      }
       const columns = [
         {
           title: "Distributor ID",
@@ -111,6 +155,13 @@ export default function GetDistributor() {
           filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()), 
           onFilter: (value, record) => record.kyc?.toString() === value, 
           width: "15%",
+        },{
+          title:'Status',
+          dataIndex:"status",
+          width:"15%",
+          render:(_,record)=>(
+            <Button type={record.status === 1?'primary':'default'}  onClick={()=>handleStatus(record)}>{record.status}</Button>
+          )
         }
         
         ,

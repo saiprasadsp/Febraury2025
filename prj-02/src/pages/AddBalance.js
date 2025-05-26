@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Input, Button, Tag, Typography, Row, Col, Card } from 'antd';
 import "../styles/AddBalance.css";
-
+import { load } from "@cashfreepayments/cashfree-js";
+import { useCreateOrderMutation } from '../slices/usersApiSlice';
+import { toast } from 'react-toastify';
 const { Title, Paragraph } = Typography;
 
 export default function AddBalance() {
@@ -13,7 +15,14 @@ export default function AddBalance() {
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [highlightPlanButtons, setHighlightPlanButtons] = useState(false);
   const [selectedPlanButton, setSelectedPlanButton] = useState('');
-
+  const [createOrder]= useCreateOrderMutation()
+  let cashfree;
+    var initializeSDK = async function () {          
+        cashfree = await load({
+            mode: "sandbox"
+        });
+    }
+    initializeSDK();
   const handlePlanSelect = (plan) => {
     setSelectedPlan(plan);
     setSelectedPlanButton(plan);
@@ -52,17 +61,46 @@ export default function AddBalance() {
   };
 
   const handleReferenceClick = (val) => {
+    
     setSelectedAmount(val);
+
   };
 
-  const handleAddBalance = () => {
-    if (!selectedPlan) {
-      setHighlightPlanButtons(true);
-      return;
-    }
-    console.log('Adding balance:', selectedAmount);
-  };
+    const handleAddBalance = async() => {
+      
+      if (!selectedPlan) {
+        setHighlightPlanButtons(true);
+        return;
+      }
+      console.log('Adding balance:', selectedAmount);
+      try {
+        const res = await createOrder({amount:selectedAmount,phone:'9879879870',customerID:'test_user1',orderID:'6'}).unwrap()
+        console.log(res.Session_ID);
+        
+        let checkoutOptions={
+          paymentSessionId:res.Session_ID,
+          redirectTarget:'_self'
+        }
+        console.log("step 22",checkoutOptions);
+        
+        cashfree.checkout(checkoutOptions)
+        
+      } catch (err) {
+        console.log(err);
+        toast.error(err?.data?.message || "Failed to update status");
+        
+      }
 
+    };
+  
+
+  // const doPayment = async()=>{
+  //   let checkoutOptions={
+  //     paymentSessionId:"",
+  //     redirectTarget:'_self'
+  //   }
+  //   cashfree.checkout(checkoutOptions)
+  // }
   return (
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={24} sm={20} md={16} lg={12}>

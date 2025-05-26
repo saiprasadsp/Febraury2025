@@ -5,6 +5,7 @@ const USERS_URL = `${process.env.REACT_APP_API}/users`
 const DISTRIBUTOR_LIST = `${process.env.REACT_APP_API}/distributor`
 const RETAILER_LIST = `${process.env.REACT_APP_API}/retailer`
 const DASHBOARD = `${process.env.REACT_APP_API}/dashboard`
+const PAYMENTS = `${process.env.REACT_APP_API}/payments`
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
@@ -97,6 +98,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 body:data
             })
         }),
+        activateDistributor:builder.mutation({
+            query:(data)=>({
+                url:`${DISTRIBUTOR_LIST}/status`,
+                method:'PUT',
+                body:data
+            })
+        }),
         createRetailer:builder.mutation({
             query:(data)=>({
                 url:`${RETAILER_LIST}/register`,
@@ -139,9 +147,23 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method:'PUT',
                 body:data,
             })
+        }),
+        activeRetailer:builder.mutation({
+            query:(data)=>({
+                url:`${RETAILER_LIST}/status`,
+                method:'PUT',
+                body:data
+            })
+        }),
+        createOrder:builder.mutation({
+            query:(data)=>({
+                url:`${PAYMENTS}`,
+                method:"POST",
+                body:data
+            })
         })
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation} = usersApiSlice
 

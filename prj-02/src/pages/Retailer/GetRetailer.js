@@ -1,7 +1,7 @@
-import { Table, Button } from 'antd'
+import { Table, Button, Modal } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { useGetRetailerMutation } from '../../slices/usersApiSlice';
+import { useActiveRetailerMutation, useGetRetailerMutation } from '../../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import "../../styles/GetDistributor.css";
@@ -14,6 +14,7 @@ export default function GetRetailer() {
   const {userInfo} = useSelector((state)=>state.auth)
   
   const [getRetailer,{isLoading}]=useGetRetailerMutation()
+  const [activeRetailer]=useActiveRetailerMutation()
     useEffect(()=>{
     
         const fetchRetailer = async()=>{
@@ -29,7 +30,7 @@ export default function GetRetailer() {
                 mobile:item.user_mobile,
                 doj:item.doj,
                 kyc:item.kyc_status,
-    
+                status:item.retailer_status===1 ? "Active" :'De-Active'    
                }))
                setData(formattedData)
              } catch (err) {
@@ -46,6 +47,49 @@ export default function GetRetailer() {
       const handleView = (id) => {
         navigate(`/dashboard/retailer/getRetailer/${id}`);
       };
+      const handleStatus=async(row)=>{
+        console.log(row);
+        
+              const updatedStatus = row.status === "Active" ? 0 : 1;
+              const statusLabel = updatedStatus === 1 ? "Active" : "Dective";
+              console.log('Step 1',updatedStatus);
+              console.log('Step 2',statusLabel);
+              
+      
+              Modal.confirm({
+                title: "Confirm Status Change",
+                content: `Are you sure you want to ${statusLabel} this distributor?`,
+                okText: "Yes",
+                cancelText: "No",
+                onOk: async () => {
+                  try {
+                    const res = await activeRetailer({
+                      id: row.retailerid,
+                      status: updatedStatus,
+                    }).unwrap();
+                    toast.success(res.message || "Status updated successfully");
+      
+                    // update local state
+                    // const newData = data.map((item) =>
+                    //   item.ID === row.ID
+                    //     ? {
+                    //         ...item,
+                    //         status: updatedStatus === 1 ? "De-Active" : "Active",
+                    //       }
+                    //     : item
+                    // );
+                    // await fetchDistributor()
+                    // setData(newData);
+                  } catch (err) {
+                    toast.error(err?.data?.message || "Failed to update status");
+                  }
+                },
+                onCancel: () => {
+                  console.log("User cancelled status change");
+                },
+              });
+      
+            }
       const columns = [
         {
           title: "Distributor ID",
@@ -127,6 +171,14 @@ export default function GetRetailer() {
           filterMode: "menu",
           filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()),
           onFilter: (value, record) => record.kyc?.toString() === value,
+        },
+        {
+          title:'Status',
+          dataIndex:"status",
+          width:"15%",
+          render:(_,record)=>(
+            <Button type={record.status === 1?'primary':'default'}  onClick={()=>handleStatus(record)}>{record.status}</Button>
+          )
         },
         {
           title: 'Actions',
