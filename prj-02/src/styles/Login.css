@@ -43,8 +43,10 @@
 }
 
 .left-section {
-    background-color: #1F6287;
+    background-color: #206383;
     height: 100vh;
+    overflow: hidden;
+
   }
 
   
@@ -153,3 +155,17 @@ input:focus {
         width: 170px;
     }
 }
+.right-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer-links {
+    position: absolute;
+    bottom: 50px;  /* space from bottom */
+    width: 100%;
+  }
+  

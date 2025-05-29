@@ -33,6 +33,9 @@ import Payments from "./pages/Payments";
 import Reports from "./pages/Reports";
 import PassBook from "./pages/PassBook";
 import AddNewBankAccount from './pages/AddNewBankAccount';
+import TermsAndConditions from './pages/TermsAndConditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import RefundPolicy from './pages/RefundPolicy';
 
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -89,6 +92,9 @@ function App() {
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
       <Route path="/user" element={<ProtectedRoute allowedRoles={["distributor"]} ><Userpage /></ProtectedRoute>} />
+      <Route path="/terms" element={<TermsAndConditions />} />
+      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+      <Route path="/refundpolicy" element={<RefundPolicy />} />
 
     </Routes>
 
