@@ -74,7 +74,7 @@ export default function GetDistributor() {
               //     : item
               // );
               // await fetchDistributor()
-              setData(newData);
+              // setData(newData);
             } catch (err) {
               toast.error(err?.data?.message || "Failed to update status");
             }

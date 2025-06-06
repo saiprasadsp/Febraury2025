@@ -6,6 +6,20 @@ import { useCreateOrderMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 const { Title, Paragraph } = Typography;
 
+
+const formattedDate =(value)=>{
+  const date = new Date(value)
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  const randomSixDigit = Math.floor(100000 + Math.random() * 900000); 
+
+  return `TheQuickPay_${year}_${month}_${day}_${randomSixDigit}`;
+}
+
 export default function AddBalance() {
   const [selectedPlan, setSelectedPlan] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
@@ -46,7 +60,6 @@ export default function AddBalance() {
         setIsError(false);
     }
 
-    // Don't reset the amount when changing plans
   };
 
   const handleInputChange = (e) => {
@@ -57,7 +70,7 @@ export default function AddBalance() {
     } else {
       setReferenceAmounts([]);
     }
-    setSelectedAmount(null); // Clear the selected amount when changing the input
+    setSelectedAmount(null); 
   };
 
   const handleReferenceClick = (val) => {
@@ -74,7 +87,7 @@ export default function AddBalance() {
       }
       console.log('Adding balance:', selectedAmount);
       try {
-        const res = await createOrder({amount:selectedAmount,phone:'9879879870',customerID:'test_user1',orderID:'6'}).unwrap()
+        const res = await createOrder({amount:selectedAmount,phone:'9879879870',customerID:'test_user1',orderID:formattedDate(new Date())}).unwrap()
         console.log(res.Session_ID);
         
         let checkoutOptions={
