@@ -4,3 +4,21 @@
   padding: 20px;
   min-height: 100vh;         
 }
+
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Adjust space between buttons */
+}
+
+.accept-btn {
+  background-color: #1F6281; /* Green */
+  border-color: #1F6281;
+  color: white;
+}
+
+.decline-btn {
+  background-color: #dc3545; /* Red */
+  border-color: #dc3545;
+  color: white;
+}
+
