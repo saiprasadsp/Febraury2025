@@ -4,6 +4,7 @@ import "../styles/AddBalance.css";
 import { load } from "@cashfreepayments/cashfree-js";
 import { useCreateOrderMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 const { Title, Paragraph } = Typography;
 
 
@@ -21,6 +22,9 @@ const formattedDate =(value)=>{
 }
 
 export default function AddBalance() {
+  const {userInfo} = useSelector((state)=>state.auth)
+  console.log(userInfo);
+  
   const [selectedPlan, setSelectedPlan] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
   const [isError, setIsError] = useState(false);
@@ -85,21 +89,17 @@ export default function AddBalance() {
         setHighlightPlanButtons(true);
         return;
       }
-      console.log('Adding balance:', selectedAmount);
       try {
-        const res = await createOrder({amount:selectedAmount,phone:'9879879870',customerID:'test_user1',orderID:formattedDate(new Date())}).unwrap()
-        console.log(res.Session_ID);
+        const res = await createOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,orderID:formattedDate(new Date())}).unwrap()
         
         let checkoutOptions={
           paymentSessionId:res.Session_ID,
           redirectTarget:'_self'
         }
-        console.log("step 22",checkoutOptions);
         
         cashfree.checkout(checkoutOptions)
         
       } catch (err) {
-        console.log(err);
         toast.error(err?.data?.message || "Failed to update status");
         
       }

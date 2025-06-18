@@ -65,16 +65,16 @@ export default function GetDistributor() {
               toast.success(res.message || "Status updated successfully");
 
               // update local state
-              // const newData = data.map((item) =>
-              //   item.ID === row.ID
-              //     ? {
-              //         ...item,
-              //         status: updatedStatus === 1 ? "De-Active" : "Active",
-              //       }
-              //     : item
-              // );
-              // await fetchDistributor()
-              // setData(newData);
+              const newData = data.map((item) =>
+                item.ID === row.ID
+                  ? {
+                      ...item,
+                      status: updatedStatus === 1 ? "De-Active" : "Active",
+                    }
+                  : item
+              );
+              await fetchDistributor()
+              setData(newData);
             } catch (err) {
               toast.error(err?.data?.message || "Failed to update status");
             }
