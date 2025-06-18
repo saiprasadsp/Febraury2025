@@ -1,3 +1,17 @@
+.left-section {
+    background-color: #206383;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    position: relative;
+}
 
 .login-box {
     background-color: white;
@@ -7,32 +21,19 @@
     width: 90%;
     max-width: 400px;
     text-align: center;
-    position: relative;
-    transform: translateY(-15px); /* Moves it 15px up */
+    transform: translateY(-15px);
 }
 
-/* Keep the right-section centered properly */
-.right-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-}
-
-/* Input Field Icons */
 .input-icon {
     position: relative;
 }
-
 .input-icon input {
     width: 100%;
-    padding: 10px 40px; /* Space for the icon */
+    padding: 10px 40px;
     border: 2px solid #1F6281;
     border-radius: 5px;
     font-size: 14px;
 }
-
 .input-icon i {
     position: absolute;
     left: 10px;
@@ -41,36 +42,21 @@
     color: #1F6281;
     font-size: 16px;
 }
-
-.left-section {
-    background-color: #1F6287;
-    height: 100vh;
-  }
-
-  
-/* Right section */
-.col-md-4 {
-    height: 100vh;
-    padding: 40px;
+input:focus {
+    border-color: #023e72;
+    outline: none;
 }
-
-/* Form inputs */
 input {
     width: 90%;
     font-size: 12px;
     border-radius: 12px !important;
-    border: 2px solid #1F6281; 
-    padding: 8px 10px 8px 30px; /* Increased top and bottom padding slightly */
-
-}
-input:focus {
-    border-color: #023e72;
-    outline: none; 
+    border: 2px solid #1F6281;
+    padding: 8px 10px 8px 30px;
 }
 
 .btn-primary {
     width: 25%;
-    height: 38px; /* ✅ Increased height */
+    height: 38px;
     background-color: #1F6281 !important;
     border-color: #1F6281 !important;
     border-radius: 12px !important;
@@ -78,78 +64,115 @@ input:focus {
     transition: all 0.3s ease-in-out;
     margin-left: -50%;
     cursor: pointer;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2); /* ✅ Added shadow */
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* Button Hover Effect */
 .btn-primary:hover {
-    background-color: #11719e !important; /* ✅ Darker shade on hover */
-    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3); /* ✅ Stronger shadow on hover */
-    transform: translateY(-2px); /* ✅ Slight lift effect */
+    background-color: #11719e !important;
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
-
-
-/* Forgot password link */
 .text-primary {
     color: #1F6281;
     text-decoration: none;
 }
-
 .text-primary:hover {
     text-decoration: underline;
 }
-
-.logo-img {
-    width: 160px; /* Slightly smaller */
-    height: auto; /* Maintain aspect ratio */
-    margin-bottom: 15px;
-}
-.error-text {
-    color: red !important;  /* Force red color */
-    font-size: 14px;
-    margin-bottom: 10px;
-
-  }
-  
-
-
-
-.mb-8 {
-    margin-bottom: 5px;
-    font-size: 10px;
-    margin-left: -10%
-}
-.right-section p {
-    color: #000000;
-    font-size: 13px;
-}
-/* Copyright text */
 .text-muted {
     font-size: 12px;
 }
-/* Make sure it stays centered on smaller screens */
-@media (max-width: 768px) {
-    .right-section {
-        width: 100%;  /* Full width on small screens */
-        justify-content: center;
-    }
-    
-    .login-box {
-        width: 95%; /* Slightly wider on small screens */
-        max-width: 350px; /* Keep it balanced */
-    }
-    .logo-img {
-        width: 140px;
-    }
-    .col-md-5 {
-        flex: 0 0 100%; /* Full width on smaller screens */
-        max-width: 100%;
-    }
+
+.logo-img {
+    width: 160px;
+    height: auto;
+    margin-bottom: 15px;
+}
+.error-text {
+    color: red !important;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.footer-links {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
 }
 
-@media (min-width: 1024px) {
-    .logo-img {
-        width: 170px;
+@media (max-width: 768px) {
+    .right-section {
+      width: 100%;
+      justify-content: center;
     }
+    .login-box {
+      width: 95%;
+      max-width: 350px;
+    }
+    .logo-img {
+      width: 140px;
+    }
+    .col-md-5 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  .stacked-image {
+    max-width: 80%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}  
+.left-section {
+    background-color: #1F6281 !important;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 5px 0 8px -3px rgba(0, 0, 0, 0.2);  /* ✅ softer, lighter shadow */
 }
+
+
+.corner-image {
+    position: absolute;
+    z-index: 1;
+    width: 600px;
+    height: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+/* First left image */
+.top-left-1 {
+    top: 30px;
+    left: -150px;
+    transform: rotate(-25deg);
+}
+
+/* Second left image (slightly lower or offset) */
+.top-left-2 {
+    top: 500px;
+    left: 60px;
+    transform: rotate(-25deg);
+}
+
+/* First right image */
+.top-right-1 {
+    top: -440px;
+    right: 60px;
+    transform: rotate(-25deg);
+}
+
+/* Second right image (slightly lower or offset) */
+.top-right-2 {
+    top: 20px;
+    right: -150px;
+    transform: rotate(-25deg);
+}
+.top-right-3 {
+    top: 460px;
+    right: -360px;
+    transform: rotate(-25deg);
+}
+
+
+

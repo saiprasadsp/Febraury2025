@@ -1,0 +1,40 @@
+.terms-container {
+  background-color: #1F6281; 
+  color: white;             
+  padding: 20px;
+  min-height: 100vh;         
+}
+
+
+.action-buttons {
+  display: flex;
+ 
+  gap: 12px; /* This sets the space between the buttons */
+  margin-top: 24px; /* Optional: adds space above the buttons */
+}
+
+.accept-btn {
+  background-color: #1F6281 !important;
+  border-color: #1F6281 !important;
+  color: white !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.accept-btn:hover {
+  background-color: #155269 !important;
+  border-color: #155269 !important;
+}
+
+.decline-btn {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: white !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.decline-btn:hover {
+  background-color: #b02a37 !important;
+  border-color: #b02a37 !important;
+}

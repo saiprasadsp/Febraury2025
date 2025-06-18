@@ -1,38 +1,11 @@
-import React from 'react'
-import { Modal,Button } from "antd";
-import { useDispatch,useSelector } from "react-redux";
-import { useAccepTermsMutation, useLogoutMutation } from "../slices/usersApiSlice";
-import { setLogin, setLogout } from "../redux/authSlice";
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React from 'react';
 import "../styles/TermsAndConditions.css";
 
 
-
-export default function TermsConditions() {
-    const {userInfo} = useSelector(state=>state.auth)
-
-    const dispatch = useDispatch()
-    const [accepTerms] = useAccepTermsMutation()
-    const [logout] = useLogoutMutation();
-    const navigate = useNavigate();
-    const handleAccept =async()=>{
-        await accepTerms()
-        dispatch(setLogin({...userInfo,termsAccepted:true}))
-    }
-    const handleDecline=async () => {
-      try {
-            await logout().unwrap();
-            dispatch(setLogout());
-            navigate("/");
-          } catch (err) {
-            toast.error(err?.data?.message || err.error);
-            console.log(err);
-          }
-    }
+function TermsAndConditions() {
   return (
-    <Modal open={!userInfo.termsAccepted} footer={null} closable={false}>
-        <h1 className="mb-6">Terms and Conditions</h1>
+    <div className="terms-container p-4">
+      <h1 className="mb-4">Terms and Conditions</h1>
       <p>
         This document is an electronic record in terms of Information Technology Act, 2000 and rules
         thereunder as applicable and the amended provisions pertaining to electronic records in various
@@ -124,16 +97,8 @@ export default function TermsConditions() {
           For any questions or concerns relating to these Terms, please contact us via the contact information provided on the website.
         </li>
       </ul>
-      <div className="action-buttons">
-  <Button type="primary" className="accept-btn" onClick={handleAccept}>
-    Accept
-  </Button>
-  <Button type="primary" className="decline-btn" onClick={handleDecline}>
-    Decline
-  </Button>
-</div>
-
-
-    </Modal>
-  )
+    </div>
+  );
 }
+
+export default TermsAndConditions;
