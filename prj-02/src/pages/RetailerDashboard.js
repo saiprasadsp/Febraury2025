@@ -37,7 +37,9 @@ export default function RetailerDashboard() {
                 Get Paid
               </button>
 
-              <button className="btn small-rounded-button btn-sm px-3">
+              <button className="btn small-rounded-button btn-sm px-3"
+              onClick={() => navigate('/dashboard/banktransfer')}>
+             
                 Settlement
               </button>
             </div>
@@ -79,7 +81,7 @@ export default function RetailerDashboard() {
             <h4>₹0.00</h4>
             <button
               className="btn btn-outline-primary btn-sm mt-2 px-3 shadow-button"
-              onClick={() => navigate('/dashboard/settlenow')}
+              onClick={() => navigate('/dashboard/banktransfer')}
             >
               Settle Now
             </button>
@@ -95,19 +97,19 @@ export default function RetailerDashboard() {
         </div>
 
         <div className="d-flex gap-3 flex-wrap justify-content-start">
-          <button className="btn btn-outline-primary service-button">
+          <button className="btn btn-outline-primary service-button" onClick={() => navigate('/dashboard/reports/comingsoon')}>
             <img src={Wifi} alt="Wifi" className="service-icon-viewmore" />
             Wifi
           </button>
-          <button className="btn btn-outline-primary service-button"  onClick={() => navigate('/dashboard/payments')}>
+          <button className="btn btn-outline-primary service-button"  onClick={() => navigate('/dashboard/reports/payments')}>
             <img src={CCPayments} alt="CC Payments" className="service-icon-colored" />
             Credit Card
           </button>
-          <button className="btn btn-outline-primary service-button">
+          <button className="btn btn-outline-primary service-button" onClick={() => navigate('/dashboard/reports/comingsoon')}>
             <img src={Recharge} alt="Recharge" className="service-icon-colored" />
             Recharge
           </button>
-          <button className="btn btn-outline-primary service-button">
+          <button className="btn btn-outline-primary service-button" onClick={() => navigate('/dashboard/reports/comingsoon')}>
             <img src={Viewmore} alt="View More" className="service-icon-viewmore" />
             View more
           </button>

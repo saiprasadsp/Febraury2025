@@ -38,6 +38,10 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import RefundPolicy from './pages/RefundPolicy';
 import PaymentStatus from "./pages/PaymentStatus";
 import ContactUs from "./pages/Webpages/ContactUs";
+import AddCreditCard from "./pages/AddCreditCard";
+import ComingSoon from "./pages/ComingSoon";
+
+
 
 
 const RequireAuth = ({ children }) => {
@@ -79,9 +83,10 @@ function App() {
         <Route path="payments" element={<Payments/>}/>
         <Route path="passbook" element={<PassBook/>}/>
         <Route path="addnewbankaccount" element={<AddNewBankAccount/>}/>
+        <Route path="addcreditcard" element={<AddCreditCard/>} />
+        <Route path="comingsoon" element={<ComingSoon/>} />
+        
         </Route>
-    
-
 
 
         <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Settings /></ProtectedRoute>} />
@@ -91,6 +96,8 @@ function App() {
         <Route path="banktransfer" element={<ProtectedRoute allowedRoles={["retailer"]}><BankTransfer/></ProtectedRoute>} />
         <Route path="addnewbankaccount" element={<ProtectedRoute allowedRoles={["retailer"]}><AddNewBankAccount/></ProtectedRoute>} />
         <Route path="payments" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
+        <Route path="addcreditcard" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
+        <Route path="comingsoon" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer"]}><PaymentStatus/></ProtectedRoute>} />
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
@@ -99,6 +106,7 @@ function App() {
       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       <Route path="/refundpolicy" element={<RefundPolicy />} />
       <Route path="/contactus" element={<ContactUs/>} />
+     
 
     </Routes>
 
