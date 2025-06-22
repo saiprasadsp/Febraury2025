@@ -40,6 +40,7 @@ import PaymentStatus from "./pages/PaymentStatus";
 import ContactUs from "./pages/Webpages/ContactUs";
 import AddCreditCard from "./pages/AddCreditCard";
 import ComingSoon from "./pages/ComingSoon";
+import TransactionHistory from "./pages/TransactionHistory";
 
 
 
@@ -85,6 +86,7 @@ function App() {
         <Route path="addnewbankaccount" element={<AddNewBankAccount/>}/>
         <Route path="addcreditcard" element={<AddCreditCard/>} />
         <Route path="comingsoon" element={<ComingSoon/>} />
+        <Route path="TransactionHistory" element={<TransactionHistory/>} />
         
         </Route>
 
@@ -98,6 +100,7 @@ function App() {
         <Route path="payments" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="addcreditcard" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="comingsoon" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
+        <Route path="transactionhistory" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer"]}><PaymentStatus/></ProtectedRoute>} />
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
