@@ -1,0 +1,72 @@
+.bank-item {
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bank-item:hover {
+  background-color: #1F6281;
+  color: white;
+}
+.add-credit-card-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between fields */
+}
+
+.add-credit-card-container h4 {
+  font-weight: 600;
+  color: #1F6281;
+  margin-bottom: 10px;
+}
+
+.add-credit-card-container .form-label {
+  font-weight: 500;
+  color: #333333;
+}
+
+.add-credit-card-container .form-control,
+.add-credit-card-container .form-select {
+  border-radius: 8px;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  transition: border-color 0.3s;
+}
+
+.add-credit-card-container .form-control:focus,
+.add-credit-card-container .form-select:focus {
+  border-color: #1F6281;
+  box-shadow: 0 0 4px rgba(31, 98, 129, 0.3);
+}
+
+.add-credit-card-container .btn-primary {
+  background-color: #1F6281;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  font-weight: 500;
+  align-self: center; /* Keep button centered inside box */
+  width: 60%; /* Optional: control button width */
+}
+
+.add-credit-card-container .btn-primary:hover {
+  background-color: #11719e;
+}
+.centered-block-button {
+  display: block; 
+  width: 200px;
+  margin: 20px auto;
+
+}

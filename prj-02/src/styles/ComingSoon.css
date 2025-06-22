@@ -1,0 +1,27 @@
+.coming-soon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: #f9f9f9;
+}
+
+.coming-soon-box {
+  text-align: center;
+  padding: 40px 60px;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.coming-soon-box h1 {
+  font-size: 42px;
+  color: #1F6281;
+  margin-bottom: 20px;
+}
+
+.coming-soon-box p {
+  font-size: 18px;
+  color: #555;
+}

@@ -4,13 +4,19 @@
     "icon": "AiOutlineUser",
     "label": "Dashboard",
     "path": "/dashboard",
-    "roles":["superadmin","distributor","retailer"]
+    "roles": [
+      "superadmin",
+      "distributor",
+      "retailer"
+    ]
   },
   {
     "key": 2,
     "icon": "AiOutlineVideoCamera",
     "label": "Distributors",
-    "roles":["superadmin"],
+    "roles": [
+      "superadmin"
+    ],
     "children": [
       {
         "key": 2,
@@ -31,14 +37,15 @@
         "path": "/dashboard/distributor/distributormargin"
       }
     ]
-
   },
   {
     "key": 3,
     "icon": "AiOutlineUpload",
     "label": "Retailers",
-    "roles":["superadmin","distributor"],
-
+    "roles": [
+      "superadmin",
+      "distributor"
+    ],
     "children": [
       {
         "key": 3,
@@ -59,93 +66,111 @@
         "path": "/dashboard/retailer/retailerMargin"
       }
     ]
-
   },
   {
     "key": 4,
     "icon": "AiOutlineUpload",
     "label": "Today Transactions",
     "path": "/dashboard/transactions",
-    "roles":["superadmin"]
-
+    "roles": [
+      "superadmin"
+    ]
   },
   {
     "key": 5,
     "icon": "AiOutlineUpload",
     "label": "Margin",
     "path": "/dashboard/margin",
-    "roles":["superadmin"]
-
+    "roles": [
+      "superadmin"
+    ]
   },
   {
     "key": 6,
     "icon": "AiOutlineUpload",
     "label": "KYC Approval",
     "path": "/dashboard/approval",
-    "roles":["superadmin"]
-
+    "roles": [
+      "superadmin"
+    ]
   },
   {
     "key": 7,
     "icon": "AiOutlineSetting",
     "label": "Settings",
     "path": "/dashboard/settings",
-    "roles":["superadmin","distributor"]
-
+    "roles": [
+      "superadmin",
+      "distributor"
+    ]
   },
   {
     "key": 8,
     "icon": "FaWallet",
     "label": "Add Balance",
     "path": "/dashboard/addbalance",
-    "roles": ["retailer"]
-  },  
+    "roles": [
+      "retailer"
+    ]
+  },
   {
     "key": 11,
     "icon": "FaUniversity",
     "label": "Settlenents",
     "path": "/dashboard/banktransfer",
-    "roles": ["retailer"]
+    "roles": [
+      "retailer"
+    ]
   },
-  
   {
     "key": 10,
     "icon": "FaCreditCard",
     "label": "Bill Payments",
     "path": "/dashboard/payments",
-    "roles": ["retailer"]
-  },  
+    "roles": [
+      "retailer"
+    ],
+    "children": [
+      {
+        "key": 12,
+        "icon": "AiOutlineBook",
+        "label": "Credit Card",
+        "path": "/dashboard/reports/payments"
+      },
+      {
+        "key": 10,
+        "icon": "AiOutlineSetting",
+        "label": "Wifi",
+        "path": "/dashboard/reports/comingsoon"
+      },
+      {
+        "key": 12,
+        "icon": "AiOutlineBook",
+        "label": "Mobile",
+        "path": "/dashboard/reports/comingsoon"
+      }
+    ]
+  },
   {
     "key": 13,
     "icon": "AiOutlineSetting",
     "label": "Reports",
-    "roles":["retailer"],
-    "children":[{
-      "key":10,
-      "icon":"AiOutlineSetting",
-      "label":"Add Balance",
-      "path":"/dashboard/reports"
-    },
-    {
-      "key":11,
-      "icon":"AiOutlineSetting",
-      "label":"Bank Transfer",
-      "path":"/dashboard/reports/banktransfer"
-    },
-    {
-      "key":10,
-      "icon":"AiOutlineSetting",
-      "label":"CC Bill Payments",
-      "path":"/dashboard/reports/payments"
-    },
-    {
-  "key": 12,
-  "icon": "AiOutlineBook",
-  "label": "PassBook",
-  "path": "/dashboard/reports/passbook"
-}
-
-  ]
-
+    "roles": [
+      "retailer"
+    ],
+    "children": [
+      {
+        "key": 10,
+        "icon": "AiOutlineSetting",
+        "label": "Tranaction Reports",
+        "path": "/dashboard/reports/payments"
+      },
+      {
+        "key": 12,
+        "icon": "AiOutlineBook",
+        "label": "PassBook",
+        "path": "/dashboard/reports/passbook"
+      }
+    ]
   }
 ]

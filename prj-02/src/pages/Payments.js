@@ -76,11 +76,10 @@ export default function Payments() {
       return (
         <div>
           <div style={{ marginBottom: '16px' }}>
-            <Link to="../addnewbankaccount">
+            <Link to="../addcreditcard">
               <button type="button" className="btn btn-warning">Add New Card</button>
             </Link>
-          </div>
-          
+          </div>  
           <Table columns={columns} onChange={onChange} dataSource={data} />
         </div>
       );
