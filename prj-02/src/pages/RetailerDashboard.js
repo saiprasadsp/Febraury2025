@@ -60,7 +60,7 @@ export default function RetailerDashboard() {
             <h4>₹0.00</h4>
             <button
               className="btn btn-outline-primary btn-sm mt-2 px-3 shadow-button"
-              onClick={() => navigate('/dashboard/revenuehistory')}
+              onClick={() => navigate('/dashboard/reports/transactionhistory')}
             >
               Go to History
             </button>

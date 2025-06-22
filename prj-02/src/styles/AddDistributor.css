@@ -101,6 +101,17 @@
   .btn-update-all:focus {
     outline: none; /* Remove focus outline */
   }
+  .search-button {
+    background-color: #1F6281;  /* Green color */
+    border-color: #1F6281;
+    color: #fff;
+    font-weight: 600;
+    padding: 6px 20px;
+    border-radius: 6px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
 
+  
   
 

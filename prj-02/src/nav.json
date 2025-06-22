@@ -162,8 +162,8 @@
       {
         "key": 10,
         "icon": "AiOutlineSetting",
-        "label": "Tranaction Reports",
-        "path": "/dashboard/reports/payments"
+        "label": "Tranaction History",
+        "path": "/dashboard/reports/transactionhistory"
       },
       {
         "key": 12,
