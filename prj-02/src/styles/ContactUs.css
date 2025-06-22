@@ -1,0 +1,112 @@
+.contact-page-container {
+    background: #0d0d1a;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #fff;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .contact-page-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .contact-page-subtitle {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #ccc;
+  }
+  
+  .contact-page-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #12122a;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    flex-wrap: wrap;
+  }
+  
+  .contact-page-form-section {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .contact-page-form-section h2 {
+    margin-bottom: 10px;
+  }
+  
+  .contact-page-form-section p {
+    margin-bottom: 20px;
+    color: #aaa;
+  }
+  
+  .contact-page-input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-page-form-section input,
+  .contact-page-form-section textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #1f1f3b;
+    border: none;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .contact-page-form-section textarea {
+    min-height: 100px;
+  }
+  
+  .contact-page-submit-button {
+    background-color: #3498db;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .contact-page-submit-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .contact-page-image-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .contact-page-image-section img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-page-box {
+      flex-direction: column;
+    }
+  
+    .contact-page-title {
+      font-size: 36px;
+    }
+  
+    .contact-page-subtitle {
+      font-size: 16px;
+    }
+  }
+  

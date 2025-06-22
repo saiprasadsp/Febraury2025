@@ -37,6 +37,9 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import RefundPolicy from './pages/RefundPolicy';
 import PaymentStatus from "./pages/PaymentStatus";
+import ContactUs from "./pages/Webpages/ContactUs";
+
+
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -95,6 +98,7 @@ function App() {
       <Route path="/terms" element={<TermsAndConditions />} />
       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       <Route path="/refundpolicy" element={<RefundPolicy />} />
+      <Route path="/contactus" element={<ContactUs/>} />
 
     </Routes>
 
