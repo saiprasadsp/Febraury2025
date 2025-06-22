@@ -103,7 +103,7 @@
   {
     "key": 11,
     "icon": "FaUniversity",
-    "label": "Bank Transfer",
+    "label": "Settlenents",
     "path": "/dashboard/banktransfer",
     "roles": ["retailer"]
   },
@@ -111,7 +111,7 @@
   {
     "key": 10,
     "icon": "FaCreditCard",
-    "label": "CC Bill Payments",
+    "label": "Bill Payments",
     "path": "/dashboard/payments",
     "roles": ["retailer"]
   },  
