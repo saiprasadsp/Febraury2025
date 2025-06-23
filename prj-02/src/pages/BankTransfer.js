@@ -61,17 +61,18 @@ export default function BankTransfer() {
           title: 'IFSC Code',
           dataIndex: 'Ifsc',
           width: "18%",
-        },        
+        },   
+        {
+          title: 'Mobile Number',
+          dataIndex: 'mobilenumber',
+          width: "15%",
+      },     
         {
           title: "Transfer",
           dataIndex: "transfer", 
           width: "15%",
         },
-        {
-          title: 'Action',
-          dataIndex: 'Delee',
-          width: "15%",
-      },
+       
       ];
       return (
         <div>

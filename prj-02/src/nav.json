@@ -126,13 +126,13 @@
     "key": 10,
     "icon": "FaCreditCard",
     "label": "Bill Payments",
-    "path": "/dashboard/payments",
+    "path": "/dashboard/reports",
     "roles": [
       "retailer"
     ],
     "children": [
       {
-        "key": 12,
+        "key": 13,
         "icon": "AiOutlineBook",
         "label": "Credit Card",
         "path": "/dashboard/reports/payments"
@@ -141,7 +141,7 @@
         "key": 10,
         "icon": "AiOutlineSetting",
         "label": "Wifi",
-        "path": "/dashboard/reports/comingsoon"
+        "path": "/dashboard/reports/wifi/comingsoon"
       },
       {
         "key": 12,
