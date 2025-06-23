@@ -61,17 +61,18 @@ export default function Payments() {
           title: 'Bank Name',
           dataIndex: 'bank name',
           width: "18%",
-        },        
+        },    
+        {
+          title: 'Mobile Number',
+          dataIndex: 'mobilenumber',
+          width: "15%",
+      },    
         {
           title: "Pay Bill",
           dataIndex: "pay bill", 
           width: "15%",
         },
-        {
-          title: 'Action',
-          dataIndex: 'Delee',
-          width: "15%",
-      },
+       
       ];
       return (
         <div>
