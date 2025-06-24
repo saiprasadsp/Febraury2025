@@ -107,12 +107,11 @@ function Login() {
             </p>
           </div>
         </div>
-
         <div className="footer-links text-center">
           <small>
             For more information{" "}
             <Link to="/terms" className="text-primary text-decoration-underline">T&C</Link> and{" "}
-            <Link to="/privacypolicy" className="text-primary text-decoration-underline">Privacy Policies</Link>.
+            <Link to="/privacypolicy" className="text-primary text-decoration-underline">Privacy Policies</Link>.and{" "}
           </small>
         </div>
       </div>
