@@ -1,0 +1,258 @@
+/* Base Header */
+.header {
+  background-color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1000;
+  flex-wrap: nowrap;
+}
+
+/* Logo */
+.logo {
+  height: 60px;
+}
+
+/* Center Links */
+.header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.header-center a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.header-center a:hover {
+  color: #1F6281;
+}
+
+.header-center .dot {
+  color: #000000;
+  font-size: 18px;
+}
+
+/* Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Login Button */
+.login-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 8px 20px;
+  border: 2px solid #1F6281;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.login-link:hover {
+  background-color: #1F6281;
+  color: white;
+}
+
+/* Hamburger Icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 4px 0;
+  transition: 0.4s;
+  border-radius: 2px;
+}
+
+/* Mobile Menu */
+.mobile-menu-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 80px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobile-menu-container.open {
+  transform: translateX(0);
+  display: flex;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  z-index: 1002;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
+  width: 80%;
+  max-width: 300px;
+}
+
+.mobile-nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 15px 0;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-nav-links a:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav-links a:hover {
+  color: #1F6281;
+}
+.mobile-nav-links a {
+  text-align: left; /* Make text align left */
+  padding-left: 10px; /* Add some left padding for spacing */
+}
+/* Page Title Section */
+.page-title {
+  text-align: center;
+  margin-top: 40px;
+  padding: 0 20px;
+}
+
+.page-title h1 {
+  font-size: 62px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.main-get-started-btn {
+  padding: 12px 30px;
+  font-size: 16px;
+  background-color: #1F6281;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.main-get-started-btn:hover {
+  background-color: #11719e;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Image Gallery */
+.image-gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.gallery-image {
+  width: 100%;
+  max-width: 1500px;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 20px;
+  }
+
+  .header-center, .login-link {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .login-link {
+    display: block;
+  }
+
+  .login-link {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+
+  .page-title h1 {
+    font-size: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 60px;
+  }
+
+  .header {
+    padding: 10px 15px;
+  }
+
+  .login-link {
+    padding: 8px 18px; 
+    font-size: 13px;   
+    border-radius: 7px; 
+  }
+
+  .page-title h1 {
+    font-size: 42px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .main-get-started-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+}

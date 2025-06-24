@@ -41,7 +41,8 @@ import ContactUs from "./pages/Webpages/ContactUs";
 import AddCreditCard from "./pages/AddCreditCard";
 import ComingSoon from "./pages/ComingSoon";
 import TransactionHistory from "./pages/TransactionHistory";
-
+import Footer from "./pages/Webpages/WebPageFooter";
+import HomePage from "./pages/Webpages/WebHomePage";
 
 
 
@@ -109,8 +110,10 @@ function App() {
       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       <Route path="/refundpolicy" element={<RefundPolicy />} />
       <Route path="/contactus" element={<ContactUs/>} />
+      <Route path="/footer" element={<Footer/>} />
+      <Route path="/home" element={<HomePage/>} />
      
-
+      
     </Routes>
 
   );

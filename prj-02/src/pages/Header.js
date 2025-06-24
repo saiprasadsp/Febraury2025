@@ -18,7 +18,7 @@ export default function Header() {
   try {
     await logout().unwrap()
     dispatch(setLogout())
-    navigate('/')
+    // navigate('/')
   } catch (err) {
     toast.error(err?.data?.message||err.error);
     

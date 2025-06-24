@@ -1,0 +1,188 @@
+.webpage-footer {
+    position: relative;
+    padding: 20px 10px 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #0A0F1F;
+    color: #E0E0E0;
+    overflow: hidden;
+}
+
+.webpage-footer-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.2;
+}
+
+.webpage-footer-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.webpage-footer-left {
+    flex: 1;
+    min-width: 250px;
+    margin-top: 40px;
+}
+
+.webpage-footer-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-width: 250px;
+}
+
+.webpage-footer-heading {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.webpage-footer-address,
+.webpage-footer-contact {
+    font-size: 0.95em;
+    color: #cccccc;
+    margin-bottom: 4px;
+}
+
+.webpage-footer-social-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 40px);
+    grid-template-rows: repeat(2, 40px);
+    gap: 15px;
+    margin-top: -50px;
+    margin-bottom: 10px;
+    margin-left: -10px; 
+}
+
+.webpage-footer-icon {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #E0E0E0;
+    font-size: 1.4em;
+    transition: all 0.3s ease;
+}
+
+.webpage-footer-icon:hover {
+    background-color: #007bff;
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+}
+
+.webpage-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.webpage-footer-arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent; /* Adjust size as needed */
+    border-right: 8px solid transparent; /* Adjust size as needed */
+    border-bottom: 12px solid #fff; /* Color and size of the arrow. Use your desired color. */
+    display: inline-block; /* Or block, depending on your layout */
+    /* Add margin/positioning if needed to center or place it */
+}
+
+/* You might also want to add some styling to the parent div for better clickability and appearance */
+.webpage-footer-scroll-top {
+    cursor: pointer;
+    /* Example: a background, padding, border-radius */
+    background-color: #555; /* Dark background for visibility */
+    padding: 10px;
+    border-radius: 50%; /* Makes it circular */
+    display: flex; /* To center the arrow */
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Example size */
+    height: 40px; /* Example size */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.webpage-footer-scroll-top:hover {
+    background-color: #777; /* Slightly lighter on hover */
+}
+
+.webpage-footer-bottom {
+    display: flex;
+    justify-content: space-between; /* Keeps elements spaced out on large screens */
+    align-items: center;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line on smaller screens */
+    padding-top: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.webpage-footer-copyright {
+    font-size: 0.85em;
+    color: #B0B0B0;
+    margin-bottom: 15px;
+    /* REMOVE THIS LINE: margin-left: -500px; */
+    flex-grow: 1; /* Allows it to take available space */
+    text-align: center; /* Default alignment */
+}
+
+/* Add or adjust your media query for smaller screens */
+@media (max-width: 768px) {
+    /* ... (your existing media query rules) ... */
+
+    .webpage-footer-bottom {
+        flex-direction: column; /* Stacks items vertically */
+        align-items: center; /* Centers items horizontally when stacked */
+        text-align: center; /* Centers text within items */
+        gap: 20px;
+        padding-top: 15px;
+    }
+
+    .webpage-footer-copyright {
+        /* On small screens, center the text */
+        text-align: center;
+        margin-bottom: 10px; /* Adjust margin if needed */
+        /* Ensure it takes full width for centering */
+        width: 100%;
+    }
+
+    .webpage-footer-scroll-top {
+        position: static;
+        margin-top: 20px;
+    }
+
+    /* You might also want to adjust social icons for smaller screens */
+    .webpage-footer-social-icons {
+        justify-content: center; /* Center icons on mobile */
+        margin-left: 0; /* Remove negative margin on mobile */
+    }
+    .webpage-footer-address {
+        font-size: 0.8em; /* Adjust this value as needed, e.g., 0.85em or 0.9em */
+    }
+
+    /* You might want to apply similar adjustment for contact info too if desired */
+    .webpage-footer-contact {
+        font-size: 0.8em; /* Optional: if you want to decrease contact font size too */
+    }
+}
