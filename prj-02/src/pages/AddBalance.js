@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, Button, Tag, Typography, Row, Col, Card } from 'antd';
 import "../styles/AddBalance.css";
 import { load } from "@cashfreepayments/cashfree-js";
-import { useCreateOrderMutation } from '../slices/usersApiSlice';
+import { useCreateOrderMutation,useCreateRazorOrderMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 const { Title, Paragraph } = Typography;
@@ -23,8 +23,6 @@ const formattedDate =(value)=>{
 
 export default function AddBalance() {
   const {userInfo} = useSelector((state)=>state.auth)
-  console.log(userInfo);
-  
   const [selectedPlan, setSelectedPlan] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
   const [isError, setIsError] = useState(false);
@@ -34,6 +32,8 @@ export default function AddBalance() {
   const [highlightPlanButtons, setHighlightPlanButtons] = useState(false);
   const [selectedPlanButton, setSelectedPlanButton] = useState('');
   const [createOrder]= useCreateOrderMutation()
+  const [createRazorOrder] = useCreateRazorOrderMutation()
+  
   let cashfree;
     var initializeSDK = async function () {          
         cashfree = await load({
@@ -41,6 +41,14 @@ export default function AddBalance() {
         });
     }
     initializeSDK();
+
+    useEffect(()=>{
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      document.body.appendChild(script);
+
+    },[])
   const handlePlanSelect = (plan) => {
     setSelectedPlan(plan);
     setSelectedPlanButton(plan);
@@ -84,25 +92,65 @@ export default function AddBalance() {
   };
 
     const handleAddBalance = async() => {
-      
+
       if (!selectedPlan) {
         setHighlightPlanButtons(true);
         return;
       }
-      try {
-        const res = await createOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,orderID:formattedDate(new Date())}).unwrap()
-        
-        let checkoutOptions={
-          paymentSessionId:res.Session_ID,
-          redirectTarget:'_self'
+      if (selectedPlan === 'Basic') {
+        try {
+          const res = await createOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,orderID:formattedDate(new Date())}).unwrap()
+          
+          let checkoutOptions={
+            paymentSessionId:res.Session_ID,
+            redirectTarget:'_self'
+          }
+          
+          cashfree.checkout(checkoutOptions)
+          
+        } catch (err) {
+          toast.error(err?.data?.message || "Failed to update status");
+          
         }
         
-        cashfree.checkout(checkoutOptions)
+      }else if(selectedPlan==='Standard'){
         
-      } catch (err) {
-        toast.error(err?.data?.message || "Failed to update status");
+        try {
+          const {data} = await createRazorOrder({amount:selectedAmount})
         
+        const options = {
+            key:process.env.REACT_APP_RAZOR_PAY,
+            amount:data.amount,
+            currency:data.currency,
+            name:'Quick Pay',
+            description:"Please make the payment",
+            order_id:data.orderid,
+            handler:function (response) {
+              console.log("step 10",response);
+              
+                // window.location.href=""
+            },
+            prefill:{
+                name:userInfo.id,
+                email:userInfo.email,
+                contact:userInfo.phone,
+    
+            },
+            theme:{
+                color:'#3399cc'
+            }
+        }
+        const rzp = new window.Razorpay(options)
+        rzp.open()
+        } catch (err) {
+          console.log(err);
+          toast.error(err?.data?.message || "Failed to update status")
+        }
+      }else{
+      console.log("Step 3",selectedPlan);
+      
       }
+      
 
     };
   
