@@ -6,6 +6,7 @@ const DISTRIBUTOR_LIST = `${process.env.REACT_APP_API}/distributor`
 const RETAILER_LIST = `${process.env.REACT_APP_API}/retailer`
 const DASHBOARD = `${process.env.REACT_APP_API}/dashboard`
 const PAYMENTS = `${process.env.REACT_APP_API}/payments`
+const RAZOR = `${process.env.REACT_APP_API}/razor`
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
@@ -168,9 +169,16 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method:'POST',
                 body:data
             })
+        }),
+        createRazorOrder:builder.mutation({
+            query:(data)=>({
+                url:`${RAZOR}`,
+                method:'POST',
+                body:data
+            })
         })
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation} = usersApiSlice
 
