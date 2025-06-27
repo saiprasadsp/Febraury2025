@@ -116,7 +116,7 @@ export default function AddBalance() {
       }else if(selectedPlan==='Standard'){
         
         try {
-          const {data} = await createRazorOrder({amount:selectedAmount})
+          const {data} = await createRazorOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id})
         
         const options = {
             key:process.env.REACT_APP_RAZOR_PAY,
@@ -124,7 +124,9 @@ export default function AddBalance() {
             currency:data.currency,
             name:'Quick Pay',
             description:"Please make the payment",
+            image:'',
             order_id:data.orderid,
+            callback_url:process.env.REACT_APP_CALL_BACK_URL,
             handler:function (response) {
               console.log("step 10",response);
               
