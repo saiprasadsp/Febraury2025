@@ -54,7 +54,7 @@ const RequireAuth = ({ children }) => {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<HomePage/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
 
@@ -111,7 +111,7 @@ function App() {
       <Route path="/refundpolicy" element={<RefundPolicy />} />
       <Route path="/contactus" element={<ContactUs/>} />
       <Route path="/footer" element={<Footer/>} />
-      <Route path="/home" element={<HomePage/>} />
+      {/* <Route path="/home" element={<HomePage/>} /> */}
      
       
     </Routes>
