@@ -17,16 +17,15 @@ export default function Profile() {
   const {userInfo} = useSelector((state)=>state.auth)
 
   useEffect(()=>{
-
-    if (userInfo && userInfo.id && userInfo.email) {
-      
+    console.log('step 1',userInfo);
+    
+    if (userInfo && userInfo.id && userInfo.email) {      
       setUserId((prevId)=>prevId !== userInfo.id ? userInfo.id:prevId)
-      setEmail((prevEmail)=>prevEmail !== userInfo.email ? userInfo.email:prevEmail)
-      
+      setEmail((prevEmail)=>prevEmail !== userInfo.email ? userInfo.email:prevEmail)      
     }
 
-  },[])
-
+  },[userInfo])
+  
   const submitHandler=async (e)=>{
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -69,7 +68,7 @@ export default function Profile() {
           </Form.Control>
         </Form.Group>
         <Form.Group className='my-2'>
-        <Button type='submit' variant='primary' className=' mt-3 wt-50' size='sm'>Update</Button>
+        <Button type='submit' variant='primary' className='mt-3 wt-50' size='sm'>Update</Button>
 
         </Form.Group>
       </Form>

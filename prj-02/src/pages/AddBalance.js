@@ -16,7 +16,7 @@ const formattedDate =(value)=>{
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
   const seconds = String(date.getSeconds()).padStart(2, '0');
-  const randomSixDigit = Math.floor(100000 + Math.random() * 900000); 
+  const randomSixDigit = Math.floor(100000 + Math.random() * 900000);
 
   return `TheQuickPay_${year}_${month}_${day}_${randomSixDigit}`;
 }
@@ -33,9 +33,9 @@ export default function AddBalance() {
   const [selectedPlanButton, setSelectedPlanButton] = useState('');
   const [createOrder]= useCreateOrderMutation()
   const [createRazorOrder] = useCreateRazorOrderMutation()
-  
+
   let cashfree;
-    var initializeSDK = async function () {          
+    var initializeSDK = async function () {
         cashfree = await load({
             mode: "sandbox"
         });
@@ -82,11 +82,11 @@ export default function AddBalance() {
     } else {
       setReferenceAmounts([]);
     }
-    setSelectedAmount(null); 
+    setSelectedAmount(null);
   };
 
   const handleReferenceClick = (val) => {
-    
+
     setSelectedAmount(val);
 
   };
@@ -99,25 +99,25 @@ export default function AddBalance() {
       }
       if (selectedPlan === 'Basic') {
         try {
-          const res = await createOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,orderID:formattedDate(new Date())}).unwrap()
-          
+          const res = await createOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,charges:process.env.REACT_APP_INCOME,orderID:formattedDate(new Date())}).unwrap()
+
           let checkoutOptions={
             paymentSessionId:res.Session_ID,
             redirectTarget:'_self'
           }
-          
+
           cashfree.checkout(checkoutOptions)
-          
+
         } catch (err) {
           toast.error(err?.data?.message || "Failed to update status");
-          
+
         }
-        
+
       }else if(selectedPlan==='Standard'){
-        
+
         try {
-          const {data} = await createRazorOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id})
-        
+          const {data} = await createRazorOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,charges:process.env.REACT_APP_INCOME})
+
         const options = {
             key:process.env.REACT_APP_RAZOR_PAY,
             amount:data.amount,
@@ -129,14 +129,14 @@ export default function AddBalance() {
             callback_url:process.env.REACT_APP_CALL_BACK_URL,
             handler:function (response) {
               console.log("step 10",response);
-              
+
                 // window.location.href=""
             },
             prefill:{
                 name:userInfo.id,
                 email:userInfo.email,
                 contact:userInfo.phone,
-    
+
             },
             theme:{
                 color:'#3399cc'
@@ -150,12 +150,12 @@ export default function AddBalance() {
         }
       }else{
       console.log("Step 3",selectedPlan);
-      
+
       }
-      
+
 
     };
-  
+
 
   // const doPayment = async()=>{
   //   let checkoutOptions={
@@ -172,21 +172,21 @@ export default function AddBalance() {
 
           <div className="plan-buttons">
             <Button
-              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''} 
+              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
                           ${selectedPlanButton === 'Basic' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Basic')}
             >
               Basic
             </Button>
             <Button
-              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''} 
+              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
                           ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Standard')}
             >
               Standard
             </Button>
             <Button
-              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''} 
+              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
                           ${selectedPlanButton === 'Premium' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Premium')}
             >
