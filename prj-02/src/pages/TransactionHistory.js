@@ -1,7 +1,7 @@
 import { Table, Button, DatePicker, Space, Input } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { useGetDistributorMutation } from '../slices/usersApiSlice';
+import { useOrderHistoryMutation } from '../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import '../styles/GetDistributor.css'
@@ -12,24 +12,26 @@ export default function TransactionHistory() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [dates, setDates] = useState([]);
-    
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state.auth);
-    const [getDistributor, { isLoading }] = useGetDistributorMutation();
+    const [orderHistory, { isLoading }] = useOrderHistoryMutation();
 
     useEffect(() => {
         const fetchDistributor = async () => {
             try {
-                const res = await getDistributor().unwrap();
+                const res = await orderHistory({userId:userInfo.id}).unwrap();
+                console.log("step 10",res);
+
                 const formattedData = res.map((item, index) => ({
                     key: index,
                     sno: index + 1,
-                    Date: item.date,
-                    transactionid: item.transactionid,
-                    amount: item.amount,
-                    charges: item.charges,
-                    creditamount: item.creditamount,
+                    Date: item.created_timestamp,
+                    transactionid: item.order_id,
+                    amount: item.order_amount,
+                    charges: item.order_charges,
+                    creditamount: item.order_credited_amount,
                     status: item.status
                 }));
                 setData(formattedData);
@@ -67,14 +69,14 @@ export default function TransactionHistory() {
     return (
         <div>
             <div style={{ marginBottom: '16px', display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <RangePicker 
+                <RangePicker
                     onChange={(values) => {
                         if (values) {
                             setDates([values[0].toDate(), values[1].toDate()]);
                         } else {
                             setDates([]);
                         }
-                    }} 
+                    }}
                 />
                 <Button className="search-button" onClick={handleSearch}>Search</Button>
             </div>
