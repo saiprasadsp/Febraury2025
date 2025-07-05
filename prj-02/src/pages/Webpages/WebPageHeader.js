@@ -14,11 +14,13 @@ function TermsAndConditions() {
         </div>
 
         <div className="header-center">
-          <a href="/products">Products</a>
+          <a href="/">Home</a>
           <span className="dot">·</span>
-          <a href="/solutions">Solutions</a>
+          <a href="/solutions">About Us</a>
           <span className="dot">·</span>
-          <a href="/pricing">Pricing</a>
+          <a href="/pricing">How It Works</a>
+          <span className="dot">·</span>
+          <a href="/pricing">Feature</a>
           <span className="dot">·</span>
           <a href="/contactus">Contact Us</a>
         </div>
