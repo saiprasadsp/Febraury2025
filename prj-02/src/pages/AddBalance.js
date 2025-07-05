@@ -56,15 +56,15 @@ export default function AddBalance() {
 
     switch (plan) {
       case 'Basic':
-        setInfoMsg('Works for normal cards - 1.25%');
+        // setInfoMsg('Works for normal cards - 1.25%');
         setIsError(false);
         break;
       case 'Standard':
-        setInfoMsg('Works for all cards except HDFC - 1.65%');
+        // setInfoMsg('Works for all cards except HDFC - 1.65%');
         setIsError(false);
         break;
       case 'Premium':
-        setInfoMsg('Works for all cards including HDFC - 1.7%');
+        // setInfoMsg('Works for all cards including HDFC - 1.7%');
         setIsError(true);
         break;
       default:

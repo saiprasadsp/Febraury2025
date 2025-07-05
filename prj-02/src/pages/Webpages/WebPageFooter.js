@@ -4,57 +4,45 @@ import footerBg from '../../assets/WebPage/Footer.png';
 
 const WebpageFooter = () => {
     const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
         <div className="webpage-footer">
             <img src={footerBg} alt="Footer Background" className="webpage-footer-background" />
 
-            <div className="webpage-footer-content">
-                <div className="webpage-footer-left">
-                    <h5 className="webpage-footer-heading">
-                        <a href="/terms" style={{ color: 'inherit', textDecoration: 'none' }}>
-                            Terms and Conditions
-                        </a>
-                    </h5>
-                    <h5 className="webpage-footer-heading"><a href="/privacypolicy" style={{ color: 'inherit', textDecoration: 'none' }}>
-                        Privacy Policy
-                    </a></h5>
-                    <h5 className="webpage-footer-heading">
-                    <a href="/refundpolicy" style={{ color: 'inherit', textDecoration: 'none' }}>
-                    Refund Policy
-                        </a> 
-                        </h5>
-                    <h5 className="webpage-footer-heading">
-                    <a href="/contactus" style={{ color: 'inherit', textDecoration: 'none' }}>
-                    Contact Us
-                        </a> 
-                        
-                       </h5>
+            <div className="webpage-footer-content updated-footer-layout">
+                {/* Quick Links */}
+                <div className="footer-section">
+                    <h5 className="webpage-footer-heading">Quick Links</h5>
+                    <p><a href="/" className="footer-link">Home</a></p>
+                    <p><a href="/aboutus" className="footer-link">About Us</a></p>
+                    <p><a href="/how-it-works" className="footer-link">How it works</a></p>
+                    <p><a href="/features" className="footer-link">Features</a></p>
+                    <p><a href="/contactus" className="footer-link">Contact Us</a></p>
                 </div>
 
-                <div className="webpage-footer-right">
-                    <div>
-                        <h4 className="webpage-footer-heading">Location</h4>
-                        <p className="webpage-footer-address">NEOFIN NEX INDIA PRIVATE LIMITED</p>
-                        <p className="webpage-footer-address">8-2-21/A/2 ,FLAT NO 101, SRINAGAR COLONY Main Road,</p>
-                        <p className="webpage-footer-address">I.M.Colony Khairatabad,</p>
-                        <p className="webpage-footer-address">Hyderabad- 500082</p>
-                    </div>
+                {/* Legal */}
+                <div className="footer-section">
+                    <h5 className="webpage-footer-heading">Legal</h5>
+                    <p><a href="/terms" className="footer-link">Terms & Conditions</a></p>
+                    <p><a href="/privacypolicy" className="footer-link">Privacy Policy</a></p>
+                    <p><a href="/refundpolicy" className="footer-link">Refund Policy</a></p>
+                </div>
 
-                    <div>
-                        <h4 className="webpage-footer-heading">Contact Us</h4>
-                        <p className="webpage-footer-contact">+91 8143 900 450</p>
-                        <p className="webpage-footer-contact">hello@neofinnex.com</p>
-                    </div>
+                {/* Location */}
+                <div className="footer-section">
+                    <h5 className="webpage-footer-heading">Location</h5>
+                    <p className="webpage-footer-address">NEOFIN NEX INDIA PRIVATE LIMITED</p>
+                    <p className="webpage-footer-address">8-2-21/A/2, FLAT NO 101, SRINAGAR COLONY Main Road,</p>
+                    <p className="webpage-footer-address">I.M.Colony, Khairatabad, Hyderabad - 500082</p>
+                    <p className="webpage-footer-contact">+91 8143 900 450</p>
+                    <p className="webpage-footer-contact">hello@neofinnex.com</p>
                 </div>
             </div>
 
-            <div className="webpage-footer-bottom">
+            {/* Bottom Section: Social & Copyright */}
+            <div className="webpage-footer-bottom centered-footer-bottom">
                 <div className="webpage-footer-social-icons">
                     <div className="webpage-footer-icon"><i className="fab fa-linkedin-in"></i></div>
                     <div className="webpage-footer-icon"><i className="fab fa-facebook-f"></i></div>
@@ -63,14 +51,16 @@ const WebpageFooter = () => {
                 </div>
 
                 <p className="webpage-footer-copyright">
-                    Copyright © {new Date().getFullYear()}, Neofin Nex India Private Limited. All Rights Reserved.
+                    © {new Date().getFullYear()} Neofin Nex India Private Limited. All rights reserved.
                 </p>
 
                 <div className="webpage-footer-scroll-top" onClick={scrollToTop}>
-                    {/* Changed this line */}
                     <i className="fas fa-arrow-up"></i>
                 </div>
             </div>
+
+
+
         </div>
     );
 };
