@@ -132,6 +132,7 @@ input {
 }
 
 
+/* General styles for corner images */
 .corner-image {
     position: absolute;
     z-index: 1;
@@ -141,6 +142,13 @@ input {
     border-radius: 10px;
 }
 
+/* General styles for all images */
+.left-section img, .right-section img {
+    max-width: 100%; /* Ensure images scale within their container */
+    height: auto; /* Maintain aspect ratio */
+    position: absolute; /* Keep the images positioned */
+}
+
 /* First left image */
 .top-left-1 {
     top: 30px;
@@ -148,7 +156,7 @@ input {
     transform: rotate(-25deg);
 }
 
-/* Second left image (slightly lower or offset) */
+/* Second left image */
 .top-left-2 {
     top: 500px;
     left: 60px;
@@ -162,17 +170,47 @@ input {
     transform: rotate(-25deg);
 }
 
-/* Second right image (slightly lower or offset) */
+/* Second right image */
 .top-right-2 {
     top: 20px;
     right: -150px;
     transform: rotate(-25deg);
 }
+
+/* Third right image */
 .top-right-3 {
     top: 460px;
     right: -360px;
     transform: rotate(-25deg);
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .top-left-1, .top-left-2, .top-right-1, .top-right-2 {
+        width: 90%; /* Scale down the images for smaller screens */
+        left: 0; /* Reset left positioning */
+        right: 0; /* Reset right positioning */
+        top: auto; /* Reset top positioning */
+        transform: none; /* Remove rotation for better readability */
+        margin: 10px auto; /* Center images */
+        position: relative; /* Allow images to flow naturally */
+    }
 
+    /* Exclude .top-right-3 from resetting its position */
+    .top-right-3 {
+        width: 90%; /* Scale down the image for smaller screens */
+        margin: 10px auto; /* Center the image horizontally */
+        position: absolute; /* Retain absolute positioning */
+        top: 460px; /* Keep its original top position */
+        right: -360px; /* Keep its original right position */
+        transform: rotate(-25deg); /* Retain rotation */
+    }
+
+    .left-section, .right-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Stack images vertically */
+    }
+}
 
