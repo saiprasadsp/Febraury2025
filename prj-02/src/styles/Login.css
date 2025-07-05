@@ -143,7 +143,7 @@ input {
 }
 
 /* General styles for all images */
-.left-section img, .right-section img {
+.left-section img {
     max-width: 100%; /* Ensure images scale within their container */
     height: auto; /* Maintain aspect ratio */
     position: absolute; /* Keep the images positioned */
@@ -206,7 +206,7 @@ input {
         transform: rotate(-25deg); /* Retain rotation */
     }
 
-    .left-section, .right-section {
+    .left-section {
         display: flex;
         justify-content: center;
         align-items: center;
