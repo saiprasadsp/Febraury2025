@@ -67,14 +67,11 @@
 }
 
 .retailer-dashboard-container .service-icon-viewmore {
-  width: 30px;
-  height: 30px;
-  transition: filter 0.3s ease;
+  width: 150px;
+  height:150px;
+  /* transition: filter 0.3s ease; */
 }
 
-.retailer-dashboard-container .service-icon-viewmore:hover {
-  filter: brightness(0) invert(1);
-}
 
 
 
