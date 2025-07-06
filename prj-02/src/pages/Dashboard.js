@@ -178,6 +178,9 @@ export default function Dashboard() {
           </Content>
         </Layout>
       </Layout>
+      <div className="retailer-footer">
+        All rights reserved © 2025 NeoFin Nex India Pvt Ltd
+      </div>
     </div>
   );
 }

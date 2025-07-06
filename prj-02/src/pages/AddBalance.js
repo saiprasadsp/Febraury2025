@@ -168,7 +168,7 @@ export default function AddBalance() {
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={24} sm={20} md={16} lg={12}>
         <Card className="inner-card">
-          <Title level={4}>Add Balance</Title>
+          <Title level={4}>Get Payment</Title>
 
           <div className="plan-buttons">
             <Button
@@ -176,21 +176,21 @@ export default function AddBalance() {
                           ${selectedPlanButton === 'Basic' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Basic')}
             >
-              Basic
+              Service1
             </Button>
             <Button
               className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
                           ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Standard')}
             >
-              Standard
+              Service2
             </Button>
             <Button
               className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
                           ${selectedPlanButton === 'Premium' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Premium')}
             >
-              Premium
+              Service3
             </Button>
           </div>
 
@@ -229,7 +229,7 @@ export default function AddBalance() {
             disabled={!selectedAmount}
             onClick={handleAddBalance}
           >
-            Add Balance
+            Get Paymnet
           </Button>
         </Card>
       </Col>
