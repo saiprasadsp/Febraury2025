@@ -43,6 +43,9 @@ import ComingSoon from "./pages/ComingSoon";
 import TransactionHistory from "./pages/TransactionHistory";
 import Footer from "./pages/Webpages/WebPageFooter";
 import HomePage from "./pages/Webpages/WebHomePage";
+import BillPayments from "./pages/BillPayments";
+
+
 
 
 
@@ -88,7 +91,6 @@ function App() {
         <Route path="addcreditcard" element={<AddCreditCard/>} />
         <Route path="comingsoon" element={<ComingSoon/>} />
         <Route path="TransactionHistory" element={<TransactionHistory/>} />
-        
         </Route>
 
 
@@ -103,6 +105,7 @@ function App() {
         <Route path="comingsoon" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="transactionhistory" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer"]}><PaymentStatus/></ProtectedRoute>} />
+        <Route path="billpayments" element={<ProtectedRoute allowedRoles={["retailer"]}><BillPayments/></ProtectedRoute>} />
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
       <Route path="/user" element={<ProtectedRoute allowedRoles={["distributor"]} ><Userpage /></ProtectedRoute>} />

@@ -142,7 +142,7 @@ export default function Dashboard() {
                 <span className="visually-hidden">Toggle Dropdown</span>
               </button>
               <ul className="dropdown-menu">
-                <li><Link to="profile" className="dropdown-item">Profile</Link></li>
+                <li><Link to="/dashboard/profile" className="dropdown-item">Profile</Link></li>
                 <li><Link onClick={logoutHandler} className="dropdown-item">Logout <FaSignOutAlt /></Link></li>
               </ul>
             </div>
@@ -178,7 +178,7 @@ export default function Dashboard() {
           </Content>
         </Layout>
       </Layout>
-      <div className="retailer-footer">
+       <div className="retailer-footer">
         All rights reserved © 2025 NeoFin Nex India Pvt Ltd
       </div>
     </div>
