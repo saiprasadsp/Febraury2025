@@ -126,29 +126,9 @@
     "key": 10,
     "icon": "FaCreditCard",
     "label": "Bill Payments",
-    "path": "/dashboard/reports",
+    "path": "/dashboard/BillPayments",
     "roles": [
       "retailer"
-    ],
-    "children": [
-      {
-        "key": 13,
-        "icon": "AiOutlineBook",
-        "label": "Credit Card",
-        "path": "/dashboard/reports/payments"
-      },
-      {
-        "key": 10,
-        "icon": "AiOutlineSetting",
-        "label": "Wifi",
-        "path": "/dashboard/reports/wifi/comingsoon"
-      },
-      {
-        "key": 12,
-        "icon": "AiOutlineBook",
-        "label": "Mobile",
-        "path": "/dashboard/reports/comingsoon"
-      }
     ]
   },
   {
@@ -172,5 +152,39 @@
         "path": "/dashboard/reports/passbook"
       }
     ]
-  }
+  },
+  {
+    "key": 14,
+    "icon": "AiOutlineSetting",
+    "label": "Account Settings",
+    "roles": [
+      "retailer"
+    ],
+    "children": [
+      {
+        "key": 101,
+        "icon": "AiOutlineFileText",
+        "label": "Terms & Conditions",
+        "path": "/terms"
+      },
+      {
+        "key": 102,
+        "icon": "AiOutlineLock",
+        "label": "Privacy Policy",
+        "path": "/privacypolicy"
+      },
+      {
+        "key": 103,
+        "icon": "AiOutlineUndo",
+        "label": "Refund Policy",
+        "path": "/refundpolicy"
+      },
+      {
+        "key": 104,
+        "icon": "AiOutlineLock",
+        "label": "Change Password",
+        "path": "/dashboard/profile"
+      }
+    ]
+  }  
 ]

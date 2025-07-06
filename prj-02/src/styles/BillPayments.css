@@ -1,0 +1,65 @@
+.bill-payment-container {
+  font-family: Arial, sans-serif;
+}
+
+.big-box {
+  background-color: #ffffff;
+  border: 2px solid #dee2e6;
+}
+
+.icon-box {
+  width: 150px;
+  height: 150px;
+  background: white;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+}
+
+.icon-box:hover {
+  transform: scale(1.05);
+}
+
+.bill-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.icon-label {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #1F6281;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: bold;
+}
+/* ✅ Container flex wrap */
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ✅ Default: more icons per row */
+.icon-box {
+  flex: 1 0 150px;
+  max-width: 150px;
+}
+
+/* ✅ Force exactly 2 icons per row on small screens */
+@media (max-width: 480px) {
+  .icon-box {
+    flex: 0 0 47%; /* Prevent growing, force 2 in a row */
+    max-width: 47%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
