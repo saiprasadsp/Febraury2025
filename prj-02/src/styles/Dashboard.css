@@ -1,7 +1,6 @@
 
 .quickpay-logo {
-  width: 100px; 
-  height: 50px;
+  height: 55px;
 }
 /* Style the button group */
 .btn-group {
@@ -102,7 +101,7 @@ footer {
   background-color: white !important;
   color: black;
   font-size: 10px;
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 200px; /* Default when sidebar is expanded */
   right: 0;
@@ -297,8 +296,57 @@ cursor: pointer;
 .dashboard-box svg {
 font-size: 26px;
 }
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-content {
+  flex: 1;
+  overflow-y: auto;
+}
 
 
+.retailer-footer {
+  background-color: white;
+  color: black;
+  font-size: 11px;
+  position: fixed;
+  bottom: 0;
+  left: 200px; /* Adjust if sidebar width changes */
+  right: 0;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  border-radius: 10px 10px 0 0;
+  transition: left 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+/* ✅ Thick top border using ::before */
+.retailer-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px; /* Thickness of the top line */
+  width: 100%;
+  background-color: #1F6281; /* Use your brand color */
+}
+.retailer-footer.collapsed {
+  left: 80px;
+}
+
+@media (max-width: 768px) {
+  .retailer-footer {
+    left: 0;
+    width: 100%;
+  }
+}
 
 
 
