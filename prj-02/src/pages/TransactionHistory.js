@@ -5,6 +5,8 @@ import { useOrderHistoryMutation } from '../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import '../styles/GetDistributor.css'
+import dayjs from "dayjs";
+
 
 const { RangePicker } = DatePicker;
 
@@ -21,8 +23,8 @@ export default function TransactionHistory() {
     useEffect(() => {
         const fetchDistributor = async () => {
             try {
-                const res = await orderHistory({userId:userInfo.id}).unwrap();
-                console.log("step 10",res);
+                const res = await orderHistory({ userId: userInfo.id }).unwrap();
+                console.log("step 10", res);
 
                 const formattedData = res.map((item, index) => ({
                     key: index,
@@ -58,7 +60,12 @@ export default function TransactionHistory() {
 
     const columns = [
         { title: "S.No", dataIndex: "sno", width: "5%" },
-        { title: "Date", dataIndex: "Date", width: "10%" },
+        {
+            title: "Date",
+            dataIndex: "Date",
+            width: "10%",
+            render: (date) => dayjs(date).format("DD MMM YYYY"),
+        },
         { title: "Transaction ID", dataIndex: "transactionid", width: "18%" },
         { title: "Amount", dataIndex: "amount", width: "15%" },
         { title: "Charges", dataIndex: "charges", width: "15%" },
