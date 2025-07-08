@@ -116,7 +116,7 @@
   {
     "key": 11,
     "icon": "FaUniversity",
-    "label": "Settlenents",
+    "label": "Settlements",
     "path": "/dashboard/banktransfer",
     "roles": [
       "retailer"
