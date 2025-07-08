@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/RetailerDashboard.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import Wallet from "../assets/Retailer/Wallet.png";
 
 export default function RetailerDashboard() {
   const navigate = useNavigate();
@@ -16,25 +15,27 @@ export default function RetailerDashboard() {
 
       {/* Wallet + Stats */}
       <div className="row g-3 mb-3">
-        <div className="col">
-          <div className="bg-primary text-white rounded p-3 h-100">
-            <h6>Current Balance</h6>
+        {/* Current Balance */}
+        <div className="col-md-4">
+          <div className="border rounded p-3 h-100">
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <h6 className="mb-0">Current Balance</h6>
+            </div>
             <div className="d-flex align-items-center mb-2">
-              <img src={Wallet} alt="Wallet" className="service-icon" />
-              <h4 className="ms-3 mb-0">0.00</h4>
+              <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/WALLET-2.png" alt="Wallet" className="walleticon" />
+              <h4 className="ms-3 mb-0">97600.24</h4>
             </div>
-            <div className="d-flex gap-2 mt-3">
-              <button
-                className="btn small-rounded-button btn-sm px-3"
-                onClick={() => navigate('/dashboard/addbalance')}
-              >
-                Get Payment
-              </button>
-            </div>
+            <button
+              className="btn small-rounded-button btn-sm px-3"
+              onClick={() => navigate('/dashboard/addbalance')}
+            >
+              Get Payment
+            </button>
           </div>
         </div>
 
-        <div className="col">
+        {/* Revenue */}
+        <div className="col-md-4">
           <div className="border rounded p-3 h-100">
             <div className="d-flex justify-content-between align-items-center mb-2">
               <h6 className="mb-0">Revenue</h6>
@@ -44,9 +45,12 @@ export default function RetailerDashboard() {
                 <option>Last Month</option>
               </select>
             </div>
-            <h4>₹0.00</h4>
+            <div className="d-flex align-items-center mb-2">
+              <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Revenue.png" alt="Revenue" className="revenuicon" />
+              <h4 className="ms-3 mb-0">57500.90</h4>
+            </div>
             <button
-              className="btn btn-outline-primary btn-sm mt-2 px-3 shadow-button"
+              className="btn small-rounded-button btn-sm px-3"
               onClick={() => navigate('/dashboard/reports/transactionhistory')}
             >
               Go to History
@@ -54,7 +58,8 @@ export default function RetailerDashboard() {
           </div>
         </div>
 
-        <div className="col">
+        {/* Settlements */}
+        <div className="col-md-4">
           <div className="border rounded p-3 h-100">
             <div className="d-flex justify-content-between align-items-center mb-2">
               <h6 className="mb-0">Settlements</h6>
@@ -64,9 +69,12 @@ export default function RetailerDashboard() {
                 <option>Last Month</option>
               </select>
             </div>
-            <h4>₹0.00</h4>
+            <div className="d-flex align-items-center mb-2">
+              <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/settlements.png" alt="Settlements" className="settlements" />
+              <h4 className="ms-3 mb-0">477400.23</h4>
+            </div>
             <button
-              className="btn btn-outline-primary btn-sm mt-2 px-3 shadow-button"
+              className="bbtn small-rounded-button btn-sm px-3"
               onClick={() => navigate('/dashboard/banktransfer')}
             >
               Settle Now
@@ -79,28 +87,49 @@ export default function RetailerDashboard() {
       <div className="border rounded p-3 mb-3">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h6 className="mb-0">Bill Services</h6>
-          <button className="btn btn-outline-secondary btn-sm">Customize Services</button>
+          <button
+            className="btn btn-outline-secondary btn-sm view-all-button"
+            onClick={() => navigate('/dashboard/BillPayments')}
+          >
+            View All Services
+          </button>
         </div>
+
         <div className="d-flex gap-3 flex-wrap justify-content-start">
-          <button className="btn btn-outline-primary service-button" onClick={() => navigate('/dashboard/reports/comingsoon')}>
-            <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Broadband.png" alt="Wifi" className="service-icon-viewmore" />
-          </button>
-          <button className="btn btn-outline-primary service-button" onClick={() => navigate('/dashboard/reports/payments')}>
-            <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/gas_cylinder.png" alt="CC Payments" className="service-icon-viewmore" />
-            Credit Card
-          </button>
-          <button className="btn btn-outline-primary service-button" onClick={() => navigate('/dashboard/reports/comingsoon')}>
-            <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/dth.png" alt="Recharge" className="service-icon-viewmore" />
-            Recharge
-          </button>
-          <button className="btn btn-outline-primary service-button" onClick={() => navigate('/dashboard/reports/comingsoon')}>
-            <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/credit_card.png" alt="View More" className="service-icon-viewmore" />
-            View more
-          </button>
+          {[
+            { label: 'Vendor Payments', path: '/dashboard/reports/comingsoon', icon: 'vendor+payments.png' },
+            { label: 'POS Machine', path: '/dashboard/reports/comingsoon', icon: 'POS_Machine.png' },
+            { label: 'QR Code', path: '/dashboard/reports/comingsoon', icon: 'QRCode.png' },
+            { label: 'Fast Tag', path: '/dashboard/reports/comingsoon', icon: 'Fast+Tag.png' },
+            { label: 'Electricity', path: '/dashboard/reports/comingsoon', icon: 'Electricity_Bill.png' },
+            { label: 'Mobile', path: '/dashboard/reports/comingsoon', icon: 'Recharge.png' },
+            { label: 'Credit Card', path: '/dashboard/reports/payments', icon: 'Credit_Card.png' },
+            { label: 'Broad Band', path: '/dashboard/reports/comingsoon', icon: 'Broadband.jpeg' },
+            { label: 'Loan Repayment', path: '/dashboard/reports/comingsoon', icon: 'Loan+EMI.png' },
+            { label: 'DTH', path: '/dashboard/reports/comingsoon', icon: 'DTH.png' },
+            { label: 'Tax', path: '/dashboard/reports/comingsoon', icon: 'Tax.png' },
+            { label: 'Water', path: '/dashboard/reports/comingsoon', icon: 'water.png' },
+          ].map((service, index) => (
+            <button
+              key={index}
+              className="btn btn-outline-primary service-button"
+              onClick={() => navigate(service.path)}
+            >
+              <div className="d-flex flex-column align-items-center">
+                <img
+                  src={`https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/${service.icon}`}
+                  alt={service.label}
+                  className="service-icon-viewmore"
+                />
+                <span className="mt-2">{service.label}</span>
+              </div>
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Transaction Trends */}
+
+      {/* Recent Transactions */}
       <div className="border rounded p-3 mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h6 className="mb-0">Recent Transaction</h6>
@@ -132,7 +161,7 @@ export default function RetailerDashboard() {
         </table>
       </div>
 
-      {/* ✅ Fixed Footer */}
+      {/* Footer */}
       <div className="retailer-footer">
         All rights reserved © 2025 NeoFin Nex India Pvt Ltd
       </div>

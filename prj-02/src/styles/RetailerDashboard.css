@@ -5,49 +5,12 @@
   color: #212529;
   box-sizing: border-box;
 }
-.retailer-dashboard-container .service-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 1px solid #1F6281;
-  color: #1F6281;
-  background-color: #fff;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.retailer-dashboard-container .service-button .service-icon {
-  width: 40px;
-  height: 40px;
-  filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(175deg) saturate(600%) brightness(90%);
-  transition: filter 0.3s;
-}
-
-.retailer-dashboard-container .service-button:hover {
-  background-color: #1F6281;
-  color: #fff;
-}
-
-.retailer-dashboard-container .service-button:hover .service-icon {
-  filter: brightness(0) invert(1);
-}
-
 
 .retailer-dashboard-container h4 {
   font-weight: 600;
   font-size: 24px;
 }
 
-.retailer-dashboard-container .text-muted {
-  color: #6c757d !important;
-}
-
-.retailer-dashboard-container .bg-primary {
-  background-color: #1F6281 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-}
 
 .retailer-dashboard-container .border {
   border: 1px solid #dfe4ea !important;
@@ -55,67 +18,65 @@
   background-color: #ffffff;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
-.retailer-dashboard-container .service-icon {
-  width: 40px;
-  height: 40px;
-  filter: brightness(0) invert(1);
-}
 
-
-.retailer-dashboard-container .service-icon:hover {
-  filter: brightness(0) invert(1);
+.retailer-dashboard-container .service-button {
+  width: 150px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  text-align: center;
+  font-size: 12px;  
+  font-weight: bold; 
 }
 
 .retailer-dashboard-container .service-icon-viewmore {
-  width: 150px;
-  height:150px;
-  /* transition: filter 0.3s ease; */
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+.retailer-dashboard-container .service-button:active {
+  color: 1F6281;
+  border-color: 1F6281;
+}
+
+.walleticon {
+  width: 90px;
+  height:90px;
+  margin-top: 15px;
+}
+.settlements {
+  width: 80px;
+  height:80px;
+  margin-top: 10px;
 }
 
 
-
-
-.retailer-dashboard-container .service-icon-colored:hover {
-  filter: brightness(0) invert(1);
+.revenuicon {
+  width: 75px;
+  height:100px;
+  margin-top: -5px;
 }
-
-.retailer-dashboard-container .btn-light {
-  background-color: #ffffff;
-  color: #1F6281;
-  border: 1px solid #dee2e6;
-  border-radius: 20px;
-  padding: 6px 16px;
-}
-
-.retailer-dashboard-container .btn-light:hover {
-  background-color: #e8f0f7;
-}
-
 .retailer-dashboard-container .small-rounded-button {
   border-radius: 5px !important;
   padding: 6px 16px;
   background-color: #ffffff;
   color: #1F6281;
   border: 1px solid #dee2e6;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, transform 0.3s, color 0.3s;
   box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+  cursor: pointer;
 }
 
+/* ✅ Hover Effect */
 .retailer-dashboard-container .small-rounded-button:hover {
-  background-color: #11719e !important;
-  color: #ffffff !important;
+  background-color: #1F6281;
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
-.retailer-dashboard-container .shadow-button {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
-  transition: box-shadow 0.3s ease !important;
-  border-radius: 5px !important;
-}
-
-.retailer-dashboard-container .shadow-button:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
-}
 
 .retailer-dashboard-container .btn-outline-primary {
   border-color: #1F6281;
@@ -130,26 +91,6 @@
   color: #ffffff;
 }
 
-.retailer-dashboard-container .btn-outline-secondary {
-  border-color: #adb5bd;
-  color: #6c757d;
-  border-radius: 8px;
-  padding: 6px 16px;
-}
-
-.retailer-dashboard-container .table {
-  margin-bottom: 0;
-  font-size: 14px;
-}
-
-.retailer-dashboard-container .table thead {
-  background-color: #f8f9fa;
-}
-
-.retailer-dashboard-container .form-select {
-  border-radius: 8px;
-  padding: 5px 10px;
-}
 .retailer-dashboard-container table {
   border-collapse: separate !important;
   border-spacing: 0;
@@ -169,4 +110,11 @@
 .retailer-dashboard-container table th,
 .retailer-dashboard-container table td {
   border: 1px solid #dee2e6;
+}
+
+
+.view-all-button:hover {
+  background-color: #1F6281; /* Red background */
+  color: white;              /* White text */
+  border-color: #1F6281;
 }
