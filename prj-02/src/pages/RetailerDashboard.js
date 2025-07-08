@@ -95,7 +95,7 @@ export default function RetailerDashboard() {
           </button>
         </div>
 
-        <div className="d-flex gap-3 flex-wrap justify-content-start">
+        <div className="services-grid">
           {[
             { label: 'Vendor Payments', path: '/dashboard/reports/comingsoon', icon: 'vendor+payments.png' },
             { label: 'POS Machine', path: '/dashboard/reports/comingsoon', icon: 'POS_Machine.png' },
@@ -121,7 +121,7 @@ export default function RetailerDashboard() {
                   alt={service.label}
                   className="service-icon-viewmore"
                 />
-                <span className="mt-2">{service.label}</span>
+                 <span>{service.label}</span>
               </div>
             </button>
           ))}
