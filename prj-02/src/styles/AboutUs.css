@@ -73,7 +73,7 @@
 }
 
 .push-right {
-  padding-left: 200px !important;
+  padding-left: 150px !important;
 }
 
 .offer-list,
@@ -115,7 +115,7 @@
   .why-list li {
     display: flex;
     align-items: start;
-    font-size: 13px;
+    font-size: 11px;
     
   }
   .text-content {
