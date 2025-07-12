@@ -42,10 +42,15 @@
   flex: 1 1 55%;
 }
 
-.text-content h2,
-.text-content h1 {
-  font-size: 24px;
-  margin-bottom: 16px;
+/* Desktop font size */
+.aboutus-container h1,
+.aboutus-container h2,
+.text-content h1,
+.text-content h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #012a4a;
+  margin-bottom: 20px;
 }
 
 .text-content p,
@@ -132,10 +137,22 @@
   .hero-section h1 {
     font-size: 30px;
   }
-
-  .text-content h2,
+ 
+  .tex.aboutus.aboutus-container h1,
+.aboutus-container h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #012a4a;
+  margin-bottom: 20px;
+}-container h1,
+.aboutus-container h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #012a4a;
+  margin-bottom: 20px;
+}t-content h2,
   .text-content h1 {
-    font-size: 30px;
+    font-size: 50px !important  ;
   }
 
   .text-content p,
@@ -156,5 +173,13 @@
 @media (max-width: 768px) {
   .text-image-wrap.responsive-reverse {
     flex-direction: column-reverse;
+  }
+}
+@media (max-width: 768px) {
+  .aboutus-container h1,
+  .aboutus-container h2,
+  .text-content h1,
+  .text-content h2 {
+    font-size: 32px !important; /* or 26px if you prefer slightly bigger */
   }
 }

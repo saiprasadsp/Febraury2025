@@ -38,8 +38,8 @@ function TermsAndConditions() {
       <div className={`mobile-menu-container ${menuOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={() => setMenuOpen(false)}>&times;</button>
         <div className="mobile-nav-links">
-          <a href="/products">Home</a>
-          <a href="/solutions">About Us</a>
+          <a href="/">Home</a>
+          <a href="/aboutus">About Us</a>
           <a href="/pricing">How It Works</a>
           <a href="/contactus">Feature</a>
           <a href="/contactus">Contact Us</a>
