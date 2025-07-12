@@ -44,6 +44,7 @@ import TransactionHistory from "./pages/TransactionHistory";
 import Footer from "./pages/Webpages/WebPageFooter";
 import HomePage from "./pages/Webpages/WebHomePage";
 import BillPayments from "./pages/BillPayments";
+import AboutUs from "./pages/Webpages/AboutUs";
 
 
 
@@ -113,6 +114,7 @@ function App() {
       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       <Route path="/refundpolicy" element={<RefundPolicy />} />
       <Route path="/contactus" element={<ContactUs/>} />
+      <Route path="/aboutus" element={<AboutUs/>} />
       <Route path="/footer" element={<Footer/>} />
       {/* <Route path="/home" element={<HomePage/>} /> */}
      

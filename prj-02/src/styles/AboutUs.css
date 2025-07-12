@@ -1,0 +1,108 @@
+.aboutus-container {
+  background: white;
+  color: #012a4a;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.get-started-btn {
+  background-color: #1F6281;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.section-block {
+  margin-bottom: 60px;
+}
+
+.text-image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.text-image-wrap.reverse {
+  flex-direction: row-reverse;
+}
+
+.text-content {
+  flex: 1 1 55%;
+}
+
+.text-content h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.text-content p,
+.text-content ul {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.text-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.section-image {
+  flex: 1 1 40%;
+  max-width: 400px;
+  width: 100%;
+}
+
+.trust-section {
+  text-align: center;
+  background-color: #f0f8ff;
+  padding: 30px 20px;
+  margin-bottom: 60px;
+}
+.push-right {
+  padding-left: 200px !important;
+}
+
+.offer-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.offer-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.list-icon {
+  color: #1F6281;
+  margin-right: 10px;
+  font-size: 18px;
+}
+.why-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.why-list li {
+  display: flex;
+  align-items: start;
+  margin-bottom: 12px;
+}
+
+.list-icon {
+  color: #1F6281;
+  margin-right: 10px;
+  font-size: 18px;
+}
