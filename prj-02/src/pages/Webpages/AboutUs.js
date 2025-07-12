@@ -40,7 +40,7 @@ const AboutUs = () => {
         <section className="section-block">
           <div className="text-image-wrap">
             <div className="text-content">
-              <h2>Who We Are</h2>
+              <h1>Who We Are</h1>
               <p>
                 TheQuickPayMe is a dynamic fintech solution designed to bridge the gap between wholesalers,
                 retailers, and end customers. Our platform enables seamless financial interactions – all under
