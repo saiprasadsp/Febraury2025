@@ -42,7 +42,8 @@
   flex: 1 1 55%;
 }
 
-.text-content h2 {
+.text-content h2,
+.text-content h1 {
   font-size: 24px;
   margin-bottom: 16px;
 }
@@ -70,39 +71,90 @@
   padding: 30px 20px;
   margin-bottom: 60px;
 }
+
 .push-right {
   padding-left: 200px !important;
 }
 
-.offer-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-.offer-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.list-icon {
-  color: #1F6281;
-  margin-right: 10px;
-  font-size: 18px;
-}
+.offer-list,
 .why-list {
   list-style: none;
   padding-left: 0;
 }
 
+.offer-list li,
 .why-list li {
   display: flex;
   align-items: start;
   margin-bottom: 12px;
+  
 }
 
 .list-icon {
   color: #1F6281;
   margin-right: 10px;
   font-size: 18px;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .aboutus-container {
+    padding: 20px 15px;
+  }
+
+  .text-image-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Special rule for only "What We Offer" reverse layout */
+  .text-image-wrap.reverse {
+    flex-direction: column-reverse;
+  }
+  .offer-list li,
+  .why-list li {
+    display: flex;
+    align-items: start;
+    font-size: 13px;
+    
+  }
+  .text-content {
+    padding-left: 0 !important;
+    width: 100%;
+  }
+
+  .section-image {
+    max-width: 100%;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .hero-section h1 {
+    font-size: 30px;
+  }
+
+  .text-content h2,
+  .text-content h1 {
+    font-size: 30px;
+  }
+
+  .text-content p,
+  .text-content ul {
+    font-size: 15px;
+  }
+
+  .get-started-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .push-right {
+    padding-left: 0px !important;
+  }
+}
+/* Reverse only on mobile */
+@media (max-width: 768px) {
+  .text-image-wrap.responsive-reverse {
+    flex-direction: column-reverse;
+  }
 }
