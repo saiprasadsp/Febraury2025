@@ -18,7 +18,7 @@ function TermsAndConditions() {
           <span className="dot">·</span>
           <a href="/aboutus">About Us</a>
           <span className="dot">·</span>
-          <a href="/pricing">How It Works</a>
+          <a href="/howitworks">How It Works</a>
           <span className="dot">·</span>
           <a href="/features">Feature</a>
           <span className="dot">·</span>
@@ -40,7 +40,7 @@ function TermsAndConditions() {
         <div className="mobile-nav-links">
           <a href="/">Home</a>
           <a href="/aboutus">About Us</a>
-          <a href="/pricing">How It Works</a>
+          <a href="/howitworks">How It Works</a>
           <a href="/features">Feature</a>
           <a href="/contactus">Contact Us</a>
         </div>

@@ -46,6 +46,7 @@ import HomePage from "./pages/Webpages/WebHomePage";
 import BillPayments from "./pages/BillPayments";
 import AboutUs from "./pages/Webpages/AboutUs";
 import Features from "./pages/Webpages/Features";
+import HowItWorks from "./pages/Webpages/HowItWorks";
 
 
 
@@ -117,6 +118,7 @@ function App() {
       <Route path="/aboutus" element={<AboutUs/>} />
       <Route path="/footer" element={<Footer/>} />
       <Route path="/features" element={<Features/>} />
+      <Route path="/howitworks" element={<HowItWorks/>} />
       {/* <Route path="/home" element={<HomePage/>} /> */}
      
       
