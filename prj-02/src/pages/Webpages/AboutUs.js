@@ -30,7 +30,7 @@ const AboutUs = () => {
         <section className="hero-section">
           <h1>Empowering Wholesalers & Retailers Across India</h1>
           <p>Simplifying payments, boosting trust, and growing businesses together.</p>
-          <button className="get-started-btn" onClick={() => navigate('/login')}>
+          <button className="main-get-started-btn" onClick={() => navigate('/login')}>
             Get Started Today
           </button>
         </section>
