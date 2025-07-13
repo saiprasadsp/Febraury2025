@@ -219,6 +219,7 @@
     padding: 8px 12px;
     border-radius: 50%;
     font-weight: bold;
+    display: none;
   }
   .step-icon {
     background-color: white;
