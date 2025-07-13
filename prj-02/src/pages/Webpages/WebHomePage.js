@@ -63,37 +63,52 @@ function HomePage() {
           From accepting customer payments to settling dues with vendors and paying utility bills,<br />
           our platform makes transactions fast, secure, and hassle-free — improving cash flow and saving time.
         </p>
-
         <div className="homepage-platform-features">
-          <div className="platform-feature">
-            <div className="platform-icon blue-bg">
-              <FaWallet />
-            </div>
-            <h4>Accept Payments</h4>
-            <p>From customers via UPI, cards, QR codes</p>
-          </div>
-          <div className="platform-feature">
-            <div className="platform-icon green-bg">
-              <FaNetworkWired />
-            </div>
-            <h4>QuickPayMe Platform</h4>
-            <p>Unified management dashboard</p>
-          </div>
-          <div className="platform-feature">
-            <div className="platform-icon blue-bg">
-              <FaFileInvoice />
-            </div>
-            <h4>Pay Bills</h4>
-            <p>Utilities, vendors, and suppliers</p>
-          </div>
-        </div>
+  <div className="platform-feature">
+    <div className="platform-feature-box">
+      <div className="platform-icon blue-bg">
+        <FaWallet />
+      </div>
+      <h4>Accept Payments</h4>
+      <p>From customers via UPI, cards, QR codes</p>
+    </div>
+  </div>
+
+  <div className="platform-feature">
+    <div className="platform-feature-box">
+      <div className="platform-icon green-bg">
+        <FaNetworkWired />
+      </div>
+      <h4>QuickPayMe Platform</h4>
+      <p>Unified management dashboard</p>
+    </div>
+  </div>
+
+  <div className="platform-feature">
+    <div className="platform-feature-box">
+      <div className="platform-icon blue-bg">
+        <FaFileInvoice />
+      </div>
+      <h4>Pay Bills</h4>
+      <p>Utilities, vendors, and suppliers</p>
+    </div>
+  </div>
+</div>
+
+        
       </section>
 
 
 
 
       <section className="homepage-features-enhanced">
-        <h2>Smart Features Built for Modern Businesses</h2>
+        <h2 className="custom-section-heading">
+          <b>
+            <span className="black-heading">Smart Features Built for </span>
+            <span className="highlight-step">Modern Businesses</span>
+          </b>
+        </h2>
+
         <p className="homepage-feature-description">
           Whether you're running a small retail shop or managing a wholesale network, TheQuickPayMe <br>
           </br>gives you powerful tools to accept payments, settle bills, and track earnings — all in one place.
