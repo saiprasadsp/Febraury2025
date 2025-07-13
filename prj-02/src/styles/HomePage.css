@@ -1,0 +1,314 @@
+/* Hero Section */
+.homepage-hero {
+    text-align: center;
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+  .homepage-hero h1 {
+    font-size: 48px;
+    color: #1F6281;
+    margin-bottom: 10px;
+  }
+  .homepage-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  /* Image Section */
+  .homepage-image-gallery {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+  .homepage-gallery-image {
+    width: 100%;
+    max-width: 2000px;
+    border-radius: 12px;
+  }
+  
+  /* Summary Section */
+  .homepage-container {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .homepage-container h2 {
+    font-size: 40px;
+    color: #1F6281;
+    margin-bottom: 20px;
+  }
+  
+  /* Platform Features */
+  .homepage-platform-features {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .platform-feature {
+    text-align: center;
+    width: 400px;
+  }
+  .platform-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+  }
+  .blue-bg {
+    background: linear-gradient(to right, #1F6281, #3399ff);
+  }
+  .green-bg {
+    background: linear-gradient(to right, #4b9bc0, #1F6281);
+  }
+  
+  .homepage-features-enhanced {
+    background: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .homepage-features-enhanced h2 {
+    font-size: 40px;
+    margin-bottom: 40px;
+    color: #1f6281;
+  }
+  .homepage-feature-description {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .homepage-feature-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .homepage-feature-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    width: 320px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .homepage-feature-card:hover {
+    transform: translateY(-5px);
+  }
+  .homepage-feature-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .feature-icon {
+    font-size: 40px;
+    color: #1f6281;
+    margin-bottom: 15px;
+  }
+  
+  /* Buttons */
+  .homepage-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 40px;
+  }
+  .homepage-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    background-color: #1F6281;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .homepage-btn:hover {
+    background-color: #14516c;
+    transform: translateY(-2px);
+  }
+  
+  /* Trusted Section */
+  .homepage-trusted {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+  }
+  .homepage-trusted h2 {
+    font-size: 28px;
+    color: #1F6281;
+    margin-bottom: 10px;
+  }
+  .homepage-trusted p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Angled Section */
+  .homepage-angled-section {
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    margin: 30px 0;
+    overflow: hidden;
+    padding: 40px 20px;
+  }
+  .angled-image-wrapper {
+    transform: skewY(4deg);
+    text-align: center;
+  }
+  .angled-app-image {
+    max-width: 90%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Get Started Section */
+  .get-started-container {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #ffffff;
+  }
+  .get-started-heading {
+    font-size: 34px;
+    margin-bottom: 10px;
+  }
+  .highlight-step {
+    color: #1F6281;
+  }
+  .get-started-subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  .get-started-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .step-card {
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 300px;
+    min-height: 420px;
+    text-align: center;
+    margin: 15px;
+    transition: transform 0.3s ease;
+  }
+  .step-card:hover {
+    transform: translateY(-5px);
+  }
+  .step-badge {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #1F6281;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+  .step-icon {
+    background-color: white;
+    color: #1f6281;
+    font-size: 30px;
+    padding: 16px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-duration {
+    font-size: 14px;
+    color: #2b7a78;
+    background-color: #ffffff;
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    margin: 10px 0;
+  }
+  .step-card h4 {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  .step-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+  }
+  
+  /* Security Section */
+  .security-assurance-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #ffffff;
+  }
+  .security-title {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .highlight-secure {
+    color: #1F6281;
+  }
+  .security-subtitle {
+    font-size: 16px;
+    color: #4a4a4a;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+  }
+  .security-features {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .security-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+  }
+  .security-icon {
+    font-size: 36px;
+    border-radius: 16px;
+    padding: 15px;
+    margin: 0 auto 20px auto;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+  }
+  .blue-secure-bg {
+    background-color: #1f75fe;
+  }
+  .green-secure-bg {
+    background-color: #28a745;
+  }
+  .purple-secure-bg {
+    background-color: #6f42c1;
+  }
+  .security-card:hover {
+    transform: translateY(-5px);
+  }
+.homepage-wrapper {
+  background-color: #ffffff;
+}  
