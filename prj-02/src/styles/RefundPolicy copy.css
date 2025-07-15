@@ -1,0 +1,65 @@
+/* General wrapper */
+.terms-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #f9fafe;
+}
+
+/* Top banner with heading and subtitle */
+.terms-hero-banner {
+  background-color: #1F6281;
+  text-align: center;
+  padding: 50px 20px 30px 20px;
+  border-bottom: 1px solid #1F6281;
+}
+
+.terms-hero-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.terms-hero-subtitle {
+  font-size: 18px;
+  color: #ffffff;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Container for the card-like sections */
+.terms-bordered-box {
+  background-color: #ffffff;
+  padding: 30px;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual policy card/section */
+.terms-point-box {
+  background-color: #f1f5ff;
+  border-left: 4px solid #1F6281;
+  padding: 20px 25px;
+  border-radius: 10px;
+  color: #1f2937;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.terms-point-box strong {
+  display: block;
+  color: #1F6281;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.terms-point-box a {
+  color: #1F6281;
+  text-decoration: underline;
+}
