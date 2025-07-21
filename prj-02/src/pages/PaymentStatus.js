@@ -1,14 +1,20 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useRef } from 'react'
 import { Result,Spin } from "antd";
 import { useLocation } from "react-router-dom";
 import { useOrderStatusMutation } from "../slices/usersApiSlice";
 import Spinner from '../Components/Spinner';
+import { useSelector } from 'react-redux';
 export default function PaymentStatus() {
-    const location = useLocation()  
+    const location = useLocation()
     const [status,setStatus] = useState("loading")
     const [message,setMessage] = useState("")
     const [orderStatus] = useOrderStatusMutation()
+    const {userInfo} = useSelector((state)=>state.auth)
+    const calledRef = useRef(false)
     useEffect(()=>{
+      if (calledRef.current) return;
+      calledRef.current=true
+
         const query = new URLSearchParams(location.search)
         const orderId = query.get("order_id")
 
@@ -20,7 +26,7 @@ export default function PaymentStatus() {
 
         const checkStatus=async () => {
           try {
-            const response = await orderStatus({orderID:orderId})
+            const response = await orderStatus({orderID:orderId,customerID:userInfo.id})
             const orderArray = response.data.order_status
             if (!Array.isArray(orderArray)|| orderArray.length===0) {
               setStatus('failed')
@@ -28,7 +34,7 @@ export default function PaymentStatus() {
               return
             }
             const {payment_status} = orderArray[0]
-            
+
             if (payment_status === 'SUCCESS') {
               setStatus('success')
               setMessage('Payment completed Successfully')
