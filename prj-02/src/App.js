@@ -97,7 +97,7 @@ function App() {
 
 
         <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Settings /></ProtectedRoute>} />
-        <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Profile /></ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer"]}><Profile /></ProtectedRoute>} />
         <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Register /></ProtectedRoute>} />
         <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer"]}><AddBalance/></ProtectedRoute>} />
         <Route path="banktransfer" element={<ProtectedRoute allowedRoles={["retailer"]}><BankTransfer/></ProtectedRoute>} />
@@ -120,8 +120,8 @@ function App() {
       <Route path="/features" element={<Features/>} />
       <Route path="/howitworks" element={<HowItWorks/>} />
       {/* <Route path="/home" element={<HomePage/>} /> */}
-     
-      
+
+
     </Routes>
 
   );
