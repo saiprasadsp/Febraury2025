@@ -24,16 +24,17 @@ export default function TransactionHistory() {
         const fetchDistributor = async () => {
             try {
                 const res = await orderHistory({ userId: userInfo.id }).unwrap();
-                console.log("step 10", res);
+                console.log(res);
 
-                const formattedData = res.map((item, index) => ({
+
+                const formattedData = res?.orders.map((item, index) => ({
                     key: index,
                     sno: index + 1,
-                    Date: item.created_timestamp,
+                    Date: item.payment_date,
                     transactionid: item.order_id,
-                    amount: item.order_amount,
-                    charges: item.order_charges,
-                    creditamount: item.order_credited_amount,
+                    amount: item.amount,
+                    charges: item.charges,
+                    creditamount: item.amount-item.charges,
                     status: item.status
                 }));
                 setData(formattedData);
