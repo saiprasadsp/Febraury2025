@@ -183,8 +183,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method:'POST',
                 body:data
             })
+        }),
+        retailer:builder.mutation({
+            query:(data)=>({
+                url:`${DASHBOARD}/retailer`,
+                method:'POST',
+                body:data
+            })
         })
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation,useRetailerMutation} = usersApiSlice

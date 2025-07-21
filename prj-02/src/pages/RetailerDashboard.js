@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/RetailerDashboard.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import { useRetailerMutation } from "../slices/usersApiSlice";
+import { useSelector } from 'react-redux';
 
 export default function RetailerDashboard() {
+  const [cBalance,setCBalance] = useState(0)
+  const [bName,setBName] = useState('')
   const navigate = useNavigate();
+  const [retailer] = useRetailerMutation()
+  const {userInfo} = useSelector((state)=>state.auth)
 
+  useEffect(()=>{
+    const fetchDashboard = async () => {
+      try {
+        const response = await retailer({customerID:userInfo.id})
+        setCBalance(response.data.wallet?.wallet_balance)
+        setBName(response.data.wallet?.business_name)
+
+      } catch (err) {
+        console.log(err);
+        toast.error(err?.data?.message)
+
+      }
+
+    }
+    fetchDashboard()
+  },[])
   return (
     <div className="retailer-dashboard-container">
       <div className="mb-4">
-        <h4>Hello, <strong>M09876</strong> 👋</h4>
+        <h4>Hello, <strong>{bName}</strong> 👋</h4>
         <small className="text-muted">What bill will you be paying today?</small>
       </div>
 
@@ -23,7 +45,7 @@ export default function RetailerDashboard() {
             </div>
             <div className="d-flex align-items-center mb-2">
               <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/WALLET-2.png" alt="Wallet" className="walleticon" />
-              <h4 className="ms-3 mb-0">97600.24</h4>
+              <h4 className="ms-3 mb-0">{cBalance}</h4>
             </div>
             <button
               className="btn small-rounded-button btn-sm px-3"
