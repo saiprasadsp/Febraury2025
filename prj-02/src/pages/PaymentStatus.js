@@ -26,7 +26,7 @@ export default function PaymentStatus() {
 
         const checkStatus=async () => {
           try {
-            const response = await orderStatus({orderID:orderId,customerID:userInfo.id})
+            const response = await orderStatus({orderID:orderId,customerID:userInfo.id,charges:process.env.REACT_APP_INCOME})
             const orderArray = response.data.order_status
             if (!Array.isArray(orderArray)|| orderArray.length===0) {
               setStatus('failed')

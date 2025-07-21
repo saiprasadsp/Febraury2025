@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { useRetailerMutation } from "../slices/usersApiSlice";
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 export default function RetailerDashboard() {
   const [cBalance,setCBalance] = useState(0)
