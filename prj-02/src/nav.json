@@ -125,7 +125,7 @@
   {
     "key": 10,
     "icon": "FaCreditCard",
-    "label": "Bill Payments",
+    "label": "Services",
     "path": "/dashboard/BillPayments",
     "roles": [
       "retailer"
@@ -134,7 +134,7 @@
   {
     "key": 13,
     "icon": "AiOutlineSetting",
-    "label": "Reports",
+    "label": "Invoice & Reports",
     "roles": [
       "retailer"
     ],
@@ -161,24 +161,6 @@
       "retailer"
     ],
     "children": [
-      {
-        "key": 101,
-        "icon": "AiOutlineFileText",
-        "label": "Terms & Conditions",
-        "path": "/terms"
-      },
-      {
-        "key": 102,
-        "icon": "AiOutlineLock",
-        "label": "Privacy Policy",
-        "path": "/privacypolicy"
-      },
-      {
-        "key": 103,
-        "icon": "AiOutlineUndo",
-        "label": "Refund Policy",
-        "path": "/refundpolicy"
-      },
       {
         "key": 104,
         "icon": "AiOutlineLock",
