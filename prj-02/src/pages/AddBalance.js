@@ -78,7 +78,7 @@ export default function AddBalance() {
     const amount = parseInt(e.target.value);
     setEnteredAmount(e.target.value);
     if (amount) {
-      setReferenceAmounts([amount - 1, amount - 2, amount + 1, amount + 2]);
+      setReferenceAmounts([amount -0]);
     } else {
       setReferenceAmounts([]);
     }
@@ -176,22 +176,22 @@ export default function AddBalance() {
                           ${selectedPlanButton === 'Basic' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Basic')}
             >
-              Service1
+              Service
             </Button>
-            <Button
+            {/* <Button
               className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
                           ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Standard')}
             >
               Service2
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
                           ${selectedPlanButton === 'Premium' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Premium')}
             >
               Service3
-            </Button>
+            </Button> */}
           </div>
 
           {selectedPlan && (

@@ -30,7 +30,7 @@ export default function AddNewBankAccount() {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" className="get-details-button">Get Details</Button>
+              <Button type="primary" className="get-details-button">Verify Details</Button>
             </Form.Item>
           </Form>
         </Card>
