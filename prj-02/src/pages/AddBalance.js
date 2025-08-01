@@ -137,6 +137,8 @@ export default function AddBalance() {
       try {
         const { data } = await createRazorOrder({
           amount: selectedAmount,
+          customerName:customerName,
+          Invoice:invoice,
           phone: mobileNumber,
           customerID: userInfo.id,
           charges: process.env.REACT_APP_INCOME,
@@ -171,6 +173,26 @@ export default function AddBalance() {
     }
   };
 
+  const handleData=(e)=>{
+    const {name,value} = e.target
+    switch (name) {
+      case 'invoice':
+        setInvoice(value)
+        break;
+      case 'customerName':
+        setCustomerName(value)
+        break;
+      case 'mobileNumber':
+        setMobileNumber(value)
+        break;
+
+      default:
+        break;
+    }
+
+
+  }
+
   return (
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={24} sm={20} md={16} lg={12}>
@@ -202,7 +224,7 @@ export default function AddBalance() {
                   type="text"
                   name="invoice"
                   placeholder="Invoice ID"
-                  onChange={handleInputChange}
+                  onChange={handleData}
                 />
               </div>
             </div>
@@ -214,7 +236,7 @@ export default function AddBalance() {
                   type="text"
                   name="customerName"
                   placeholder="Customer Name"
-                  onChange={handleInputChange}
+                  onChange={handleData}
                 />
               </div>
 
@@ -224,7 +246,7 @@ export default function AddBalance() {
                   type="text"
                   name="mobileNumber"
                   placeholder="Mobile Number"
-                  onChange={handleInputChange}
+                  onChange={handleData}
                 />
               </div>
 
