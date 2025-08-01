@@ -2,53 +2,56 @@ import React, { useEffect, useState } from 'react';
 import { Input, Button, Tag, Typography, Row, Col, Card } from 'antd';
 import "../styles/AddBalance.css";
 import { load } from "@cashfreepayments/cashfree-js";
-import { useCreateOrderMutation,useCreateRazorOrderMutation } from '../slices/usersApiSlice';
+import { useCreateOrderMutation, useCreateRazorOrderMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+
 const { Title, Paragraph } = Typography;
 
-
-const formattedDate =(value)=>{
-  const date = new Date(value)
+const formattedDate = (value) => {
+  const date = new Date(value);
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const seconds = String(date.getSeconds()).padStart(2, '0');
   const randomSixDigit = Math.floor(100000 + Math.random() * 900000);
 
   return `TheQuickPay_${year}_${month}_${day}_${randomSixDigit}`;
-}
+};
 
 export default function AddBalance() {
-  const {userInfo} = useSelector((state)=>state.auth)
+  const { userInfo } = useSelector((state) => state.auth);
+
   const [selectedPlan, setSelectedPlan] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
   const [isError, setIsError] = useState(false);
+
   const [enteredAmount, setEnteredAmount] = useState('');
+  const [invoice, setInvoice] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+
   const [referenceAmounts, setReferenceAmounts] = useState([]);
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [highlightPlanButtons, setHighlightPlanButtons] = useState(false);
   const [selectedPlanButton, setSelectedPlanButton] = useState('');
-  const [createOrder]= useCreateOrderMutation()
-  const [createRazorOrder] = useCreateRazorOrderMutation()
+
+  const [createOrder] = useCreateOrderMutation();
+  const [createRazorOrder] = useCreateRazorOrderMutation();
 
   let cashfree;
-    var initializeSDK = async function () {
-        cashfree = await load({
-            mode: "sandbox"
-        });
-    }
-    initializeSDK();
 
-    useEffect(()=>{
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.async = true;
-      document.body.appendChild(script);
+  const initializeSDK = async () => {
+    cashfree = await load({ mode: "sandbox" });
+  };
+  initializeSDK();
 
-    },[])
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   const handlePlanSelect = (plan) => {
     setSelectedPlan(plan);
     setSelectedPlanButton(plan);
@@ -56,114 +59,118 @@ export default function AddBalance() {
 
     switch (plan) {
       case 'Basic':
-        // setInfoMsg('Works for normal cards - 1.25%');
         setIsError(false);
         break;
       case 'Standard':
-        // setInfoMsg('Works for all cards except HDFC - 1.65%');
         setIsError(false);
         break;
       case 'Premium':
-        // setInfoMsg('Works for all cards including HDFC - 1.7%');
         setIsError(true);
         break;
       default:
         setInfoMsg('');
         setIsError(false);
     }
-
   };
 
   const handleInputChange = (e) => {
-    const amount = parseInt(e.target.value);
-    setEnteredAmount(e.target.value);
-    if (amount) {
-      setReferenceAmounts([amount -0]);
-    } else {
-      setReferenceAmounts([]);
+    const { name, value } = e.target;
+
+    switch (name) {
+      case 'invoice':
+        setInvoice(value);
+        break;
+      case 'customerName':
+        setCustomerName(value);
+        break;
+      case 'mobileNumber':
+        setMobileNumber(value);
+        break;
+      case 'amount':
+        setEnteredAmount(value);
+        const amount = parseInt(value);
+        if (amount) {
+          setReferenceAmounts([amount]);
+        } else {
+          setReferenceAmounts([]);
+        }
+        setSelectedAmount(null);
+        break;
+      default:
+        break;
     }
-    setSelectedAmount(null);
   };
 
   const handleReferenceClick = (val) => {
-
     setSelectedAmount(val);
-
   };
 
-    const handleAddBalance = async() => {
+  const handleAddBalance = async () => {
+    if (!selectedPlan) {
+      setHighlightPlanButtons(true);
+      return;
+    }
 
-      if (!selectedPlan) {
-        setHighlightPlanButtons(true);
-        return;
+    if (selectedPlan === 'Basic') {
+      try {
+        const res = await createOrder({
+          amount: selectedAmount,
+          phone: userInfo.phone,
+          customerID: userInfo.id,
+          InvoiceID: invoice,
+          CustomerName: customerName,
+          charges: process.env.REACT_APP_INCOME,
+          orderID: formattedDate(new Date()),
+        }).unwrap();
+
+        const checkoutOptions = {
+          paymentSessionId: res.Session_ID,
+          redirectTarget: '_self',
+        };
+
+        cashfree.checkout(checkoutOptions);
+      } catch (err) {
+        toast.error(err?.data?.message || "Failed to update status");
       }
-      if (selectedPlan === 'Basic') {
-        try {
-          const res = await createOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,charges:process.env.REACT_APP_INCOME,orderID:formattedDate(new Date())}).unwrap()
 
-          let checkoutOptions={
-            paymentSessionId:res.Session_ID,
-            redirectTarget:'_self'
-          }
-
-          cashfree.checkout(checkoutOptions)
-
-        } catch (err) {
-          toast.error(err?.data?.message || "Failed to update status");
-
-        }
-
-      }else if(selectedPlan==='Standard'){
-
-        try {
-          const {data} = await createRazorOrder({amount:selectedAmount,phone:userInfo.phone,customerID:userInfo.id,charges:process.env.REACT_APP_INCOME})
+    } else if (selectedPlan === 'Standard') {
+      try {
+        const { data } = await createRazorOrder({
+          amount: selectedAmount,
+          phone: mobileNumber,
+          customerID: userInfo.id,
+          charges: process.env.REACT_APP_INCOME,
+        });
 
         const options = {
-            key:process.env.REACT_APP_RAZOR_PAY,
-            amount:data.amount,
-            currency:data.currency,
-            name:'Quick Pay',
-            description:"Please make the payment",
-            image:'',
-            order_id:data.orderid,
-            callback_url:process.env.REACT_APP_CALL_BACK_URL,
-            handler:function (response) {
-              console.log("step 10",response);
+          key: process.env.REACT_APP_RAZOR_PAY,
+          amount: data.amount,
+          currency: data.currency,
+          name: 'Quick Pay',
+          description: "Please make the payment",
+          order_id: data.orderid,
+          callback_url: process.env.REACT_APP_CALL_BACK_URL,
+          handler: function (response) {
+            console.log("Razorpay response:", response);
+          },
+          prefill: {
+            name: userInfo.id,
+            email: userInfo.email,
+            contact: userInfo.phone,
+          },
+          theme: {
+            color: '#3399cc',
+          },
+        };
 
-                // window.location.href=""
-            },
-            prefill:{
-                name:userInfo.id,
-                email:userInfo.email,
-                contact:userInfo.phone,
-
-            },
-            theme:{
-                color:'#3399cc'
-            }
-        }
-        const rzp = new window.Razorpay(options)
-        rzp.open()
-        } catch (err) {
-          console.log(err);
-          toast.error(err?.data?.message || "Failed to update status")
-        }
-      }else{
-      console.log("Step 3",selectedPlan);
-
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } catch (err) {
+        toast.error(err?.data?.message || "Failed to update status");
       }
+    }
+  };
 
-
-    };
-
-
-  // const doPayment = async()=>{
-  //   let checkoutOptions={
-  //     paymentSessionId:"",
-  //     redirectTarget:'_self'
-  //   }
-  //   cashfree.checkout(checkoutOptions)
-  // }
   return (
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={24} sm={20} md={16} lg={12}>
@@ -173,25 +180,11 @@ export default function AddBalance() {
           <div className="plan-buttons">
             <Button
               className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
-                          ${selectedPlanButton === 'Basic' ? 'selected' : ''}`}
+              ${selectedPlanButton === 'Basic' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Basic')}
             >
               Service
             </Button>
-            {/* <Button
-              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
-                          ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
-              onClick={() => handlePlanSelect('Standard')}
-            >
-              Service2
-            </Button> */}
-            {/* <Button
-              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
-                          ${selectedPlanButton === 'Premium' ? 'selected' : ''}`}
-              onClick={() => handlePlanSelect('Premium')}
-            >
-              Service3
-            </Button> */}
           </div>
 
           {selectedPlan && (
@@ -200,14 +193,55 @@ export default function AddBalance() {
             </Paragraph>
           )}
 
-          <Input
-            type="number"
-            className="amount-input"
-            placeholder="Enter amount"
-            value={enteredAmount}
-            onChange={handleInputChange}
-          />
+          {/* Form Fields */}
+          <div className="form-container">
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="invoice">Invoice ID</label>
+                <input
+                  type="text"
+                  name="invoice"
+                  placeholder="Invoice ID"
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
 
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="customerName">Customer Name</label>
+                <input
+                  type="text"
+                  name="customerName"
+                  placeholder="Customer Name"
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="mobileNumber">Mobile Number</label>
+                <input
+                  type="text"
+                  name="mobileNumber"
+                  placeholder="Mobile Number"
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="amount">Amount</label>
+                <input
+                  type="number"
+                  name="amount"
+                  placeholder="Enter amount"
+                  value={enteredAmount}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Reference Tags */}
           {referenceAmounts.length > 0 && (
             <div className="reference-tags">
               {referenceAmounts.map((val) => (
@@ -223,13 +257,14 @@ export default function AddBalance() {
             </div>
           )}
 
+          {/* Submit Button */}
           <Button
             type="primary"
             className="add-balance-button"
             disabled={!selectedAmount}
             onClick={handleAddBalance}
           >
-            Get Paymnet
+            Get Payment
           </Button>
         </Card>
       </Col>
