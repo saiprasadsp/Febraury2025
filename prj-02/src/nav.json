@@ -107,21 +107,13 @@
   {
     "key": 8,
     "icon": "FaWallet",
-    "label": "Get Paymnet",
+    "label": "Add Funds",
     "path": "/dashboard/addbalance",
     "roles": [
       "retailer"
     ]
   },
-  {
-    "key": 11,
-    "icon": "FaUniversity",
-    "label": "Settlements",
-    "path": "/dashboard/banktransfer",
-    "roles": [
-      "retailer"
-    ]
-  },
+ 
   {
     "key": 10,
     "icon": "FaCreditCard",
