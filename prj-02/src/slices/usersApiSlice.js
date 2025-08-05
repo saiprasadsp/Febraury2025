@@ -165,7 +165,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         orderStatus:builder.mutation({
             query:(data)=>({
-                url:`${PAYMENTS}/payment-status`,
+                url:`${RAZOR}/payment-status`,
                 method:'POST',
                 body:data
             })
