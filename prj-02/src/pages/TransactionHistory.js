@@ -143,7 +143,13 @@ if (logoData) {
                     amount: item.amount,
                     charges: item.charges,
                     creditamount: item.amount-item.charges,
-                    status: item.status
+                    status: item.status,
+                    invoice_id: item.invoice_id,
+    customer_name: item.customer_name,
+    mobile_number: item.mobile_number,
+
+                     
+
                 }));
                 setData(formattedData);
                 setFilteredData(formattedData);
@@ -169,7 +175,15 @@ if (logoData) {
 
  const columns = [
         { title: "S.No", dataIndex: "sno", width: "5%" },
-        { title: "Customre Number", dataIndex: "murali", width: "10%" },
+        { title: "Customre Details", width: "10%", 
+          render: (_, record) => (
+    <>
+      <div> {record.invoice_id}</div>
+      <div> {record.customer_name}</div>
+      <div>{record.mobile_number}</div>
+    </>
+  ),
+        },
         {
             title: "Transaction Date",
             dataIndex: "Date",

@@ -118,7 +118,7 @@ export default function AddBalance() {
           amount: selectedAmount,
           phone: userInfo.phone,
           customerID: userInfo.id,
-          InvoiceID: invoice,
+          Invoice: invoice,
           CustomerName: customerName,
           charges: process.env.REACT_APP_INCOME,
           orderID: formattedDate(new Date()),
@@ -202,11 +202,11 @@ export default function AddBalance() {
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={24} sm={20} md={16} lg={12}>
         <Card className="inner-card">
-          <Title level={4}>Get Payment</Title>
+          <Title level={4}>Add Funds</Title>
 
           <div className="plan-buttons">
             <Button
-              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
+              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : '
               ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Standard')}
             >
@@ -224,11 +224,11 @@ export default function AddBalance() {
           <div className="form-container">
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="invoice">Invoice ID</label>
+                <label htmlFor="invoice">Email</label>
                 <input
                   type="text"
                   name="invoice"
-                  placeholder="Invoice ID"
+                  placeholder="Email"
                   onChange={handleData}
                 />
               </div>
