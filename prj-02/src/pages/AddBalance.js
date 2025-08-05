@@ -5,6 +5,7 @@ import { load } from "@cashfreepayments/cashfree-js";
 import { useCreateOrderMutation, useCreateRazorOrderMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import { redirect } from 'react-router-dom';
 
 const { Title, Paragraph } = Typography;
 
@@ -134,10 +135,12 @@ export default function AddBalance() {
       }
 
     } else if (selectedPlan === 'Standard') {
+      console.log("step 1");
+
       try {
         const { data } = await createRazorOrder({
           amount: selectedAmount,
-          customerName:customerName,
+          CustomerName:customerName,
           Invoice:invoice,
           phone: mobileNumber,
           customerID: userInfo.id,
@@ -151,9 +154,11 @@ export default function AddBalance() {
           name: 'Quick Pay',
           description: "Please make the payment",
           order_id: data.orderid,
-          callback_url: process.env.REACT_APP_CALL_BACK_URL,
+          // redirect:true,
+          // callback_url: process.env.REACT_APP_CALL_BACK_URL,
           handler: function (response) {
             console.log("Razorpay response:", response);
+            window.location.href = `/dashboard/payment-status?order_id=${data.orderid}&provider=razorpay`
           },
           prefill: {
             name: userInfo.id,
@@ -202,8 +207,8 @@ export default function AddBalance() {
           <div className="plan-buttons">
             <Button
               className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
-              ${selectedPlanButton === 'Basic' ? 'selected' : ''}`}
-              onClick={() => handlePlanSelect('Basic')}
+              ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
+              onClick={() => handlePlanSelect('Standard')}
             >
               Service
             </Button>

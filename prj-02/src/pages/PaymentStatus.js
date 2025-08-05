@@ -12,11 +12,13 @@ export default function PaymentStatus() {
     const {userInfo} = useSelector((state)=>state.auth)
     const calledRef = useRef(false)
     useEffect(()=>{
+
       if (calledRef.current) return;
       calledRef.current=true
 
         const query = new URLSearchParams(location.search)
         const orderId = query.get("order_id")
+
 
         if (!orderId) {
           setStatus('failed')
@@ -27,18 +29,23 @@ export default function PaymentStatus() {
         const checkStatus=async () => {
           try {
             const response = await orderStatus({orderID:orderId,customerID:userInfo.id,charges:process.env.REACT_APP_INCOME})
-            const orderArray = response.data.order_status
-            if (!Array.isArray(orderArray)|| orderArray.length===0) {
-              setStatus('failed')
-              setMessage("No payment found for this order. It may have failed or not been processed")
-              return
-            }
-            const {payment_status} = orderArray[0]
+            // console.log(response);
 
-            if (payment_status === 'SUCCESS') {
+            // const orderArray = response.data.order_status
+            // if (!Array.isArray(orderArray)|| orderArray.length===0) {
+            //   setStatus('failed')
+            //   setMessage("No payment found for this order. It may have failed or not been processed")
+            //   return
+            // }
+            // console.log(orderArray);
+
+            // const {payment_status} = orderArray[0]
+            const {order_status} = response.data
+
+            if (order_status === 'SUCCESS') {
               setStatus('success')
               setMessage('Payment completed Successfully')
-            } else if (payment_status==='PENDING') {
+            } else if (order_status==='PENDING') {
               setStatus('pending')
               setMessage('Payment is in pending')
             }else{
