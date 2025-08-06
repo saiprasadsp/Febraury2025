@@ -58,7 +58,7 @@ export default function RetailerDashboard() {
         </div>
 
         {/* Revenue */}
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <div className="border rounded p-3 h-100">
             <div className="d-flex justify-content-between align-items-center mb-2">
               <h6 className="mb-0">Revenue</h6>
@@ -79,7 +79,7 @@ export default function RetailerDashboard() {
               Go to History
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* Settlements */}
         <div className="col-md-4">

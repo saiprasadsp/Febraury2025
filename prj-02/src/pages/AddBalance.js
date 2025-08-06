@@ -140,8 +140,8 @@ export default function AddBalance() {
       try {
         const { data } = await createRazorOrder({
           amount: selectedAmount,
-          CustomerName:customerName,
-          Invoice:invoice,
+          CustomerName: customerName,
+          Invoice: invoice,
           phone: mobileNumber,
           customerID: userInfo.id,
           charges: process.env.REACT_APP_INCOME,
@@ -178,8 +178,8 @@ export default function AddBalance() {
     }
   };
 
-  const handleData=(e)=>{
-    const {name,value} = e.target
+  const handleData = (e) => {
+    const { name, value } = e.target
     switch (name) {
       case 'invoice':
         setInvoice(value)
@@ -206,12 +206,14 @@ export default function AddBalance() {
 
           <div className="plan-buttons">
             <Button
-              className={`plan-button ${highlightPlanButtons && !selectedPlan ? 'highlight' : '
-              ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
+              className={`plan-button 
+    ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''} 
+    ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
               onClick={() => handlePlanSelect('Standard')}
             >
               Service
             </Button>
+
           </div>
 
           {selectedPlan && (
