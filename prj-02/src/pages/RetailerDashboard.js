@@ -94,7 +94,7 @@ export default function RetailerDashboard() {
             </div>
             <div className="d-flex align-items-center mb-2">
               <img src="https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/settlements.png" alt="Settlements" className="settlements" />
-              <h4 className="ms-3 mb-0">477400.23</h4>
+              <h4 className="ms-3 mb-0">{cBalance}</h4>
             </div>
             <button
               className="bbtn small-rounded-button btn-sm px-3"
