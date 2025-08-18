@@ -107,8 +107,17 @@
   {
     "key": 8,
     "icon": "FaWallet",
-    "label": "Add Funds",
+    "label": " Get Payment",
     "path": "/dashboard/addbalance",
+    "roles": [
+      "retailer"
+    ]
+  },
+  {
+    "key": 11,
+    "icon": "FaUniversity",
+    "label": "Settlements",
+    "path": "/dashboard/banktransfer",
     "roles": [
       "retailer"
     ]
@@ -117,7 +126,7 @@
   {
     "key": 10,
     "icon": "FaCreditCard",
-    "label": "Services",
+    "label": "Bill Payments",
     "path": "/dashboard/BillPayments",
     "roles": [
       "retailer"

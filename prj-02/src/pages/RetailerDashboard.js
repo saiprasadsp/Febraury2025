@@ -52,13 +52,13 @@ export default function RetailerDashboard() {
               className="btn small-rounded-button btn-sm px-3"
               onClick={() => navigate('/dashboard/addbalance')}
             >
-              Add Funds
+               Get Payment
             </button>
           </div>
         </div>
 
         {/* Revenue */}
-        {/* <div className="col-md-4">
+        <div className="col-md-4">
           <div className="border rounded p-3 h-100">
             <div className="d-flex justify-content-between align-items-center mb-2">
               <h6 className="mb-0">Revenue</h6>
@@ -79,13 +79,13 @@ export default function RetailerDashboard() {
               Go to History
             </button>
           </div>
-        </div> */}
+        </div>
 
         {/* Settlements */}
         <div className="col-md-4">
           <div className="border rounded p-3 h-100">
             <div className="d-flex justify-content-between align-items-center mb-2">
-              <h6 className="mb-0">Transactions</h6>
+              <h6 className="mb-0">Settlements</h6>
               <select className="form-select form-select-sm w-auto">
                 <option>Today</option>
                 <option>This Month</option>
@@ -98,9 +98,9 @@ export default function RetailerDashboard() {
             </div>
             <button
               className="bbtn small-rounded-button btn-sm px-3"
-              onClick={() => navigate('/dashboard/reports/transactionhistory')}
+             onClick={() => navigate('/dashboard/banktransfer')}
             >
-              Transaction Histroy
+               Settle Now
             </button>
           </div>
         </div>
@@ -120,9 +120,9 @@ export default function RetailerDashboard() {
 
         <div className="services-grid">
           {[
-            // { label: 'Vendor Payments', path: '/dashboard/banktransfer', icon: 'vendor+payments.png' },
-            // { label: 'Get POS Machine', path: '/dashboard/reports/comingsoon', icon: 'POS_Machine.png' },
-            // { label: 'Get QR Code', path: '/dashboard/reports/comingsoon', icon: 'QRCode.png' },
+            { label: 'Vendor Payments', path: '/dashboard/banktransfer', icon: 'vendor+payments.png' },
+            { label: 'Get POS Machine', path: '/dashboard/reports/comingsoon', icon: 'POS_Machine.png' },
+            { label: 'Get QR Code', path: '/dashboard/reports/comingsoon', icon: 'QRCode.png' },
             { label: 'Fast Tag', path: '/dashboard/reports/comingsoon', icon: 'Fast+Tag.png' },
             { label: 'Electricity', path: '/dashboard/reports/comingsoon', icon: 'Electricity_Bill.png' },
             { label: 'Mobile', path: '/dashboard/reports/comingsoon', icon: 'Recharge.png' },
