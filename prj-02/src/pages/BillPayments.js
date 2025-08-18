@@ -15,13 +15,13 @@ export default function BillPayments() {
     { name: "Electricity", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Electricity_Bill.png", path: "/dashboard/bill/electricity" },
     { name: "Gas", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Cylinder.png", path: "/dashboard/bill/gas" },
     { name: "Mobile Recharge", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Recharge.png", path: "/dashboard/bill/mobile" },
-    // { name: "POS Machine", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/POS_Machine.png", path: "/dashboard/bill/pos" },
-    // { name: "QR Code", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/QRCode.png", path: "/dashboard/bill/qr" }, 
+    { name: "POS Machine", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/POS_Machine.png", path: "/dashboard/bill/pos" },
+    { name: "QR Code", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/QRCode.png", path: "/dashboard/bill/qr" }, 
     { name: "Insurance", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Insurance.png", path: "/dashboard/bill/fasttag" },
     { name: "Loan EMI", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Loan+EMI.png", path: "/dashboard/bill/fasttag" },
     { name: "Subscription", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/subscriptionns.png", path: "/dashboard/bill/fasttag" },
     { name: "Tax Payments", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/Tax.png", path: "/dashboard/bill/fasttag" },
-    // { name: "Vendor Payments", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/vendor+payments.png", path: "/dashboard/bill/fasttag" },
+    { name: "Vendor Payments", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/vendor+payments.png", path: "/dashboard/bill/fasttag" },
     { name: "Water Bill", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/water.png", path: "/dashboard/bill/fasttag" },
   ];
 

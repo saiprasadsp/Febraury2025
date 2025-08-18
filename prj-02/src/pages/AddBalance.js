@@ -202,7 +202,7 @@ export default function AddBalance() {
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={24} sm={20} md={16} lg={12}>
         <Card className="inner-card">
-          <Title level={4}>Add Funds</Title>
+          <Title level={4}> Get Payment</Title>
 
           <div className="plan-buttons">
             <Button
