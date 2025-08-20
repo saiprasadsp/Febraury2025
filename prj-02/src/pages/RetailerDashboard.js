@@ -82,7 +82,7 @@ export default function RetailerDashboard() {
         </div>
 
         {/* Settlements */}
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <div className="border rounded p-3 h-100">
             <div className="d-flex justify-content-between align-items-center mb-2">
               <h6 className="mb-0">Settlements</h6>
@@ -103,7 +103,7 @@ export default function RetailerDashboard() {
                Settle Now
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Bill Services */}
@@ -123,15 +123,15 @@ export default function RetailerDashboard() {
             { label: 'Vendor Payments', path: '/dashboard/banktransfer', icon: 'vendor+payments.png' },
             { label: 'Get POS Machine', path: '/dashboard/reports/comingsoon', icon: 'POS_Machine.png' },
             { label: 'Get QR Code', path: '/dashboard/reports/comingsoon', icon: 'QRCode.png' },
-            // { label: 'Fast Tag', path: '/dashboard/reports/comingsoon', icon: 'Fast+Tag.png' },
-            // { label: 'Electricity', path: '/dashboard/reports/comingsoon', icon: 'Electricity_Bill.png' },
-            // { label: 'Mobile', path: '/dashboard/reports/comingsoon', icon: 'Recharge.png' },
-            // { label: 'Credit Card', path: '/dashboard/reports/comingsoon', icon: 'Credit_Card.png' },
-            // { label: 'Broad Band', path: '/dashboard/reports/comingsoon', icon: 'Broadband.jpeg' },
-            // { label: 'Loan Repayment', path: '/dashboard/reports/comingsoon', icon: 'Loan+EMI.png' },
-            // { label: 'DTH', path: '/dashboard/reports/comingsoon', icon: 'DTH.png' },
-            // { label: 'Tax', path: '/dashboard/reports/comingsoon', icon: 'Tax.png' },
-            // { label: 'Water', path: '/dashboard/reports/comingsoon', icon: 'water.png' },
+            { label: 'Fast Tag', path: '/dashboard/reports/comingsoon', icon: 'Fast+Tag.png' },
+            { label: 'Electricity', path: '/dashboard/reports/comingsoon', icon: 'Electricity_Bill.png' },
+            { label: 'Mobile', path: '/dashboard/reports/comingsoon', icon: 'Recharge.png' },
+            { label: 'Credit Card', path: '/dashboard/reports/comingsoon', icon: 'Credit_Card.png' },
+            { label: 'Broad Band', path: '/dashboard/reports/comingsoon', icon: 'Broadband.jpeg' },
+            { label: 'Loan Repayment', path: '/dashboard/reports/comingsoon', icon: 'Loan+EMI.png' },
+            { label: 'DTH', path: '/dashboard/reports/comingsoon', icon: 'DTH.png' },
+            { label: 'Tax', path: '/dashboard/reports/comingsoon', icon: 'Tax.png' },
+            { label: 'Water', path: '/dashboard/reports/comingsoon', icon: 'water.png' },
           ].map((service, index) => (
             <button
               key={index}

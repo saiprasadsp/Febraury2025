@@ -116,15 +116,7 @@
       "retailer"
     ]
   },
-  {
-    "key": 11,
-    "icon": "FaUniversity",
-    "label": "Settlements",
-    "path": "/dashboard/banktransfer",
-    "roles": [
-      "retailer"
-    ]
-  },
+  
  
   {
     "key": 10,
