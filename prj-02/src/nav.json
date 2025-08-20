@@ -7,7 +7,9 @@
     "roles": [
       "superadmin",
       "distributor",
-      "retailer"
+      "retailer",
+      "wholesaler",
+      "reports"
     ]
   },
   {
@@ -101,7 +103,8 @@
     "path": "/dashboard/settings",
     "roles": [
       "superadmin",
-      "distributor"
+      "distributor",
+      "wholesaler"
     ]
   },
   {
@@ -126,7 +129,7 @@
   {
     "key": 10,
     "icon": "FaCreditCard",
-    "label": "Bill Payments",
+    "label": "Services",
     "path": "/dashboard/BillPayments",
     "roles": [
       "retailer"

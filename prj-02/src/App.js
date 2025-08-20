@@ -63,7 +63,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
 
-      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['distributor', "superadmin","retailer"]}><Dashboard /></ProtectedRoute>}>
+      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['distributor', "superadmin","retailer","wholesaler","reports"]}><Dashboard /></ProtectedRoute>}>
         <Route index={true} element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Content /></ProtectedRoute>} />
 
         <Route path="retail" element={<ProtectedRoute allowedRoles={["superadmin"]}><Retail /></ProtectedRoute>} />
@@ -96,7 +96,7 @@ function App() {
         </Route>
 
 
-        <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Settings /></ProtectedRoute>} />
+        <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","wholesaler"]}><Settings /></ProtectedRoute>} />
         <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer"]}><Profile /></ProtectedRoute>} />
         <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Register /></ProtectedRoute>} />
         <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer"]}><AddBalance/></ProtectedRoute>} />
@@ -106,6 +106,7 @@ function App() {
         <Route path="addcreditcard" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="comingsoon" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
         <Route path="transactionhistory" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
+
         <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer"]}><PaymentStatus/></ProtectedRoute>} />
         <Route path="billpayments" element={<ProtectedRoute allowedRoles={["retailer"]}><BillPayments/></ProtectedRoute>} />
       </Route>
