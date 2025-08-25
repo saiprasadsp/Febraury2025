@@ -47,6 +47,8 @@ import BillPayments from "./pages/BillPayments";
 import AboutUs from "./pages/Webpages/AboutUs";
 import Features from "./pages/Webpages/Features";
 import HowItWorks from "./pages/Webpages/HowItWorks";
+import RetailerDashboard from "./pages/RetailerDashboard";
+
 
 
 
@@ -84,7 +86,7 @@ function App() {
           <Route path="addRetailer" element={<ProtectedRoute allowedRoles={["distributor"]}><AddRetailer /></ProtectedRoute>}/>
           <Route path="retailerMargin" element={<RetailerMargin />} />
         </Route>
-        <Route path="reports" element={<ProtectedRoute allowedRoles={['retailer']}><Reports/></ProtectedRoute>}>
+        <Route path="reports" element={<ProtectedRoute allowedRoles={['retailer','wholesaler']}><Reports/></ProtectedRoute>}>
         <Route index={true} element={<AddBalance/>}/>
         <Route path="banktransfer" element={<BankTransfer/>}/>
         <Route path="payments" element={<Payments/>}/>
@@ -96,19 +98,18 @@ function App() {
         </Route>
 
 
-        <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","wholesaler"]}><Settings /></ProtectedRoute>} />
-        <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer"]}><Profile /></ProtectedRoute>} />
+        <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Settings /></ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer","wholesaler"]}><Profile /></ProtectedRoute>} />
         <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Register /></ProtectedRoute>} />
-        <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer"]}><AddBalance/></ProtectedRoute>} />
-        <Route path="banktransfer" element={<ProtectedRoute allowedRoles={["retailer"]}><BankTransfer/></ProtectedRoute>} />
-        <Route path="addnewbankaccount" element={<ProtectedRoute allowedRoles={["retailer"]}><AddNewBankAccount/></ProtectedRoute>} />
-        <Route path="payments" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
-        <Route path="addcreditcard" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
-        <Route path="comingsoon" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
-        <Route path="transactionhistory" element={<ProtectedRoute allowedRoles={["retailer"]}><Payments/></ProtectedRoute>} />
-
-        <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer"]}><PaymentStatus/></ProtectedRoute>} />
-        <Route path="billpayments" element={<ProtectedRoute allowedRoles={["retailer"]}><BillPayments/></ProtectedRoute>} />
+        <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><AddBalance/></ProtectedRoute>} />
+        <Route path="banktransfer" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><BankTransfer/></ProtectedRoute>} />
+        <Route path="addnewbankaccount" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><AddNewBankAccount/></ProtectedRoute>} />
+        <Route path="payments" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><Payments/></ProtectedRoute>} />
+        <Route path="addcreditcard" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><Payments/></ProtectedRoute>} />
+        <Route path="comingsoon" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><Payments/></ProtectedRoute>} />
+        <Route path="transactionhistory" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><Payments/></ProtectedRoute>} />
+        <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><PaymentStatus/></ProtectedRoute>} />
+        <Route path="billpayments" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><BillPayments/></ProtectedRoute>} />
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
       <Route path="/user" element={<ProtectedRoute allowedRoles={["distributor"]} ><Userpage /></ProtectedRoute>} />

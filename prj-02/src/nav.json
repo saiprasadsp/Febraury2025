@@ -103,8 +103,8 @@
     "path": "/dashboard/settings",
     "roles": [
       "superadmin",
-      "distributor",
-      "wholesaler"
+      "distributor"
+      
     ]
   },
   {
@@ -113,10 +113,19 @@
     "label": " Get Payment",
     "path": "/dashboard/addbalance",
     "roles": [
-      "retailer"
+      "retailer",
+       "wholesaler"
     ]
   },
-  
+  {
+    "key": 11,
+    "icon": "FaUniversity",
+    "label": "Settlements",
+    "path": "/dashboard/banktransfer",
+    "roles": [
+       "wholesaler"
+    ]
+  },
  
   {
     "key": 10,
@@ -124,7 +133,7 @@
     "label": "Services",
     "path": "/dashboard/BillPayments",
     "roles": [
-      "retailer"
+      "retailer", "wholesaler"
     ]
   },
   {
@@ -132,7 +141,7 @@
     "icon": "AiOutlineSetting",
     "label": "Invoice & Reports",
     "roles": [
-      "retailer"
+      "retailer", "wholesaler"
     ],
     "children": [
       {
@@ -154,7 +163,8 @@
     "icon": "AiOutlineSetting",
     "label": "Account Settings",
     "roles": [
-      "retailer"
+      "retailer",
+       "wholesaler"
     ],
     "children": [
       {
