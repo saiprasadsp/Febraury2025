@@ -6,7 +6,7 @@ import { useUpdateUserMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { setLogin, setLogout } from '../redux/authSlice';
 
-export default function Profile() {
+export default function TPIN() {
   const[userId,setUserId] = useState('')
   const[email,setEmail] = useState('')
   const[password,setPassword] = useState('')
@@ -45,7 +45,7 @@ export default function Profile() {
   }
   return (
     <FormContainer >
-      <h1>Update Password</h1>
+      <h1>Update TPIN</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className='my-2' controlId='userid'>
           <Form.Label>UserID</Form.Label>
@@ -54,16 +54,16 @@ export default function Profile() {
         </Form.Group>
         <Form.Group className='my-2' controlId='email'>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' placeholder='Enter email' value={email} readOnly onChange={(e)=>setEmail(e.target.value)}>
+          <Form.Control type='email' placeholder='Enter email' value={email} readOnly  onChange={(e)=>setEmail(e.target.value)}>
           </Form.Control>
         </Form.Group>
         <Form.Group className='my-2' controlId='password'>
-          <Form.Label>Password</Form.Label>
+          <Form.Label>New TPIN</Form.Label>
           <Form.Control type='password' placeholder='Enter password' value={password} onChange={(e)=>setPassword(e.target.value)}>
           </Form.Control>
         </Form.Group>
         <Form.Group className='my-2' controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Confirm TPIN</Form.Label>
           <Form.Control type='password' placeholder='Confirm password' value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}>
           </Form.Control>
         </Form.Group>

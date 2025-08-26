@@ -48,7 +48,7 @@ import AboutUs from "./pages/Webpages/AboutUs";
 import Features from "./pages/Webpages/Features";
 import HowItWorks from "./pages/Webpages/HowItWorks";
 import WSdashboard from "./pages/WholeSalerDashboard";
-
+import TPIN from "./pages/TPIN";
 
 
 
@@ -110,6 +110,8 @@ function App() {
         <Route path="transactionhistory" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><Payments/></ProtectedRoute>} />
         <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><PaymentStatus/></ProtectedRoute>} />
         <Route path="billpayments" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><BillPayments/></ProtectedRoute>} />
+       <Route path="tpin" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><TPIN/></ProtectedRoute>} />
+        
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
       <Route path="/user" element={<ProtectedRoute allowedRoles={["distributor"]} ><Userpage /></ProtectedRoute>} />
@@ -121,6 +123,7 @@ function App() {
       <Route path="/footer" element={<Footer/>} />
       <Route path="/features" element={<Features/>} />
       <Route path="/howitworks" element={<HowItWorks/>} />
+      
       {/* <Route path="/home" element={<HomePage/>} /> */}
 
 
