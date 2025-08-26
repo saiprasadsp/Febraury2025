@@ -47,7 +47,7 @@ import BillPayments from "./pages/BillPayments";
 import AboutUs from "./pages/Webpages/AboutUs";
 import Features from "./pages/Webpages/Features";
 import HowItWorks from "./pages/Webpages/HowItWorks";
-import RetailerDashboard from "./pages/RetailerDashboard";
+import WSdashboard from "./pages/WholeSalerDashboard";
 
 
 
@@ -97,7 +97,7 @@ function App() {
         <Route path="TransactionHistory" element={<TransactionHistory/>} />
         </Route>
 
-
+       <Route path="WSdashboard" element={<ProtectedRoute allowedRoles={["wholesaler"]}><WSdashboard /></ProtectedRoute>} />
         <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Settings /></ProtectedRoute>} />
         <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer","wholesaler"]}><Profile /></ProtectedRoute>} />
         <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Register /></ProtectedRoute>} />

@@ -15,7 +15,9 @@ import {
   AiOutlineSetting,
   AiOutlineBook,
   AiOutlineFileText,
+  AiOutlineAppstore ,
 } from "react-icons/ai";
+
 import {
   FaCreditCard,
   FaUniversity,
@@ -95,8 +97,9 @@ export default function Dashboard() {
       1: <AiOutlineDashboard />, 2: <AiOutlineTeam />, 3: <AiOutlineShop />,
       4: <AiOutlineTransaction />, 5: <AiOutlineDollarCircle />,
       6: <AiOutlineCheckCircle />, 7: <AiOutlineSetting />, 8: <FaWallet />,
-      9: <FaUserCheck />, 10: <FaCreditCard />, 11: <FaUniversity />,
+      9: <FaUserCheck />, 10: <AiOutlineAppstore   />, 11: <FaUniversity />,
       12: <AiOutlineBook />, 13: <AiOutlineFileText />, 14: <FaUserPlus />,
+       15: <AiOutlineDashboard />,
     };
     return icons[key] || null;
   };

@@ -1,5 +1,14 @@
 [
   {
+  "key": 15,
+  "icon": "AiOutlineDashboard",
+  "label": "Home",
+  "path": "/dashboard/WSdashboard",
+  "roles": [
+    "wholesaler"
+  ]
+},
+  {
     "key": 1,
     "icon": "AiOutlineUser",
     "label": "Dashboard",
@@ -8,7 +17,6 @@
       "superadmin",
       "distributor",
       "retailer",
-      "wholesaler",
       "reports"
     ]
   },
@@ -175,4 +183,5 @@
       }
     ]
   }  
+ 
 ]

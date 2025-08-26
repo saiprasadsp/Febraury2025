@@ -1,12 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";  // 👈 to get role from Redux
 import '../styles/BillPayments.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function BillPayments() {
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth); // get role
 
-  const billServices = [
+  const allServices = [
     { name: "Vendor Payments", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/vendor+payments.png", path: "/dashboard/banktransfer" },
     { name: "POS Machine", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/POS_Machine.png", path: "/dashboard/reports/comingsoon" },
     { name: "QR Code", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/QRCode.png", path: "/dashboard/reports/comingsoon" }, 
@@ -25,9 +27,17 @@ export default function BillPayments() {
     { name: "Water Bill", url: "https://announcementsgenysoft.s3.ap-south-1.amazonaws.com/thequcikpaymeicons/water.png", path: "/dashboard/bill/fasttag" },
   ];
 
+  // Wholesaler specific services
+  const wholesalerServices = allServices.filter(service =>
+    ["Vendor Payments", "POS Machine", "QR Code", "Tax Payments"].includes(service.name)
+  );
+
+  // Pick services based on role
+  const billServices = userInfo?.role === "wholesaler" ? wholesalerServices : allServices;
+
   return (
     <div className="bill-payment-container container mt-4">
-      <h4 className="mb-3">Bill Payments</h4>
+      <h4 className="mb-3">Services & Payments</h4>
 
       <div className="big-box p-4 rounded shadow-sm">
         <div className="icon-grid">
