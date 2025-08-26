@@ -178,8 +178,14 @@
       {
         "key": 104,
         "icon": "AiOutlineLock",
-        "label": "Change Password",
+        "label": "Update Password",
         "path": "/dashboard/profile"
+      },
+      {
+        "key": 105,
+        "icon": "AiOutlineLock",
+        "label": "Update TPIN",
+        "path": "/dashboard/tpin"
       }
     ]
   }  
