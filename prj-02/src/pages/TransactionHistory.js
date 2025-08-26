@@ -194,7 +194,35 @@ if (logoData) {
         { title: "Amount", dataIndex: "amount", width: "5%" },
         { title: "Charges", dataIndex: "charges", width: "8%" },
         { title: "Credit Amount", dataIndex: "creditamount", width: "8%" },
-        { title: "Status", dataIndex: "status", width: "7%" },
+        {
+  title: "Status",
+  dataIndex: "status",
+  width: "7%",
+  render: (status) => {
+    let color =
+      status?.toLowerCase() === "success"
+        ? "green"
+        : status?.toLowerCase() === "pending"
+        ? "gold"
+        : "red";
+
+    return (
+      <span
+        style={{
+          backgroundColor: color,
+          color: "white",
+          padding: "2px 8px",
+          borderRadius: "12px",
+          fontSize: "12px",
+          fontWeight: 500,
+        }}
+      >
+        {status}
+      </span>
+    );
+  },
+}
+,
        {
   title: "Action",
   dataIndex: "invoice",

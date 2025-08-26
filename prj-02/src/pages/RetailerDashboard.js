@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { useRetailerMutation } from "../slices/usersApiSlice";
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useOrderHistoryMutation } from "../slices/usersApiSlice";
+import dayjs from "dayjs";
+
+
 
 export default function RetailerDashboard() {
   const [cBalance,setCBalance] = useState(0)
@@ -13,7 +17,33 @@ export default function RetailerDashboard() {
   const navigate = useNavigate();
   const [retailer] = useRetailerMutation()
   const {userInfo} = useSelector((state)=>state.auth)
+  const [transactions, setTransactions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [orderHistory] = useOrderHistoryMutation();
+  
+useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const res = await orderHistory({ userId: userInfo.id }).unwrap();
+        const formattedData = res?.orders.map((item, index) => ({
+          id: index,
+          date: item.payment_date,
+          transactionid: item.order_id,
+          amount: item.amount,
+          charges: item.charges,
+          creditamount: item.amount - item.charges,
+          status: item.status,
+        }));
+        setTransactions(formattedData);
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchTransactions();
+  }, [orderHistory, userInfo]);
   useEffect(()=>{
     const fetchDashboard = async () => {
       try {
@@ -152,38 +182,74 @@ export default function RetailerDashboard() {
         </div>
       </div>
 
+  {/* Recent Transactions */}
+    <div className="border rounded p-3 mb-5">
+  <div className="d-flex justify-content-between align-items-center mb-3">
+    <h6 className="mb-0">Recent Transaction</h6>
+    <div className="d-flex gap-2">
+      <select className="form-select form-select-sm w-auto">
+        <option>Today</option>
+        <option>This Month</option>
+      </select>
+      <button className="btn btn-outline-primary btn-sm px-3">Export</button>
+    </div>
+  </div>
 
-      {/* Recent Transactions */}
-      <div className="border rounded p-3 mb-5">
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h6 className="mb-0">Recent Transaction</h6>
-          <div className="d-flex gap-2">
-            <select className="form-select form-select-sm w-auto">
-              <option>Today</option>
-              <option>This Month</option>
-            </select>
-            <button className="btn btn-outline-primary btn-sm px-3">Export</button>
-          </div>
-        </div>
+  <table className="table table-sm text-center">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Transaction Date</th>
+        <th>Transaction ID</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {loading ? (
+        <tr>
+          <td colSpan="5" className="text-center py-4">
+            <div className="text-muted">Loading...</div>
+          </td>
+        </tr>
+      ) : transactions.length > 0 ? (
+        transactions.map((txn, index) => (
+          <tr key={txn.id}>
+            <td>{index + 1}</td>
+            <td>{dayjs(txn.date).format("DD-MM-YYYY hh:mm A")}</td>
+            
+            <td>{txn.transactionid}</td>
+            <td>₹{txn.amount}</td>
+            <td>
+              <span
+                className={`badge ${
+                  txn.status?.toLowerCase() === "success"
+                    ? "bg-success"
+                    : txn.status?.toLowerCase() === "pending"
+                    ? "bg-warning"
+                    : "bg-danger"
+                }`}
+              >
+                {txn.status}
+              </span>
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan="5" className="text-center py-4">
+            <div className="text-muted">
+              No recent activity to show here.
+              <br />Get started by making a transaction
+            </div>
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
 
-        <table className="table table-sm text-center">
-          <thead>
-            <tr>
-              <th>Transaction type</th>
-              <th>Amount</th>
-              <th>Transaction date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colSpan="4" className="text-center py-4">
-                <div className="text-muted">No recent activity to show here.<br />Get started by making a transaction</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  
 
       {/* Footer */}
       <div className="retailer-footer">
@@ -192,3 +258,4 @@ export default function RetailerDashboard() {
     </div>
   );
 }
+      
