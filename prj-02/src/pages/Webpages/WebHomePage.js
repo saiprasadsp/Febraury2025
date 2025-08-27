@@ -42,7 +42,7 @@ function HomePage() {
           </button>
           <button
             className="homepage-btn"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/contactus")}
           >
             Get Started
           </button>

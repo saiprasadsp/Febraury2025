@@ -49,8 +49,9 @@ import Features from "./pages/Webpages/Features";
 import HowItWorks from "./pages/Webpages/HowItWorks";
 import WSdashboard from "./pages/WholeSalerDashboard";
 import TPIN from "./pages/TPIN";
-
-
+import ForgotPassword from "./pages/ForgotPassword";
+import OTP from "./pages/Email-otp";
+import PasswordSetup from "./pages/PasswordSetup";
 
 
 const RequireAuth = ({ children }) => {
@@ -123,9 +124,14 @@ function App() {
       <Route path="/footer" element={<Footer/>} />
       <Route path="/features" element={<Features/>} />
       <Route path="/howitworks" element={<HowItWorks/>} />
+      <Route path="/forgotpassword" element={<ForgotPassword/>} />
+      <Route path="/emailotp" element={<OTP/>} />
+      <Route path="/passwordsetup" element={<PasswordSetup/>} />
+
+      
       
       {/* <Route path="/home" element={<HomePage/>} /> */}
-
+f
 
     </Routes>
 
