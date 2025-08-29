@@ -10,12 +10,20 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { data, error, isLoading } = useGetUserQuery(null, {
-    skip: !!userInfo,  // don't call if userInfo already exists
-  });
+  const token = userInfo?.token;
+
+const { data, error, isLoading } = useGetUserQuery(null, {
+  skip: !token,   // only fetch if token exists
+});
+
+  // const { data, error, isLoading } = useGetUserQuery(null, {
+  //   skip: !!userInfo,  // don't call if userInfo already exists
+  // });
 
   useEffect(() => {
+
     if (data) {
+
       dispatch(setLogin(data)); // set user info from profile API
     } else if (error) {
       dispatch(setLogout());
@@ -27,7 +35,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   if (!userInfo) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (!userInfo.termsAccepted) {

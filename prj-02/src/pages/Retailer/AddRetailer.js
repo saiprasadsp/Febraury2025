@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/AddDistributor.css";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useCreateRetailerMutation } from "../../slices/usersApiSlice";
-import PdfUploader from "../../Components/PdfUploader"; 
+import { useCreateRetailerMutation,useAadharMutation } from "../../slices/usersApiSlice";
+import PdfUploader from "../../Components/PdfUploader";
 const { Option } = Select;
 
 const steps = [
@@ -20,6 +20,7 @@ const AddRetailer = () => {
     const [current, setCurrent] = useState(0);
     const [form] = Form.useForm();
     const [createRetailer, { isLoading }] = useCreateRetailerMutation();
+    const [aadhar] = useAadharMutation();
     const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state.auth);
 
@@ -101,6 +102,17 @@ const AddRetailer = () => {
         }));
     };
 
+    const handleAadhar=async()=>{
+        console.log("step 1");
+        console.log(formData.aadharNumber);
+
+        const res = await aadhar({aadhar:formData.aadharNumber}).unwrap;
+        console.log(res);
+
+
+
+    }
+
 
     return (
         <div style={{ width: "80%", margin: "auto" }}>
@@ -139,7 +151,7 @@ const AddRetailer = () => {
                                         onChange={(e) => {
                                             let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
                                             value = value.slice(0, 12); // Limit to 12 digits
-                                            value = value.replace(/(\d{4})/g, "$1 ").trim(); // Format with spaces
+                                            // value = value.replace(/(\d{4})/g, "$1 ").trim(); // Format with spaces
 
                                             form.setFieldsValue({ aadharNumber: value }); // Update Ant Design form state
                                             setFormData((prev) => ({
@@ -149,6 +161,7 @@ const AddRetailer = () => {
                                         }}
                                         name="aadharNumber"
                                     />
+                                    <button onClick={handleAadhar}>Verify</button>
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -468,4 +481,3 @@ const AddRetailer = () => {
 };
 
 export default AddRetailer;
-
