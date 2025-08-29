@@ -5,7 +5,7 @@ import "../../styles/AddDistributor.css";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useCreateRetailerMutation } from "../../slices/usersApiSlice";
-import PdfUploader from "../../Components/PdfUploader"; 
+import PdfUploader from "../../Components/PdfUploader";
 const { Option } = Select;
 
 const steps = [
@@ -244,6 +244,46 @@ const AddRetailer = () => {
                 {current === 1 && (
                     <>
                         <Row gutter={16}>
+                            
+                            <Col span={12}>
+                                <Form.Item
+                                    name="panNumber"
+                                    label="PAN Number"
+                                    rules={[
+                                        { required: true, message: "Please enter PAN number" },
+                                        { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]$/, message: "Enter a valid PAN (e.g., ABCDE1234F)" }
+                                    ]}
+                                    normalize={(value) => value.toUpperCase()} // Automatically converts to uppercase
+                                >
+                                    <div style={{ position: "relative" }}>
+                                        <Input
+                                            maxLength={10}
+                                            value={formData.panNumber}
+                                            onChange={handleInputChange}
+                                            name="panNumber"
+                                            style={{ paddingRight: "90px" }} // give space for button
+                                        />
+                                        <Button
+                                            type="primary"
+                                            size="small"
+                                            style={{
+                                                position: "absolute",
+                                                right: "5px",
+                                                top: "50%",
+                                                transform: "translateY(-50%)",
+                                                borderRadius: "6px",
+                                                backgroundColor: "#1F6281",
+                                                color: "#fff",
+                                                border: "none"
+                                            }}
+                                            onClick={handleInputChange}
+                                        >
+                                            Verify Name
+                                        </Button>
+                                    </div>
+                                </Form.Item>
+                            </Col>
+                        
                             <Col span={12}>
                                 <Form.Item
                                     name="panName"
@@ -253,20 +293,8 @@ const AddRetailer = () => {
                                     <Input value={formData.panName} onChange={handleInputChange} name="panName" />
                                 </Form.Item>
                             </Col>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="panNumber"
-                                    label="PAN Number"
-                                    rules={[
-                                        { required: true, message: "Please enter PAN number" },
-                                        { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]$/, message: "Enter a valid PAN (e.g., ABCDE1234F)" }
-                                    ]}
-                                    normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
-                                >
-                                    <Input maxLength={10} onChange={handleInputChange} value={formData.panNumber} name='panNumber'/>
-                                </Form.Item>
 
-                            </Col>
+
                         </Row>
                         <Row gutter={16}>
                             <Col span={12}>
@@ -428,7 +456,7 @@ const AddRetailer = () => {
                                     ]}
                                     normalize={(value) => value.toUpperCase()} // Automatically converts input to uppercase
                                 >
-                                    <Input maxLength={11} onChange={handleInputChange} value={form.IFSC} name="IFSC"/>
+                                    <Input maxLength={11} onChange={handleInputChange} value={form.IFSC} name="IFSC" />
                                 </Form.Item>
 
                             </Col>
