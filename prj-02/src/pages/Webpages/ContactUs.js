@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from "../../pages/Webpages/WebPageHeader.js";
 import Footer from "../../pages/Webpages/WebPageFooter.js";
-import '../../styles/ContactUs.css';  
+import '../../styles/ContactUs.css';
 import contactImage from '../../assets/WebPage/Contactus.png';
 import { EnvironmentOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
+import { useContactMutation } from "../../slices/usersApiSlice";
+import { toast } from 'react-toastify';
 
 const ContactUs = () => {
+  const [contact,{isLoading}] = useContactMutation()
+  const [formData,setFormData] = useState({
+    firstName:'',
+    lastName:"",
+    email:"",
+    mobile:"",
+    message:""
+  })
+  const handleContact = async()=>{
+    console.log(formData);
+
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+            data.append(key, value);
+        });
+    try {
+      const res = await contact(data).unwrap()
+      console.log(res);
+
+    } catch (err) {
+     console.error(err);
+      toast.error(err?.data?.message)
+    }
+  }
+
+  const handleInputChange =(e)=>{
+    const {name,value}=e.target
+    setFormData((prevData)=>({
+      ...prevData,
+      [name]:value
+    }))
+  }
   return (
     <div>
       <Header />
@@ -24,13 +58,13 @@ const ContactUs = () => {
             </p>
             <form>
               <div className="contact-page-input-row">
-                <input type="text" placeholder="Last Name" />
-                <input type="text" placeholder="First Name" />
+                <input type="text" placeholder="Last Name" name='firstName' value={formData.firstName} onChange={handleInputChange}/>
+                <input type="text" placeholder="First Name" name='lastName' value={formData.lastName} onChange={handleInputChange}/>
               </div>
-              <input type="email" placeholder="Email" />
-              <input type="tel" placeholder="Phone Number" />
-              <textarea placeholder="Message"></textarea>
-              <button className="contact-page-submit-button">Send it to the moon</button>
+              <input type="email" placeholder="Email" name='email' value={formData.email} onChange={handleInputChange}/>
+              <input type="tel" placeholder="Phone Number" name='mobile' value={formData.mobile} onChange={handleInputChange}/>
+              <textarea placeholder="Message" name='message' value={formData.message} onChange={handleInputChange}></textarea>
+              <button className="contact-page-submit-button" onClick={handleContact}>Send it to the moon</button>
             </form>
           </div>
 
