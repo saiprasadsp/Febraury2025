@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/AddDistributor.css";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useCreateRetailerMutation,useAadharMutation } from "../../slices/usersApiSlice";
+import { useCreateRetailerMutation,useAadharMutation,usePanMutation } from "../../slices/usersApiSlice";
 import PdfUploader from "../../Components/PdfUploader";
 const { Option } = Select;
 
@@ -21,6 +21,7 @@ const AddRetailer = () => {
     const [form] = Form.useForm();
     const [createRetailer, { isLoading }] = useCreateRetailerMutation();
     const [aadhar] = useAadharMutation();
+    const [pan]=usePanMutation()
     const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state.auth);
 
@@ -101,6 +102,12 @@ const AddRetailer = () => {
             [name]: value.toUpperCase(),
         }));
     };
+
+    const handleVerification=async()=>{
+        const res = await pan({pan:formData.panNumber}).unwrap
+        console.log(res.data);
+
+    }
 
     const handleAadhar=async()=>{
         console.log("step 1");
@@ -257,7 +264,7 @@ const AddRetailer = () => {
                 {current === 1 && (
                     <>
                         <Row gutter={16}>
-                            
+
                             <Col span={12}>
                                 <Form.Item
                                     name="panNumber"
@@ -289,14 +296,14 @@ const AddRetailer = () => {
                                                 color: "#fff",
                                                 border: "none"
                                             }}
-                                            onClick={handleInputChange}
+                                            onClick={handleVerification}
                                         >
                                             Verify Name
                                         </Button>
                                     </div>
                                 </Form.Item>
                             </Col>
-                        
+
                             <Col span={12}>
                                 <Form.Item
                                     name="panName"
