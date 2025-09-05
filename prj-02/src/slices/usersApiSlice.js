@@ -8,7 +8,7 @@ const DASHBOARD = `${process.env.REACT_APP_API}/dashboard`
 const PAYMENTS = `${process.env.REACT_APP_API}/payments`
 const RAZOR = `${process.env.REACT_APP_API}/razor`
 const CASHFREE = `${process.env.REACT_APP_API}/cashfree`
-const Contact = `${process.env.REACT_APP_API}/`
+const Contact = `${process.env.REACT_APP_API}/contact`
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:(builder)=>({
@@ -209,7 +209,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         contact:builder.mutation({
             query:(data)=>({
-                url:`${Contact}`,
+                url:`${Contact}/`,
                 method:'POST',
                 body:data
             })
