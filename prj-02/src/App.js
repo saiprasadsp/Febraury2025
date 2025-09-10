@@ -52,6 +52,7 @@ import TPIN from "./pages/TPIN";
 import ForgotPassword from "./pages/ForgotPassword";
 import OTP from "./pages/Email-otp";
 import PasswordSetup from "./pages/PasswordSetup";
+import { ToastContainer } from "react-toastify";
 
 
 const RequireAuth = ({ children }) => {
@@ -60,7 +61,8 @@ const RequireAuth = ({ children }) => {
 };
 
 function App() {
-  return (
+  return (<>
+  <ToastContainer/>
     <Routes>
       <Route path="/" element={<HomePage/>} />
       <Route path="/login" element={<Login />} />
@@ -112,7 +114,7 @@ function App() {
         <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><PaymentStatus/></ProtectedRoute>} />
         <Route path="billpayments" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><BillPayments/></ProtectedRoute>} />
        <Route path="tpin" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><TPIN/></ProtectedRoute>} />
-        
+
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
       <Route path="/user" element={<ProtectedRoute allowedRoles={["distributor"]} ><Userpage /></ProtectedRoute>} />
@@ -125,15 +127,17 @@ function App() {
       <Route path="/features" element={<Features/>} />
       <Route path="/howitworks" element={<HowItWorks/>} />
       <Route path="/forgotpassword" element={<ForgotPassword/>} />
-      <Route path="/emailotp" element={<OTP/>} />
-      <Route path="/passwordsetup" element={<PasswordSetup/>} />
+      <Route path="/emailotp/:id" element={<OTP/>} />
+      <Route path="/passwordsetup/:id" element={<PasswordSetup/>} />
 
-      
-      
+
+
       {/* <Route path="/home" element={<HomePage/>} /> */}
 f
 
     </Routes>
+  </>
+
 
   );
 }

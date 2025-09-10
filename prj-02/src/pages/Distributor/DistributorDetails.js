@@ -75,11 +75,13 @@ export default function DistributorDetails() {
         async function getDistributorDetail() {
             try {
 
-                const res = await getDistributorDetails({ ditributorId: id }).unwrap();
+                const res = await getDistributorDetails({ distributorId: id }).unwrap();
+
 
                 setData(res);
                 if (res.length > 0) {
                     const item = res[0]
+
                     setFormData((prevData) => ({
                         ...prevData,
                         ID: item.ID,
@@ -154,7 +156,7 @@ export default function DistributorDetails() {
             Object.entries(formData).forEach(([key, value]) => {
                 data.append(key, value);
             });
-            
+
             if (aadharFile.length>0 && aadharFile[0].originFileObj) data.append('aadharUrl', aadharFile[0].originFileObj);
             if (panFile.length) data.append('panUrl', panFile[0].originFileObj);
             if (shopImageFile.length) data.append('shopImageUrl', shopImageFile[0].originFileObj);
