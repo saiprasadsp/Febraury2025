@@ -3,9 +3,10 @@ import "../styles/ForgotPassword.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { setLogin } from "../redux/authSlice";
-import { useLoginMutation } from "../slices/usersApiSlice";
+import { useLoginMutation,useForgotPasswordMutation } from "../slices/usersApiSlice";
 import logo from "../assets/logo/TheQucikPayMe.png";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { toast } from "react-toastify";
 
 function ForgotPassword() {
   const [userID, setUserID] = useState("");
@@ -16,7 +17,7 @@ function ForgotPassword() {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
   const [login] = useLoginMutation();
-
+  const [forgotPassword]  = useForgotPasswordMutation()
   useEffect(() => {
     if (userInfo) {
       navigate("/dashboard");
@@ -47,9 +48,25 @@ function ForgotPassword() {
     }
   };
 
+  const handleReset = async (e) => {
+    e.preventDefault()
+    setError("")
+    try {
+      let id = userID
+      const res = await forgotPassword({userId:userID}).unwrap()
+      toast.success(res.message || "Operation Completed Successfully");
+      navigate(`/emailotp/${id}`);
+
+    } catch (err) {
+      console.error("Forgot password Failed:",err);
+      setError(err?.data?.message || "Somethng went wrong. Try again")
+      toast.error(err?.data?.message||"Something went wrong.")
+    }
+  }
+
   return (
-   
-     <div class="col-12 min-vh-100 d-flex justify-content-center align-items-center right-section">
+
+     <div className="col-12 min-vh-100 d-flex justify-content-center align-items-center right-section">
         <div className="login-box">
           <div className="d-flex flex-column align-items-center">
             <img src={logo} alt="Blender Logo" className="logo-img" />
@@ -68,12 +85,12 @@ function ForgotPassword() {
                   required
                 />
               </div>
-              
+
               <div className="d-flex justify-content-between mb-4">
                 <span>
                   <a href="/login" className="text-primary">Back to Login?</a>
                 </span>
-                <button type="submit" className="btn btn-primary">Continue</button>
+                <button type="submit" className="btn btn-primary" onClick={handleReset}>Continue</button>
               </div>
             </form>
 

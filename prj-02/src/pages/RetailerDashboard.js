@@ -20,12 +20,13 @@ export default function RetailerDashboard() {
   const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [orderHistory] = useOrderHistoryMutation();
-  
+
 useEffect(() => {
     const fetchTransactions = async () => {
       try {
         const res = await orderHistory({ userId: userInfo.id }).unwrap();
-        const formattedData = res?.orders.map((item, index) => ({
+
+        const formattedData = res.map((item, index) => ({
           id: index,
           date: item.payment_date,
           transactionid: item.order_id,
@@ -217,7 +218,7 @@ useEffect(() => {
           <tr key={txn.id}>
             <td>{index + 1}</td>
             <td>{dayjs(txn.date).format("DD-MM-YYYY hh:mm A")}</td>
-            
+
             <td>{txn.transactionid}</td>
             <td>₹{txn.amount}</td>
             <td>
@@ -249,7 +250,7 @@ useEffect(() => {
   </table>
 </div>
 
-  
+
 
       {/* Footer */}
       <div className="retailer-footer">
@@ -258,4 +259,3 @@ useEffect(() => {
     </div>
   );
 }
-      
