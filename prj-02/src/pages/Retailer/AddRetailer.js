@@ -128,6 +128,94 @@ const AddRetailer = () => {
             <Form form={form} layout="vertical" onFinish={onFinish}>
                 {current === 0 && (
                     <>
+ <Row gutter={16}>
+  <Col span={12}>
+    <Form.Item
+      label="Aadhaar Number"
+      name="aadharNumber"
+      rules={[
+        { required: true, message: "Please enter Aadhaar number" },
+        {
+          pattern: /^\d{4} \d{4} \d{4}$/,
+          message: "Enter a valid 12-digit Aadhaar number (XXXX XXXX XXXX)",
+        },
+      ]}
+    >
+      <Input
+        maxLength={14}
+        value={formData.aadharNumber}
+        onChange={(e) => {
+          let value = e.target.value.replace(/\D/g, "");
+          value = value.slice(0, 12);
+          form.setFieldsValue({ aadharNumber: value });
+          setFormData((prev) => ({
+            ...prev,
+            aadharNumber: value,
+          }));
+        }}
+        name="aadharNumber"
+        style={{ paddingRight: "90px" }}
+      />
+      <Button
+        type="primary"
+        size="small"
+        style={{
+          position: "absolute",
+          right: "5px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          borderRadius: "6px",
+          backgroundColor: "#1F6281",
+          color: "#fff",
+          border: "none",
+        }}
+        onClick={handleAadhar}
+      >
+        Send OTP
+      </Button>
+    </Form.Item>
+  </Col>
+
+  {/* OTP Verification Field */}
+  <Col span={12}>
+    <Form.Item
+      label="OTP"
+      name="otp"
+      rules={[{ required: true, message: "Please enter OTP" }]}
+    >
+      <Input
+        maxLength={6}
+        value={formData.otp}
+        onChange={(e) =>
+          setFormData((prev) => ({
+            ...prev,
+            otp: e.target.value.replace(/\D/g, ""), // only numbers
+          }))
+        }
+        placeholder="Enter OTP"
+        style={{ paddingRight: "90px" }}
+      />
+      <Button
+        type="primary"
+        size="small"
+        style={{
+          position: "absolute",
+          right: "5px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          borderRadius: "6px",
+          backgroundColor: "#1F6281",
+          color: "#fff",
+          border: "none",
+        }}
+        // onClick={handleOtpVerify} // your OTP verify function
+      >
+        Verify OTP
+      </Button>
+    </Form.Item>
+  </Col>
+</Row>
+                            
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item
@@ -143,34 +231,7 @@ const AddRetailer = () => {
                                 </Form.Item>
                             </Col>
 
-                            <Col span={12}>
-                                <Form.Item
-                                    label="Aadhaar Number"
-                                    name="aadharNumber"
-                                    rules={[
-                                        { required: true, message: "Please enter Aadhaar number" },
-                                        { pattern: /^\d{4} \d{4} \d{4}$/, message: "Enter a valid 12-digit Aadhaar number (XXXX XXXX XXXX)" }
-                                    ]}
-                                >
-                                    <Input
-                                        maxLength={14} // 12 digits + 2 spaces
-                                        value={formData.aadharNumber} // Ensure controlled input
-                                        onChange={(e) => {
-                                            let value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                                            value = value.slice(0, 12); // Limit to 12 digits
-                                            // value = value.replace(/(\d{4})/g, "$1 ").trim(); // Format with spaces
-
-                                            form.setFieldsValue({ aadharNumber: value }); // Update Ant Design form state
-                                            setFormData((prev) => ({
-                                                ...prev,
-                                                aadharNumber: value, // Update React state
-                                            }));
-                                        }}
-                                        name="aadharNumber"
-                                    />
-                                    <button onClick={handleAadhar}>Verify</button>
-                                </Form.Item>
-                            </Col>
+                           
                         </Row>
 
 
@@ -264,58 +325,83 @@ const AddRetailer = () => {
                 {current === 1 && (
                     <>
                         <Row gutter={16}>
+  {/* PAN Name */}
+  <Col span={12}>
+    <Form.Item
+      name="panName"
+      label="Name as per PAN"
+      rules={[{ required: true, message: "Please enter name as per PAN" }]}
+    >
+      <Input
+        value={formData.panName}
+        onChange={handleInputChange}
+        name="panName"
+      />
+    </Form.Item>
+  </Col>
 
-                            <Col span={12}>
-                                <Form.Item
-                                    name="panNumber"
-                                    label="PAN Number"
-                                    rules={[
-                                        { required: true, message: "Please enter PAN number" },
-                                        { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]$/, message: "Enter a valid PAN (e.g., ABCDE1234F)" }
-                                    ]}
-                                    normalize={(value) => value.toUpperCase()} // Automatically converts to uppercase
-                                >
-                                    <div style={{ position: "relative" }}>
-                                        <Input
-                                            maxLength={10}
-                                            value={formData.panNumber}
-                                            onChange={handleInputChange}
-                                            name="panNumber"
-                                            style={{ paddingRight: "90px" }} // give space for button
-                                        />
-                                        <Button
-                                            type="primary"
-                                            size="small"
-                                            style={{
-                                                position: "absolute",
-                                                right: "5px",
-                                                top: "50%",
-                                                transform: "translateY(-50%)",
-                                                borderRadius: "6px",
-                                                backgroundColor: "#1F6281",
-                                                color: "#fff",
-                                                border: "none"
-                                            }}
-                                            onClick={handleVerification}
-                                        >
-                                            Verify Name
-                                        </Button>
-                                    </div>
-                                </Form.Item>
-                            </Col>
+  {/* PAN DOB */}
+  <Col span={12}>
+    <Form.Item
+      name="pandob"
+      label="DOB As Per PAN"
+      rules={[{ required: true, message: "Please enter DOB as per PAN" }]}
+    >
+      <Input
+        value={formData.pandob}
+        onChange={handleInputChange}
+        name="pandob"
+        placeholder="DD/MM/YYYY"
+      />
+    </Form.Item>
+  </Col>
+</Row>
 
-                            <Col span={12}>
-                                <Form.Item
-                                    name="panName"
-                                    label="Name as per PAN"
-                                    rules={[{ required: true, message: "Please enter name as per PAN" }]}
-                                >
-                                    <Input value={formData.panName} onChange={handleInputChange} name="panName" />
-                                </Form.Item>
-                            </Col>
+{/* PAN Number with Verify Button */}
+<Row gutter={16}>
+  <Col span={24}>
+    <Form.Item
+      name="panNumber"
+      label="PAN Number"
+      rules={[
+        { required: true, message: "Please enter PAN number" },
+        {
+          pattern: /^[A-Z]{5}[0-9]{4}[A-Z]$/,
+          message: "Enter a valid PAN (e.g., ABCDE1234F)",
+        },
+      ]}
+      normalize={(value) => value.toUpperCase()}
+    >
+      <div style={{ position: "relative" }}>
+        <Input
+          maxLength={10}
+          value={formData.panNumber}
+          onChange={handleInputChange}
+          name="panNumber"
+          style={{ paddingRight: "90px" }}
+        />
+        <Button
+          type="primary"
+          size="small"
+          style={{
+            position: "absolute",
+            right: "5px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            borderRadius: "6px",
+            backgroundColor: "#1F6281",
+            color: "#fff",
+            border: "none",
+          }}
+          onClick={handleVerification}
+        >
+          Verify Name
+        </Button>
+      </div>
+    </Form.Item>
+  </Col>
+</Row>
 
-
-                        </Row>
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item >
