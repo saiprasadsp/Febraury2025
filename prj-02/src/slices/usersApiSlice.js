@@ -201,6 +201,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 body:data
             })
         }),
+        otp:builder.mutation({
+            query:(data)=>({
+                url:`${CASHFREE}/verify-otp`,
+                method:'POST',
+                body:data
+            })
+        }),
         pan:builder.mutation({
             query:(data)=>({
                 url:`${CASHFREE}/verify-pan`,
@@ -239,4 +246,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation,useRetailerMutation,useAadharMutation,usePanMutation,useContactMutation,useForgotPasswordMutation,useVerifyMutation,useResetPasswordMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation,useRetailerMutation,useAadharMutation,useOtpMutation,usePanMutation,useContactMutation,useForgotPasswordMutation,useVerifyMutation,useResetPasswordMutation} = usersApiSlice
