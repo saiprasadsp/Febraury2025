@@ -132,10 +132,9 @@ if (logoData) {
         const fetchDistributor = async () => {
             try {
                 const res = await orderHistory({ userId: userInfo.id }).unwrap();
-                console.log(res);
 
 
-                const formattedData = res?.orders.map((item, index) => ({
+                const formattedData = res?.map((item, index) => ({
                     key: index,
                     sno: index + 1,
                     Date: item.payment_date,
@@ -148,7 +147,7 @@ if (logoData) {
     customer_name: item.customer_name,
     mobile_number: item.mobile_number,
 
-                     
+
 
                 }));
                 setData(formattedData);
@@ -175,7 +174,7 @@ if (logoData) {
 
  const columns = [
         { title: "S.No", dataIndex: "sno", width: "5%" },
-        { title: "Customre Details", width: "10%", 
+        { title: "Customre Details", width: "10%",
           render: (_, record) => (
     <>
       <div> {record.invoice_id}</div>

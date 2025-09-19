@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/AddDistributor.css";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useCreateRetailerMutation,useAadharMutation,usePanMutation } from "../../slices/usersApiSlice";
+import { useCreateRetailerMutation,useAadharMutation,usePanMutation,useOtpMutation } from "../../slices/usersApiSlice";
 import PdfUploader from "../../Components/PdfUploader";
 const { Option } = Select;
 
@@ -18,10 +18,12 @@ const steps = [
 
 const AddRetailer = () => {
     const [current, setCurrent] = useState(0);
+    const [extRef,setExtRef] = useState()
     const [form] = Form.useForm();
     const [createRetailer, { isLoading }] = useCreateRetailerMutation();
     const [aadhar] = useAadharMutation();
     const [pan]=usePanMutation()
+    const [Otp] = useOtpMutation()
     const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state.auth);
 
@@ -104,21 +106,75 @@ const AddRetailer = () => {
     };
 
     const handleVerification=async()=>{
-        const res = await pan({pan:formData.panNumber}).unwrap
-        console.log(res.data);
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const {latitude,longitude} = position.coords;
+
+                try {
+                    const res = await pan({pan:formData.panNumber,latitude:latitude,longitude:longitude,name:formData.panName}).unwrap()
+                    toast.success(res?.status)
+                } catch (err) {
+                    console.error(err);
+
+                }
+            })
+        }
 
     }
 
     const handleAadhar=async()=>{
-        console.log("step 1");
-        console.log(formData.aadharNumber);
 
-        const res = await aadhar({aadhar:formData.aadharNumber}).unwrap;
-        console.log(res);
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const {latitude,longitude} = position.coords;
 
+                try {
+                    const res = await aadhar({aadhar:formData.aadharNumber,latitude:latitude,longitude:longitude}).unwrap();
+                    setExtRef(res?.data?.data?.otpReferenceID)
+                    toast.success(res?.data?.status)
+                    console.log("step 1",res?.data?.status);
+                } catch (err) {
+                    console.error(err);
 
-
+                }
+            })
+        }
     }
+
+    const handleOtpVerify = async () => {
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const {latitude,longitude} = position.coords;
+
+                try {
+                    // const res = await aadhar({aadhar:formData.aadharNumber,latitude:latitude,longitude:longitude}).unwrap();
+                    // toast.success(res?.data?.status)
+                    console.log("step 0",formData.otp,extRef);
+
+                    const res = await Otp({otp:formData.otp,otpRef:extRef,latitude:latitude,longitude:longitude}).unwrap()
+                    toast.success(res?.status)
+                    const apiData = res?.data
+
+                    setFormData((prevData)=>({
+                        ...prevData,
+                        aadharName:apiData?.fullName,
+                        dob:apiData?.dateOfBirth,
+                        gender:apiData?.gender,
+                        address:apiData?.address?.house,
+                        state:apiData?.address?.state,
+                        district:apiData?.address?.dist,
+                        pincode:apiData?.address?.pc,
+                        // email:,
+                        // mobile:
+
+                    }))
+                    console.log("step 1",res);
+                } catch (err) {
+                    console.error(err);
+
+                }
+            })
+        }
 
 
     return (
@@ -208,14 +264,14 @@ const AddRetailer = () => {
           color: "#fff",
           border: "none",
         }}
-        // onClick={handleOtpVerify} // your OTP verify function
+        onClick={handleOtpVerify} // your OTP verify function
       >
         Verify OTP
       </Button>
     </Form.Item>
   </Col>
 </Row>
-                            
+
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Form.Item
@@ -231,7 +287,7 @@ const AddRetailer = () => {
                                 </Form.Item>
                             </Col>
 
-                           
+
                         </Row>
 
 
