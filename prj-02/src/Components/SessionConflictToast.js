@@ -18,7 +18,7 @@ export default function SessionConflictToast() {
         dispatch(setLogout())
         dispatch(clearSessionConflict)
         setIsModalVisible(false)
-        window.location.href='/'
+        window.location.href='/login'
     }
     const handleIgnore=()=>{
       dispatch(clearSessionConflict())
