@@ -7,7 +7,7 @@ const baseQueryWithAuth = async(args,api,extraOptions)=>{
     let result = await baseQuery(args,api,extraOptions);
 
     if (result.error ) {
-        if (result.error.status===401 && result.error.data.actionRequired) {
+        if (result.error.status===401) {
             api.dispatch(setShowSessionConflict(result.error.data.message))
             return
         }

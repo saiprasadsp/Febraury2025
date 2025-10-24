@@ -183,6 +183,8 @@ const AddRetailer = () => {
           longitude: longitude,
         }).unwrap();
         toast.success(res?.status);
+        console.log("step 0",res);
+
         const apiData = res?.data;
         console.log("step 1", apiData?.data?.fullName);
         setFormData((prevData) => ({
