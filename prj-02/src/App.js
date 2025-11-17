@@ -54,6 +54,7 @@ import OTP from "./pages/Email-otp";
 import PasswordSetup from "./pages/PasswordSetup";
 import Utilities from "./pages/Utilities";
 import { ToastContainer } from "react-toastify";
+import PaymentPage from "./pages/PaymentPage";
 
 
 const RequireAuth = ({ children }) => {
@@ -115,6 +116,7 @@ function App() {
         <Route path="payment-status" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><PaymentStatus/></ProtectedRoute>} />
         <Route path="billpayments" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><BillPayments/></ProtectedRoute>} />
         <Route path="billpayments/category/:id" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><Utilities/></ProtectedRoute>} />
+        <Route path="billpayments/:id" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><PaymentPage/></ProtectedRoute>} />
        <Route path="tpin" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><TPIN/></ProtectedRoute>} />
 
       </Route>
