@@ -18,7 +18,7 @@ import {
   useCreateRetailerMutation,
   useAadharMutation,
   usePanMutation,
-  useOtpMutation,
+  useOtpMutation,useGstMutation
 } from "../../slices/usersApiSlice";
 import PdfUploader from "../../Components/PdfUploader";
 import dayjs from "dayjs";
@@ -41,9 +41,11 @@ const AddRetailer = () => {
   const [aadhar] = useAadharMutation();
   const [pan] = usePanMutation();
   const [Otp] = useOtpMutation();
+  const [gst]=useGstMutation()
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-
+  const [gstName,setGstName] = useState()
+  const [gstResult,setGstResult] = useState(false)
   const [formData, setFormData] = useState({
     distributorId: userInfo.id,
     roleid: 3,
@@ -60,6 +62,7 @@ const AddRetailer = () => {
     password: "",
     panNumber: "",
     panName: "",
+    gst:"",
     businessName: "",
     businessCategory: "",
     businessAddress: "",
@@ -148,6 +151,33 @@ const AddRetailer = () => {
       });
     }
   };
+
+  const handleGST = async () => {
+   if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        try {
+          const res = await gst({
+            gst: formData.gst,
+            latitude: latitude,
+            longitude: longitude
+          }).unwrap();
+          if (res?.statuscode === "TXN") {
+            setGstResult(true)
+            setGstName(res?.data?.gstDetails?.lgnm)
+
+            toast.success(res?.status);
+          } else {
+            toast.error(res?.data?.panDetails?.status || "GST");
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      });
+    }
+
+  }
 
   const handleAadhar = async () => {
     if (navigator.geolocation) {
@@ -555,6 +585,48 @@ const AddRetailer = () => {
                   </div>
                 </Form.Item>
               </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={24}>
+                <Form.Item
+                  name="gstNumber"
+                  label="GST Number"
+                  // rules={[
+                  //   { required: true, message: "Please enter PAN number" },
+                  //   {
+                  //     pattern: /^[A-Z]{5}[0-9]{4}[A-Z]$/,
+                  //     message: "Enter a valid PAN (e.g., ABCDE1234F)",
+                  //   },
+                  // ]}
+                  normalize={(value) => value.toUpperCase()}>
+                  <div style={{ position: "relative" }}>
+                    <Input
+                      // maxLength={10}
+                      value={formData.gst}
+                      onChange={handleInputChange}
+                      name="gst"
+                      style={{ paddingRight: "90px" }}
+                    />
+                    <Button
+                      type="primary"
+                      size="small"
+                      style={{
+                        position: "absolute",
+                        right: "5px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        borderRadius: "6px",
+                        backgroundColor: "#1F6281",
+                        color: "#fff",
+                        border: "none",
+                      }}
+                      onClick={handleGST}>
+                      Verify Name
+                    </Button>
+                  </div>
+                </Form.Item>
+              </Col>
+              {gstResult&&<Col>{gstName}</Col>}
             </Row>
 
             <Row gutter={16}>
