@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, Button, Tag, Typography, Row, Col, Card } from 'antd';
 import "../styles/AddBalance.css";
 import { load } from "@cashfreepayments/cashfree-js";
-import { useCreateOrderMutation, useCreateRazorOrderMutation } from '../slices/usersApiSlice';
+import { useCreateOrderMutation, useCreateRazorOrderMutation,usePhonepeMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { redirect } from 'react-router-dom';
@@ -38,6 +38,7 @@ export default function AddBalance() {
 
   const [createOrder] = useCreateOrderMutation();
   const [createRazorOrder] = useCreateRazorOrderMutation();
+  const [phonepe] = usePhonepeMutation()
 
   let cashfree;
 
@@ -66,7 +67,7 @@ export default function AddBalance() {
         setIsError(false);
         break;
       case 'Premium':
-        setIsError(true);
+        setIsError(false);
         break;
       default:
         setInfoMsg('');
@@ -176,6 +177,17 @@ export default function AddBalance() {
         toast.error(err?.data?.message || "Failed to update status");
       }
     }
+    else if (selectedPlan === 'Premium') {
+      try {
+        const {data} = await phonepe({paisa:selectedAmount})
+        console.log(data);
+        window.open(data.url,"_blank","noopener","noreferrer")
+
+      } catch (err) {
+
+      }
+
+    }
   };
 
   const handleData = (e) => {
@@ -206,10 +218,10 @@ export default function AddBalance() {
 
           <div className="plan-buttons">
             <Button
-              className={`plan-button 
-    ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''} 
+              className={`plan-button
+    ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
     ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
-              onClick={() => handlePlanSelect('Standard')}
+              onClick={() => handlePlanSelect('Premium')}
             >
               Service
             </Button>
