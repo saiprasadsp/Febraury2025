@@ -179,12 +179,26 @@ export default function AddBalance() {
     }
     else if (selectedPlan === 'Premium') {
       try {
-        const {data} = await phonepe({paisa:selectedAmount})
+        const {data} = await phonepe({paisa:selectedAmount,
+          CustomerName: customerName,
+          Invoice: invoice,
+          phone: mobileNumber,
+          customerID: userInfo.id,
+          charges: process.env.REACT_APP_INCOME,})
         console.log(data);
-        window.open(data.url,"_blank","noopener","noreferrer")
+        const redirectUrl = data.url
+        const orderId = data.orderId
+
+        if (!redirectUrl|| !orderId) {
+          toast.error("Invalid Phonpe response")
+          return
+        }
+
+        window.open(redirectUrl,"_blank","noopener,noreferrer")
+        // window.location.href=`/dashboard/payment-status?order_id=${orderId}&provider=phonepe`
 
       } catch (err) {
-
+        toast.error(err?.data?.messsage||"Failed to update status")
       }
 
     }
@@ -221,9 +235,17 @@ export default function AddBalance() {
               className={`plan-button
     ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
     ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
-              onClick={() => handlePlanSelect('Premium')}
+              onClick={() => handlePlanSelect('Standard')}
             >
-              Service
+              Razorpay
+            </Button>
+            <Button
+            className={`plan-button
+    ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
+    ${selectedPlanButton === 'Premium' ? 'selected' : ''}`}
+            onClick={()=>handlePlanSelect('Premium')}
+            >
+              Phone-pe
             </Button>
 
           </div>
