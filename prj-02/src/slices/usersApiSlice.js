@@ -2,6 +2,7 @@ import { apiSlice } from "./apiSlice";
 
 
 const USERS_URL = `${process.env.REACT_APP_API}/users`
+const SUPERDISTRIBUTOR_LIST = `${process.env.REACT_APP_API}/superdistributor`
 const DISTRIBUTOR_LIST = `${process.env.REACT_APP_API}/distributor`
 const RETAILER_LIST = `${process.env.REACT_APP_API}/retailer`
 const DASHBOARD = `${process.env.REACT_APP_API}/dashboard`
@@ -60,6 +61,54 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             query:(data)=>({
                 url:`${USERS_URL}/`,
                 method:'POST',
+                body:data
+            })
+        }),
+        getSuperDistributor:builder.mutation({
+            query:()=>({
+                url:`${SUPERDISTRIBUTOR_LIST}/profile`,
+                method:'GET',
+            })
+        }),
+        createSuperDistributor:builder.mutation({
+            query:(data)=>({
+                url:`${SUPERDISTRIBUTOR_LIST}/register`,
+                method:'POST',
+                body:data
+            })
+        }),
+        getSuperDistributorDetails:builder.mutation({
+            query:(data)=>({
+                url:`${SUPERDISTRIBUTOR_LIST}/profile/id`,
+                method:'POST',
+                body:data
+            })
+        }),
+        updateSuperDistributorMargin:builder.mutation({
+            query:(data)=>({
+                url:`${SUPERDISTRIBUTOR_LIST}/update`,
+                method:'PUT',
+                body:data
+            })
+        }),
+        updateSuperDistributor:builder.mutation({
+            query:(data)=>({
+                url:`${SUPERDISTRIBUTOR_LIST}/profile`,
+                method:'PUT',
+                body:data
+            })
+        }),
+        approveSuperDistributor:builder.mutation({
+            query:(data)=>({
+                url:`${SUPERDISTRIBUTOR_LIST}/approve`,
+                method:'POST',
+                body:data
+            })
+        }),
+        activateSuperDistributor:builder.mutation({
+            query:(data)=>({
+                url:`${SUPERDISTRIBUTOR_LIST}/status`,
+                method:'PUT',
                 body:data
             })
         }),
@@ -296,4 +345,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation,useRetailerMutation,useAadharMutation,useOtpMutation,usePanMutation,useContactMutation,useForgotPasswordMutation,useVerifyMutation,useResetPasswordMutation,useCategoryMutation,useBillerMutation,useBillerDetailsMutation,useBillerEnquiryMutation,useBillerPaymentMutation,useGstMutation,usePhonepeMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation,useRetailerMutation,useAadharMutation,useOtpMutation,usePanMutation,useContactMutation,useForgotPasswordMutation,useVerifyMutation,useResetPasswordMutation,useCategoryMutation,useBillerMutation,useBillerDetailsMutation,useBillerEnquiryMutation,useBillerPaymentMutation,useGstMutation,usePhonepeMutation,useGetSuperDistributorMutation,useCreateSuperDistributorMutation,useGetSuperDistributorDetailsMutation,useUpdateSuperDistributorMarginMutation,useUpdateSuperDistributorMutation,useActivateSuperDistributorMutation,useApproveSuperDistributorMutation} = usersApiSlice

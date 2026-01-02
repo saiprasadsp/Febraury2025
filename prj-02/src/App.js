@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Adminpage from "./pages/Adminpage";
 import Userpage from "./pages/Userpage";
+import SuperDistributor from "./pages/SuperDistributor";
 import Distributor from "./pages/Distributor";
 import Retailer from "./pages/Retailer";
 import Retail from "./pages/RetailList";
@@ -18,6 +19,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Content from "./pages/Content";
+
+import GetSuperDistributor from "./pages/SuperDistributor/GetSuperDistributor";
+import SuperDistributorDetails from "./pages/SuperDistributor/SuperDistributorDetails";
+import AddSuperDistributor from "./pages/SuperDistributor/AddSuperdistributor";
+import SuperDistributorMargin from "./pages/SuperDistributor/SuperDistributorMargin";
+
 import GetDistributor from "./pages/Distributor/GetDistributor";
 import DistributorDetails from "./pages/Distributor/DistributorDetails";
 import AddDistributor from "./pages/Distributor/AddDistributor";
@@ -70,22 +77,28 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
 
-      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['distributor', "superadmin","retailer","wholesaler","reports"]}><Dashboard /></ProtectedRoute>}>
-        <Route index={true} element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Content /></ProtectedRoute>} />
+      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['distributor', "superadmin","retailer","wholesaler","reports","superdistributor"]}><Dashboard /></ProtectedRoute>}>
+        <Route index={true} element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Content /></ProtectedRoute>} />
 
         <Route path="retail" element={<ProtectedRoute allowedRoles={["superadmin"]}><Retail /></ProtectedRoute>} />
         <Route path="transactions" element={<ProtectedRoute allowedRoles={["superadmin"]}><Transactions /></ProtectedRoute>} />
         <Route path="margin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Margin /></ProtectedRoute>} />
         <Route path="approval" element={<ProtectedRoute allowedRoles={["superadmin"]}><KYCApproval /></ProtectedRoute>} />
 
-        <Route path="distributor" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Distributor /></ProtectedRoute>}>
+        <Route path="superdistributor" element={<ProtectedRoute allowedRoles={["superdistributor", "superadmin"]}><SuperDistributor /></ProtectedRoute>}>
+          <Route index={true} element={<GetSuperDistributor />} />
+          <Route path="getSuperdistributor/:id" element={<SuperDistributorDetails />} />
+          <Route path="addSuperdistributor" element={<AddSuperDistributor />} />
+          <Route path="superDistributorMargin" element={<SuperDistributorMargin />} />
+        </Route>
+        <Route path="distributor" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Distributor /></ProtectedRoute>}>
           <Route index={true} element={<GetDistributor />} />
           <Route path="getDistributor/:id" element={<DistributorDetails />} />
           <Route path="addDistributor" element={<AddDistributor />} />
           <Route path="distributorMargin" element={<DistributorMargin />} />
         </Route>
 
-        <Route path="retailer" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Retailer /></ProtectedRoute>}>
+        <Route path="retailer" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Retailer /></ProtectedRoute>}>
           <Route index={true} element={<GetRetailers />} />
           <Route path="getRetailer/:id" element={<RetailerDetails />} />
           <Route path="addRetailer" element={<ProtectedRoute allowedRoles={["distributor"]}><AddRetailer /></ProtectedRoute>}/>
@@ -103,9 +116,9 @@ function App() {
         </Route>
 
        <Route path="WSdashboard" element={<ProtectedRoute allowedRoles={["wholesaler"]}><WSdashboard /></ProtectedRoute>} />
-        <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Settings /></ProtectedRoute>} />
-        <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer","wholesaler"]}><Profile /></ProtectedRoute>} />
-        <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin"]}><Register /></ProtectedRoute>} />
+        <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Settings /></ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer","wholesaler","superdistributor"]}><Profile /></ProtectedRoute>} />
+        <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Register /></ProtectedRoute>} />
         <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><AddBalance/></ProtectedRoute>} />
         <Route path="banktransfer" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><BankTransfer/></ProtectedRoute>} />
         <Route path="addnewbankaccount" element={<ProtectedRoute allowedRoles={["retailer","wholesaler"]}><AddNewBankAccount/></ProtectedRoute>} />
@@ -121,7 +134,7 @@ function App() {
 
       </Route>
       <Route path="/admin" element={<ProtectedRoute allowedRoles={["superadmin"]}><Adminpage /></ProtectedRoute>} />
-      <Route path="/user" element={<ProtectedRoute allowedRoles={["distributor"]} ><Userpage /></ProtectedRoute>} />
+      <Route path="/user" element={<ProtectedRoute allowedRoles={["distributor","superdistributor"]} ><Userpage /></ProtectedRoute>} />
       <Route path="/terms" element={<TermsAndConditions />} />
       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       <Route path="/refundpolicy" element={<RefundPolicy />} />

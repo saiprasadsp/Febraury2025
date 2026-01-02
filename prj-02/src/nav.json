@@ -17,7 +17,36 @@
       "superadmin",
       "distributor",
       "retailer",
-      "reports"
+      "reports",
+      "superdistributor"
+    ]
+  },
+  {
+    "key": 2,
+    "icon": "AiOutlineVideoCamera",
+    "label": "Super Distributors",
+    "roles": [
+      "superadmin"
+    ],
+    "children": [
+      {
+        "key": 2,
+        "icon": "AiOutlineTeam",
+        "label": "Super Distributor List",
+        "path": "/dashboard/superdistributor"
+      },
+      {
+        "key": 14,
+        "icon": "FaUserPlus",
+        "label": "Add Super Distributor",
+        "path": "/dashboard/superdistributor/addsuperdistributor"
+      },
+      {
+        "key": 5,
+        "icon": "FaUserCheck",
+        "label": "Super Distributor Margin",
+        "path": "/dashboard/superdistributor/superdistributormargin"
+      }
     ]
   },
   {
@@ -54,7 +83,8 @@
     "label": "Retailers",
     "roles": [
       "superadmin",
-      "distributor"
+      "distributor",
+      "superdistributor"
     ],
     "children": [
       {
@@ -111,8 +141,9 @@
     "path": "/dashboard/settings",
     "roles": [
       "superadmin",
-      "distributor"
-      
+      "distributor",
+      "superdistributor"
+
     ]
   },
   {
@@ -134,7 +165,7 @@
        "wholesaler"
     ]
   },
- 
+
   {
     "key": 10,
     "icon": "FaCreditCard",
@@ -188,6 +219,6 @@
         "path": "/dashboard/tpin"
       }
     ]
-  }  
- 
+  }
+
 ]

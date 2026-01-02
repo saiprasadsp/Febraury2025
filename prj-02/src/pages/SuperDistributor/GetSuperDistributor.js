@@ -1,7 +1,7 @@
 import { Table, Button, Modal } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-import { useActivateDistributorMutation, useGetDistributorMutation } from '../../slices/usersApiSlice';
+import { useActivateSuperDistributorMutation, useGetSuperDistributorMutation } from '../../slices/usersApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/GetDistributor.css'
@@ -12,28 +12,27 @@ export default function GetDistributor() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {userInfo} = useSelector((state)=>state.auth)
-  const [getDistributor,{isLoading}]=useGetDistributorMutation()
-  const [activateDistributor]=useActivateDistributorMutation()
+  const [getSuperDistributor,{isLoading}]=useGetSuperDistributorMutation()
+  const [activateSuperDistributor]=useActivateSuperDistributorMutation()
     useEffect(()=>{
 
         const fetchDistributor = async()=>{
              try {
-               const res = await getDistributor().unwrap();
-               console.log(res);
+               const res = await getSuperDistributor().unwrap();
 
                const formattedData = res.map((item)=>({
                 key:item.ID,
-                ID:item.distributor_id,
+                ID:item.superdistributor_id,
                 name:item.name_as_per_aadhaar,
                 mobile:item.user_mobile,
                 doj:item.doj,
                 kyc:item.kyc_status,
-                status:item.distributor_status===1 ? "Active" :'De-Active'
+                status:item.superdistributor_status===1 ? "Active" :'De-Active'
 
                }))
-               console.log(formattedData);
 
                setData(formattedData)
+
              } catch (err) {
                toast.error(err?.data?.message||err.error);
              }
@@ -45,7 +44,7 @@ export default function GetDistributor() {
 
       };
       const handleView = (id) => {
-        navigate(`/dashboard/distributor/getDistributor/${id}`);
+        navigate(`/dashboard/superdistributor/getSuperDistributor/${id}`);
       };
 
       const handleStatus=async(row)=>{
@@ -62,7 +61,7 @@ export default function GetDistributor() {
           cancelText: "No",
           onOk: async () => {
             try {
-              const res = await activateDistributor({
+              const res = await activateSuperDistributor({
                 id: row.ID,
                 status: updatedStatus,
               }).unwrap();
@@ -91,7 +90,7 @@ export default function GetDistributor() {
       }
       const columns = [
         {
-          title: "Distributor ID",
+          title: "Super Distributor ID",
           dataIndex: "ID",
           filters: data
             ? data.map((item) => ({
@@ -105,7 +104,7 @@ export default function GetDistributor() {
           width: "15%",
         },
         {
-          title: 'Distributor Name',
+          title: 'Super Distributor Name',
           dataIndex: 'name',
           width: "25%",
           render: (text) => (
