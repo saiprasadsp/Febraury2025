@@ -362,8 +362,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method:"POST",
                 body:data
             })
+        }),
+        getPayInReports:builder.mutation({
+            query:(data)=>({
+                url:`${PAYMENTS}/filter-order`,
+                method:"POST",
+                body:data
+            })
         })
     })
 })
 
-export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation,useRetailerMutation,useAadharMutation,useOtpMutation,usePanMutation,useContactMutation,useForgotPasswordMutation,useVerifyMutation,useResetPasswordMutation,useCategoryMutation,useBillerMutation,useBillerDetailsMutation,useBillerEnquiryMutation,useBillerPaymentMutation,useGstMutation,usePhonepeMutation,useGetSuperDistributorMutation,useCreateSuperDistributorMutation,useGetSuperDistributorDetailsMutation,useUpdateSuperDistributorMarginMutation,useUpdateSuperDistributorMutation,useActivateSuperDistributorMutation,useApproveSuperDistributorMutation,useGetReporterMutation,useCreateReporterMutation,useApiLockMutation} = usersApiSlice
+export const{useDashboardMutation,useLoginMutation,useAccepTermsMutation,useLogoutMutation,useUpdateUserMutation,useGetUserQuery,useCreateUserMutation,useGetDistributorMutation,useCreateDistributorMutation,useGetDistributorDetailsMutation,useUpdateDistributorMarginMutation,useUpdateDistributorMutation,useActivateDistributorMutation,useGetRetailerMutation,useCreateRetailerMutation,useApproveDistributorMutation,useGetRetailerDetailsMutation,useUpdateRetailerMutation,useApproveRetailerMutation,useUpdateRetailerPercentageMutation,useActiveRetailerMutation,useCreateOrderMutation,useOrderStatusMutation,useCreateRazorOrderMutation,useOrderHistoryMutation,useRetailerMutation,useAadharMutation,useOtpMutation,usePanMutation,useContactMutation,useForgotPasswordMutation,useVerifyMutation,useResetPasswordMutation,useCategoryMutation,useBillerMutation,useBillerDetailsMutation,useBillerEnquiryMutation,useBillerPaymentMutation,useGstMutation,usePhonepeMutation,useGetSuperDistributorMutation,useCreateSuperDistributorMutation,useGetSuperDistributorDetailsMutation,useUpdateSuperDistributorMarginMutation,useUpdateSuperDistributorMutation,useActivateSuperDistributorMutation,useApproveSuperDistributorMutation,useGetReporterMutation,useCreateReporterMutation,useApiLockMutation,useGetPayInReportsMutation} = usersApiSlice

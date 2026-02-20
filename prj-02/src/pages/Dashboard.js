@@ -34,7 +34,7 @@ import navLinks from "../nav.json";
 import logo from "../assets/logo/TheQucikPayMe.png";
 import "../styles/Dashboard.css";
 import RetailerDashboard from "./RetailerDashboard";
-
+import PayInReports from "../pages/Reporter/PayInReports";
 const { Header, Sider, Content } = Layout;
 
 export default function Dashboard() {
@@ -120,6 +120,19 @@ export default function Dashboard() {
     };
   });
 
+  const renderRoleDashboard=()=>{
+    if (location.pathname !== "/dashboard") return <Outlet/>
+
+    switch (userInfo?.role) {
+      case "retailer":
+        return <RetailerDashboard/>;
+      case "reports":
+        return <PayInReports/>;
+      default:
+        return <Outlet/>;
+    }
+  }
+
   return (
     <div className="dashboard-container">
       <ToastContainer />
@@ -173,11 +186,7 @@ export default function Dashboard() {
         <Layout>
           <Content className="dashboard-content">
             <SessionConflictToast />
-            {userInfo?.role === "retailer" && location.pathname === "/dashboard" ? (
-              <RetailerDashboard />
-            ) : (
-              <Outlet />
-            )}
+            {renderRoleDashboard()}
           </Content>
         </Layout>
       </Layout>
