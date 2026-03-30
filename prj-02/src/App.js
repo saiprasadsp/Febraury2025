@@ -64,6 +64,7 @@ import { ToastContainer } from "react-toastify";
 import PaymentPage from "./pages/PaymentPage";
 import  GetReporter from "./pages/Reporter/GetReporter";
 import  AddReporter from "./pages/Reporter/AddReporter";
+import PaymentGateWays from "./pages/PaymentGateWays";
 
 const RequireAuth = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -121,6 +122,7 @@ function App() {
         </Route>
        <Route path="WSdashboard" element={<ProtectedRoute allowedRoles={["wholesaler"]}><WSdashboard /></ProtectedRoute>} />
         <Route path="settings" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Settings /></ProtectedRoute>} />
+        <Route path="paymentgateways" element={<ProtectedRoute allowedRoles={["superadmin"]}><PaymentGateWays /></ProtectedRoute>} />
         <Route path="profile" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","retailer","wholesaler","superdistributor"]}><Profile /></ProtectedRoute>} />
         <Route path="register" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Register /></ProtectedRoute>} />
         <Route path="addbalance" element={<ProtectedRoute allowedRoles={["retailer","wholesaler","reports"]}><AddBalance/></ProtectedRoute>} />

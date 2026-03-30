@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, Button, Tag, Typography, Row, Col, Card } from 'antd';
 import "../styles/AddBalance.css";
 import { load } from "@cashfreepayments/cashfree-js";
-import { useCreateOrderMutation, useCreateRazorOrderMutation,usePhonepeMutation } from '../slices/usersApiSlice';
+import { useCreateOrderMutation, useCreateRazorOrderMutation,useGetGateWaysMutation,usePhonepeMutation } from '../slices/usersApiSlice';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { redirect } from 'react-router-dom';
@@ -25,6 +25,7 @@ export default function AddBalance() {
   const [selectedPlan, setSelectedPlan] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
   const [isError, setIsError] = useState(false);
+  const [gateways, setGateways] = useState([]);
 
   const [enteredAmount, setEnteredAmount] = useState('');
   const [invoice, setInvoice] = useState('');
@@ -39,6 +40,8 @@ export default function AddBalance() {
   const [createOrder] = useCreateOrderMutation();
   const [createRazorOrder] = useCreateRazorOrderMutation();
   const [phonepe] = usePhonepeMutation()
+    const [getGateWays] = useGetGateWaysMutation();
+
 
   let cashfree;
 
@@ -52,9 +55,14 @@ export default function AddBalance() {
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
     script.async = true;
     document.body.appendChild(script);
+
+    fetchGateways();
+
   }, []);
 
   const handlePlanSelect = (plan) => {
+    console.log("step 1", plan);
+
     setSelectedPlan(plan);
     setSelectedPlanButton(plan);
     setHighlightPlanButtons(false);
@@ -112,8 +120,11 @@ export default function AddBalance() {
       setHighlightPlanButtons(true);
       return;
     }
+    const gatewayName = selectedPlan?.code
 
-    if (selectedPlan === 'Basic') {
+
+
+    if (gatewayName === 'phonepe') {
       try {
         const res = await createOrder({
           amount: selectedAmount,
@@ -123,6 +134,7 @@ export default function AddBalance() {
           CustomerName: customerName,
           charges: process.env.REACT_APP_INCOME,
           orderID: formattedDate(new Date()),
+          userInfo:userInfo
         }).unwrap();
 
         const checkoutOptions = {
@@ -135,7 +147,7 @@ export default function AddBalance() {
         toast.error(err?.data?.message || "Failed to update status");
       }
 
-    } else if (selectedPlan === 'Standard') {
+    } else if (gatewayName === "razorpay") {
       console.log("step 1");
 
       try {
@@ -145,7 +157,10 @@ export default function AddBalance() {
           Invoice: invoice,
           phone: mobileNumber,
           customerID: userInfo.id,
-          charges: process.env.REACT_APP_INCOME,
+          // charges: process.env.REACT_APP_INCOME,
+          userInfo:userInfo,
+          gateway_id:5
+
         });
 
         const options = {
@@ -177,7 +192,7 @@ export default function AddBalance() {
         toast.error(err?.data?.message || "Failed to update status");
       }
     }
-    else if (selectedPlan === 'Premium') {
+    else if (gatewayName ==="") {
       try {
         const {data} = await phonepe({paisa:selectedAmount,
           CustomerName: customerName,
@@ -224,6 +239,15 @@ export default function AddBalance() {
 
   }
 
+  const fetchGateways = async () => {
+    try {
+      const res = await getGateWays().unwrap();
+      setGateways(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={24} sm={20} md={16} lg={12}>
@@ -231,7 +255,17 @@ export default function AddBalance() {
           <Title level={4}> Get Payment</Title>
 
           <div className="plan-buttons">
-            <Button
+
+          {gateways.map((gateway)=>(
+            <Button key={gateway.id}
+            className={`plan-button
+    ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
+    ${selectedPlan?.id === gateway?.id ? 'selected' : ''}`}
+              onClick={() => handlePlanSelect(gateway)}>
+              {gateway.name}
+            </Button>
+          ))}
+            {/* <Button
               className={`plan-button
     ${highlightPlanButtons && !selectedPlan ? 'highlight' : ''}
     ${selectedPlanButton === 'Standard' ? 'selected' : ''}`}
@@ -246,7 +280,7 @@ export default function AddBalance() {
             onClick={()=>handlePlanSelect('Premium')}
             >
               Phone-pe
-            </Button>
+            </Button> */}
 
           </div>
 

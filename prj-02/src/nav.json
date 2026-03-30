@@ -1,13 +1,11 @@
 [
   {
-  "key": 15,
-  "icon": "AiOutlineDashboard",
-  "label": "Home",
-  "path": "/dashboard/WSdashboard",
-  "roles": [
-    "wholesaler"
-  ]
-},
+    "key": 15,
+    "icon": "AiOutlineDashboard",
+    "label": "Home",
+    "path": "/dashboard/WSdashboard",
+    "roles": ["wholesaler"]
+  },
   {
     "key": 1,
     "icon": "AiOutlineUser",
@@ -25,9 +23,7 @@
     "key": 2,
     "icon": "AiOutlineVideoCamera",
     "label": "Super Distributors",
-    "roles": [
-      "superadmin"
-    ],
+    "roles": ["superadmin"],
     "children": [
       {
         "key": 2,
@@ -53,9 +49,7 @@
     "key": 2,
     "icon": "AiOutlineVideoCamera",
     "label": "Distributors",
-    "roles": [
-      "superadmin"
-    ],
+    "roles": ["superadmin"],
     "children": [
       {
         "key": 2,
@@ -81,11 +75,7 @@
     "key": 3,
     "icon": "AiOutlineUpload",
     "label": "Retailers",
-    "roles": [
-      "superadmin",
-      "distributor",
-      "superdistributor"
-    ],
+    "roles": ["superadmin", "distributor", "superdistributor"],
     "children": [
       {
         "key": 3,
@@ -112,58 +102,49 @@
     "icon": "AiOutlineUpload",
     "label": "Today Transactions",
     "path": "/dashboard/transactions",
-    "roles": [
-      "superadmin"
-    ]
+    "roles": ["superadmin"]
   },
   {
     "key": 5,
     "icon": "AiOutlineUpload",
     "label": "Margin",
     "path": "/dashboard/margin",
-    "roles": [
-      "superadmin"
-    ]
+    "roles": ["superadmin"]
   },
   {
     "key": 6,
     "icon": "AiOutlineUpload",
     "label": "KYC Approval",
     "path": "/dashboard/approval",
-    "roles": [
-      "superadmin"
-    ]
+    "roles": ["superadmin"]
   },
   {
     "key": 7,
     "icon": "AiOutlineSetting",
     "label": "Settings",
     "path": "/dashboard/settings",
-    "roles": [
-      "superadmin",
-      "distributor",
-      "superdistributor"
-
-    ]
+    "roles": ["superadmin", "distributor", "superdistributor"]
+  },
+  {
+    "key": 20,
+    "icon": "AiOutlineSetting",
+    "label": "Payment GateWays",
+    "path": "/dashboard/paymentgateways",
+    "roles": ["superadmin"]
   },
   {
     "key": 8,
     "icon": "FaWallet",
     "label": " Get Payment",
     "path": "/dashboard/addbalance",
-    "roles": [
-      "retailer",
-       "wholesaler"
-    ]
+    "roles": ["retailer", "wholesaler"]
   },
   {
     "key": 11,
     "icon": "FaUniversity",
     "label": "Settlements",
     "path": "/dashboard/banktransfer",
-    "roles": [
-       "wholesaler"
-    ]
+    "roles": ["wholesaler"]
   },
 
   {
@@ -171,17 +152,13 @@
     "icon": "FaCreditCard",
     "label": "Services",
     "path": "/dashboard/BillPayments",
-    "roles": [
-      "retailer", "wholesaler"
-    ]
+    "roles": ["retailer", "wholesaler"]
   },
   {
     "key": 13,
     "icon": "AiOutlineSetting",
     "label": "Invoice & Reports",
-    "roles": [
-      "retailer", "wholesaler"
-    ],
+    "roles": ["retailer", "wholesaler"],
     "children": [
       {
         "key": 10,
@@ -201,10 +178,7 @@
     "key": 14,
     "icon": "AiOutlineSetting",
     "label": "Account Settings",
-    "roles": [
-      "retailer",
-       "wholesaler"
-    ],
+    "roles": ["retailer", "wholesaler"],
     "children": [
       {
         "key": 104,
@@ -224,9 +198,9 @@
     "key": 15,
     "icon": "AiOutlineUpload",
     "label": "Reports",
-    "roles": [
-      "superadmin"],
-      "children":[{
+    "roles": ["superadmin"],
+    "children": [
+      {
         "key": 2,
         "icon": "AiOutlineTeam",
         "label": "Reporter",
@@ -237,7 +211,7 @@
         "icon": "FaUserPlus",
         "label": "Add Distributor",
         "path": "/dashboard/reporter/addreporter"
-      }]
+      }
+    ]
   }
-
 ]
