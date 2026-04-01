@@ -28,7 +28,7 @@ export default function Content() {
         let param = userInfo.role ==='distributor'?userInfo.id:''
 
         const res= await dashboard({distributor:param}).unwrap()
-        
+
         if (res && res.length>0) {
         setList(res[0])
         }
@@ -41,8 +41,8 @@ export default function Content() {
     fetchDashboard()
   }, [])
   const data = [
-    { name: "AVAILABLE BALANCE", icon: <FaWallet /> },
-    { name: "PAYIN IN", icon: <FaRupeeSign /> },
+    { name: "AVAILABLE BALANCE", icon: <FaWallet />,count:`${list.total_balance}` },
+    { name: "PAYIN IN", icon: <FaRupeeSign />,count:`${list.total_payins}` },
     { name: "PAYOUT", icon: <FaMoneyCheckAlt /> },
     { name: "CC Bill Payments", icon: <FaCreditCard /> },
     ...(userInfo.role === "superadmin" ? [{ name: "Distributor Count", icon: <FaUserTie />, count: `${list.total_distributor}`, value: 'distributor' }] : []),
@@ -67,7 +67,7 @@ export default function Content() {
           <span>{item.count}</span>
         </div>
       </div>
-      
+
       ))}
     </Container>
   );
