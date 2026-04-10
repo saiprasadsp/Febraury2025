@@ -83,7 +83,7 @@ export default function TransactionHistory() {
         />
         <Button className="search-button" onClick={handleSearch}>Search</Button>
       </div>
-      <Table columns={columns} dataSource={filteredData} />
+      <Table columns={columns} dataSource={filteredData} rowKey={(record) => record.transactionid} />
     </div>
   );
 }

@@ -18,7 +18,8 @@ import {
   useCreateRetailerMutation,
   useAadharMutation,
   usePanMutation,
-  useOtpMutation,useGstMutation
+  useOtpMutation,
+  useGstMutation,
 } from "../../slices/usersApiSlice";
 import PdfUploader from "../../Components/PdfUploader";
 import dayjs from "dayjs";
@@ -41,11 +42,11 @@ const AddRetailer = () => {
   const [aadhar] = useAadharMutation();
   const [pan] = usePanMutation();
   const [Otp] = useOtpMutation();
-  const [gst]=useGstMutation()
+  const [gst] = useGstMutation();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-  const [gstName,setGstName] = useState()
-  const [gstResult,setGstResult] = useState(false)
+  const [gstName, setGstName] = useState();
+  const [gstResult, setGstResult] = useState(false);
   const [formData, setFormData] = useState({
     distributorId: userInfo.id,
     roleid: 3,
@@ -62,7 +63,7 @@ const AddRetailer = () => {
     password: "",
     panNumber: "",
     panName: "",
-    gst:"",
+    gst: "",
     businessName: "",
     businessCategory: "",
     businessAddress: "",
@@ -153,7 +154,7 @@ const AddRetailer = () => {
   };
 
   const handleGST = async () => {
-   if (navigator.geolocation) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
 
@@ -161,11 +162,11 @@ const AddRetailer = () => {
           const res = await gst({
             gst: formData.gst,
             latitude: latitude,
-            longitude: longitude
+            longitude: longitude,
           }).unwrap();
           if (res?.statuscode === "TXN") {
-            setGstResult(true)
-            setGstName(res?.data?.gstDetails?.lgnm)
+            setGstResult(true);
+            setGstName(res?.data?.gstDetails?.lgnm);
 
             toast.success(res?.status);
           } else {
@@ -176,8 +177,7 @@ const AddRetailer = () => {
         }
       });
     }
-
-  }
+  };
 
   const handleAadhar = async () => {
     if (navigator.geolocation) {
@@ -213,13 +213,13 @@ const AddRetailer = () => {
           longitude: longitude,
         }).unwrap();
         toast.success(res?.status);
-        console.log("step 0",res);
+        console.log("step 0", res);
 
         const apiData = res?.data;
         console.log("step 1", apiData?.data?.fullName);
         setFormData((prevData) => ({
           ...prevData,
-          aadharName: apiData.data.fullName,
+          aadharName: apiData?.data?.fullName,
           dob: dayjs(apiData.data.dateOfBirth),
           gender: apiData.data.gender,
           address: apiData.data.address.house,
@@ -283,23 +283,24 @@ const AddRetailer = () => {
                     name="aadharNumber"
                     style={{ paddingRight: "90px" }}
                   />
-                  <Button
-                    type="primary"
-                    size="small"
-                    style={{
-                      position: "absolute",
-                      right: "5px",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      borderRadius: "6px",
-                      backgroundColor: "#1F6281",
-                      color: "#fff",
-                      border: "none",
-                    }}
-                    onClick={handleAadhar}>
-                    Send OTP
-                  </Button>
                 </Form.Item>
+                <Button
+                  type="primary"
+                  size="small"
+                  style={{
+                    position: "absolute",
+                    right: "15px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    borderRadius: "6px",
+                    backgroundColor: "#1F6281",
+                    color: "#fff",
+                    border: "none",
+                    zIndex: 10,
+                  }}
+                  onClick={handleAadhar}>
+                  Send OTP
+                </Button>
               </Col>
 
               {/* OTP Verification Field */}
@@ -320,24 +321,25 @@ const AddRetailer = () => {
                     placeholder="Enter OTP"
                     style={{ paddingRight: "90px" }}
                   />
-                  <Button
-                    type="primary"
-                    size="small"
-                    style={{
-                      position: "absolute",
-                      right: "5px",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      borderRadius: "6px",
-                      backgroundColor: "#1F6281",
-                      color: "#fff",
-                      border: "none",
-                    }}
-                    onClick={handleOtpVerify} // your OTP verify function
-                  >
-                    Verify OTP
-                  </Button>
                 </Form.Item>
+                <Button
+                  type="primary"
+                  size="small"
+                  style={{
+                    position: "absolute",
+                    right: "15px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    borderRadius: "6px",
+                    backgroundColor: "#1F6281",
+                    color: "#fff",
+                    border: "none",
+                    zIndex: 10,
+                  }}
+                  onClick={handleOtpVerify} // your OTP verify function
+                >
+                  Verify OTP
+                </Button>
               </Col>
             </Row>
 
@@ -463,7 +465,7 @@ const AddRetailer = () => {
                   ]}>
                   <Input
                     maxLength={10}
-                    value={formData.value}
+                    value={formData.mobile}
                     name="mobile"
                     onChange={(e) => {
                       const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
@@ -558,32 +560,31 @@ const AddRetailer = () => {
                     },
                   ]}
                   normalize={(value) => value.toUpperCase()}>
-                  <div style={{ position: "relative" }}>
-                    <Input
-                      maxLength={10}
-                      value={formData.panNumber}
-                      onChange={handleInputChange}
-                      name="panNumber"
-                      style={{ paddingRight: "90px" }}
-                    />
-                    <Button
-                      type="primary"
-                      size="small"
-                      style={{
-                        position: "absolute",
-                        right: "5px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        borderRadius: "6px",
-                        backgroundColor: "#1F6281",
-                        color: "#fff",
-                        border: "none",
-                      }}
-                      onClick={handleVerification}>
-                      Verify Name
-                    </Button>
-                  </div>
+                  <Input
+                    maxLength={10}
+                    value={formData.panNumber}
+                    onChange={handleInputChange}
+                    name="panNumber"
+                    style={{ paddingRight: "90px" }}
+                  />
                 </Form.Item>
+                <Button
+                  type="primary"
+                  size="small"
+                  style={{
+                    position: "absolute",
+                    right: "15px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    borderRadius: "6px",
+                    backgroundColor: "#1F6281",
+                    color: "#fff",
+                    border: "none",
+                    zIndex: 10,
+                  }}
+                  onClick={handleVerification}>
+                  Verify Name
+                </Button>
               </Col>
             </Row>
             <Row gutter={16}>
@@ -599,34 +600,33 @@ const AddRetailer = () => {
                   //   },
                   // ]}
                   normalize={(value) => value.toUpperCase()}>
-                  <div style={{ position: "relative" }}>
-                    <Input
-                      // maxLength={10}
-                      value={formData.gst}
-                      onChange={handleInputChange}
-                      name="gst"
-                      style={{ paddingRight: "90px" }}
-                    />
-                    <Button
-                      type="primary"
-                      size="small"
-                      style={{
-                        position: "absolute",
-                        right: "5px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        borderRadius: "6px",
-                        backgroundColor: "#1F6281",
-                        color: "#fff",
-                        border: "none",
-                      }}
-                      onClick={handleGST}>
-                      Verify Name
-                    </Button>
-                  </div>
+                  <Input
+                    // maxLength={10}
+                    value={formData.gst}
+                    onChange={handleInputChange}
+                    name="gst"
+                    style={{ paddingRight: "90px" }}
+                  />
                 </Form.Item>
+                <Button
+                  type="primary"
+                  size="small"
+                  style={{
+                    position: "absolute",
+                    right: "15px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    borderRadius: "6px",
+                    backgroundColor: "#1F6281",
+                    color: "#fff",
+                    border: "none",
+                    zIndex: 10,
+                  }}
+                  onClick={handleGST}>
+                  Verify Name
+                </Button>
               </Col>
-              {gstResult&&<Col>{gstName}</Col>}
+              {gstResult && <Col>{gstName}</Col>}
             </Row>
 
             <Row gutter={16}>
@@ -868,7 +868,7 @@ const AddRetailer = () => {
                   <Input
                     maxLength={11}
                     onChange={handleInputChange}
-                    value={form.IFSC}
+                    value={formData.IFSC}
                     name="IFSC"
                   />
                 </Form.Item>

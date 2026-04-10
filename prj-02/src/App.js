@@ -90,7 +90,7 @@ function App() {
         <Route path="superdistributor" element={<ProtectedRoute allowedRoles={["superdistributor", "superadmin"]}><SuperDistributor /></ProtectedRoute>}>
           <Route index={true} element={<GetSuperDistributor />} />
           <Route path="getSuperdistributor/:id" element={<SuperDistributorDetails />} />
-          <Route path="addSuperdistributor" element={<AddSuperDistributor />} />
+          <Route path="addSuperDistributor" element={<AddSuperDistributor />} />
           <Route path="superDistributorMargin" element={<SuperDistributorMargin />} />
         </Route>
         <Route path="distributor" element={<ProtectedRoute allowedRoles={["distributor", "superadmin","superdistributor"]}><Distributor /></ProtectedRoute>}>

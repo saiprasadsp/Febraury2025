@@ -236,7 +236,7 @@ export default function PayInReports() {
         format={dateFormat}
         onChange={(value, dateString) => handleDate(value, dateString)}
       />
-      <Table columns={columns} dataSource={transactions} placement="topRight" />
+      <Table columns={columns} dataSource={transactions} rowKey={(record, index) => record.key ?? record.id ?? record.ID ?? record.transactionid ?? index} placement="topRight" />
     </div>
   );
 }

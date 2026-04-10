@@ -14,7 +14,7 @@ export default function Payments() {
   const {userInfo} = useSelector((state)=>state.auth)
   const [getDistributor,{isLoading}]=useGetDistributorMutation()
     useEffect(()=>{
-    
+
         const fetchDistributor = async()=>{
              try {
                const res = await getDistributor().unwrap();
@@ -25,18 +25,18 @@ export default function Payments() {
                 // mobile:item.user_mobile,
                 // doj:item.doj,
                 // kyc:item.kyc_status,
-    
+
                }))
                setData(formattedData)
              } catch (err) {
                toast.error(err?.data?.message||err.error);
              }
-           
+
            }
            fetchDistributor();
         },[])
     const onChange = (pagination, filters, sorter, extra) => {
-      
+
       };
       const handleView = (id) => {
         navigate(`/dashboard/distributor/getDistributor/${id}`);
@@ -46,7 +46,7 @@ export default function Payments() {
           title: "S.No",
           dataIndex: "sno",
           width: "5%",
-        },        
+        },
         {
           title: 'Name',
           dataIndex: 'names',
@@ -54,25 +54,25 @@ export default function Payments() {
       },
       {
         title: "Card 4 Digits",
-        dataIndex: "card 4 digits",   
+        dataIndex: "card 4 digits",
         width: "18%",
       },
         {
           title: 'Bank Name',
           dataIndex: 'bank name',
           width: "18%",
-        },    
+        },
         {
           title: 'Mobile Number',
           dataIndex: 'mobilenumber',
           width: "15%",
-      },    
+      },
         {
           title: "Pay Bill",
-          dataIndex: "pay bill", 
+          dataIndex: "pay bill",
           width: "15%",
         },
-       
+
       ];
       return (
         <div>
@@ -80,8 +80,8 @@ export default function Payments() {
             <Link to="../addcreditcard">
               <button type="button" className="btn btn-warning">Add New Card</button>
             </Link>
-          </div>  
-          <Table columns={columns} onChange={onChange} dataSource={data} />
+          </div>
+          <Table columns={columns} onChange={onChange} dataSource={data} rowKey={(record, index) => record.key ?? record.id ?? record.ID ?? record.transactionid ?? index} />
         </div>
       );
 }

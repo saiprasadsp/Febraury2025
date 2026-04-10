@@ -180,9 +180,9 @@ export default function GetDistributor() {
   return (
     <div>
       <div>
-        <button type="button" className="btn btn-warning"><Link to='addDistributor'>Add Distributor</Link></button>
+        <button type="button" className="btn btn-warning"><Link to='addSuperDistributor'>Add Super Distributor</Link></button>
       </div>
-        <Table className="custom-distributor-table" columns={columns} onChange={onChange} dataSource={data}/>
+        <Table className="custom-distributor-table" columns={columns} onChange={onChange} dataSource={data} rowKey={(record, index) => record.key ?? record.id ?? record.ID ?? record.transactionid ?? index} />
 
         </div>
   )

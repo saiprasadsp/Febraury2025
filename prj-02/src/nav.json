@@ -35,7 +35,7 @@
         "key": 14,
         "icon": "FaUserPlus",
         "label": "Add Super Distributor",
-        "path": "/dashboard/superdistributor/addsuperdistributor"
+        "path": "/dashboard/superdistributor/addSuperDistributor"
       },
       {
         "key": 5,

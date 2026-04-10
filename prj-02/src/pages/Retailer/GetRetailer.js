@@ -52,14 +52,14 @@ export default function GetRetailer() {
         console.log(row);
 
               const updatedStatus = row.status === "Active" ? 0 : 1;
-              const statusLabel = updatedStatus === 1 ? "Active" : "Dective";
+              const statusLabel = updatedStatus === 1 ? "Active" : "De-Active";
               console.log('Step 1',updatedStatus);
               console.log('Step 2',statusLabel);
 
 
               Modal.confirm({
                 title: "Confirm Status Change",
-                content: `Are you sure you want to ${statusLabel} this distributor?`,
+                content: `Are you sure you want to ${statusLabel} this retailer?`,
                 okText: "Yes",
                 cancelText: "No",
                 onOk: async () => {
@@ -102,7 +102,7 @@ export default function GetRetailer() {
             }))
             : [],
           filterMode: "menu",
-          filterSearch: (input, record) => String(record.value).includes(input),
+          filterSearch: (input, record) => String(record.ID).includes(input),
           onFilter: (value, record) => String(record.ID).includes(value),
           width: "15%",
         },
@@ -144,7 +144,7 @@ export default function GetRetailer() {
                 }))
             : [],
           filterMode: "menu",
-          filterSearch: (input, record) => record.value?.toString().includes(input),
+          filterSearch: (input, record) => record.mobile?.toString().includes(input),
           onFilter: (value, record) => record.mobile?.toString().includes(value),
         },
         {
@@ -170,7 +170,7 @@ export default function GetRetailer() {
               }))
             : [],
           filterMode: "menu",
-          filterSearch: (input, record) => record.value?.toString().toLowerCase().includes(input.toLowerCase()),
+          filterSearch: (input, record) => record.kyc?.toString().toLowerCase().includes(input.toLowerCase()),
           onFilter: (value, record) => record.kyc?.toString() === value,
         },
         {
@@ -178,7 +178,7 @@ export default function GetRetailer() {
           dataIndex:"status",
           width:"15%",
           render:(_,record)=>(
-            <Button type={record.status === 1?'primary':'default'}  onClick={()=>handleStatus(record)}>{record.status}</Button>
+            <Button type={record.status === 'Active'?'primary':'default'}  onClick={()=>handleStatus(record)}>{record.status}</Button>
           )
         },
         {
@@ -187,8 +187,8 @@ export default function GetRetailer() {
           width: 100,
           render: (_, record) => (
             <>
-            <Button className="" onClick={() => handleApiLock(record)}>Lock</Button>
-            <Button className="view-button" onClick={() => handleView(record.retailerid)}>View</Button>
+            <Button key="lock" className="" onClick={() => handleApiLock(record)}>Lock</Button>
+            <Button key="view" className="view-button" onClick={() => handleView(record.retailerid)}>View</Button>
             </>
           ),
         },
@@ -214,7 +214,7 @@ export default function GetRetailer() {
       <div>{userInfo.role==="superadmin"?<></>:<button type="button" className="btn btn-warning"><Link to='addRetailer'>Add Retailer</Link></button>}
 
       </div>
-      <Table columns={columns} onChange={onChange} dataSource={data} />
+      <Table columns={columns} onChange={onChange} dataSource={data} rowKey={(record, index) => record.key ?? record.id ?? record.ID ?? record.transactionid ?? index} />
 
     </div>
   )

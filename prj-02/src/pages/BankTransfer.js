@@ -14,7 +14,7 @@ export default function BankTransfer() {
   const {userInfo} = useSelector((state)=>state.auth)
   const [getDistributor,{isLoading}]=useGetDistributorMutation()
     useEffect(()=>{
-    
+
         const fetchDistributor = async()=>{
              try {
                const res = await getDistributor().unwrap();
@@ -25,18 +25,18 @@ export default function BankTransfer() {
                 // mobile:item.user_mobile,
                 // doj:item.doj,
                 // kyc:item.kyc_status,
-    
+
                }))
                setData(formattedData)
              } catch (err) {
                toast.error(err?.data?.message||err.error);
              }
-           
+
            }
            fetchDistributor();
         },[])
     const onChange = (pagination, filters, sorter, extra) => {
-      
+
       };
       const handleView = (id) => {
         navigate(`/dashboard/distributor/getDistributor/${id}`);
@@ -46,7 +46,7 @@ export default function BankTransfer() {
           title: "S.No",
           dataIndex: "sno",
           width: "5%",
-        },        
+        },
         {
           title: 'Name',
           dataIndex: 'names',
@@ -54,25 +54,25 @@ export default function BankTransfer() {
       },
       {
         title: "Account Number",
-        dataIndex: "account number",   
+        dataIndex: "account number",
         width: "18%",
       },
         {
           title: 'IFSC Code',
           dataIndex: 'Ifsc',
           width: "18%",
-        },   
+        },
         {
           title: 'Mobile Number',
           dataIndex: 'mobilenumber',
           width: "15%",
-      },     
+      },
         {
           title: "Transfer",
-          dataIndex: "transfer", 
+          dataIndex: "transfer",
           width: "15%",
         },
-       
+
       ];
       return (
         <div>
@@ -81,8 +81,8 @@ export default function BankTransfer() {
               <button type="button" className="btn btn-warning">Add Bank Account</button>
             </Link>
           </div>
-          
-          <Table columns={columns} onChange={onChange} dataSource={data} />
+
+          <Table columns={columns} onChange={onChange} dataSource={data} rowKey={(record, index) => record.key ?? record.id ?? record.ID ?? record.transactionid ?? index} />
         </div>
       );
 }

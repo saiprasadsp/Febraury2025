@@ -6,10 +6,10 @@ const baseQuery = fetchBaseQuery({baseUrl:`${process.env.REACT_APP_API}`,credent
 const baseQueryWithAuth = async(args,api,extraOptions)=>{
     let result = await baseQuery(args,api,extraOptions);
 
-    if (result.error ) {
+    if (result?.error) {
         if (result.error.status===401) {
-            api.dispatch(setShowSessionConflict(result.error.data.message))
-            return
+            api.dispatch(setShowSessionConflict(result.error.data?.message))
+            return result
         }
     }
     return result
